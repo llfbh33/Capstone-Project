@@ -5,7 +5,7 @@ import uuid
 
 
 # setting a list of allowable file types for upload
-ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif"}
+ALLOWED_EXTENSIONS = {"pdf", "png", "jpg", "jpeg", "gif", 'PNG'}
 # get the name of the bucket from the environment variables
 BUCKET_NAME = os.environ.get("S3_BUCKET")
 # location at AWS where the bucket is located
