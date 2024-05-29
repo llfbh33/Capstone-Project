@@ -3,6 +3,8 @@ import { useDispatch } from "react-redux";
 import { thunkLogout } from "../../redux/session";
 import { useNavigate } from "react-router-dom";
 
+import './LeftNavigation.css'
+
 
 
 function LeftNavigation() {
