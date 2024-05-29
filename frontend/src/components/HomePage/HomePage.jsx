@@ -1,7 +1,18 @@
+import { useSelector } from "react-redux";
 import LeftNavigation from "../LeftNavigation/LeftNavigation";
 import './HomePage.css'
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage () {
+    const user = useSelector(state => state.session.user)
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) navigate('/')
+    }, [user])
+
+
     return (
         <div id='main-homepage-container'>
             <div id='left-hand-nav-container'>
