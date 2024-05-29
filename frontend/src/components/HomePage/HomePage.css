@@ -1,0 +1,11 @@
+#main-homepage-container {
+    display: flex;
+    flex-direction: row;
+}
+
+
+#left-hand-nav-container {
+    width: 20%;
+    max-width: 300px;
+    min-width: 200px;
+}

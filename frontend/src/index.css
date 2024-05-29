@@ -1,5 +1,25 @@
 /* TODO: Add sitewide styles */
 
+body {
+    margin: 0px;
+}
+
 html {
-    background-color: rgb(138, 207, 138);
+    /* background-color: rgb(138, 207, 138); */
+}
+
+button {
+    color: white;
+    background-color: #00366B;
+    border: 1px solid #3399FF
+}
+
+.error-validation {
+    color: red;
+    font-size: medium;
+}
+
+.error-validation-hidden {
+    color: rgba(255, 0, 0, 0);
+    font-size: medium;
 }

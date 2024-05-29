@@ -1,0 +1,53 @@
+/* replace with landingpage-section1-3-container background image when you have it */
+#landingpage-section-1,
+#landingpage-section-2,
+#landingpage-section-3 {
+    background-color: black;
+}
+
+#landingpage-section-1 {
+    width: 100%;
+    height: 500px;
+    display: flex;
+    align-items: end;
+    justify-content: center;
+}
+
+#landingpage-section-1 > img {
+    width: 700px;
+    margin-left: 32px;
+}
+
+#landingpage-section-2 {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+#landingpage-section-2 > li{
+    list-style: none;
+    background-color: #00366B;
+    border: 1px solid #3399FF;
+    color: white
+}
+
+#landingpage-login-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#landingpage-section-3 {
+    height: 100px;
+}
+
+#landingpage-section-4 {
+    background-color: #00366B;
+    height: 500px;
+    border-top: 1px solid #3399FF;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
