@@ -8,16 +8,22 @@
     background-size: cover;
 }
 
-
+/* include with every page the nav is located.  Keeps the nav in place */
 #left-hand-nav-container {
     width: 300px;
-
     height: 100vh;
     position: fixed;
 }
 
-
+/* Make sure to shift container content to make room for the navigation */
 #main-homepage-content-container {
-    margin-left: 350px;
+    margin-left: 340px;
+    width: 100%;
+}
 
+#homepage-user-title {
+    padding: 12px 8px;
+    margin: 0;
+    width: 80%;
+    border-bottom: 1px solid #3399FF;
 }

@@ -30,3 +30,16 @@ html {
     color: rgba(255, 0, 0, 0);
     font-size: medium;
 }
+
+.mini-page-title {
+    font-size: 14px;
+    padding: 8px
+}
+
+.page-title-blocks {
+    margin: 0;
+    font-size: 20px;
+    padding: 12px 0px 5px 8px;
+    width: 200px;
+    border-bottom: 1px solid #3399FF;
+}
