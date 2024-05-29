@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
+import TestImageForm from '../components/TestImageForm/TestImageForm'
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -17,6 +18,7 @@ export default function Layout() {
       <ModalProvider>
         <Navigation />
         {isLoaded && <Outlet />}
+          <TestImageForm />
         <Modal />
       </ModalProvider>
     </>
