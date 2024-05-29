@@ -7,7 +7,37 @@ function HomePage () {
             <div id='left-hand-nav-container'>
                 <LeftNavigation />
             </div>
-            <div>
+            <div id='main-homepage-content-container'>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
+                <h1>Home Page</h1>
+                <h2>Insert left side nav bar and notebooks</h2>
+                <h3> and a signout on that nav bar</h3>
                 <h1>Home Page</h1>
                 <h2>Insert left side nav bar and notebooks</h2>
                 <h3> and a signout on that nav bar</h3>
