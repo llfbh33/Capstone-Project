@@ -30,7 +30,13 @@
     list-style: none;
     background-color: #00366B;
     border: 1px solid #3399FF;
-    color: white
+    color: white;
+    width: 220px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
 }
 
 #landingpage-login-form {
@@ -46,8 +52,36 @@
     background-color: #00366B;
     height: 500px;
     border-top: 1px solid #3399FF;
+    border-bottom: 1px solid #3399FF;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.landingpage-demo-login-btn {
+    width: 220px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 10px
+}
+
+#landingpage-footer {
+    color: white;
+    background-color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    height: 50px;
+}
+
+#landingpage-footer-subsection {
+    display: flex;
+    gap: 40px
+}
+
+.landingpage-footer-link {
+    color:white;
+    text-decoration: none;
 }

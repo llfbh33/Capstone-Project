@@ -1,6 +1,7 @@
 import Navigation from '../Navigation/Navigation'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
@@ -65,7 +66,7 @@ function LandingPage() {
                         onItemClick={handleClick}
                         modalComponent={<LoginFormModal username={username} />}
                         />
-                    <button onClick={handledemologin}>Login as Demo User</button>
+                    <button className='landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
                 </section>
                 <section id='landingpage-section-3'>
 
@@ -97,8 +98,14 @@ function LandingPage() {
                     </li>
                 </ul>
             </section>
-            <footer>
-
+            <footer id='landingpage-footer' >
+                <div id='landingpage-footer-subsection'>
+                    <Link to='https://github.com/llfbh33/Capstone-Project' className='landingpage-footer-link'>About</Link>
+                    <Link className='landingpage-footer-link' onClick={() => alert('Linked in coming soon')}>Contact Us</Link>
+                </div>
+                <div>
+                    PenCrafted by Aubrie Woodbine
+                </div>
             </footer>
         </div>
     )
