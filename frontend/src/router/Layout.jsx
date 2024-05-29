@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
-import Navigation from "../components/Navigation/Navigation";
-import TestImageForm from '../components/TestImageForm/TestImageForm'
-import LandingPage from "../components/LandingPage/LandingPage";
+// import Navigation from "../components/Navigation/Navigation";
+// import TestImageForm from '../components/TestImageForm/TestImageForm'
+// import LandingPage from "../components/LandingPage/LandingPage";
 
 export default function Layout() {
   const dispatch = useDispatch();

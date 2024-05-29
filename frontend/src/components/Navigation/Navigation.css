@@ -19,6 +19,7 @@
 #landingpage-navigation-in-out-container > li {
   list-style: none;
   display: inline-flex;
+  justify-content: center;;
   margin: 10px;
   border: 1px solid #3399FF;
   border-radius: 10px;
@@ -26,4 +27,5 @@
   font-size: 22px;
   padding: 10px;
   width: 90px;
+  cursor: pointer;
 }

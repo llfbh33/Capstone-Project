@@ -10,10 +10,9 @@ import './LandingPage.css'
 import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
-    const [username, setUserName] = useState('')
-    const [password, setPassword] = useState('')
-    const [hidden, setHidden] = useState(true)
-    const [errors, setErrors] = useState({});
+    const [username] = useState('')
+    // const [hidden, setHidden] = useState(true)
+    // const [errors, setErrors] = useState({});
     const dispatch = useDispatch()
     const navigate = useNavigate();
 
