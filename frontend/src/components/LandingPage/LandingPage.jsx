@@ -18,17 +18,6 @@ function LandingPage() {
     const navigate = useNavigate();
 
 
-    const handleClick = (e) => {
-        e.preventDefault();
-
-        if (username) {
-            console.log('there is a username')
-            setHidden(true)
-        } else {
-            setHidden(false)
-        }
-    }
-
     // logs in demo user
     const handledemologin = async (e) => {
         e.preventDefault();
@@ -50,23 +39,14 @@ function LandingPage() {
             <div id='landingpage-section1-3-container' >
                 <section id='landingpage-section-1'>
                     <img src='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/landing-page-title-image.png' />
+                    <div className='landingpage-section-1-midtitle'>Your Writing Journey Starts Here: Create, Share, Improve</div>
                 </section>
                 <section id='landingpage-section-2'>
-                    {/* <form id='landingpage-login-form' > */}
-                        <input
-                            type='text'
-                            placeholder='User Name'
-                            value={username}
-                            onChange={(e) => setUserName(e.target.value)}
-                            >
-                        </input>
-                        <p className={hidden ? 'error-validation-hidden' : 'error-validation'}>Please enter your username before proceeding</p>
-                        <OpenModalMenuItem
-                        itemText="Continue"
-                        onItemClick={handleClick}
-                        modalComponent={<LoginFormModal username={username} />}
-                        />
-                    <button className='landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
+                    <OpenModalMenuItem
+                    itemText="Continue"
+                    modalComponent={<LoginFormModal username={username} />}
+                    />
+                    <button className='button landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
                 </section>
                 <section id='landingpage-section-3'>
 
