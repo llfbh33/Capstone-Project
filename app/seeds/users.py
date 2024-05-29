@@ -5,9 +5,9 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        name='Demo', username='demo', profle_image='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-1.png', password='password')
+        name='Demo', username='demo', profile_image='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-1.png', password='password')
     marnie = User(
-        name='Marie', username='marnie', profiel_image='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-3.png', password='password')
+        name='Marie', username='marnie', profile_image='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-3.png', password='password')
     bobbie = User(
         name='Bobbie', username='bobbie', profile_image='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-4.png', password='password')
 
