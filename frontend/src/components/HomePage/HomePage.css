@@ -1,11 +1,23 @@
 #main-homepage-container {
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: row;
+    height: 100vh;
+    overflow:auto;
+    background-size: cover;
 }
 
 
 #left-hand-nav-container {
-    width: 20%;
-    max-width: 300px;
-    min-width: 200px;
+    width: 300px;
+
+    height: 100vh;
+    position: fixed;
+}
+
+
+#main-homepage-content-container {
+    margin-left: 350px;
+
 }

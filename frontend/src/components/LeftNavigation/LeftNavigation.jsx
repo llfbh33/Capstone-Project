@@ -20,7 +20,7 @@ function LeftNavigation() {
 
 
     return (
-        <div>left navBar main div
+        <div id='main-left-nav-container'>left navBar main div
             <div>
                 signout section (bottom)
                 <button onClick={logout}>Log Out</button>
