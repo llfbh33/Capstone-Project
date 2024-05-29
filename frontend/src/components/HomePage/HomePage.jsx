@@ -19,39 +19,19 @@ function HomePage () {
                 <LeftNavigation />
             </div>
             <div id='main-homepage-content-container'>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
-                <h1>Home Page</h1>
-                <h2>Insert left side nav bar and notebooks</h2>
-                <h3> and a signout on that nav bar</h3>
+                <p className='mini-page-title' >Ready to write? Create a notebook to get started!</p>
+                <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
+                <p className="page-title-blocks">Notebooks</p>
+                <div>
+                    <div>This is were we will map all of our Notebooks</div>
+                </div>
+                <h1 id='homepage-user-title'></h1>
+                <p className="page-title-blocks">Your Public Entries</p>
+                <div>
+                    <div>
+                        This is where we will map all of our public entries
+                    </div>
+                </div>
             </div>
         </div>
     )

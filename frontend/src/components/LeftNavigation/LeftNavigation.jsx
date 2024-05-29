@@ -45,10 +45,10 @@ function LeftNavigation() {
                 <div id='left-nav-user-info' onClick={() => alert('Profile page and ability to change profile image coming soon')}>
                     {console.log(user)}
                     <div id='left-nav-user-info-inner'>
-                        <img src={user.profile_image} className="profile-image"/>
+                        <img src={user?.profile_image} className="profile-image"/>
                         <div id='left-nav-user-name'>
-                            <div>{`Hello ${user.name}`}</div>
-                            <div>{`username : ${user.username}`}</div>
+                            <div>{`Hello ${user?.name}`}</div>
+                            <div>{`username : ${user?.username}`}</div>
                         </div>
                     </div>
                 </div>
