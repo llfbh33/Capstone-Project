@@ -1,7 +1,5 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
-# from .user import User
-# from .notebook import Notebook
 
 class Entry(db.Model):
     __tablename__ = 'entries'
