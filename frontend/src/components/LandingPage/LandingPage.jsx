@@ -23,7 +23,7 @@ function LandingPage() {
 
         await dispatch(
             thunkLogin({
-              username: 'demo',
+              username: 'demo-user',
               password: 'password',
             })
           );
