@@ -18,7 +18,6 @@ function LeftNavigation() {
     const logout = (e) => {
         e.preventDefault();
         dispatch(thunkLogout());
-        navigate('/')
     };
 
     const mainNavElementClick = (string) => {
@@ -46,7 +45,6 @@ function LeftNavigation() {
         <div id='main-left-nav-container'>
             <div>
                 <div id='left-nav-user-info' onClick={() => alert('Profile page and ability to change profile image coming soon')}>
-                    {console.log(user)}
                     <div id='left-nav-user-info-inner'>
                         <img src={user?.profile_image} className="profile-image"/>
                         <div id='left-nav-user-name'>

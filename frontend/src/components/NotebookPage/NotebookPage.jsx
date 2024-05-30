@@ -1,19 +1,27 @@
-import { useParams } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import LeftNavigation from "../LeftNavigation/LeftNavigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
+
 import './NotebookPage.css'
+import { thunkDeleteNotebook, thunkLoadNotebooks } from '../../redux/notebook';
 
 
 // adjust this page for entries instead of notebooks
 
 function NotebookPage () {
-    const {notebookId} = useParams()
-    const user = useSelector(state => state.session.user)
-    const notebooks = useSelector(state => state.notebooks)
-    const currNotebook = useSelector(state => state.notebooks[notebookId])
+    const {notebookId} = useParams();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const user = useSelector(state => state.session.user);
+    const notebooks = useSelector(state => state.notebooks);
+    const currNotebook = useSelector(state => state.notebooks[notebookId]);
 
-    const handleDeleteNotebook = () => {
-        alert(`This button will delete the current notebook, notebook ${notebookId}. Then navigate the user back to the home page`)
+    const handleDeleteEntry = async (id) => {
+        // alert(`This button will delete the selected entry, entry ${id}.`)
+
+        dispatch(thunkDeleteNotebook(notebookId))
+        dispatch(thunkLoadNotebooks())
+        navigate('/home')
     }
 
     const handleClickEntry = (id) => {
@@ -33,12 +41,11 @@ function NotebookPage () {
             <div className='main-insite-content-container'>
                 <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
-                    <button className='button delete-notebook-btn' onClick={handleDeleteNotebook}>{`Delete ${currNotebook.name}?`}</button>
                 </div>
                 <h1 id='homepage-user-title'>{`Notebook: ${currNotebook?.name}`}</h1>
                 <div id='notebookpage-about-section-container' >
                     <div className='notebookpage-about-section'>
-                        {currNotebook.about}
+                        {currNotebook?.about}
                     </div>
                 </div>
                 <h1 id='homepage-underline'></h1>
@@ -46,10 +53,14 @@ function NotebookPage () {
                 <div id='homepage-notebook-card-container'>
                     {notebooks
                         ? Object.values(notebooks).map(notebook => (
-                            <div className="homepage-notebook-card" key={notebook.id} onClick={() => handleClickEntry(notebook.id)}>
-                                <div>{notebook.name}</div>
+                            <div key={notebook.id}>
+                                <div className="homepage-notebook-card"  >
+                                    <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(notebook.id)}>
+                                        <div>{notebook?.name}</div>
+                                    </div>
+                                    <button className="button homepage-delete-notebook" onClick={() => handleDeleteEntry(notebook.id)}>{`Delete ${notebook.name}?`}</button>
+                                </div>
                             </div>
-
                             ))
                     : ''}
                     <div id='homepage-new-notebook-card' onClick={handleNewEntry} >
