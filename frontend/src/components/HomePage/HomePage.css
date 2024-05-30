@@ -1,29 +1,46 @@
-#main-homepage-container {
-    background-color: black;
-    color: white;
-    display: flex;
-    flex-direction: row;
-    height: 100vh;
-    overflow:auto;
-    background-size: cover;
-}
-
-/* include with every page the nav is located.  Keeps the nav in place */
-#left-hand-nav-container {
-    width: 300px;
-    height: 100vh;
-    position: fixed;
-}
-
-/* Make sure to shift container content to make room for the navigation */
-#main-homepage-content-container {
-    margin-left: 340px;
-    width: 100%;
-}
 
 #homepage-user-title {
     padding: 12px 8px;
     margin: 0;
     width: 80%;
     border-bottom: 1px solid #3399FF;
+}
+
+#homepage-underline {
+    border-bottom: 1px solid #3399FF;
+    width: 81%;
+    margin: 0px
+}
+
+#homepage-notebook-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 96%;
+    padding: 14px 0px;
+}
+
+.homepage-notebook-card {
+    height: 240px;
+    width: 200px;
+    margin: 16px;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+}
+
+#homepage-new-notebook-card {
+    height: 240px;
+    width: 200px;
+    margin: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 20px;
+    line-height: 2;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+}
+
+#create-notebook-title {
+    padding: 12px
 }

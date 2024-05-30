@@ -70,6 +70,10 @@
     cursor: pointer;
 }
 
+.left-nav-notebook-name {
+    margin: 6px 0px;
+}
+
 #left-nav-signout-container {
     height: 60px;
     display: flex;

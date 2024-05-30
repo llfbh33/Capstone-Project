@@ -1,0 +1,18 @@
+
+#notebookpage-about-section-container {
+    width: 96%;
+}
+
+.notebookpage-about-section {
+    text-align: center;
+    width: 70%;
+    padding: 20px;
+    font-size: 18px;
+}
+
+.delete-notebook-btn {
+    width: 300px;
+    height: 35px;
+    margin-right: 30px;
+    border-radius: 5px;
+}
