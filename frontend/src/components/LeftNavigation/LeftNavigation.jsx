@@ -11,6 +11,7 @@ function LeftNavigation() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const user = useSelector(state => state.session.user)
+    const notebooks = useSelector(state => state.notebooks)
     const [openMain, setOpenMain] = useState('')
     const [openMid, setOpenMid] = useState('')
 
@@ -37,6 +38,10 @@ function LeftNavigation() {
         }
     }
 
+    const handleClickNotebook = (id) => {
+        navigate(`/notebook/${id}`)
+    }
+
     return (
         <div id='main-left-nav-container'>
             <div>
@@ -55,10 +60,20 @@ function LeftNavigation() {
                         <div className='left-nav-main-ele' onClick={() => mainNavElementClick('home')}>Home</div>
                         <div hidden={openMain === 'home' ? false : true}>
                             <div className="left-nav-mid-line"></div>
+                            <div className="left-nav-mid-ele" onClick={() => navigate('/home')}>Home Page</div>
                             <div className="left-nav-mid-ele" onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
                             <div hidden={openMid === 'notebooks' ? false : true}>
                                 <div className="left-nav-small-line"></div>
-                                <div className="left-nav-small-ele">Currently no notebooks</div>
+                                <div className="left-nav-small-ele">
+                                    {notebooks
+                                        ? Object.values(notebooks).map(notebook => (
+                                            <div className="left-nav-notebook-name" key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                                <div>{notebook.name}</div>
+                                            </div>
+
+                                            ))
+                                    : ''}
+                                </div>
                             </div>
                             <div className="left-nav-mid-ele" onClick={() => alert('Feature coming soon')}>Theme</div>
                         </div>

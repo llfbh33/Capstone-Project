@@ -4,6 +4,7 @@ import SignupFormPage from '../components/SignupFormPage';
 import Layout from './Layout';
 import HomePage from '../components/HomePage/HomePage';
 import LandingPage from '../components/LandingPage/LandingPage';
+import NotebookPage from '../components/NotebookPage/NotebookPage';
 
 export const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ export const router = createBrowserRouter([
       {
         path: '/home',
         element: <HomePage />,
+      },
+      {
+        path: '/notebook/:notebookId',
+        element: <NotebookPage />,
       },
     ],
   },

@@ -5,7 +5,7 @@ body {
 }
 
 /* html {
-    /* background-color: rgb(138, 207, 138); 
+    /* background-color: rgb(138, 207, 138);
 } */
 
 .button {
@@ -31,6 +31,30 @@ body {
     font-size: medium;
 }
 
+/* make a main container with each page with this */
+.main-insite-container {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow:auto;
+    background-size: cover;
+}
+
+/* include with every page the nav is located.  Keeps the nav in place */
+.left-hand-nav-container {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+}
+
+/* Make sure to shift container content to make room for the navigation */
+.main-insite-content-container {
+    margin-left: 340px;
+    width: 100%;
+}
+
 .mini-page-title {
     font-size: 14px;
     padding: 8px
@@ -42,4 +66,10 @@ body {
     padding: 12px 0px 5px 8px;
     width: 200px;
     border-bottom: 1px solid #3399FF;
+}
+
+.top-statement-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
