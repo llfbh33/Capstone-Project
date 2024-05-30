@@ -1,5 +1,7 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
-from datetime import date
+from datetime import datetime
+# from .user import User
+# from .notebook import Notebook
 
 class Entry(db.Model):
     __tablename__ = 'entries'
@@ -9,11 +11,15 @@ class Entry(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    notebook_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebook.id')), nullable=False)
+    notebook_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
     name = db.Column(db.String(100), nullable=False)
-    created_at = db.Column(db.Date, default=date.now())
-    updated_at = db.Column(db.Date, default=date.now())
+    created_at = db.Column(db.Date, default=datetime.now())
+    updated_at = db.Column(db.Date, default=datetime.now())
 
+    users = db.relationship('User', back_populates='entries')
+    notebooks = db.relationship('Notebook', back_populates='entries')
+    posts = db.relationship('Post', cascade='all, delete', back_populates='entries')
+    comments = db.relationship('Comment', cascade='all, delete', back_populates='entries')
 
     def to_dict(self):
         return {
