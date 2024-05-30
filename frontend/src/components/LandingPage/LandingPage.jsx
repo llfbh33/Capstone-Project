@@ -1,6 +1,6 @@
 import Navigation from '../Navigation/Navigation'
-import { useState } from 'react'
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
@@ -8,26 +8,44 @@ import LoginFormModal from "../LoginFormModal";
 import { thunkLogin } from "../../redux/session";
 import './LandingPage.css'
 import { useNavigate } from 'react-router-dom';
+import { thunkLoadNotebooks } from '../../redux/notebook';
 
 function LandingPage() {
     const [username] = useState('')
+    const [errors, setErrors] = useState({});
     // const [hidden, setHidden] = useState(true)
     // const [errors, setErrors] = useState({});
     const dispatch = useDispatch()
     const navigate = useNavigate();
+    const user = useSelector(state => state.session.user)
+
+    // checks in there is a current user- keeps current user from the landing page
+    useEffect(() => {
+        if (user) navigate('/home')
+    }, [user])
 
 
     // logs in demo user
     const handledemologin = async (e) => {
         e.preventDefault();
 
-        await dispatch(
+        let serverResponse = await dispatch(
             thunkLogin({
               username: 'demo-user',
               password: 'password',
             })
-          );
-        navigate('/home')
+          )
+
+        if (serverResponse) {
+            setErrors(serverResponse)
+        } else {
+            serverResponse = await dispatch(thunkLoadNotebooks)
+            if (serverResponse) {
+                setErrors(serverResponse)
+            } else {
+                navigate('/home')
+            }
+        }
     }
 
 
