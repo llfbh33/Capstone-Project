@@ -50,6 +50,9 @@
     padding: 12px
 }
 
+#create-notebook-title > li {
+    list-style: none;
+}
 
 .homepage-delete-notebook {
     width: 100%;
