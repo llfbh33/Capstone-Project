@@ -66,6 +66,7 @@ function HomePage () {
                                         <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
                                             <div>{notebook?.name}</div>
                                         </div>
+                                        <button className="button homepage-delete-notebook">{`Edit ${notebook.name}`}</button>
                                         <button className="button homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook.id)}>{`Delete ${notebook.name}?`}</button>
                                     </div>
                                 </div>

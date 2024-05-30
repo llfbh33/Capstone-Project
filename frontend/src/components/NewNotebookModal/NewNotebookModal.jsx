@@ -28,9 +28,11 @@ function NewNotebookFormModal() {
       })
     );
 
-    if (serverResponse) {
+    if (serverResponse.name) {
       setErrors(serverResponse);
     } else {
+      setName('')
+      setAbout('')
       closeModal();
       navigate('/home')
     }
