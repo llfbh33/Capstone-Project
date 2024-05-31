@@ -1,93 +1,153 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Post, db
-from app.forms import PostForm
+from app.models import Post, db, Entry
+from app.forms import PostForm, EditPostForm
 from datetime import datetime
 
 post_routes = Blueprint('posts', __name__)
 
 
-@entry_routes.route('')
+@post_routes.route('')
 @login_required
-def get_entries():
+def get_posts():
     """
-    Query for all entries by current user and returns them in a list of notebook dictionaries
+    Query for all posts within the site
     """
-    entries = Entry.query.filter(Entry.user_id == current_user.id).all()
-    return {'entries': [entry.to_dict() for entry in entries]}
+
+    entries = Entry.query.filter(Entry.is_public == True).all()
+    posts = []
+
+    for entry in entries:
+        entry_post = []
+        for post in entry.posts:
+            entry_post.append(post.to_dict())
+        entry_comments = []
+        for comment in entry.comments:
+            entry_comments.append(comment.to_dict())
+        entry_w_post = entry.to_dict()
+        entry_w_post['post'] = entry_post
+        entry_w_post['comments'] = entry_comments
+        posts.append(entry_w_post)
+
+    return posts
 
 
 
-@entry_routes.route('/<int:entry_id>')
+@post_routes.route('/user')
 @login_required
-def entry(entry_id):
+def get_user_posts():
     """
-    Query for an entry by id and returns it in a dictionary
+    Query for all posts posted by current user
     """
-    entry = Entry.query.get(entry_id)
-    return entry.to_dict()
+    entries = Entry.query.filter(Entry.is_public == True, Entry.user_id == current_user.id).all()
+    posts = []
+
+    for entry in entries:
+        entry_post = []
+        for post in entry.posts:
+            entry_post.append(post.to_dict())
+        entry_comments = []
+        for comment in entry.comments:
+            entry_comments.append(comment.to_dict())
+        entry_w_post = entry.to_dict()
+        entry_w_post['post'] = entry_post
+        entry_w_post['comments'] = entry_comments
+        posts.append(entry_w_post)
+
+    return posts
 
 
-@entry_routes.route('/new', methods=['post'])
+
+
+@post_routes.route('/<int:post_id>')
+@login_required
+def entry(post_id):
+    """
+    Query for a post by id and returns it in a dictionary
+    """
+    post = Post.query.filter(Post.id == post_id).first()
+    entry = Entry.query.filter(Entry.id == post.entry_id).first()
+
+    entry_comments = []
+    for comment in entry.comments:
+        entry_comments.append(comment.to_dict())
+
+    entry_return = entry.to_dict()
+    entry_return['post'] = post.to_dict()
+    entry_return['comments'] = entry_comments
+
+    return entry_return
+
+
+@post_routes.route('/new', methods=['post'])
 @login_required
 def create_entry():
     """
-    Create a new entry for the current notebook
+    Create a new post for the current entry
     """
-    form = EntryForm()
+    form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
 
-        new_entry = Entry (
-            user_id = form.data['user_id'],
-            notebook_id = form.data['notebook_id'],
-            name = form.data['name'],
-            about = form.data['about'],
-            created_at = datetime.now(),
-            updated_at = datetime.now()
+        entry = Entry.query.get(form.data['entry_id'])
+        setattr(entry, 'is_public', True)
+
+        new_post = Post (
+            entry_id = form.data['entry_id'],
+            message = form.data['message'],
         )
 
-        db.session.add(new_entry)
+        db.session.add(new_post)
         db.session.commit()
 
-        return new_entry.to_dict()
+        post = Post.query.filter(Post.entry_id == form.data['entry_id']).first()
+        post_return = entry.to_dict()
+        post_return['post'] = post.to_dict()
+
+        return post_return
     else:
         return form.errors, 400
 
 
-@entry_routes.route('/<int:entry_id>/edit', methods=['post'])
+@post_routes.route('/<int:post_id>/edit', methods=['post'])
 @login_required
-def edit_entry(entry_id):
+def edit_entry(post_id):
     """
-    Edit an existing entry for the current user
+    Edit an existing post for the current user
     """
-    form = EntryForm()
+    form = EditPostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
     if form.validate_on_submit():
 
-        currEntry = Entry.query.get(entry_id)
-        setattr(currEntry, 'name', form.data['name'])
-        setattr(currEntry, 'content', form.data['content'])
-        setattr(currEntry, 'updated_at', datetime.now())
+        currPost = Post.query.get(post_id)
+        setattr(currPost, 'message', form.data['message'])
+        setattr(currPost, 'updated_at', datetime.now())
 
         db.session.commit()
 
-        return currEntry.to_dict()
+        entry = Entry.query.get(form.data['entry_id'])
+        post_return = entry.to_dict()
+        post_return['post'] = currPost.to_dict()
+
+        return post_return
     else:
         return form.errors, 400
 
 
-@entry_routes.route("/<int:entry_id>/delete")
+@post_routes.route("/<int:post_id>/delete")
 @login_required
-def delete_notebook(entry_id):
+def delete_notebook(post_id):
     """
-    Delete a notebook
+    Remove an entry from being public and delete the post
     """
-    entry_to_delete = Entry.query.get(entry_id)
+    post_to_delete = Post.query.get(post_id)
 
-    db.session.delete(entry_to_delete)
+    entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
+    setattr(entry, 'is_public', False)
+
+    db.session.delete(post_to_delete)
     db.session.commit()
 
-    return {"message": "Entry has been successfully deleted"}
+    return {"message": "Post has been successfully deleted"}

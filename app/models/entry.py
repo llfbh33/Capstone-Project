@@ -13,6 +13,7 @@ class Entry(db.Model):
     notebook_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text, nullable=False)
+    is_public = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
 
