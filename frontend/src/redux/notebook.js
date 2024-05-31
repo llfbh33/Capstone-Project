@@ -112,7 +112,7 @@ function notebookReducer(state = initialState, action) {
     }
     case EDIT_NOTEBOOK: {
         const newState = {...state};
-        newState[action.notebook.id] = action.notenook;
+        newState[action.notebook.id] = action.notebook;
         return newState;
     }
     case DELETE_NOTEBOOK: {
