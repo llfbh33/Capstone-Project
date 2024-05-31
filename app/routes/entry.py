@@ -14,7 +14,7 @@ def get_entries():
     Query for all entries by current user and returns them in a list of notebook dictionaries
     """
     entries = Entry.query.filter(Entry.user_id == current_user.id).all()
-    return {'entries': [entries.to_dict() for entry in entries]}
+    return {'entries': [entry.to_dict() for entry in entries]}
 
 
 

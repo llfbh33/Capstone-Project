@@ -15,7 +15,7 @@ export default function Layout() {
   const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     dispatch(thunkAuthenticate())
-    // .then(() => console.log('hello'))
+    .then(() => dispatch(thunkLoadNotebooks()))
     .then(() => dispatch(thunkLoadNotebooks()))
     .then(() => setIsLoaded(true))
     .catch((error) => console.log(error))
