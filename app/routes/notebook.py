@@ -54,6 +54,29 @@ def create_notebook():
         return form.errors, 400
 
 
+@notebook_routes.route('/<int:notebook_id>/edit', methods=['post'])
+@login_required
+def edit_notebook(notebook_id):
+    """
+    Edit an existing notebook for the current user
+    """
+    form = NotebookForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    print('form', form)
+    if form.validate_on_submit():
+
+        currNotebook = Notebook.query.get(notebook_id)
+        setattr(currNotebook, 'name', form.data['name'])
+        setattr(currNotebook, 'about', form.data['about'])
+
+        db.session.commit()
+
+        return currNotebook.to_dict()
+    else:
+        return form.errors, 400
+
+
 @notebook_routes.route("/<int:notebook_id>/delete")
 @login_required
 def delete_notebook(notebook_id):

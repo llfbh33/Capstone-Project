@@ -4,9 +4,9 @@ import './HomePage.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteNotebook, thunkLoadNotebooks } from '../../redux/notebook';
-import LoginFormModal from "../LoginFormModal";
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
-import NewNotebookFormModal from "../NewNotebookModal/NewNotebookModal";
+import NewNotebookFormModal from "../NotebookModals/NewNotebookModal";
+import EditNotebookFormModal from "../NotebookModals/EditNotenookModal";
 
 
 function HomePage () {
@@ -61,13 +61,20 @@ function HomePage () {
                     <div id='homepage-notebook-card-container'>
                         {notebooks
                             ? Object.values(notebooks).map(notebook => (
-                                <div key={notebook.id}>
+                                <div key={notebook?.id}>
                                     <div className="homepage-notebook-card"  >
                                         <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
                                             <div>{notebook?.name}</div>
                                         </div>
-                                        <button className="button homepage-delete-notebook">{`Edit ${notebook.name}`}</button>
-                                        <button className="button homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook.id)}>{`Delete ${notebook.name}?`}</button>
+                                        <div>
+                                        <div className="button homepage-edit-notebook">
+                                            <OpenModalMenuItem
+                                            itemText={`Edit ${notebook?.name}`}
+                                            modalComponent={<EditNotebookFormModal notebook={notebook} />}
+                                            />
+                                        </div>
+                                        <button className="button homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook?.id)}>{`Delete ${notebook?.name}?`}</button>
+                                        </div>
                                     </div>
                                 </div>
                                 ))
