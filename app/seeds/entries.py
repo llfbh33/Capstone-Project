@@ -9,7 +9,8 @@ def seed_entries():
         name = 'the Closet',
         content='''Every night, Lisa heard the same soft whispering coming from her closet. "I'm watching you," it would murmur. Terrified, she would hide under her blanket, too scared to move. One night, fed up with the sleepless nights, she bravely got out of bed and yanked the closet door open.
 
-                Inside, there was nothing but her clothes and shoes. Relieved, she laughed at her imagination and turned to go back to bed. As she did, she caught a glimpse of her mirror. In its reflection, her closet door was still open—and a pair of glowing eyes stared back at her from the darkness.'''
+                Inside, there was nothing but her clothes and shoes. Relieved, she laughed at her imagination and turned to go back to bed. As she did, she caught a glimpse of her mirror. In its reflection, her closet door was still open—and a pair of glowing eyes stared back at her from the darkness.''',
+        is_public=True
         )
     two  = Entry(
         user_id = 1,
@@ -73,7 +74,8 @@ def seed_entries():
 
                    With a final smile, he stepped back into the vortex, and it closed behind him. The well returned to its ordinary appearance, but Jenny knew it held extraordinary secrets.
 
-                   From that day on, she never stopped believing in the magic hidden in everyday places, and the well became a cherished part of Oak Hollow's lore—a testament to the power of curiosity and courage.'''
+                   From that day on, she never stopped believing in the magic hidden in everyday places, and the well became a cherished part of Oak Hollow's lore—a testament to the power of curiosity and courage.''',
+        is_public=True
         )
     four  = Entry(
         user_id = 1,
@@ -123,7 +125,8 @@ def seed_entries():
 
                 As winter tightened its grip once more, the forest fell silent, wrapped in a blanket of stillness. The oak tree stood alone in its quiet majesty, a symbol of strength and resilience in the face of nature's ever-changing whims.
 
-                And so the dance of seasons continued, each one blending seamlessly into the next, a timeless cycle of growth, decay, and rebirth. And through it all, the oak tree stood as a silent sentinel, bearing witness to the beauty and wonder of the natural world.'''
+                And so the dance of seasons continued, each one blending seamlessly into the next, a timeless cycle of growth, decay, and rebirth. And through it all, the oak tree stood as a silent sentinel, bearing witness to the beauty and wonder of the natural world.''',
+        is_public=True
         )
     six  = Entry(
         user_id = 1,
@@ -209,7 +212,15 @@ def seed_entries():
 
                 Back on the Galileo, Simian stood on the bridge, looking out at the stars once more. He felt a deep sense of pride in his team and the journey they had begun together. As Captain Simian, he was determined to lead them with courage, wisdom, and a spirit of exploration.
 
-                The odyssey had just begun, and he couldn't wait to see where it would take them.'''
+                The odyssey had just begun, and he couldn't wait to see where it would take them.''',
+        is_public=True
+        )
+    eight  = Entry(
+        user_id = 2,
+        notebook_id = 4,
+        name = 'May 31, 2024',
+        content='''This is a test to make sure that the posts are coming out correctly.  That we can search by all posts and search by the individual users posts''',
+        is_public=True
         )
 
     db.session.add(one)
@@ -219,6 +230,7 @@ def seed_entries():
     db.session.add(five)
     db.session.add(six)
     db.session.add(seven)
+    db.session.add(eight)
     db.session.commit()
 
 def undo_entries():

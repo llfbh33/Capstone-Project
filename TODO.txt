@@ -1,6 +1,5 @@
-- check that the forms and models for comments and posts are complete
-- create routes for posts
-- create routes for comments
+
+
 - create thunks for posts
 - create thunks for comments
 - put in a page swapper

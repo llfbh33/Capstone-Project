@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, TextAreaField
+from wtforms import StringField, IntegerField, TextAreaField, BooleanField
 from wtforms.validators import DataRequired, ValidationError, Length
 from app.models import User, Notebook
-from sqlalchemy.types import BLOB
 
 
 def user_exists(form, field):
@@ -30,3 +29,4 @@ class EntryForm(FlaskForm):
     notebook_id = IntegerField('notebook_id', validators=[DataRequired(), notebook_exitst])
     name = StringField('name', validators=[DataRequired(), Length(max=100)])
     content = TextAreaField('content', validators=[DataRequired()])
+    is_public = BooleanField('is_public')

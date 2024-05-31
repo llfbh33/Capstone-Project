@@ -14,7 +14,17 @@ def get_entries():
     Query for all entries by current user and returns them in a list of notebook dictionaries
     """
     entries = Entry.query.filter(Entry.user_id == current_user.id).all()
-    return {'entries': [entry.to_dict() for entry in entries]}
+    entries_return = []
+
+    for entry in entries:
+        entry_comments = []
+        for comment in entry.comments:
+            entry_comments.append(comment.to_dict())
+        entry_w_comments = entry.to_dict()
+        entry_w_comments['comments'] = entry_comments
+        entries_return.append(entry_w_comments)
+
+    return entries_return
 
 
 
@@ -25,7 +35,16 @@ def entry(entry_id):
     Query for an entry by id and returns it in a dictionary
     """
     entry = Entry.query.get(entry_id)
-    return entry.to_dict()
+
+    comments = []
+    for comment in entry.comments:
+        comments.append(comment.to_dict())
+
+    entry_return = entry.to_dict()
+    entry_return['comments'] = comments
+
+
+    return entry_return
 
 
 @entry_routes.route('/new', methods=['post'])

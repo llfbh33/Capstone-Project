@@ -18,10 +18,16 @@ def seed_notebooks():
         name = "Captain Simian's Odyssey",
         about='''Here I am going to start my book about Captain Simian's travels through the stars on his starship the Galileo.  He navigates uncharted galaxies, encounters alien civilizations, and combats cosmic threats. It will be a sci-fi adventure exploring bravery, teamwork, and the boundless possibilities of space exploration.'''
         )
+    four  = Notebook(
+        user_id = 2,
+        name = "A Test of posts",
+        about='''Here I am trying to make sure that the posts are coming out correctly.'''
+        )
 
     db.session.add(one)
     db.session.add(two)
     db.session.add(three)
+    db.session.add(four)
     db.session.commit()
 
 def undo_notebooks():
