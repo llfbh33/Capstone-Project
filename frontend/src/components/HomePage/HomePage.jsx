@@ -19,7 +19,7 @@ function HomePage () {
 
     useEffect(() => {
         if (!user) navigate('/')
-    }, [user])
+    }, [user, navigate])
 
     useEffect(() => {
         if (notebooks) {
@@ -33,7 +33,7 @@ function HomePage () {
         } else {
             setLoaded(false)
         }
-    })
+    }, [gotNotebooks])
 
     const handleClickNotebook = (id) => {
         // alert(`feature will send user to notebook ${id} page`)

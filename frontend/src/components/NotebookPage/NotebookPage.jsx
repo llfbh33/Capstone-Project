@@ -1,4 +1,4 @@
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import LeftNavigation from "../LeftNavigation/LeftNavigation";
 import { useSelector, useDispatch} from "react-redux";
 
@@ -12,11 +12,10 @@ function NotebookPage () {
     const {notebookId} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
     const currNotebook = useSelector(state => state.notebooks[notebookId]);
 
-    const handleDeleteEntry = async (id) => {
+    const handleDeleteEntry = async () => {
         // alert(`This button will delete the selected entry, entry ${id}.`)
 
         dispatch(thunkDeleteNotebook(notebookId))
@@ -26,7 +25,6 @@ function NotebookPage () {
 
     const handleClickEntry = (id) => {
         alert(`feature will send user to entry ${id} page`)
-        // navigate(`/notebook/${id}`)
     }
 
     const handleNewEntry = () => {
