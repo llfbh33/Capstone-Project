@@ -65,8 +65,8 @@ function LeftNavigation() {
                                 <div className="left-nav-small-ele">
                                     {notebooks
                                         ? Object.values(notebooks).map(notebook => (
-                                            <div className="left-nav-notebook-name" key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
-                                                <div>{notebook.name}</div>
+                                            <div className="left-nav-notebook-name" key={notebook?.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                                <div>{notebook?.name}</div>
                                             </div>
 
                                             ))
