@@ -16,7 +16,7 @@ def seed_notebooks():
     three  = Notebook(
         user_id = 1,
         name = "Captain Simian's Odyssey",
-        about='''Here I am going to start my book about Captain Simian't travels through the stars on his starship the Galileo.  He navigates uncharted galaxies, encounters alien civilizations, and combats cosmic threats. It will be a sci-fi adventure exploring bravery, teamwork, and the boundless possibilities of space exploration.'''
+        about='''Here I am going to start my book about Captain Simian's travels through the stars on his starship the Galileo.  He navigates uncharted galaxies, encounters alien civilizations, and combats cosmic threats. It will be a sci-fi adventure exploring bravery, teamwork, and the boundless possibilities of space exploration.'''
         )
 
     db.session.add(one)

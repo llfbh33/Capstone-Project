@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+# from sqlalchemy.types import BLOB
 
 class Entry(db.Model):
     __tablename__ = 'entries'
@@ -11,6 +12,7 @@ class Entry(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     notebook_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('notebooks.id')), nullable=False)
     name = db.Column(db.String(100), nullable=False)
+    content = db.Column(db.Text, nullable=False)
     created_at = db.Column(db.Date, default=datetime.now())
     updated_at = db.Column(db.Date, default=datetime.now())
 
