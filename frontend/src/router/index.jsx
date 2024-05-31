@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
         element: <NotebookPage />,
       },
       {
-        path: '/entries/:entryId',
+        path: '/notebook/:notebookId/entries/:entryId',
         element: <EntryPage />,
       },
 

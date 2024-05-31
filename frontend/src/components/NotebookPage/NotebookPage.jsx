@@ -21,18 +21,18 @@ function NotebookPage () {
         let notebookEntries = Object.values(entries).filter(entry => entry.notebook_id === parseInt(notebookId))
         console.log(notebookEntries)
         setNoteEntries(notebookEntries)
-    }, [notebookId])
+    }, [notebookId, entries])
 
     const handleDeleteEntry = async () => {
         // alert(`This button will delete the selected entry, entry ${id}.`)
 
-        dispatch(thunkDeleteNotebook(notebookId))
+        dispatch(thunkDeleteNotebook (notebookId))
         dispatch(thunkLoadNotebooks())
         navigate('/home')
     }
 
     const handleClickEntry = (entry) => {
-        navigation.navigate(`/entries/${entry.id}`, {entry})
+        navigate(`notebook/${notebookId}/entries/${entry.id}`)
     }
 
     const handleNewEntry = () => {
