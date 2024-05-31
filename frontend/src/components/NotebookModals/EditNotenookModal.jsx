@@ -2,12 +2,10 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./NewNotebookModal.css";
-import { useNavigate } from "react-router-dom";
 import { thunkEditNotebook, thunkLoadNotebooks } from "../../redux/notebook";
 
 function EditNotebookFormModal({notebook}) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const user = useSelector(state => state.session.user)
   const [name, setName] = useState(notebook.name);
   const [about, setAbout] = useState(notebook.about);
@@ -37,7 +35,7 @@ function EditNotebookFormModal({notebook}) {
       setName('')
       setAbout('')
       await closeModal();
-    //   navigate('/home')
+
     }
   };
 

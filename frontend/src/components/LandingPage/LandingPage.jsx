@@ -22,7 +22,7 @@ function LandingPage() {
     // checks in there is a current user- keeps current user from the landing page
     useEffect(() => {
         if (user) navigate('/home')
-    }, [user])
+    }, [user, navigate])
 
 
     // logs in demo user
