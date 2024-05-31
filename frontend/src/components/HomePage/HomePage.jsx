@@ -59,8 +59,7 @@ function HomePage () {
                     <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
                     <p className="page-title-blocks">Your Notebooks</p>
                     <div id='homepage-notebook-card-container'>
-                        {notebooks
-                            ? Object.values(notebooks).map(notebook => (
+                        {Object.values(notebooks).map(notebook => (
                                 <div key={notebook?.id}>
                                     <div className="homepage-notebook-card"  >
                                         <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
@@ -78,7 +77,7 @@ function HomePage () {
                                     </div>
                                 </div>
                                 ))
-                        : ''}
+                            }
                         <div id='homepage-new-notebook-card'>
                             <div id='create-notebook-title'>
                                 <OpenModalMenuItem

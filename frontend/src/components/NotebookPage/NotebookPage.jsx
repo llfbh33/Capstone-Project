@@ -4,6 +4,7 @@ import { useSelector, useDispatch} from "react-redux";
 
 import './NotebookPage.css'
 import { thunkDeleteNotebook, thunkLoadNotebooks } from '../../redux/notebook';
+import { useEffect, useState } from 'react';
 
 
 // adjust this page for entries instead of notebooks
@@ -12,8 +13,15 @@ function NotebookPage () {
     const {notebookId} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const notebooks = useSelector(state => state.notebooks);
+    const entries = useSelector(state => state.entries);
     const currNotebook = useSelector(state => state.notebooks[notebookId]);
+    const [noteEntries, setNoteEntries] = useState('')
+
+    useEffect(() => {
+        let notebookEntries = Object.values(entries).filter(entry => entry.notebook_id === parseInt(notebookId))
+        console.log(notebookEntries)
+        setNoteEntries(notebookEntries)
+    }, [notebookId])
 
     const handleDeleteEntry = async () => {
         // alert(`This button will delete the selected entry, entry ${id}.`)
@@ -23,8 +31,8 @@ function NotebookPage () {
         navigate('/home')
     }
 
-    const handleClickEntry = (id) => {
-        alert(`feature will send user to entry ${id} page`)
+    const handleClickEntry = (entry) => {
+        navigation.navigate(`/entries/${entry.id}`, {entry})
     }
 
     const handleNewEntry = () => {
@@ -49,14 +57,14 @@ function NotebookPage () {
                 <h1 id='homepage-underline'></h1>
                 <p className="page-title-blocks">Your Entries</p>
                 <div id='homepage-notebook-card-container'>
-                    {notebooks
-                        ? Object.values(notebooks).map(notebook => (
-                            <div key={notebook.id}>
+                    {entries
+                        ? Object.values(noteEntries).map(entry => (
+                            <div key={entry.id}>
                                 <div className="homepage-notebook-card"  >
-                                    <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(notebook.id)}>
-                                        <div>{notebook?.name}</div>
+                                    <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(entry)}>
+                                        <div>{entry?.name}</div>
                                     </div>
-                                    <button className="button homepage-delete-notebook" onClick={() => handleDeleteEntry(notebook.id)}>{`Delete ${notebook.name}?`}</button>
+                                    <button className="button homepage-delete-notebook" onClick={() => handleDeleteEntry(entry.id)}>{`Delete ${entry.name}?`}</button>
                                 </div>
                             </div>
                             ))

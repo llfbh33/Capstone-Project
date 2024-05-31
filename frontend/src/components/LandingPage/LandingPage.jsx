@@ -9,12 +9,14 @@ import { thunkLogin } from "../../redux/session";
 import './LandingPage.css'
 import { useNavigate } from 'react-router-dom';
 import { thunkLoadNotebooks } from '../../redux/notebook';
+import { thunkLoadEntries } from '../../redux/entry';
 
 function LandingPage() {
     const [username] = useState('')
-    const [errors, setErrors] = useState({});
+    // const [errors, setErrors] = useState({});
     // const [hidden, setHidden] = useState(true)
     // const [errors, setErrors] = useState({});
+    const [loaded, setLoaded] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate();
     const user = useSelector(state => state.session.user)
@@ -24,28 +26,35 @@ function LandingPage() {
         if (user) navigate('/home')
     }, [user, navigate])
 
+    useEffect(() => {
+        if (loaded) {
+            setLoaded(false)
+            navigate('/home')
+        }
+
+    }, [loaded])
+
 
     // logs in demo user
     const handledemologin = async (e) => {
         e.preventDefault();
 
-        let serverResponse = await dispatch(
+        await dispatch(
             thunkLogin({
               username: 'demo-user',
               password: 'password',
             })
           )
 
-        if (serverResponse) {
-            setErrors(serverResponse)
-        } else {
-            serverResponse = await dispatch(thunkLoadNotebooks)
-            if (serverResponse) {
-                setErrors(serverResponse)
-            } else {
-                navigate('/home')
-            }
+        const server = dispatch(thunkLoadEntries())
+        if (server) {
+            console.log(server)
         }
+        await dispatch(thunkLoadNotebooks())
+
+          .then(() => {
+            setLoaded(true)
+          })
     }
 
 
