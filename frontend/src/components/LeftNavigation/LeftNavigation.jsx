@@ -49,7 +49,7 @@ function LeftNavigation() {
                         <img src={user?.profile_image} className="profile-image"/>
                         <div id='left-nav-user-name'>
                             <div>{`Hello ${user?.name}`}</div>
-                            <div>{`username : ${user?.username}`}</div>
+                            <div>{user?.username}</div>
                         </div>
                     </div>
                 </div>

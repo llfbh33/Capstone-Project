@@ -36,15 +36,15 @@ function Navigation() {
 
   return (
     <div id='landingpage-navigation-container' >
-        <img src='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/title-00366B.png' />
+        <img src='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/nav-title-00366B.png' />
         <div id='landingpage-navigation-in-out-container'>
             <OpenModalMenuItem
-              itemText="Log In"
+              buttonText="Log In"
               onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             <OpenModalMenuItem
-              itemText="Sign Up"
+              buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />

@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
+
+import { useModal } from "../../../context/Modal";
 import "./NewNotebookModal.css";
-import { thunkEditNotebook, thunkLoadNotebooks } from "../../redux/notebook";
+import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
 
 function EditNotebookFormModal({notebook}) {
   const dispatch = useDispatch();

@@ -39,11 +39,9 @@ const {notebookId, entryId} = useParams();
   };
 
   return (
-    <div className='main-insite-container'>
-        <div className='left-hand-nav-container'>
-            <LeftNavigation />
-        </div>
-         <div className='main-insite-content-container'>
+
+
+         <div>
             <div>
                 <h1>{`Notebook: ${notebook?.name}`}</h1>
                 <h1>{`Entry: ${entry?.name}`}</h1>
@@ -51,8 +49,7 @@ const {notebookId, entryId} = useParams();
             <h1 id='homepage-underline'></h1>
             <div className="entry-content-container">
                 <form onSubmit={handleSubmit}>
-                <label>
-            User Name
+
             <div className="entry-content-input-container">
                 <textarea
                     className="entry-input-area"
@@ -62,24 +59,15 @@ const {notebookId, entryId} = useParams();
                     required
                 />
             </div>
-
-            </label>
             {errors.username && <p>{errors.username}</p>}
-            <label>
-            Password
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-            />
-            </label>
+
+
             {errors.password && <p>{errors.password}</p>}
-            <button type="submit">Log In</button>
+            <button type="submit">Save Progress</button>
         </form>
             </div>
       </div>
-    </div>
+
   );
 }
 

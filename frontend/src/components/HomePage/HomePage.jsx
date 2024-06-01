@@ -6,6 +6,7 @@ import { thunkDeleteNotebook} from '../../redux/notebook';
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 // import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
+import EditNotebookFormModal from "../Modals/NotebookModals/EditNotenookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 
 function HomePage () {
