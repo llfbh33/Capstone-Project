@@ -1,5 +1,6 @@
 import { clearEntries } from "./entry";
 import { clearNotebooks } from "./notebook";
+import { thunkLoadUsers } from "./users";
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';

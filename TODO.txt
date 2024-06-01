@@ -12,3 +12,9 @@
 
 
 - put a loading sign or a wait on returning the value of the home page
+
+
+- get all users will not run if it has login required on it.
+    - the current user is not considered authenticated
+
+- figure out how to keep the format of the text when saving the information

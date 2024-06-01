@@ -5,6 +5,7 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import LeftNavigation from "../components/LeftNavigation/LeftNavigation";
 import loadState from "../utils/loadData";
+import { thunkLoadUsers } from "../redux/users";
 
 
 export default function Layout() {
@@ -14,6 +15,7 @@ export default function Layout() {
   useEffect(() => {
     dispatch(thunkAuthenticate())
     .then(() => loadState(dispatch))
+    .then(() => dispatch(thunkLoadUsers()))
     .catch((error) => console.log(error))
   }, [dispatch]);
 

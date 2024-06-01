@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { thunkLogout } from "../../redux/session";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import './LeftNavigation.css'
 import { useState } from "react";
@@ -55,7 +55,15 @@ function LeftNavigation() {
                 </div>
                 <div>
                     <div>
-                        <div className='left-nav-main-ele' onClick={() => mainNavElementClick('home')}>Home</div>
+                        <NavLink
+                            className='left-nav-main-ele'
+                            onClick={() => mainNavElementClick('home')}
+                            style={({ isActive}) => ({
+                                color: isActive
+                                    ? 'lightblue'
+                                    : 'white'
+                            })}
+                            >Home</NavLink>
                         <div hidden={openMain === 'home' ? false : true}>
                             <div className="left-nav-mid-line"></div>
                             <div className="left-nav-mid-ele" onClick={() => navigate('/')}>Home Page</div>
