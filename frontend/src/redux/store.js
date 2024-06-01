@@ -12,7 +12,7 @@ import entryReducer from "./entry";
 const rootReducer = combineReducers({
   session: sessionReducer,
   notebooks: notebookReducer,
-  entries: entryReducer
+  entries: entryReducer,
 });
 
 let enhancer;
