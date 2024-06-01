@@ -15,7 +15,7 @@ const DELETE_POST = 'post/DELETE_POST';
 // middleware functions for updating entries state
 const loadEntries = (entries) => ({
   type: LOAD_USER_ENTRIES,
-  payload: entries
+  entries
 });
 
 const createEntry = (entry) => ({
@@ -75,7 +75,7 @@ export const thunkLoadEntries = () => async (dispatch) => {
     const response = await fetch('/api/entries');
     if (response.ok) {
         const data = await response.json();
-        return dispatch(loadEntries(data.entries));
+        return dispatch(loadEntries(data));
     } else {
         return { server: "Something went wrong. Please try again" }
     }
@@ -236,7 +236,7 @@ function entryReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_USER_ENTRIES: {
         const newState = {...state};
-        action.payload.forEach((entry) => {
+        action.entries.forEach((entry) => {
             newState[entry.id] = entry
         });
         return newState
