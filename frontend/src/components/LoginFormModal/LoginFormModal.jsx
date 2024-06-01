@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -13,6 +13,7 @@ function LoginFormModal({username}) {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -24,6 +25,7 @@ function LoginFormModal({username}) {
     );
 
     if (serverResponse) {
+      setPassword('')
       setErrors(serverResponse);
     } else {
       closeModal();

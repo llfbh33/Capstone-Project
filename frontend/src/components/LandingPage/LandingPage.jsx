@@ -67,7 +67,7 @@ function LandingPage() {
             <div id='landingpage-section1-3-container' >
                 <section id='landingpage-section-1'>
                     <img src='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/landing-page-title-image.png' />
-                    <div className='landingpage-section-1-midtitle'>Your Writing Journey Starts Here: Create, Share, Improve</div>
+                    <div className='landingpage-section-1-midtitle'>Your Writing Journey Starts Here: Create, Share, Improve! Sign in now!</div>
                 </section>
                 <section id='landingpage-section-2'>
                     <OpenModalMenuItem

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
@@ -8,18 +8,33 @@ import { useNavigate } from "react-router-dom";
 function SignupFormModal() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [validationErrors, setValidationErrors] = useState({});
   const { closeModal } = useModal();
+
+  useEffect(() => {
+    let errors = {}
+    if (name.length < 4) errors.name = 'Name must be 4 or more characters long';
+    if (name.length > 50) errors.name = 'Name must be less than 50 characters long';
+    if (username.length < 8) errors.username = 'Username must be 8 or more characters long';
+    if (username.length > 50) errors.username = 'Username must be less than 50 characters long';
+    if (password.length < 8) errors.password = 'Password must be 8 or more characters long'
+    if (confirmPassword !== password) errors.confirmPassword = 'Password and confirmed password must match'
+
+    setValidationErrors(errors)
+
+  }, [name, username, password, confirmPassword])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
-      return setErrors({
+      setPassword('')
+      setConfirmPassword('')
+      return setValidationErrors({
         confirmPassword:
           "Confirm Password field must be the same as the Password field",
       });
@@ -27,35 +42,35 @@ function SignupFormModal() {
 
     const serverResponse = await dispatch(
       thunkSignup({
-        email,
+        name,
         username,
         password,
       })
     );
 
     if (serverResponse) {
-      setErrors(serverResponse);
+      setValidationErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/home')
+      navigate('/')
     }
   };
 
   return (
     <>
       <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+      {validationErrors.server && <p>{validationErrors.server}</p>}
       <form onSubmit={handleSubmit}>
         <label>
-          Email
+          Name
           <input
             type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {name && validationErrors.name && <p>{validationErrors.name}</p>}
         <label>
           Username
           <input
@@ -65,7 +80,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {username && validationErrors.username && <p>{validationErrors.username}</p>}
         <label>
           Password
           <input
@@ -75,7 +90,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {password && validationErrors.password && <p>{validationErrors.password}</p>}
         <label>
           Confirm Password
           <input
@@ -85,7 +100,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
+        {confirmPassword && validationErrors.confirmPassword && <p>{validationErrors.confirmPassword}</p>}
         <button type="submit">Sign Up</button>
       </form>
     </>
