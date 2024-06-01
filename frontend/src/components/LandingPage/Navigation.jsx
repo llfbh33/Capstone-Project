@@ -1,11 +1,11 @@
 // import { NavLink } from "react-router-dom";
 // import ProfileButton from "./ProfileButton";
-import "./Navigation.css";
+import "./LandingPage.css";
 
 import { useState, useEffect, useRef } from "react";
 import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
-import SignupFormModal from "../SignupFormModal";
+import LoginFormModal from "../Modals/LoginFormModal";
+import SignupFormModal from "../Modals/SignupFormModal";
 
 function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
