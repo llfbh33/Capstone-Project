@@ -3,7 +3,7 @@ import './HomePage.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteNotebook} from '../../redux/notebook';
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
 import NewNotebookFormModal from "../NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../NotebookModals/EditNotenookModal";
 

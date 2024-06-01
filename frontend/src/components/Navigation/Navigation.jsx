@@ -3,7 +3,7 @@
 import "./Navigation.css";
 
 import { useState, useEffect, useRef } from "react";
-import OpenModalMenuItem from "./OpenModalMenuItem";
+import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
 
