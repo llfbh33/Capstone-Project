@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
+
+import { useModal } from "../../../context/Modal";
 import "./NewNotebookModal.css";
 import { useNavigate } from "react-router-dom";
-import { thunkCreateNotebook } from "../../redux/notebook";
+import { thunkCreateNotebook } from "../../../redux/notebook";
 
 function NewNotebookFormModal() {
   const dispatch = useDispatch();

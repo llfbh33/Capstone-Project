@@ -3,10 +3,10 @@ import './HomePage.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteNotebook} from '../../redux/notebook';
-import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
-import NewNotebookFormModal from "../NotebookModals/NewNotebookModal";
-import EditNotebookFormModal from "../NotebookModals/EditNotenookModal";
 
+import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
+// import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 
 function HomePage () {
     const user = useSelector(state => state.session.user)

@@ -1,6 +1,6 @@
 /* main landing page navigation bar container*/
 #landingpage-navigation-container {
-    background-color: #00366B;
+    background-color: #100647;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -31,7 +31,7 @@
 
 
 
-
+  /* background-color: #00366B; */
 
 
 

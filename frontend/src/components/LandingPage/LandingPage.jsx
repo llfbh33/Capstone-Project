@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import LoginFormModal from "../Modals/LoginFormModal";
 import { thunkLogin } from "../../redux/session";
 import './LandingPage.css'
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { thunkLoadNotebooks } from '../../redux/notebook';
 import { thunkLoadEntries } from '../../redux/entry';
 import { ModalProvider, Modal } from "../../context/Modal";
+
 
 function LandingPage() {
     const [username] = useState('')
