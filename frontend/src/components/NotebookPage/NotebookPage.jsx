@@ -40,11 +40,7 @@ function NotebookPage () {
     }
 
     return (
-        <div className='main-insite-container' >
-            <div className='left-hand-nav-container'>
-                <LeftNavigation />
-            </div>
-            <div className='main-insite-content-container'>
+<div>
                 <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
                 </div>
@@ -76,7 +72,7 @@ function NotebookPage () {
                     </div>
                 </div>
             </div>
-        </div>
+
     )
 }
 

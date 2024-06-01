@@ -1,5 +1,3 @@
 
-- create thunks for posts
-- create thunks for comments
 - put in a page swapper
 - create a base page with sidebar constantly attatched.
