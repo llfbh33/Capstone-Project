@@ -27,7 +27,7 @@ function LoginFormModal({username}) {
       setErrors(serverResponse);
     } else {
       closeModal();
-      navigate('/home')
+      navigate('/')
     }
   };
 

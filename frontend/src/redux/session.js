@@ -1,3 +1,4 @@
+import { clearEntries } from "./entry";
 import { clearNotebooks } from "./notebook";
 
 const SET_USER = 'session/setUser';
@@ -62,7 +63,8 @@ export const thunkSignup = (user) => async (dispatch) => {
 
 export const thunkLogout = () => async (dispatch) => {
   await fetch("/api/auth/logout");
-  await dispatch(clearNotebooks())
+  await dispatch(clearNotebooks());
+  await dispatch(clearEntries());
   dispatch(removeUser());
 };
 

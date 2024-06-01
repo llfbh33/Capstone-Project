@@ -1,9 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
-import LeftNavigation from "../LeftNavigation/LeftNavigation";
 import './HomePage.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { thunkDeleteNotebook, thunkLoadNotebooks } from '../../redux/notebook';
+import { thunkDeleteNotebook} from '../../redux/notebook';
 import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
 import NewNotebookFormModal from "../NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../NotebookModals/EditNotenookModal";
@@ -43,7 +42,6 @@ function HomePage () {
 
     const handleDeleteNotebook = async (id) => {
         dispatch(thunkDeleteNotebook(id))
-        dispatch(thunkLoadNotebooks())
     }
 
 
