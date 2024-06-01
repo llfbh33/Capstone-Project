@@ -72,7 +72,7 @@ function LandingPage() {
                 </section>
                 <section id='landingpage-section-2'>
                     <OpenModalMenuItem
-                    itemText="Continue"
+                    buttonText="Continue"
                     modalComponent={<LoginFormModal username={username} />}
                     />
                     <button className='button landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
@@ -83,14 +83,14 @@ function LandingPage() {
             </div>
 
             <section id='landingpage-section-4'>
-                <h2>Welcome to PenCrafted, where your creativity takes flight!</h2>
-                <div>
+                <h2 id='landingpage-section4-title' >Welcome to PenCrafted, where your creativity takes flight!</h2>
+                <div id='landingpage-section4-minititle'>
                     At PenCrafted, we believe that every writer has a unique voice and story to tell.
                     Our platform is designed to provide you a safe space to express yourself!  Compose
                     your works privately or help you refine your craft through constructive feedback and
                     community support. Here’s how it works:
                 </div>
-                <ul>
+                <ul id='landingpage-minititle-list-container'>
                     <li>
                         Organize and create: Sign up and create notebooks centered on the topic you will
                         write about. Whether it’s a short story, poem, or novel excerpt, you can organize your

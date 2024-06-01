@@ -15,20 +15,28 @@
   }
 
   /* sign in and sign out buttons in landing page navigation bar container*/
-  #landingpage-navigation-in-out-container > li {
+  #landingpage-navigation-in-out-container > button {
     list-style: none;
     display: inline-flex;
-    justify-content: center;;
+    justify-content: center;
+    align-items: center;
     margin: 10px;
     border: 1px solid #3399FF;
     border-radius: 10px;
     color: white;
-    font-size: 22px;
+    font-size: 18px;
     padding: 10px;
-    width: 90px;
+    width: 120px;
+    height: 36px;
     cursor: pointer;
+    background-color: #100647;
+    font-family: "Comic Neue", cursive;
   }
 
+  #landingpage-navigation-in-out-container > button:hover {
+    background-color: #231764;
+    border: 1px solid #4da2f7;
+  }
 
 
   /* background-color: #00366B; */
@@ -58,6 +66,10 @@
     margin-left: 32px;
 }
 
+.landingpage-section-1-midtitle {
+    font-size: 26px;
+}
+
 #landingpage-section-2 {
     height: 200px;
     display: flex;
@@ -71,21 +83,25 @@
     font-size: 24px;
 }
 
-#landingpage-section-2 > li{
+#landingpage-section-2 > button{
     list-style: none;
-    background-color: #00366B;
+    background-color: #100647;
     border: 1px solid #3399FF;
+    color: white;
     width: 280px;
-    height: 36px;
+    height: 40px;
+    font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-family: "Comic Neue", cursive;
 }
 
-#landingpage-section-2 > li:hover {
-    background-color: #024b94;
+#landingpage-section-2 > button:hover {
+    background-color: #231764;
+    border: 1px solid #4da2f7;
 }
 
 #landingpage-section-3 {
@@ -93,7 +109,7 @@
 }
 
 #landingpage-section-4 {
-    background-color: #00366B;
+    background-color: #100647;
     height: 500px;
     border-top: 1px solid #3399FF;
     border-bottom: 1px solid #3399FF;
@@ -101,6 +117,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* justify-content: center; */
+}
+
+#landingpage-section4-title {
+    margin: 50px;
+    font-size: 32px;
+}
+
+#landingpage-section4-minititle {
+    width: 85%;
+    font-size: 22px;
+    text-align: center;
+}
+
+#landingpage-minititle-list-container {
+    width: 65%;
+    margin: 40px;
+    font-size: 18px;
+}
+
+#landingpage-minititle-list-container > li {
+    margin: 16px;
+    font-size: 20px;
 }
 
 .landingpage-demo-login-btn {
@@ -128,4 +167,13 @@
 .landingpage-footer-link {
     color:white;
     text-decoration: none;
+    height: 40px;
+    width: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.landingpage-footer-link:hover {
+    text-decoration: underline;
 }

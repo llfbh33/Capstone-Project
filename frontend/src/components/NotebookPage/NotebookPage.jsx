@@ -28,11 +28,11 @@ function NotebookPage () {
 
         dispatch(thunkDeleteNotebook (notebookId))
         dispatch(thunkLoadNotebooks())
-        navigate('/home')
+        navigate('/')
     }
 
     const handleClickEntry = (entry) => {
-        navigate(`notebook/${notebookId}/entries/${entry.id}`)
+        navigate(`/notebook/${notebookId}/entries/${entry.id}`)
     }
 
     const handleNewEntry = () => {
@@ -40,7 +40,7 @@ function NotebookPage () {
     }
 
     return (
-<div>
+            <div>
                 <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
                 </div>

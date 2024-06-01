@@ -2,13 +2,15 @@
 
 body {
     margin: 0px;
+    font-family: "Comic Neue", cursive;
+    background-color: #100647;
 }
 
 /* html {
     /* background-color: rgb(138, 207, 138);
 } */
 
-.button {
+/* .button {
     color: white;
     display: flex;
     justify-content: center;
@@ -19,7 +21,7 @@ body {
 }
 .button:hover {
     background-color: #024b94;
-}
+} */
 
 .error-validation {
     color: red;
@@ -72,4 +74,25 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+
+.modal {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-button {
+    background-color: #100647;
+    color: white;
+    border-radius: 10px;
+    height: 30px;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+}
+
+
+.modal-button:hover {
+    background-color: #231764;
+    border: 1px solid #4da2f7;
 }

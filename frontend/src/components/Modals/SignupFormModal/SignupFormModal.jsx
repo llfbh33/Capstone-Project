@@ -61,6 +61,7 @@ function SignupFormModal() {
       <h1>Sign Up</h1>
       {validationErrors.server && <p>{validationErrors.server}</p>}
       <form onSubmit={handleSubmit}>
+      <div className="modal">
         <label>
           Name
           <input
@@ -101,7 +102,8 @@ function SignupFormModal() {
           />
         </label>
         {confirmPassword && validationErrors.confirmPassword && <p>{validationErrors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        <button className='modal-button' type="submit">Sign Up</button>
+        </div>
       </form>
     </>
   );
