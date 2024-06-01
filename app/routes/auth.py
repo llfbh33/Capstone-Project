@@ -3,8 +3,18 @@ from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
+from random import choice
+
 
 auth_routes = Blueprint('auth', __name__)
+
+
+default_images = [
+    'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-1.png',
+    'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-3.png',
+    'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-4.png',
+    'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/pi-default-5.png'
+]
 
 
 @auth_routes.route('/')
@@ -52,9 +62,10 @@ def sign_up():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         user = User(
+            name=form.data['name'],
             username=form.data['username'],
-            email=form.data['email'],
-            password=form.data['password']
+            password=form.data['password'],
+            profile_image = choice(default_images)
         )
         db.session.add(user)
         db.session.commit()

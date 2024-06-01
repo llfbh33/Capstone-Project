@@ -1,3 +1,14 @@
+- Walk through the landing page and find any issues with insite
+    - check sign up modals
+    - check any links
+    - adjust bottom links to open a new web page
 
-- put in a page swapper
-- create a base page with sidebar constantly attatched.
+
+- loging in with center button is good
+    - validations are good
+    - password clears if it is wrong
+
+- still asks for email on sign up
+
+
+- put a loading sign or a wait on returning the value of the home page
