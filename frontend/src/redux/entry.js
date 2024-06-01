@@ -64,9 +64,9 @@ const editPost = (post) => ({
   post
 })
 
-const deletePost = (postId) => ({
+const deletePost = (post) => ({
   type: DELETE_POST,
-  postId
+  post
 });
 
 
@@ -288,8 +288,7 @@ function entryReducer(state = initialState, action) {
 // save the entry, delete from state, filter and reduce to remove post, add filtered object to state, return
     case DELETE_POST: {
       const newState = {...state};
-      adjust_entry = newState[action.post.entry_id]
-      delete newState[action.post.entry_id]
+      let adjust_entry = newState[action.post.entry_id]
       adjust_entry = Object.keys(adjust_entry)
           .filter(key => key !== 'post')
           .reduce((newObj, key) => {

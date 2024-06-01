@@ -5,6 +5,7 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 import './LeftNavigation.css'
 import { useState } from "react";
+import { thunkLoadEntries } from "../../redux/entry";
 
 
 function LeftNavigation() {
@@ -21,11 +22,17 @@ function LeftNavigation() {
     };
 
     const mainNavElementClick = (string) => {
-        if (openMain) {
+        if (openMain !== string) {
+            setOpenMain('')
+            setOpenMid('')
+            setOpenMain(string)
+            navigate(string)
+        } else if (openMain === string){
             setOpenMain('')
             setOpenMid('')
         } else {
             setOpenMain(string)
+            navigate(string)
         }
     }
 
@@ -41,6 +48,11 @@ function LeftNavigation() {
         navigate(`/notebook/${id}`)
     }
 
+    const publicFeed = async () => {
+        await dispatch(thunkLoadEntries())
+        navigate('/public')
+    }
+
     return (
         <div id='main-left-nav-container'>
             <div>
@@ -53,21 +65,12 @@ function LeftNavigation() {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div id="navigation-container">
                     <div>
-                        <NavLink
-                            className='left-nav-main-ele'
-                            onClick={() => mainNavElementClick('home')}
-                            style={({ isActive}) => ({
-                                color: isActive
-                                    ? 'lightblue'
-                                    : 'white'
-                            })}
-                            >Home</NavLink>
-                        <div hidden={openMain === 'home' ? false : true}>
+                    <div className={openMain === '/' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/')}>Home</div>
+                        <div hidden={openMain === '/' ? false : true}>
                             <div className="left-nav-mid-line"></div>
-                            <div className="left-nav-mid-ele" onClick={() => navigate('/')}>Home Page</div>
-                            <div className="left-nav-mid-ele" onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
+                            <div className={openMid === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
                             <div hidden={openMid === 'notebooks' ? false : true}>
                                 <div className="left-nav-small-line"></div>
                                 <div className="left-nav-small-ele">
@@ -88,7 +91,11 @@ function LeftNavigation() {
                         <div className='left-nav-main-ele' onClick={() => alert('Tags coming soon')}>Tags</div>
                     </div>
                     <div>
-                        <div className='left-nav-main-ele' onClick={() => alert('Public Feed coming soon')}>PublicFeed</div>
+                    <div className={openMain === '/public' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/public')}>Public Feed</div>
+                        <div hidden={openMain === '/public' ? false : true}>
+                        <div className="left-nav-mid-line"></div>
+                            <div className="left-nav-mid-ele" onClick={publicFeed}>All Posts</div>
+                        </div>
                     </div>
                     <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Comments coming soon')}>Comments</div>
