@@ -49,12 +49,7 @@ function HomePage () {
 
 
     return (
-        <div className='main-insite-container'>
-            <div className='left-hand-nav-container'>
-                <LeftNavigation />
-            </div>
-            <div className='main-insite-content-container'>
-                {loaded ? <div>
+                <div>
                     <p className='mini-page-title' >Ready to write? Create a notebook to get started!</p>
                     <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
                     <p className="page-title-blocks">Your Notebooks</p>
@@ -95,12 +90,7 @@ function HomePage () {
                         </div>
                     </div>
                 </div>
-                :
-                <div>
-                    <h1>...Loading</h1>
-                </div>}
-            </div>
-        </div>
+
     )
 }
 

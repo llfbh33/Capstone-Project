@@ -58,7 +58,7 @@ function LeftNavigation() {
                         <div className='left-nav-main-ele' onClick={() => mainNavElementClick('home')}>Home</div>
                         <div hidden={openMain === 'home' ? false : true}>
                             <div className="left-nav-mid-line"></div>
-                            <div className="left-nav-mid-ele" onClick={() => navigate('/home')}>Home Page</div>
+                            <div className="left-nav-mid-ele" onClick={() => navigate('/')}>Home Page</div>
                             <div className="left-nav-mid-ele" onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
                             <div hidden={openMid === 'notebooks' ? false : true}>
                                 <div className="left-nav-small-line"></div>

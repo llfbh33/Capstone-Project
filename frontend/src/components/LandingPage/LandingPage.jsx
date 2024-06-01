@@ -10,6 +10,7 @@ import './LandingPage.css'
 import { useNavigate } from 'react-router-dom';
 import { thunkLoadNotebooks } from '../../redux/notebook';
 import { thunkLoadEntries } from '../../redux/entry';
+import { ModalProvider, Modal } from "../../context/Modal";
 
 function LandingPage() {
     const [username] = useState('')
@@ -59,7 +60,8 @@ function LandingPage() {
 
 
     return (
-        // <h1>Landing Page</h1>
+        <>
+        <ModalProvider>
         <div id='main-landingpage-container'>
             <Navigation />
             <div id='landingpage-section1-3-container' >
@@ -114,6 +116,9 @@ function LandingPage() {
                 </div>
             </footer>
         </div>
+                <Modal />
+                </ModalProvider>
+                </>
     )
 }
 
