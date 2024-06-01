@@ -11,9 +11,9 @@ entry_routes = Blueprint('entries', __name__)
 @login_required
 def get_entries():
     """
-    Query for all entries by current user and returns them in a list of notebook dictionaries
+    Query for all entries and list them as dictionaries
     """
-    entries = Entry.query.filter(Entry.user_id == current_user.id).all()
+    entries = Entry.query.all()
     entries_return = []
 
     for entry in entries:
@@ -22,6 +22,8 @@ def get_entries():
             entry_comments.append(comment.to_dict())
         entry_w_comments = entry.to_dict()
         entry_w_comments['comments'] = entry_comments
+        if entry.posts:
+            entry_w_comments['post'] = entry.posts[0].to_dict()
         entries_return.append(entry_w_comments)
 
     return entries_return
