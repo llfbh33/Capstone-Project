@@ -3,9 +3,10 @@
 import "./LandingPage.css";
 
 import { useState, useEffect, useRef } from "react";
-import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
+
 import LoginFormModal from "../Modals/LoginFormModal";
 import SignupFormModal from "../Modals/SignupFormModal";
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 
 function Navigation() {
   const [showMenu, setShowMenu] = useState(false);
