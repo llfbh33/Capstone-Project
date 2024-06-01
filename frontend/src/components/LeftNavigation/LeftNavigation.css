@@ -39,10 +39,20 @@
     align-items: center;
 }
 
-.left-nav-main-ele {
+#navigation-container {
+    margin-top: 18px
+}
+
+.left-nav-main-ele,
+.left-nav-main-ele-selected {
     margin: 6px 20px;
     cursor: pointer;
     font-size: 26px;
+    text-decoration: none;
+}
+
+.left-nav-main-ele-selected {
+    color: lightblue
 }
 
 .left-nav-mid-line {
@@ -52,10 +62,16 @@
 }
 
 
-.left-nav-mid-ele {
+.left-nav-mid-ele,
+.left-nav-mid-ele-selected {
     font-size: 20px;
     margin: 10px 40px;
     cursor: pointer;
+    text-decoration: none;
+}
+
+.left-nav-mid-ele-selected {
+    color: lightblue
 }
 
 .left-nav-small-line {

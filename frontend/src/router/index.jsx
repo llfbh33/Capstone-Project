@@ -4,6 +4,8 @@ import NotebookPage from '../components/NotebookPage/NotebookPage';
 import EntryPage from '../components/EntryPage/EntryPage';
 import LandingPageSwapper from './LandingPageSwapper';
 import NotFound from '../components/NotFound'
+import PublicFeed from '../components/PublicFeedPage/PublicFeed';
+import PublicPost from '../components/PublicFeedPage/PublicPost';
 
 
 export const router = createBrowserRouter([
@@ -21,6 +23,14 @@ export const router = createBrowserRouter([
       {
         path: '/notebook/:notebookId/entries/:entryId',
         element: <EntryPage />,
+      },
+      {
+        path: '/public',
+        element: <PublicFeed />,
+      },
+      {
+        path: '/public/:postId',
+        element: <PublicPost />,
       },
       {
         path: '*',

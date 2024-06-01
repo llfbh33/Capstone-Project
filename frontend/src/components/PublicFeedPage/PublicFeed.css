@@ -1,0 +1,135 @@
+
+.postfeed-post-container {
+    margin: 10px;
+}
+
+#publicfeed-title {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    border-bottom: 1px solid #3399FF;
+}
+
+.post-name-and-user-container {
+    display: flex;
+    justify-content: space-between;
+    width: 84%;
+}
+
+.post-username-image-container {
+    display: flex;
+    align-items: center;
+    gap: 10px
+}
+
+.post-profile-image {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.post-bottom-border {
+    border-bottom: 1px solid #3399FF;
+    width: 90%;
+}
+
+.small-post-container {
+    border: 1px solid #3399FF;
+    height: 100px;
+    width: 84%;
+    margin: 10px;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.small-post-container:hover {
+    border: 2px solid #3399FF;
+    height: 97.25px;
+    width: 83.75%;
+}
+
+.small-post-content {
+    margin: 14px;
+    font-size: 18px;
+}
+
+.postfeed-remove-post-button > button {
+    background-color: #100647;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+    height: 32px;
+    width: 120px;
+}
+
+.postfeed-remove-post-button > button:hover {
+    background-color: #231764;
+    border: 1px solid #4da2f7;
+}
+
+#post-remove-modal-container {
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    line-height: 1.5;
+    justify-content: center;
+}
+
+.post-remove-disclaimer {
+    text-wrap: wrap;
+}
+
+#remove-post-button-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 14px
+}
+
+#public-post-title {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    border-bottom: 1px solid #4da2f7;
+}
+
+.post-content-container {
+    width: 85%;
+    margin: 20px;
+    margin-top: 40px;
+    border: 1px solid #4da2f7;
+    line-height: 1.5;
+    padding: 20px;
+    font-size: 20px;
+}
+
+.post-content {
+    margin: 0px;
+}
+
+.post-message-container {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    align-items: center;
+    margin-left: 40px
+}
+
+.message-container {
+    border: 1px solid #4da2f7;
+    height: 80px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.message-element {
+    width: 95%
+}
