@@ -29,6 +29,7 @@ class Entry(db.Model):
             'notebook_id': self.notebook_id,
             'name': self.name,
             'content': self.content,
+            'is_public': self.is_public,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

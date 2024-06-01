@@ -39,6 +39,11 @@ def seed_comments():
         entry_id=5,
         comment='I think your right.  Turning this into a poem would really give it the right feeling.'
     )
+    eight = Comment(
+        user_id=1,
+        entry_id=1,
+        comment='I am commenting on my own entry publicly!!! :D'
+    )
 
 
     db.session.add(one)
@@ -48,6 +53,7 @@ def seed_comments():
     db.session.add(five)
     db.session.add(six)
     db.session.add(seven)
+    db.session.add(eight)
 
     db.session.commit()
 

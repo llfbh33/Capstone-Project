@@ -42,6 +42,8 @@ body {
     height: 100vh;
     overflow:auto;
     background-size: cover;
+    padding-right: 3%;
+    min-height: 910px;
 }
 
 /* include with every page the nav is located.  Keeps the nav in place */
@@ -86,7 +88,6 @@ body {
     background-color: #100647;
     color: white;
     border-radius: 10px;
-    height: 30px;
     border: 1px solid #3399FF;
     cursor: pointer;
 }
@@ -95,4 +96,9 @@ body {
 .modal-button:hover {
     background-color: #231764;
     border: 1px solid #4da2f7;
+}
+
+.modal-yes-no {
+    display: flex;
+    justify-content: space-between;
 }

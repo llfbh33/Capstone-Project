@@ -1,18 +1,21 @@
 from flask import Blueprint
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import User
 
 user_routes = Blueprint('users', __name__)
 
 
 @user_routes.route('/')
-@login_required
+# @login_required
 def users():
     """
     Query for all users and returns them in a list of user dictionaries
     """
-    users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    if current_user:
+        users = User.query.all()
+        return {'users': [user.to_dict() for user in users]}
+    else:
+        return {'errors': {'message': 'Unauthorized'}}, 401
 
 
 @user_routes.route('/<int:id>')
