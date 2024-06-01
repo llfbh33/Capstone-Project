@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import OpenModalMenuItem from "../Navigation/OpenModalMenuItem";
+import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import { thunkLogin } from "../../redux/session";
 import './LandingPage.css'
