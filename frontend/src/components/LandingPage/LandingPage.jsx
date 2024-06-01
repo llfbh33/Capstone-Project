@@ -1,10 +1,10 @@
-import Navigation from '../Navigation/Navigation'
+import Navigation from './Navigation'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import OpenModalMenuItem from "../OpenModalButton/OpenModalMenuItem";
-import LoginFormModal from "../LoginFormModal";
+import LoginFormModal from "../Modals/LoginFormModal";
 import { thunkLogin } from "../../redux/session";
 import './LandingPage.css'
 import { useNavigate } from 'react-router-dom';
