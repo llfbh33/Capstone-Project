@@ -22,10 +22,8 @@
 
 - comments are full CRUD - they need to be reviewed
 - notebooks -
-    - can see notebooks - R
+    - can see notebooks
     - can edit a notebook
-        - needs validations
-        - modal needs to be spaced out better
         - should we have a delete and edit on the individual page?
     - can delete a notebook
         - there is not yet a delete modal - just deletes right away

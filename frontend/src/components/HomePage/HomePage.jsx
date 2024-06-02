@@ -3,6 +3,8 @@ import './HomePage.css'
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteNotebook} from '../../redux/notebook';
+import { BsTrash3Fill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 // import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
@@ -36,7 +38,6 @@ function HomePage () {
     }, [gotNotebooks])
 
     const handleClickNotebook = (id) => {
-        // alert(`feature will send user to notebook ${id} page`)
         setLoaded(false)
         navigate(`/notebook/${id}`)
     }
@@ -57,16 +58,22 @@ function HomePage () {
                                 <div key={notebook?.id}>
                                     <div className="homepage-notebook-card"  >
                                         <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
-                                            <div>{notebook?.name}</div>
+                                            <div>
+                                                <div>{notebook?.name}</div>
+                                            </div>
+                                            <div className='notebook-about-section-container'>
+                                                <div>{`${notebook?.about.slice(0, 120)}...`}</div>
+                                            </div>
+
                                         </div>
-                                        <div>
-                                        <div className="button homepage-edit-notebook">
+                                    <div className="notebook-edit-delete-container">
+                                        <div className="homepage-edit-notebook">
                                             <OpenModalMenuItem
-                                            itemText={`Edit ${notebook?.name}`}
+                                            itemText={<FaEdit />}
                                             modalComponent={<EditNotebookFormModal notebook={notebook} />}
                                             />
                                         </div>
-                                        <button className="button homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook?.id)}>{`Delete ${notebook?.name}?`}</button>
+                                            <button className="homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook?.id)}><BsTrash3Fill /></button>
                                         </div>
                                     </div>
                                 </div>
