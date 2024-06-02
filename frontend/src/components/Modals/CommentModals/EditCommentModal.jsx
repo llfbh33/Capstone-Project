@@ -18,7 +18,6 @@ function EditCommentModal({comment}) {
         e.preventDefault()
 
         if (updateComment.length > 600) {
-            console.log('did not work')
             return
         }
 

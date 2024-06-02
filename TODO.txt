@@ -18,3 +18,39 @@
     - the current user is not considered authenticated
 
 - figure out how to keep the format of the text when saving the information
+
+
+- comments are full CRUD - they need to be reviewed
+- notebooks -
+    - can see notebooks - R
+    - can edit a notebook
+        - needs validations
+        - modal needs to be spaced out better
+        - should we have a delete and edit on the individual page?
+    - can delete a notebook
+        - there is not yet a delete modal - just deletes right away
+    - can create a notebook
+        - There are no validations on the modal but it runs really quickly
+- entries -
+    - can see entries
+        - The public ones need to be mapped out on the home page
+        - The preview button 'works' - need to find a way to save styling of text
+    - The save button for the edit does not work.
+    - The delete button deletes the notebook it is associated with
+    - create an entry just gives a popup alert
+- Posts -
+    - Can see posts on the public feed
+        - They should be in order by date
+        - would like to have 2 more spots in the dropdown, today and in the last week
+            - eventyally I would like to change those up to the most liked and most commented
+        - can not see them on the homepage
+        - do we want to have another way to get to personal posts in the nav bar?
+    - Can remove a post from the public feed page
+        - When going to the entry page it is now set to private and still has the comments on it
+        - the publish/private button on the entries page does not work
+    - Creating a new post does not work
+        - the publish/private button on the entries page does not work
+    - Can not edit a post at all
+
+
+- the home button in the nav does not work if it is open  only if it is closed
