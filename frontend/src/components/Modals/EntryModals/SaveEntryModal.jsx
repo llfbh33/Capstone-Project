@@ -6,50 +6,38 @@ import "./EntryModals.css";
 import { thunkLoadNotebooks } from "../../../redux/notebook";
 import { thunkEditEntry } from "../../../redux/entry";
 
-function SaveEntryModal({entry}) {
+function SaveEntryModal({entry, content}) {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user)
-  const [name, setName] = useState(entry.name);
+  // const [name, setName] = useState(entry.name);
   const [validationErrors, setValidationErrors] = useState({});
   const { closeModal } = useModal();
+  console.log('content', content)
 
-  useEffect(() => {
-    const errors = {};
-    if (name <= 0) errors.name = 'Please provide a name for your entry'
-    if (name.length > 100) errors.name = 'Name must be 100 characters or less'
-    setValidationErrors(errors)
-  }, [name])
-
-  const handleSubmit = async (e) => {
+  const saveChanges = async (e) => {
     e.preventDefault();
 
     const serverResponse = await dispatch(thunkEditEntry ({
-        id: entry.id,
-        userId: user.id,
-        notebookId: entry.notebook_id,
-        name,
-        content: entry.content,
-        isPublic: entry.is_public
-      })
-    );
+      id: entry.id,
+      userId: user.id,
+      notebookId: entry.notebook_id,
+      name: entry.name,
+      content: content,
+      isPublic: entry.is_public
+    })
+  );
 
-    if (serverResponse.name) {
-      setErrors(serverResponse);
-    } else {
-      await dispatch(thunkLoadNotebooks())
-      setName('')
-      closeModal();
-
-    }
-  };
-
-  const saveChanges = () => {
-    console.log('save the changes')
+  if (serverResponse.name) {
+    setErrors(serverResponse);
+  } else {
+    await dispatch(thunkLoadNotebooks())
+    closeModal();
+  }
     closeModal();
   }
 
   const deleteChanges = () => {
-    console.log('delete the changes')
+    console.log('Discard changes')
     closeModal();
   }
 

@@ -7,4 +7,5 @@ const loadState = async (dispatch) => {
   await dispatch(thunkLoadEntries());
 };
 
+
 export default loadState;

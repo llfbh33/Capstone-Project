@@ -42,7 +42,6 @@ function PublicFeed() {
                                 : ''}
                             </div>
                         </div>
-                        {console.log(post.id)}
                         <div className="small-post-container" onClick={() => navigate(`/public/${post.id}`)}>
                             <p className="small-post-content">{`${post.content.slice(0, 400)}...`}</p>
                         </div>
