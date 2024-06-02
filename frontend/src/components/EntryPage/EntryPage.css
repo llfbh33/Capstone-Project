@@ -58,6 +58,29 @@
     min-height: 50px;
 }
 
+#entrypage-underline {
+    border-bottom: 1px solid #3399FF;
+    width: 81%;
+}
+
+#entryedit-toolbar-container {
+    width: 82%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#editentry-save-btn-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+#editentry-save-btn-container > p {
+    margin: 0px;
+}
+
 .entrypage-comment-title {
     display: flex;
     align-items: center;

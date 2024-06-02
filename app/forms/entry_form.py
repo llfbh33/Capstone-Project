@@ -7,21 +7,16 @@ from app.models import User, Notebook
 def user_exists(form, field):
     # Checking if user exists
     user_id = field.data
-    user = User.query.filter(User.user_id == user_id).first()
+    user = User.query.filter(User.id == user_id).first()
     if not user:
         raise ValidationError('User not found.')
 
 def notebook_exitst(form, field):
     #checking if notebook exitst
     notebook_id = field.data
-    notebook = Notebook.query.filter(Notebook.notebook_id == notebook_id).first()
+    notebook = Notebook.query.filter(Notebook.id == notebook_id).first()
     if not notebook:
         raise ValidationError('Notebook not found')
-
-# def informationRequired(form, field):
-#     content = field.data
-#     if not content.length:
-#         raise ValidationError('Please provide some content')
 
 
 class EntryForm(FlaskForm):
