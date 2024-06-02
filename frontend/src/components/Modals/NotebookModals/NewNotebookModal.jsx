@@ -35,7 +35,7 @@ function NewNotebookFormModal() {
       setName('')
       setAbout('')
       closeModal();
-      navigate('/home')
+      navigate('/')
     }
   };
 
