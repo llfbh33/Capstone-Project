@@ -32,11 +32,7 @@
     margin: 24px 0px;
 }
 
-.entry-button {
-    margin: 0px 10px;
-    width: 110px;
-    height: 30px
-}
+
 
 .entry-content-container {
     line-height: 1.5;
@@ -63,7 +59,36 @@
     width: 81%;
 }
 
+/* buttons that go with the title of the page*/
+.entrypage-button-container {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.editentry-name-button > button {
+    background-color: #100647;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+    width: 110px;
+    height: 31px;
+}
+
+.entry-button {
+    width: 110px;
+    height: 30px
+}
+
 #entryedit-toolbar-container {
+    width: 82%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#entrypage-entrytitle-buttons {
     width: 82%;
     display: flex;
     align-items: center;

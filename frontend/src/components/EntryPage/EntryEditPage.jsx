@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
@@ -8,12 +8,14 @@ import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
 
+
 import './EntryPage.css'
 import { thunkEditEntry } from "../../redux/entry";
+import SaveEntryModal from "../Modals/EntryModals/SaveEntryModal";
 
 
 function EntryEditPage() {
-  const {notebookId, entryId} = useParams();
+  const {notebookId, entryId, entries} = useParams();
   const entry = useSelector(state => state.entries[parseInt(entryId)]);
   const currUser = useSelector(state => state.session.user)
   const allUsers = useSelector(state => state.users)
@@ -26,7 +28,30 @@ function EntryEditPage() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const notebook = useSelector(state => state.notebooks[notebookId])
+//   let warningModal = document.getElementById('save-warning-modal')
+  const { setModalContent, setOnModalClose } = useModal();
 
+    const refOne = useRef(null)
+
+    if (refOne === null) {
+        document.removeEventListener('click', outsideClick)
+    }
+
+    useEffect(() => {
+        if (refOne !== null) {
+            document.addEventListener('click', outsideClick, true)
+        }
+    }, [entries])
+
+    // works but is messy - find a way to isolate buttons only?
+    const outsideClick = (e) => {
+        if(refOne === null || !refOne.current.contains(e.target)) {
+            const modalComponent =<SaveEntryModal  entry={entry} content={content}/>
+            setModalContent(modalComponent);
+        } else {
+            console.log("Clicked inside...")
+        }
+    }
 
   useEffect(() =>{
     if(entry?.name) {
@@ -75,7 +100,7 @@ function EntryEditPage() {
 }
 
   return (
-        <div>
+        <div ref={refOne} id='editentry-main-container'>
             <form onSubmit={handleSave}>
                 <div id='entryedit-toolbar-container'>
                     <div>This is where the tool bar goes</div>

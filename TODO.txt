@@ -51,3 +51,12 @@
 
 
 - the home button in the nav does not work if it is open  only if it is closed
+
+
+
+- Eventually, set it to where if you click on any button or link outside of the edit entry form
+    it will have the popup modal, we are just sticking with everywhere outside for now
+    here are some docs to help in the future:
+    - https://www.youtube.com/watch?v=Tj499K6bGhU
+    - https://stackoverflow.com/questions/49680484/how-to-add-one-event-listener-for-all-buttons
+    - https://stackoverflow.com/questions/31997103/react-utilizing-child-event-listener-in-parent

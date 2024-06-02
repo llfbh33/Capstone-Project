@@ -11,6 +11,7 @@ import EntryEditPage from "./EntryEditPage";
 
 import './EntryPage.css'
 import EntryPreviewPage from "./EntryPreviewPage";
+import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
 
 
 function EntryPage() {
@@ -23,7 +24,7 @@ function EntryPage() {
   const [content, setContent] = useState('');
   const [name, setName] = useState("");
   const [isPublic, setIsPublic] = useState('Publish')
-  const [isPreview, setIsPreview] = useState('Edit')
+  const [isPreview, setIsPreview] = useState('Edit Entry')
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const notebook = useSelector(state => state.notebooks[notebookId])
@@ -52,7 +53,7 @@ function EntryPage() {
 
   const previewSwitch = () => {
     if (isPreview === 'Preview') {
-      setIsPreview('Edit')
+      setIsPreview('Edit Entry')
     } else {
       setIsPreview('Preview')
     }
@@ -63,9 +64,15 @@ function EntryPage() {
           <div>
               <div id='entrypage-entry-notebook-title'>
                   <h2>{`Notebook: ${notebook?.name}`}</h2>
-                  <div>
+                  <div id='entrypage-entrytitle-buttons'>
                       <h1>{`Entry: ${name}`}</h1>
-                      <div>
+                      <div className="entrypage-button-container">
+                          <div className="editentry-name-button">
+                                <OpenModalMenuItem
+                                buttonText='Edit Name'
+                                modalComponent={<EditEntryNameFormModal entry={entry} />}
+                                />
+                          </div>
                           <button
                               className="modal-button entry-button"
                               onClick={previewSwitch}
