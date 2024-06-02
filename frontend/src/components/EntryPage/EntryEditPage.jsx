@@ -38,19 +38,21 @@ function EntryEditPage() {
     }
 
     useEffect(() => {
-        if (refOne !== null) {
+        if (content && entry?.content !== content) {
             document.addEventListener('click', outsideClick, true)
+          // ment to remove the event listener but it is not quite working
         }
-    }, [entries])
+        return document.removeEventListener('click', outsideClick)
+
+    }, [content])
 
     // works but is messy - find a way to isolate buttons only?
     const outsideClick = (e) => {
-        if(refOne === null || !refOne.current.contains(e.target)) {
+        if(refOne !== null && !refOne.current.contains(e.target)) {
             const modalComponent =<SaveEntryModal  entry={entry} content={content}/>
             setModalContent(modalComponent);
-        } else {
-            console.log("Clicked inside...")
         }
+        return document.removeEventListener('click', outsideClick)
     }
 
   useEffect(() =>{
@@ -90,6 +92,7 @@ function EntryEditPage() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+      document.removeEventListener('click', outsideClick)
       closeModal();
     }
   };
