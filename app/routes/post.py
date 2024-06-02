@@ -127,11 +127,7 @@ def edit_entry(post_id):
 
         db.session.commit()
 
-        entry = Entry.query.get(form.data['entry_id'])
-        post_return = entry.to_dict()
-        post_return['post'] = currPost.to_dict()
-
-        return post_return
+        return currPost.to_dict()
     else:
         return form.errors, 400
 

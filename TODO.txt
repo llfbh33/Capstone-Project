@@ -41,14 +41,13 @@
         - They should be in order by date
         - would like to have 2 more spots in the dropdown, today and in the last week
             - eventyally I would like to change those up to the most liked and most commented
-        - can not see them on the homepage
         - do we want to have another way to get to personal posts in the nav bar?
     - Can remove a post from the public feed page
-        - When going to the entry page it is now set to private and still has the comments on it
-        - the publish/private button on the entries page does not work
+        - after deleting on the entry page it is not set to private but the publish/private button on the entries page does not work
     - Creating a new post does not work
         - the publish/private button on the entries page does not work
-    - Can not edit a post at all
+    - Can edit a post from the home page
+        - do we want to be able to edit a post from the post page or the public feed?
 
 
 - the home button in the nav does not work if it is open  only if it is closed

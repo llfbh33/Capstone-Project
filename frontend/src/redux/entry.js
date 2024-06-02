@@ -203,7 +203,7 @@ export const thunkCreatePost = (post) => async (dispatch) => {
 };
 
 export const thunkEditPost = (post) => async (dispatch) => {
-const response = await fetch(`/api/posts/${post.id}/edit`, {
+const response = await fetch(`/api/posts/${post.entryId}/edit`, {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
@@ -285,7 +285,8 @@ function entryReducer(state = initialState, action) {
       newState[action.post.entry_id].post = action.post
       return newState
     }
-// save the entry, delete from state, filter and reduce to remove post, add filtered object to state, return
+// This delete of a post is good, but it does not adjust for the fact that the is_public
+// boolean for the entry is now set to false
     case DELETE_POST: {
       const newState = {...state};
       let adjust_entry = newState[action.post.entry_id]
@@ -296,6 +297,7 @@ function entryReducer(state = initialState, action) {
             return newObj;
           }, {});
       newState[adjust_entry.id] = adjust_entry;
+      newState[adjust_entry.id].is_public = false;
       return newState
     }
     case CLEAR_ENTRIES: {
