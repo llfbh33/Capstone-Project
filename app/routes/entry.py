@@ -72,7 +72,10 @@ def create_entry():
         db.session.add(new_entry)
         db.session.commit()
 
-        return new_entry.to_dict()
+        entry_retrun = new_entry.to_dict()
+        entry_retrun['comments'] = []
+
+        return entry_retrun
     else:
         return form.errors, 400
 
@@ -85,17 +88,32 @@ def edit_entry(entry_id):
     """
     form = EntryForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-
+    print('entry data', form.data)
     if form.validate_on_submit():
 
         currEntry = Entry.query.get(entry_id)
         setattr(currEntry, 'name', form.data['name'])
         setattr(currEntry, 'content', form.data['content'])
+        setattr(currEntry, 'is_public', form.data['is_public'])
         setattr(currEntry, 'updated_at', datetime.now())
 
         db.session.commit()
 
-        return currEntry.to_dict()
+        entry_retrun = currEntry.to_dict()
+
+        comment_list = []
+        for comment in currEntry.comments:
+            comment_list.append(comment.to_dict())
+        entry_retrun['comments'] = comment_list
+
+        post_list = []
+        for post in currEntry.posts:
+            post_list.append(post.to_dict())
+
+        if post_list:
+            entry_retrun['post'] = post_list[0]
+
+        return entry_retrun
     else:
         return form.errors, 400
 

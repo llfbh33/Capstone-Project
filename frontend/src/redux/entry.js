@@ -104,7 +104,8 @@ export const thunkCreateEntry = (entry) => async (dispatch) => {
 
 
 export const thunkEditEntry = (entry) => async (dispatch) => {
-    const response = await fetch(`/api/notebooks/${entry.id}/edit`, {
+  console.log('entry obj ----->', entry)
+    const response = await fetch(`/api/entries/${entry.id}/edit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -112,6 +113,7 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
             notebook_id: entry.notebookId,
             name: entry.name,
             content: entry.content,
+            is_public: entry.isPublic
         }),
     });
     if (response.ok) {
