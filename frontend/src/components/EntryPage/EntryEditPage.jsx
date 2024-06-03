@@ -9,6 +9,7 @@ import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
 
 
+
 import './EntryPage.css'
 import { thunkEditEntry } from "../../redux/entry";
 import SaveEntryModal from "../Modals/EntryModals/SaveEntryModal";
@@ -113,6 +114,7 @@ function EntryEditPage() {
                     </div>
                 </div>
                 <div className="entry-content-container">
+
                     <div className="entry-content-input-container">
                         <textarea
                             className="entry-input-area"

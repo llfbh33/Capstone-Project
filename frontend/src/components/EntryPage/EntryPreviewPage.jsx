@@ -17,6 +17,13 @@ function EntryPreviewPage() {
     const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
     const navigate = useNavigate()
+    const test = (<div>
+                    <h1>hello there</h1>
+                    <br></br>
+                    <h2>will this work?</h2>
+                    <br></br>
+                    <p>and one more for effort</p>
+                    </div>)
 
     const lookPreview = () => {
         console.log('not working?')
@@ -27,7 +34,7 @@ function EntryPreviewPage() {
         <div className="entry-preview-content-container">
 
             <div>
-                <div>{entry?.content}</div>
+                <div id='entry-preview-content' type='HTML'>{entry?.content}</div>
             </div>
             <div>
                 {entry?.comments.length
@@ -60,10 +67,12 @@ function EntryPreviewPage() {
                                 {comment.comment}
                             </div>
                         </div>
+
                     ))}
                 </div>
                 : <h3>You have no comments on this entry</h3>}
             </div>
+            <div>{test}</div>
         </div>
     )
 }

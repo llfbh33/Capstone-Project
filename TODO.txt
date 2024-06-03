@@ -60,3 +60,17 @@
     - https://www.youtube.com/watch?v=Tj499K6bGhU
     - https://stackoverflow.com/questions/49680484/how-to-add-one-event-listener-for-all-buttons
     - https://stackoverflow.com/questions/31997103/react-utilizing-child-event-listener-in-parent
+
+
+
+WHAT NEEDS TO BE DONE -
+
+Landing Page
+    - clean up the modals
+    - add background image (if you have time)
+
+On Login
+    - When we login we come to the same page we were on when we signed out - do we care about this
+
+Left Nav Bar
+    - when we click onto a notebook card the nav for it's name does not light up

@@ -86,8 +86,13 @@
     cursor: pointer;
 }
 
-.left-nav-notebook-name {
+.left-nav-sml-ele {
     margin: 6px 0px;
+}
+
+.left-nav-sml-ele-selected {
+    margin: 6px 0px;
+    color: lightblue
 }
 
 #left-nav-signout-container {
