@@ -44,7 +44,7 @@ function PublicFeed() {
                             </div>
                         </div>
                         <div className="small-post-container" onClick={() => navigate(`/public/${post.id}`)}>
-                            <p className="small-post-content">{parser(post.content).slice(0, 400)}</p>
+                            <p className="small-post-content">{parser(post.content)}</p>
                         </div>
                         <div className="post-bottom-border"></div>
                     </div>

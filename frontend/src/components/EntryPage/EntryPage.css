@@ -30,7 +30,6 @@
     resize: none;
     border: 4px inset #3399FF;
     margin: 24px 0px;
-<<<<<<< HEAD
     white-space: pre;
 }
 
@@ -40,14 +39,6 @@
 
 .entry-preview-content {
     white-space: pre-wrap;
-=======
-}
-
-.entry-button {
-    margin: 0px 10px;
-    width: 110px;
-    height: 30px
->>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
 }
 
 .entry-content-container {
@@ -70,7 +61,6 @@
     min-height: 50px;
 }
 
-<<<<<<< HEAD
 #entrypage-underline {
     border-bottom: 1px solid #3399FF;
     width: 81%;
@@ -123,8 +113,6 @@
     margin: 0px;
 }
 
-=======
->>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
 .entrypage-comment-title {
     display: flex;
     align-items: center;

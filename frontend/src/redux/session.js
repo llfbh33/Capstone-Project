@@ -1,10 +1,7 @@
 import { clearEntries } from "./entry";
 import { clearNotebooks } from "./notebook";
-<<<<<<< HEAD
 import loadState from "../utils/loadData";
-=======
-import { thunkLoadUsers } from "./users";
->>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
+
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
