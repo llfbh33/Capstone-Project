@@ -15,14 +15,20 @@ function EditNotebookFormModal({notebook}) {
 
     useEffect(() => {
         const errors = {};
-        if (name <= 0) errors.name = 'Please provide a name for your notebook'
-        if (name.length > 100) errors.name = 'Name must be 100 characters or less'
-        if (about.length > 400) errors.about = 'About section must be 400 characters or less'
+        if (name <= 0) errors.name = 'Notebook name is required'
+        if (name.length > 100) errors.name = 'Notebook name can not be over 100 characters'
+        if (about.length > 400) errors.about = 'Notebook about section can not be over 400 characters'
         setValidationErrors(errors)
-    }, [name, about])
+    }, [name, about]);
+
+    useEffect(() => {
+        if (about === '') setAbout(' ')
+      }, [about])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (Object.values(validationErrors).length) return;
 
         const serverResponse = await dispatch(thunkEditNotebook ({
             id: notebook.id,
@@ -54,11 +60,12 @@ function EditNotebookFormModal({notebook}) {
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    <p className="notebook-errors">{validationErrors.name ? `${validationErrors.name}` : ''}</p>
+                    {validationErrors.name ? <p className="error-validation">{validationErrors.name}</p> : <p>{`${name.length}/100`}</p>}
                 </div>
 
                 <div className="edit-notebook-info-2">
-                    <label className="edit-notebook-label">Write a little about what you will use this notebook for</label>
+                    <div className="edit-notebook-label">Write a little about what you will use this notebook for!</div>
+                    <div>This is not required but it is a helpful way to keep your writing organized.</div>
                     <textarea
                         value={about}
                         rows={12}

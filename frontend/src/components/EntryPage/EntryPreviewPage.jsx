@@ -32,15 +32,17 @@ function EntryPreviewPage() {
     return (
         <div className="entry-preview-content-container">
 
-            {entry.content
+            {entry?.content.length
             ? <div>
                 <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
             </div>
             : <p>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
 
+            {entry?.content === '<p></p>' && <p>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
+
             <h1 id='entrypage-underline'></h1>
             <div>
-                {entry.comments.length
+                {entry?.comments.length
                 ? <div>
                     <h2>Comments on your Entry:</h2>
                     {entry?.comments.map(comment => (

@@ -20,8 +20,8 @@ def post_exists(form, field):
 
 class PostForm(FlaskForm):
     entry_id = IntegerField('entry_id', validators=[DataRequired(), entry_exitst, post_exists])
-    message = StringField('message', validators=[Length(max=100)])
+    message = StringField('message', validators=[Length(max=250)])
 
 class EditPostForm(FlaskForm):
     entry_id = IntegerField('entry_id', validators=[DataRequired(), entry_exitst])
-    message = StringField('message', validators=[Length(max=100)])
+    message = StringField('message', validators=[Length(max=250)])

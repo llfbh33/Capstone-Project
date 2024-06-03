@@ -8,6 +8,8 @@ import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
 import EntryPreviewPage from "./EntryPreviewPage";
 import EntryEditPage from "./EntryEditPage";
 import './EntryPage.css'
+import PostPostModal from "../Modals/PostModals/PostEntryModal";
+import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 
 
 
@@ -32,15 +34,6 @@ function EntryPage() {
           setIsPublic('Make Private')
         }
     }, [entry])
-
-
-    const publicSwitch = () => {
-        if (isPublic === 'Publish') {
-          setIsPublic('Make Private')
-        } else {
-          setIsPublic('Publish')
-        }
-    }
 
     const previewSwitch = () => {
         if (isPreview === 'Preview') {
@@ -71,10 +64,22 @@ function EntryPage() {
                                 onClick={previewSwitch}
                                 >{isPreview}
                             </button>
-                            <button
-                              className="modal-button entry-button"
-                              onClick={(publicSwitch)}
-                            >{isPublic}</button>
+                            {entry?.is_public
+
+                            ? <div className="editentry-name-button">
+                                <OpenModalMenuItem
+                                buttonText='Set Private'
+                                modalComponent={<RemovePostModal post={entry} />}
+                                />
+                            </div>
+
+                            : <div className="editentry-name-button">
+                                <OpenModalMenuItem
+                                buttonText='Set Public'
+                                modalComponent={<PostPostModal entry={entry} />}
+                                />
+                            </div>
+                            }
                             <div className="editentry-name-button">
                                 <OpenModalMenuItem
                                 buttonText='Delete'

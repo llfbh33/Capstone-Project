@@ -26,7 +26,7 @@ function PublicPost() {
     const handleComment = async(e) => {
         e.preventDefault()
 
-        if (comment.length > 600) {
+        if (comment.length > 600 || comment.length <= 0) {
             return
         }
 
@@ -36,9 +36,9 @@ function PublicPost() {
             comment: comment
         }
 
+        setComment('');
         await dispatch(thunkCreateComment(newComment));
         await dispatch(thunkLoadEntries());
-        setComment('');
         return
     }
 
@@ -74,7 +74,7 @@ function PublicPost() {
                         onChange={(e) => setComment(e.target.value)}
                         />
                     </div>
-                    <p className={comment.length > 600 ? 'comment-error' : 'comment-length'}>{`Comment must be under: ${comment.length}/600`}</p>
+                    <p className={comment.length > 600 || comment.length <= 0 ? 'comment-error' : 'comment-length'}>{`Comment must be under: ${comment.length}/600`}</p>
                 </div>
             </form>
             {post?.comments.length ?

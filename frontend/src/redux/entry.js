@@ -280,7 +280,7 @@ function entryReducer(state = initialState, action) {
     }
     case CREATE_POST: {
       const newState = {...state};
-      newState[action.post.entry_id]['post'] = action.post
+      newState[action.post.id] = action.post
       return newState
     }
     case EDIT_POST: {

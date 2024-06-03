@@ -9,7 +9,6 @@
 - get all users will not run if it has login required on it.
     - the current user is not considered authenticated
 
-<<<<<<< HEAD
 
 - comments are full CRUD
     - when deleting a comment from a public feed element you need to refresh for it to disapear
@@ -78,6 +77,11 @@ Left Nav Bar
 first walk through full crud - then validations
 
 - new notebook creation needs validations
-=======
-- figure out how to keep the format of the text when saving the information
->>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
+
+
+- So that Brian can pregrade
+    - Making an entry public from the entry page does not work yet
+
+
+- comments in the entry pages do not show up when you are editing but do on the preview page, switch this?
+- the commenters profile images do not show on the comments on the entry pages
