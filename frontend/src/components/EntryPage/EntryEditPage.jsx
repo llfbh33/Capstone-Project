@@ -29,6 +29,7 @@ function EntryEditPage() {
     // const { setModalContent, setOnModalClose } = useModal();
 
     const refOne = useRef(null)
+    // adding in a note to test that I can push with no problem
 
     // if (refOne === null) {
     //     document.removeEventListener('click', outsideClick)
