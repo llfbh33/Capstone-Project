@@ -20,7 +20,7 @@ function DeleteNotebookFormModal({notebook}) {
     return (
         <div id='post-remove-modal-container'>
             <h2>{`Are you sure you want to delete "${notebook.name}" ?`}</h2>
-            <h4 className="post-remove-disclaimer">{`Deleting your notebook will also delete all of the entries within it. Are you sure?.`}</h4>
+            <h4 className="post-remove-disclaimer">{`Deleting your notebook will also delete all of the entries within. Are you sure?.`}</h4>
             <div id='remove-post-button-container'>
                 <button className="modal-button delete-comment-button" onClick={deleteNotebook}>Yes, Delete Notebook</button>
                 <button className="modal-button delete-comment-button" onClick={doNotDelete}>No, Keep My Notebook</button>

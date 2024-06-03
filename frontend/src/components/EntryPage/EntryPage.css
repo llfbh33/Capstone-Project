@@ -30,9 +30,12 @@
     resize: none;
     border: 4px inset #3399FF;
     margin: 24px 0px;
+    white-space: pre;
 }
 
-
+.entry-preview-content {
+    white-space: pre-wrap;
+}
 
 .entry-content-container {
     line-height: 1.5;

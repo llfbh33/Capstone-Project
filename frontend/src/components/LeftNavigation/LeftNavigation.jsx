@@ -1,57 +1,62 @@
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, useLocation} from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { thunkLogout } from "../../redux/session";
-import { useNavigate, NavLink } from "react-router-dom";
-
-import './LeftNavigation.css'
-import { useState } from "react";
 import { thunkLoadEntries } from "../../redux/entry";
+import { thunkLogout } from "../../redux/session";
+import './LeftNavigation.css'
 
 
 function LeftNavigation() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const location = useLocation();
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks)
     const [openMain, setOpenMain] = useState('')
     const [openMid, setOpenMid] = useState('')
+    const [openSml, setOpenSml] = useState('')
 
-    const logout = (e) => {
-        e.preventDefault();
-        dispatch(thunkLogout());
-    };
 
+// Open and close of main navigation tabs
     const mainNavElementClick = (string) => {
         if (openMain !== string) {
-            setOpenMain('')
-            setOpenMid('')
             setOpenMain(string)
-            navigate(string)
         } else if (openMain === string){
             setOpenMain('')
-            setOpenMid('')
         } else {
             setOpenMain(string)
-            navigate(string)
         }
     }
 
+//Open and close of mid and sml size tabs / navigates
     const midNavElementClick = (string) => {
-        if (openMid) {
-            setOpenMid('')
-        } else {
-            setOpenMid(string)
+        setOpenMid(string)
+        setOpenSml('')
+        if (string === 'notebooks'){
+            navigate('/')
+        } else if (string === 'all-posts') {
+            navigate('/public')
         }
     }
 
+// Navigating to a specific notebook by id
     const handleClickNotebook = (id) => {
+        setOpenSml(id)
         navigate(`/notebook/${id}`)
     }
 
+// Navigation for when the 'All Posts' tab is clicked
     const publicFeed = async () => {
         await dispatch(thunkLoadEntries())
         navigate('/public')
     }
+
+// Loging out of the site
+    const logout = (e) => {
+        e.preventDefault();
+        dispatch(thunkLogout());
+    };
 
     return (
         <div id='main-left-nav-container'>
@@ -76,10 +81,9 @@ function LeftNavigation() {
                                 <div className="left-nav-small-ele">
                                     {notebooks
                                         ? Object.values(notebooks).map(notebook => (
-                                            <div className="left-nav-notebook-name" key={notebook?.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                            <div className={openSml === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => handleClickNotebook(notebook.id)}>
                                                 <div>{notebook?.name}</div>
                                             </div>
-
                                             ))
                                     : ''}
                                 </div>
@@ -94,7 +98,7 @@ function LeftNavigation() {
                     <div className={openMain === '/public' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/public')}>Public Feed</div>
                         <div hidden={openMain === '/public' ? false : true}>
                         <div className="left-nav-mid-line"></div>
-                            <div className="left-nav-mid-ele" onClick={publicFeed}>All Posts</div>
+                            <div className={openMid === 'all-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('all-posts')}>All Posts</div>
                         </div>
                     </div>
                     <div>
