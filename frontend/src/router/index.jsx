@@ -8,6 +8,7 @@ import PublicFeed from '../components/PublicFeedPage/PublicFeed';
 import PublicPost from '../components/PublicFeedPage/PublicPost';
 import EntryPreviewPage from '../components/EntryPage/EntryPreviewPage';
 import EntryEditPage from '../components/EntryPage/EntryEditPage'
+import PublicUserPosts from '../components/PublicFeedPage/PublicUserPosts';
 
 
 export const router = createBrowserRouter([
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: '/public/:postId',
         element: <PublicPost />,
+      },
+      {
+        path: '/public/user',
+        element: <PublicUserPosts />,
       },
       {
         path: '*',

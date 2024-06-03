@@ -4,6 +4,7 @@ import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
 import { useNavigate } from "react-router-dom"
+import parser from 'html-react-parser'
 
 function PublicFeed() {
     const allEntries = useSelector(state => state.entries)
@@ -43,7 +44,7 @@ function PublicFeed() {
                             </div>
                         </div>
                         <div className="small-post-container" onClick={() => navigate(`/public/${post.id}`)}>
-                            <p className="small-post-content">{`${post.content.slice(0, 400)}...`}</p>
+                            <p className="small-post-content">{parser(post.content).slice(0, 400)}</p>
                         </div>
                         <div className="post-bottom-border"></div>
                     </div>

@@ -1,14 +1,6 @@
 - Walk through the landing page and find any issues with insite
-    - check sign up modals
-    - check any links
-    - adjust bottom links to open a new web page
+    - notebook modals need to be worked on
 
-
-- loging in with center button is good
-    - validations are good
-    - password clears if it is wrong
-
-- still asks for email on sign up
 
 
 - put a loading sign or a wait on returning the value of the home page
@@ -17,10 +9,11 @@
 - get all users will not run if it has login required on it.
     - the current user is not considered authenticated
 
-- figure out how to keep the format of the text when saving the information
 
+- comments are full CRUD
+    - when deleting a comment from a public feed element you need to refresh for it to disapear
+        - on edit it will update right away
 
-- comments are full CRUD - they need to be reviewed
 - notebooks -
     - can see notebooks
     - can edit a notebook
@@ -31,12 +24,14 @@
         - There are no validations on the modal but it runs really quickly
 - entries -
     - can see entries
-        - The public ones need to be mapped out on the home page
-        - The preview button 'works' - need to find a way to save styling of text
-    - The save button for the edit does not work.
+    - can edit an entry
+        - trying to get the save modal to work more efficiently
+        - still need to style the tool bar and provide the buttons I want
     - The delete button deletes the notebook it is associated with
     - create an entry just gives a popup alert
 - Posts -
+    - if a notebook is deleted the public entries related to it are not removed from the public entries on the home page
+        - do we really want to include them on the home page? - adjusts after refresh
     - Can see posts on the public feed
         - They should be in order by date
         - would like to have 2 more spots in the dropdown, today and in the last week

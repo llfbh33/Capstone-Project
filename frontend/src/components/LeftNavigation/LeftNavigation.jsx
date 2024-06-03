@@ -37,6 +37,8 @@ function LeftNavigation() {
             navigate('/')
         } else if (string === 'all-posts') {
             navigate('/public')
+        } else if (string === 'user-posts') {
+            navigate('/public/user')
         }
     }
 
@@ -99,6 +101,7 @@ function LeftNavigation() {
                         <div hidden={openMain === '/public' ? false : true}>
                         <div className="left-nav-mid-line"></div>
                             <div className={openMid === 'all-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('all-posts')}>All Posts</div>
+                            <div className={openMid === 'user-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('user-posts')}>Your Posts</div>
                         </div>
                     </div>
                     <div>

@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from "react-redux";
-import './HomePage.css'
+
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { thunkDeleteNotebook} from '../../redux/notebook';
@@ -15,7 +15,7 @@ import EditPostFormModal from "../Modals/PostModals/EditPostModal";
 import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 
-function HomePage () {
+function PublicUserPosts () {
     const user = useSelector(state => state.session.user)
     const notebooks = useSelector(state => state.notebooks)
     const allEntries = useSelector(state => state.entries)
@@ -60,17 +60,17 @@ function HomePage () {
                 <div>
                     <p className='mini-page-title' >Ready to write? Create a notebook to get started!</p>
                     <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
-                    <p className="page-title-blocks">Your Notebooks</p>
+                    <p className="page-title-blocks">Your Public Entries</p>
                     <div id='homepage-notebook-card-container'>
-                        {Object.values(notebooks).map(notebook => (
-                                <div key={notebook?.id}>
+                        {entries.map(entry => (
+                                <div key={entry?.id}>
                                     <div className="homepage-notebook-card"  >
-                                        <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
+                                        <div className="homepage-notebook-card-details" onClick={() => navigate(`/public/${entry?.id}`)}>
                                             <div>
-                                                <div>{notebook?.name}</div>
+                                                <div>{entry?.name}</div>
                                             </div>
                                             <div className='notebook-about-section-container'>
-                                                <div>{`${notebook?.about.slice(0, 120)}...`}</div>
+                                                <div>{`${entry?.post.message}`}</div>
                                             </div>
 
                                         </div>
@@ -78,32 +78,23 @@ function HomePage () {
                                         <div className="homepage-edit-notebook">
                                             <OpenModalMenuItem
                                             itemText={<FaEdit />}
-                                            modalComponent={<EditNotebookFormModal notebook={notebook} />}
+                                            modalComponent={<EditPostFormModal post={entry} />}
                                             />
                                         </div>
                                         <div className="homepage-edit-notebook">
                                             <OpenModalMenuItem
                                             itemText={<BsTrash3Fill />}
-                                            modalComponent={<DeleteNotebookFormModal notebook={notebook} />}
+                                            modalComponent={<RemovePostModal post={entry} />}
                                             />
                                         </div>
-                                            {/* <button className="homepage-delete-notebook" onClick={() => handleDeleteNotebook(notebook?.id)}><BsTrash3Fill /></button> */}
                                     </div>
                                 </div>
                             </div>
                         ))}
-                        <div id='homepage-new-notebook-card'>
-                            <div id='create-notebook-title'>
-                                <OpenModalMenuItem
-                                itemText="Click here to create a new Notebook"
-                                modalComponent={<NewNotebookFormModal />}
-                                />
-                            </div>
-                        </div>
                     </div>
                 </div>
     )
 }
 
 
-export default HomePage;
+export default PublicUserPosts;
