@@ -1,14 +1,14 @@
 import { useEffect, useState, useRef } from "react";
-import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
-import { NavLink, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import { useParams } from "react-router-dom";
-import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
-import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-
-
+// import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
+// import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+// import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
+// import { EditorProvider, FloatingMenu, BubbleMenu, EditorContent, useEditor } from '@tiptap/react'
+// import StarterKit from '@tiptap/starter-kit'
+import TipTap from "../TipTap/TipTap";
 
 import './EntryPage.css'
 import { thunkEditEntry } from "../../redux/entry";
@@ -29,32 +29,31 @@ function EntryEditPage() {
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
   const notebook = useSelector(state => state.notebooks[notebookId])
-//   let warningModal = document.getElementById('save-warning-modal')
   const { setModalContent, setOnModalClose } = useModal();
 
     const refOne = useRef(null)
 
-    if (refOne === null) {
-        document.removeEventListener('click', outsideClick)
-    }
+    // if (refOne === null) {
+    //     document.removeEventListener('click', outsideClick)
+    // }
 
-    useEffect(() => {
-        if (content && entry?.content !== content) {
-            document.addEventListener('click', outsideClick, true)
-          // ment to remove the event listener but it is not quite working
-        }
-        return document.removeEventListener('click', outsideClick)
+    // useEffect(() => {
+    //     if (content && entry?.content !== content) {
+    //         document.addEventListener('click', outsideClick, true)
+    //       // ment to remove the event listener but it is not quite working
+    //     }
+    //     return document.removeEventListener('click', outsideClick)
 
-    }, [content])
+    // }, [content])
 
-    // works but is messy - find a way to isolate buttons only?
-    const outsideClick = (e) => {
-        if(refOne !== null && !refOne.current.contains(e.target)) {
-            const modalComponent =<SaveEntryModal  entry={entry} content={content}/>
-            setModalContent(modalComponent);
-        }
-        return document.removeEventListener('click', outsideClick)
-    }
+    // // works but is messy - find a way to isolate buttons only?
+    // const outsideClick = (e) => {
+    //     if(refOne !== null && !refOne.current.contains(e.target)) {
+    //         const modalComponent =<SaveEntryModal  entry={entry} content={content}/>
+    //         setModalContent(modalComponent);
+    //     }
+    //     return document.removeEventListener('click', outsideClick)
+    // }
 
   useEffect(() =>{
     if(entry?.name) {
@@ -103,6 +102,8 @@ function EntryEditPage() {
     navigate(`/notebook/${notebookId}/entries/${entryId}/preview`)
 }
 
+
+
   return (
         <div ref={refOne} id='editentry-main-container'>
             <form onSubmit={handleSave}>
@@ -114,18 +115,7 @@ function EntryEditPage() {
                     </div>
                 </div>
                 <div className="entry-content-container">
-
-                    <div className="entry-content-input-container">
-                        <textarea
-                            className="entry-input-area"
-                            type="text"
-                            rows={38}
-                            cols={166}
-                            value={content}
-                            onChange={(e) => setContent(e.target.value)}
-                            required
-                        />
-                    </div>
+                  <TipTap content={content} setContent={setContent}/>
                 </div>
             </form>
         </div>
@@ -133,51 +123,3 @@ function EntryEditPage() {
 }
 
 export default EntryEditPage;
-
-
-{/* <div>
-<form onSubmit={handleSave}>
-    <div className="entry-content-container">
-      <div className="entry-content-input-container">
-          <textarea
-              className="entry-input-area"
-              type="text"
-              rows={38}
-              cols={166}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-          />
-      </div>
-    </div>
-  </form>
-  {entry?.comments.length ?
-  <div className="entry-page-ccomments">
-    <h2>Comments on your Entry:</h2>
-    {entry.comments.map(comment => (
-      <div key={comment.id}>
-        <div className="entrypage-comment-title">
-            <div>{allUsers[comment.user_id]?.username}</div>
-            <div>
-                {comment.user_id === currUser.id
-                    ? <div className="entrypage-delete-comment" >
-                      <OpenModalMenuItem
-                      buttonText="Edit Comment"
-                      modalComponent={<EditCommentModal comment={comment} />}
-                      />
-                    </div>
-                  : ''}
-                  <div className="entrypage-delete-comment" >
-                      <OpenModalMenuItem
-                      buttonText="Delete Comment"
-                      modalComponent={<DeleteCommentModal comment={comment} />}
-                      />
-                  </div>
-            </div>
-        </div>
-        <div className="entrypage-comment">{comment.comment}</div>
-      </div>
-    ))}
-  </div>
-  : <h3>You have no comments on this entry</h3>}
-</div> */}

@@ -33,6 +33,10 @@
     white-space: pre;
 }
 
+.ProseMirror {
+    border: 2px inset #3399FF;
+}
+
 .entry-preview-content {
     white-space: pre-wrap;
 }

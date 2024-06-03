@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
-import { thunkLogin } from "../../redux/session";
-import { useDispatch, useSelector } from "react-redux";
-import { useModal } from "../../context/Modal";
+
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { NavLink } from "react-router-dom";
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-import EntryEditPage from './EntryEditPage'
+import parser from 'html-react-parser'
+
+
 
 function EntryPreviewPage() {
 
@@ -17,24 +16,17 @@ function EntryPreviewPage() {
     const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
     const navigate = useNavigate()
-    const test = (<div>
-                    <h1>hello there</h1>
-                    <br></br>
-                    <h2>will this work?</h2>
-                    <br></br>
-                    <p>and one more for effort</p>
-                    </div>)
 
-    const lookPreview = () => {
-        console.log('not working?')
-        navigate(`/notebook/${notebookId}/entries/${entryId}/edit`)
-    }
+    // const lookPreview = () => {
+    //     console.log('not working?')
+    //     navigate(`/notebook/${notebookId}/entries/${entryId}/edit`)
+    // }
 
     return (
         <div className="entry-preview-content-container">
 
             <div>
-                <div id='entry-preview-content' type='HTML'>{entry?.content}</div>
+                <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry?.content) : ''}</div>
             </div>
             <div>
                 {entry?.comments.length
@@ -67,46 +59,13 @@ function EntryPreviewPage() {
                                 {comment.comment}
                             </div>
                         </div>
-
                     ))}
                 </div>
                 : <h3>You have no comments on this entry</h3>}
             </div>
-            <div>{test}</div>
         </div>
     )
 }
 
 
 export default EntryPreviewPage
-
-
-{/* <div>
-<div id='entrypage-entry-notebook-title'>
-    <h2>{`Notebook: ${notebook?.name}`}</h2>
-    <h1>{`Entry: ${name}`}</h1>
-</div>
-<h1 id='homepage-underline'></h1>
-<div className="entry-content-container">
-      <div className="entry-toolbar-n-btns-container">
-        <div className="hidden-font">
-          this is the tool bar
-        </div>
-        <div id="entry-buttons-container">
-          <button className="modal-button entry-button" type='submit'>Save</button>
-          <button
-              className="modal-button entry-button"
-              onClick={() => setIsPreview(true)}
-            >Edit</button>
-          <button
-              className="modal-button entry-button"
-              onClick={(publicSwitch)}
-            >{isPublic}</button>
-          <button className="modal-button entry-button">Delete</button>
-        </div>
-      </div>
-  {/* <div className="entry-content-container">
-    <div>{content}</div>
-  </div> */}
-//   </div>
-// </div> */}
