@@ -1,10 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
 import { thunkCreateComment, thunkLoadEntries } from "../../redux/entry";
+import parser from 'html-react-parser'
 
 function PublicPost() {
     const { postId } = useParams();
@@ -14,6 +15,13 @@ function PublicPost() {
     const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
+    const [loaded, setLoaded] = useState(false)
+
+    useEffect(() => {
+        if (post) {
+            setLoaded(true)
+        }
+    }, [post])
 
     const handleComment = async(e) => {
         e.preventDefault()
@@ -34,6 +42,7 @@ function PublicPost() {
         return
     }
 
+    if (loaded) {
     return (
         <div>
             <div id="public-post-title">
@@ -41,7 +50,7 @@ function PublicPost() {
                 <h1>{`${post?.name} by ${creator?.username}`}</h1>
             </div>
             <div className="post-content-container">
-                <p className="post-content">{post?.content}</p>
+                <p className="post-content">{parser(post.content)}</p>
             </div>
             <div className='post-message-container'>
                 <div>
@@ -105,6 +114,7 @@ function PublicPost() {
 
         </div>
     )
+    }
 }
 
 export default PublicPost
