@@ -7,10 +7,9 @@ import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
 import EntryPreviewPage from "./EntryPreviewPage";
 import EntryEditPage from "./EntryEditPage";
-import './EntryPage.css'
 import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
-
+import './EntryPage.css'
 
 
 function EntryPage() {
@@ -18,7 +17,6 @@ function EntryPage() {
     const entry = useSelector(state => state.entries[entryId]);
     const [content, setContent] = useState('');
     const [name, setName] = useState("");
-    const [isPublic, setIsPublic] = useState('Publish')
     const [isPreview, setIsPreview] = useState('Edit Entry')
     const notebook = useSelector(state => state.notebooks[notebookId])
 
@@ -29,9 +27,6 @@ function EntryPage() {
         }
         if (entry?.content) {
           setContent(entry.content)
-        }
-        if(entry?.is_public) {
-          setIsPublic('Make Private')
         }
     }, [entry])
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { thunkCreatePost, thunkEditEntry, thunkLoadEntries } from "../../../redux/entry";
+import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
 
@@ -9,7 +9,6 @@ import { useNavigate } from "react-router-dom";
 function PostPostModal({entry}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const user = useSelector(state => state.session.user)
     const [message, setMessage] = useState(' ');
     const [validationErrors, setValidationErrors] = useState({});
     const { closeModal } = useModal();
