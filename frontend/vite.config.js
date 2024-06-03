@@ -11,6 +11,7 @@ export default defineConfig((mode) => ({
       failOnError: mode === "production",
     }),
   ],
+  build: { chunkSizeWarningLimit: 1000, },
   server: {
     open: true,
     proxy: {

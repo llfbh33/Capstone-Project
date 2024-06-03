@@ -127,6 +127,7 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
 
 
 export const thunkDeleteEntry = (entryId) => async (dispatch) => {
+  console.log(entryId)
     const response = await fetch(`/api/entries/${entryId}/delete`);
     if (response.ok) {
         return dispatch(deleteEntry(entryId))

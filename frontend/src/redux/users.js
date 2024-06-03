@@ -1,4 +1,3 @@
-// do not think we are using this reducer any more - think about deleting it if the entry reducer works find
 const LOAD_USERS = 'users/LOAD_USERS';
 
 const loadUsers = ({users}) => ({
@@ -8,7 +7,6 @@ const loadUsers = ({users}) => ({
 
 
 export const thunkLoadUsers = () => async (dispatch) => {
-    console.log('here')
     const response = await fetch('/api/users');
     if (response.ok) {
         const data = await response.json();

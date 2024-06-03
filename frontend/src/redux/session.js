@@ -1,6 +1,6 @@
 import { clearEntries } from "./entry";
 import { clearNotebooks } from "./notebook";
-import { thunkLoadUsers } from "./users";
+import loadState from "../utils/loadData";
 
 const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
@@ -35,6 +35,7 @@ export const thunkLogin = (credentials) => async dispatch => {
 
   if(response.ok) {
     const data = await response.json();
+    loadState(dispatch);
     dispatch(setUser(data));
   } else if (response.status < 500) {
     const errorMessages = await response.json();

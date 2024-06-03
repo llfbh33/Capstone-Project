@@ -69,3 +69,11 @@ On Login
 
 Left Nav Bar
     - when we click onto a notebook card the nav for it's name does not light up
+
+
+- for some reason the entry edit is doing auto save
+
+
+first walk through full crud - then validations
+
+- new notebook creation needs validations

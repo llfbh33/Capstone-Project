@@ -64,7 +64,7 @@ def create_entry():
             user_id = form.data['user_id'],
             notebook_id = form.data['notebook_id'],
             name = form.data['name'],
-            about = form.data['about'],
+            content = form.data['content'],
             created_at = datetime.now(),
             updated_at = datetime.now()
         )
