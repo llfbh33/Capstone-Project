@@ -3,6 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 import { thunkLogout } from "../../redux/session";
+<<<<<<< HEAD
+=======
+import { useNavigate, NavLink } from "react-router-dom";
+
+>>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
 import './LeftNavigation.css'
 
 
@@ -70,8 +75,21 @@ function LeftNavigation() {
                 <div id="navigation-container">
 
                     <div>
+<<<<<<< HEAD
                         <div className={openMain === '/' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/')}>Home</div>
                         <div hidden={openMain === '/' ? false : true}>
+=======
+                        <NavLink
+                            className='left-nav-main-ele'
+                            onClick={() => mainNavElementClick('home')}
+                            style={({ isActive}) => ({
+                                color: isActive
+                                    ? 'lightblue'
+                                    : 'white'
+                            })}
+                            >Home</NavLink>
+                        <div hidden={openMain === 'home' ? false : true}>
+>>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
                             <div className="left-nav-mid-line"></div>
                             <div className={openMid === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
                             <div hidden={openMid === 'notebooks' ? false : true}>

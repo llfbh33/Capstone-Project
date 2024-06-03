@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
+<<<<<<< HEAD
 
 import LandingPageSwapper from './LandingPageSwapper';
+=======
+>>>>>>> 6284ff2c8ce9df06d22eb1d4115c1d64d5b8abb2
 import HomePage from '../components/HomePage/HomePage';
 import NotebookPage from '../components/NotebookPage/NotebookPage';
 import EntryPage from '../components/EntryPage/EntryPage';
