@@ -1,14 +1,13 @@
 import { createBrowserRouter } from 'react-router-dom';
+
+import LandingPageSwapper from './LandingPageSwapper';
 import HomePage from '../components/HomePage/HomePage';
 import NotebookPage from '../components/NotebookPage/NotebookPage';
 import EntryPage from '../components/EntryPage/EntryPage';
-import LandingPageSwapper from './LandingPageSwapper';
-import NotFound from '../components/NotFound'
 import PublicFeed from '../components/PublicFeedPage/PublicFeed';
 import PublicPost from '../components/PublicFeedPage/PublicPost';
-import EntryPreviewPage from '../components/EntryPage/EntryPreviewPage';
-import EntryEditPage from '../components/EntryPage/EntryEditPage'
 import PublicUserPosts from '../components/PublicFeedPage/PublicUserPosts';
+import NotFound from '../components/NotFound'
 
 
 export const router = createBrowserRouter([
@@ -27,7 +26,6 @@ export const router = createBrowserRouter([
         path: '/notebook/:notebookId/entries/:entryId',
         element: <EntryPage />,
       },
-
       {
         path: '/public',
         element: <PublicFeed />,

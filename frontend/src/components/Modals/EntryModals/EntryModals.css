@@ -1,3 +1,15 @@
 .no-errors {
     margin: 2.5px
 }
+
+#notebook-create-modal {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.name-input {
+    width: 100px;
+}

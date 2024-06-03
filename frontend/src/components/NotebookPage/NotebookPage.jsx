@@ -1,42 +1,36 @@
 import { useNavigate, useParams } from 'react-router-dom'
-import LeftNavigation from "../LeftNavigation/LeftNavigation";
-import { useSelector, useDispatch} from "react-redux";
-
-import './NotebookPage.css'
-import { thunkDeleteNotebook, thunkLoadNotebooks } from '../../redux/notebook';
+import { useSelector } from "react-redux";
 import { useEffect, useState } from 'react';
+import { BsTrash3Fill } from "react-icons/bs";
 
+import CreateEntryNameFormModal from '../Modals/EntryModals/CreateEntryNameModal';
+import DeleteEntryFormModal from '../Modals/EntryModals/DeleteEntryModal';
+import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
+import { useModal } from '../../context/Modal';
+import './NotebookPage.css'
 
 // adjust this page for entries instead of notebooks
 
 function NotebookPage () {
     const {notebookId} = useParams();
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const entries = useSelector(state => state.entries);
     const currNotebook = useSelector(state => state.notebooks[notebookId]);
     const [noteEntries, setNoteEntries] = useState('')
+    const { setModalContent } = useModal();
 
     useEffect(() => {
         let notebookEntries = Object.values(entries).filter(entry => entry.notebook_id === parseInt(notebookId))
-        console.log(notebookEntries)
         setNoteEntries(notebookEntries)
     }, [notebookId, entries])
-
-    const handleDeleteEntry = async () => {
-        // alert(`This button will delete the selected entry, entry ${id}.`)
-
-        dispatch(thunkDeleteNotebook (notebookId))
-        dispatch(thunkLoadNotebooks())
-        navigate('/')
-    }
 
     const handleClickEntry = (entry) => {
         navigate(`/notebook/${notebookId}/entries/${entry.id}`)
     }
 
     const handleNewEntry = () => {
-        alert(`create new entry here`)
+        let modalComponent =<CreateEntryNameFormModal />
+        setModalContent(modalComponent);
     }
 
     return (
@@ -60,7 +54,12 @@ function NotebookPage () {
                                     <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(entry)}>
                                         <div>{entry?.name}</div>
                                     </div>
-                                    <button className="button homepage-delete-notebook" onClick={() => handleDeleteEntry(entry.id)}>{`Delete ${entry.name}?`}</button>
+                                    <div className="homepage-edit-notebook">
+                                            <OpenModalMenuItem
+                                            itemText={<BsTrash3Fill />}
+                                            modalComponent={<DeleteEntryFormModal entry={entry} />}
+                                            />
+                                    </div>
                                 </div>
                             </div>
                             ))

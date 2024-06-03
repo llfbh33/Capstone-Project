@@ -1,22 +1,19 @@
-
-import { useSelector} from "react-redux";
 import { useParams} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { useSelector} from "react-redux";
+import { useEffect, useState } from "react";
+import parser from 'html-react-parser'
+
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-import parser from 'html-react-parser'
-import { useEffect, useState } from "react";
-
 
 
 function EntryPreviewPage() {
 
-    const {notebookId, entryId} = useParams();
+    const { entryId } = useParams();
     const entry = useSelector(state => state.entries[entryId]);
     const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
-    const navigate = useNavigate()
     const [loaded, setLoaded] = useState(false)
 
     // const lookPreview = () => {
@@ -25,17 +22,22 @@ function EntryPreviewPage() {
     // }
 
     useEffect(() => {
-        if (entry?.content) {
+        if (entry) {
             setLoaded(true)
         }
     }, [entry])
+
+
     if (loaded) {
     return (
         <div className="entry-preview-content-container">
 
-            <div>
+            {entry.content
+            ? <div>
                 <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
             </div>
+            : <p>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
+
             <h1 id='entrypage-underline'></h1>
             <div>
                 {entry.comments.length
@@ -43,6 +45,7 @@ function EntryPreviewPage() {
                     <h2>Comments on your Entry:</h2>
                     {entry?.comments.map(comment => (
                         <div key={comment.id}>
+                            
                             <div className="entrypage-comment-title">
                                 <div>
                                     {allUsers[comment.user_id]?.username}
@@ -64,6 +67,7 @@ function EntryPreviewPage() {
                                     </div>
                                 </div>
                             </div>
+
                             <div className="entrypage-comment">
                                 {comment.comment}
                             </div>
@@ -72,9 +76,9 @@ function EntryPreviewPage() {
                 </div>
                 : <h3>You have no comments on this entry</h3>}
             </div>
+
         </div>
-    )
-    }
+    )}
 }
 
 

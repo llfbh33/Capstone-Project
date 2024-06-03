@@ -1,10 +1,8 @@
 import { useDispatch } from 'react-redux';
 
-import { useModal } from '../../../context/Modal'
-import { thunkDeleteComment } from '../../../redux/entry'
-
-import './CommentModals.css'
-
+import { thunkDeleteComment, thunkLoadEntries } from '../../../redux/entry';
+import { useModal } from '../../../context/Modal';
+import './CommentModals.css';
 
 
 function DeleteCommentModal({comment}) {
@@ -12,14 +10,16 @@ function DeleteCommentModal({comment}) {
     const { closeModal } = useModal();
 
     const deleteComment = async (e) => {
+        e.preventDefault();
+
         await dispatch(thunkDeleteComment(comment));
+        await dispatch(thunkLoadEntries());
         closeModal();
     };
 
     const doNotDelete = () => {
         closeModal();
     };
-
 
     return (
         <div id='delete-comment-modal' >
@@ -32,4 +32,4 @@ function DeleteCommentModal({comment}) {
     )
 }
 
-export default DeleteCommentModal
+export default DeleteCommentModal;

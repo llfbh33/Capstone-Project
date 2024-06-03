@@ -23,5 +23,5 @@ class EntryForm(FlaskForm):
     user_id = IntegerField('user_id', validators=[DataRequired(), user_exists])
     notebook_id = IntegerField('notebook_id', validators=[DataRequired(), notebook_exitst])
     name = StringField('name', validators=[DataRequired(), Length(max=100)])
-    content = TextAreaField('content', validators=[DataRequired()])
+    content = TextAreaField('content')
     is_public = BooleanField('is_public')
