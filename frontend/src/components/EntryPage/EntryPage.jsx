@@ -11,6 +11,7 @@ import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
 import LoadingPage from "../LoadingPage";
+import LandingPage from "../LandingPage/LandingPage";
 
 
 function EntryPage() {
@@ -46,6 +47,7 @@ function EntryPage() {
 
     return (
         <div>
+            {loaded ?
             <div>
 
                 <div id='entrypage-entry-notebook-title'>
@@ -99,6 +101,7 @@ function EntryPage() {
                     {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview}/> : <EntryPreviewPage entry={entry} /> }
                 </div>
             </div>
+            : <LandingPage /> }
         </div>
     )
 }

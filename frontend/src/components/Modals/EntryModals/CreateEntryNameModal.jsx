@@ -35,17 +35,15 @@ function CreateEntryNameFormModal() {
             name,
             content: '',
             isPublic: false
-        })
-        );
+        }));
 
-        console.log('serverResponse', serverResponse.entry.id)
         if (serverResponse.name) {
             setValidationErrors(serverResponse);
         } else {
             await dispatch(thunkLoadEntries())
             setName('')
             navigate(`/notebook/${notebookId}/entries/${serverResponse.entry.id}`)
-            await closeModal();
+            closeModal();
         }
     };
 
