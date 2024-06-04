@@ -14,9 +14,9 @@ import { thunkLoadUsers } from '../../redux/users';
 function LandingPage() {
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(thunkLoadUsers())
-    }, [])
+    // useEffect(() => {
+    //     dispatch(thunkLoadUsers())
+    // }, [dispatch])
 
     // logs in demo user
     const handledemologin = async (e) => {

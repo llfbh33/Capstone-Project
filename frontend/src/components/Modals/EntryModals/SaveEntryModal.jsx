@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkEditEntry } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import "./EntryModals.css";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 
 
@@ -12,9 +12,9 @@ function SaveEntryModal({entry, content, setIsPreview}) {
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
 
-    useEffect(() => {
-        if (entry.content === content) closeModal();
-    }, [])
+    // useEffect(() => {
+    //     if (entry.content === content) closeModal();
+    // }, [])
 
     const saveChanges = async (e) => {
         e.preventDefault();

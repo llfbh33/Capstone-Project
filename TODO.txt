@@ -100,5 +100,4 @@ first walk through full crud - then validations
 
 -----------------------------
 - when setting a post to public it runs an error before rendering - set a load first?
-- when trying to set public or delete, the save message tries to take overt
-- Fiber - freelance coding 
+

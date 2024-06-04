@@ -10,6 +10,7 @@ import EntryEditPage from "./EntryEditPage";
 import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
+import LoadingPage from "../LoadingPage";
 
 
 function EntryPage() {
@@ -18,8 +19,13 @@ function EntryPage() {
     const [content, setContent] = useState('');
     const [name, setName] = useState("");
     const [isPreview, setIsPreview] = useState('Edit Entry')
+    const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
 
+    useEffect(() => {
+        if (entry) setLoaded(true);
+        // else setLoaded(false);
+    }, [entry])
 
     useEffect(() =>{
         if(entry?.name) {
