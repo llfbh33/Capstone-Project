@@ -51,7 +51,7 @@ function EntryPage() {
                             <div className="editentry-name-button">
                                   <OpenModalMenuItem
                                   buttonText='Edit Name'
-                                  modalComponent={<EditEntryNameFormModal entry={entry} />}
+                                  modalComponent={<EditEntryNameFormModal entry={entry}/>}
                                   />
                             </div>
                             <button
@@ -88,7 +88,7 @@ function EntryPage() {
 
                 <h1 id='entrypage-underline'></h1>
                 <div>
-                    {isPreview === 'Preview' ? <EntryEditPage entry={entry}/> : <EntryPreviewPage entry={entry} /> }
+                    {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview}/> : <EntryPreviewPage entry={entry} /> }
                 </div>
             </div>
         </div>

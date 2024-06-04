@@ -3,13 +3,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkEditEntry } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import "./EntryModals.css";
+import { useEffect } from "react";
 
 
 
-function SaveEntryModal({entry, content}) {
+function SaveEntryModal({entry, content, setIsPreview}) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
+
+    useEffect(() => {
+        if (entry.content === content) closeModal();
+    }, [])
 
     const saveChanges = async (e) => {
         e.preventDefault();
@@ -22,7 +27,8 @@ function SaveEntryModal({entry, content}) {
             content: content,
             isPublic: entry.is_public
         }));
-        closeModal();
+        setIsPreview('Edit Entry')
+        await closeModal();
     }
 
     const deleteChanges = () => {

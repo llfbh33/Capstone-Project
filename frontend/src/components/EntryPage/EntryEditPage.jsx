@@ -6,55 +6,47 @@ import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/react'
 
-import { useNavigate, useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
-import { thunkEditEntry } from "../../redux/entry";
+import SaveEntryModal from '../Modals/EntryModals/SaveEntryModal'
+import { thunkEditEntry, thunkLoadEntries } from "../../redux/entry";
 import { useModal } from "../../context/Modal";
 import MenuBar from "../TipTap/TipTap";
 import './EntryPage.css'
 
 
 
-function EntryEditPage() {
+function EntryEditPage({setIsPreview}) {
     const { entryId } = useParams();
     const entry = useSelector(state => state.entries[parseInt(entryId)]);
-    // const allUsers = useSelector(state => state.users)
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [content, setContent] = useState(entry.content);
-    const [validationErrors, setValidationErrors] = useState({});
-    const { closeModal } = useModal();
-    // const notebook = useSelector(state => state.notebooks[notebookId])
-    // const { setModalContent, setOnModalClose } = useModal();
-
-    const refOne = useRef(null)
+    const { setModalContent } = useModal();
+    const [currentEntry, setCurrentEntry] = useState(entry)
 
     useEffect(() => {
-      // if the content of the entry does not equal the content state
-        if (entry?.content !== content) {
-          // set a document wide event listener onClick to activate the function outsideClick
-            document.addEventListener('click', outsideClick, true)
-          // else entry.content equals content
-        } else {
-          // then remove the event listener from the document
-          document.removeEventListener('click', outsideClick)
-        }
-    // activate this useEffect if there is a change in content
+      setCurrentEntry(entry)
     }, [content])
 
-    // activated if click on the document after entry.content and content are not the same
-    const outsideClick = (e) => {
-      // if the referenced div does not contain the target of the click
+// creates a reference which is added to the main div of the edit area
+    const refOne = useRef(null)
+// callback function which will be activated if content is changed
+    const outsideClick = useCallback((e) => {
+      document.removeEventListener('click', outsideClick, true)
+      console.log(currentEntry.content === content)
+      console.log(currentEntry.content, content)
+      if (entry.content !== content) {
         if(!refOne.current.contains(e.target)) {
-          // save the value of content to the entry
-            handleSave()
-            // const modalComponent =<SaveEntryModal  entry={entry} content={content}/>
-            // setModalContent(modalComponent);
+            const modalComponent =<SaveEntryModal  entry={entry} content={content} setIsPreview={setIsPreview} />
+            setModalContent(modalComponent);
         }
-        return document.removeEventListener('click', outsideClick)
-    }
+      }
+      return
+    }, [content] )
+// adds an event listener to the page
+    document.addEventListener('click', outsideClick, true)
 
 
 // necessary extentions for use of the tool bar
@@ -89,22 +81,17 @@ function EntryEditPage() {
     const handleSave = async (e) => {
         if (e) e.preventDefault();
 
-    const serverResponse = await dispatch(thunkEditEntry ({
-        id: entry.id,
-        userId: entry.user_id,
-        notebookId: entry.notebook_id,
-        name: entry.name,
-        content,
-        isPublic: entry.is_public
-        })
-    );
+        await dispatch(thunkEditEntry ({
+            id: entry.id,
+            userId: entry.user_id,
+            notebookId: entry.notebook_id,
+            name: entry.name,
+            content,
+            isPublic: entry.is_public
+            }));
 
-        if (serverResponse) {
-            setValidationErrors(serverResponse);
-        } else {
-            document.removeEventListener('click', outsideClick)
-            closeModal();
-        }
+        await dispatch(thunkLoadEntries());
+        return document.removeEventListener('click', outsideClick, true)
     };
 
 
