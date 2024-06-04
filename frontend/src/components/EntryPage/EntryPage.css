@@ -1,4 +1,4 @@
-
+/* Main Entry Page */
 #entrypage-entry-notebook-title {
     display: flex;
     flex-direction: column;
@@ -11,62 +11,13 @@
     margin: 0px;
 }
 
-.entry-content-container {
-    padding: 10px;
-}
-
-
-.entry-content-input-container {
-    /* height: 400px; */
-    width: 800px;
-}
-
-.entry-toolbar-n-btns-container {
+#entrypage-entrytitle-buttons {
+    width: 98.5%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
-.entry-input-area {
-    resize: none;
-    border: 4px inset #3399FF;
-    margin: 24px 0px;
-    white-space: pre;
-}
-
-.ProseMirror {
-    border: 2px inset #3399FF;
-}
-
-.entry-preview-content {
-    white-space: pre-wrap;
-}
-
-.entry-content-container {
-    line-height: 1.5;
-    font-size: 18px;
-    margin: 20px 10px
-}
-
-.hidden-font {
-    color: black
-}
-
-.entrypage-comment {
-    margin-top: 10px;
-    display: flex;
-    /* align-items: center; */
-    margin-left: 5%;
-    border-bottom: 1px solid grey;
-    width: 65%;
-    min-height: 50px;
-}
-
-#entrypage-underline {
-    border-bottom: 1px solid #3399FF;
-    width: 81%;
-}
-
-/* buttons that go with the title of the page*/
 .entrypage-button-container {
     display: flex;
     align-items: center;
@@ -80,7 +31,7 @@
     border: 1px solid #3399FF;
     cursor: pointer;
     width: 110px;
-    height: 31px;
+    height: 30px;
 }
 
 .entry-button {
@@ -88,18 +39,27 @@
     height: 30px
 }
 
+#entrypage-underline {
+    border-bottom: 1px solid #3399FF;
+    width: 100%;
+}
+
+
+/* Edit Entry Page */
+.editentry-main-container {
+    border: 1px solid #3399FF;
+}
+
 #entryedit-toolbar-container {
-    width: 82%;
+    border-bottom: 2px solid #3399FF;
+    padding: 14px;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#entrypage-entrytitle-buttons {
-    width: 82%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.entry-content-container {
+    padding: 0px 20px;
 }
 
 #editentry-save-btn-container {
@@ -113,6 +73,8 @@
     margin: 0px;
 }
 
+
+/* Comment section */
 .entrypage-comment-title {
     display: flex;
     align-items: center;
@@ -147,4 +109,14 @@
 .entrypage-delete-comment > button:hover {
     background-color: #231764;
     border: 1px solid #4da2f7;
+}
+
+
+.entrypage-comment {
+    margin-top: 10px;
+    display: flex;
+    margin-left: 5%;
+    border-bottom: 1px solid grey;
+    width: 65%;
+    min-height: 50px;
 }

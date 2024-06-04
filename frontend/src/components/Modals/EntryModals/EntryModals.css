@@ -1,5 +1,11 @@
+.entry-validation-errors {
+    margin: 4px;
+    color: red
+}
+
 .no-errors {
-    margin: 2.5px
+    margin: 4px;
+    color: white
 }
 
 #notebook-create-modal {

@@ -44,7 +44,7 @@ function CreateEntryNameFormModal() {
         } else {
             await dispatch(thunkLoadEntries())
             setName('')
-            navigate(`/notebook/${notebookId}/entries/${serverResponse.entry.id}`) 
+            navigate(`/notebook/${notebookId}/entries/${serverResponse.entry.id}`)
             await closeModal();
         }
     };
@@ -63,7 +63,7 @@ function CreateEntryNameFormModal() {
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
-                <p className={validationErrors.name ? "notebook-errors" : 'no-errors'}>{validationErrors.name ? `${validationErrors.name}` : `${name.length}/100`}</p>
+                <p className={validationErrors.name ? "entry-validation-errors" : 'no-errors'}>{`${name.length}/100`}</p>
             </div>
             <div className="edit-notebook-button-container">
                 <button type="submit" className="modal-button edit-notebook-button">Submit Changes</button>

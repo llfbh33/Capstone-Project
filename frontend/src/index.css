@@ -82,6 +82,8 @@ body {
 .modal {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .modal-button {
@@ -89,6 +91,7 @@ body {
     color: white;
     border-radius: 10px;
     border: 1px solid #3399FF;
+    font-family: "Comic Neue", cursive;
     cursor: pointer;
 }
 
@@ -101,4 +104,19 @@ body {
 .modal-yes-no {
     display: flex;
     justify-content: space-between;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.modal-form-title {
+    margin: 0px 0px 20px 0px
 }

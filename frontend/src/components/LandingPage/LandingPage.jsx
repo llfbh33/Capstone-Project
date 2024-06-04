@@ -8,9 +8,15 @@ import { thunkLogin } from "../../redux/session";
 import { ModalProvider, Modal } from "../../context/Modal";
 
 import './LandingPage.css'
+import { useEffect } from 'react';
+import { thunkLoadUsers } from '../../redux/users';
 
 function LandingPage() {
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(thunkLoadUsers())
+    }, [])
 
     // logs in demo user
     const handledemologin = async (e) => {
