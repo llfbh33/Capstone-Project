@@ -16,10 +16,6 @@ function EntryPreviewPage() {
     const currUser = useSelector(state => state.session.user);
     const [loaded, setLoaded] = useState(false)
 
-    // const lookPreview = () => {
-    //     console.log('not working?')
-    //     navigate(`/notebook/${notebookId}/entries/${entryId}/edit`)
-    // }
 
     useEffect(() => {
         if (entry) {
@@ -32,7 +28,7 @@ function EntryPreviewPage() {
     return (
         <div className="entry-preview-content-container">
 
-            {entry?.content.length
+            {entry?.content
             ? <div>
                 <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
             </div>
@@ -42,7 +38,7 @@ function EntryPreviewPage() {
 
             <h1 id='entrypage-underline'></h1>
             <div>
-                {entry?.comments.length
+                {entry?.comments
                 ? <div>
                     <h2>Comments on your Entry:</h2>
                     {entry?.comments.map(comment => (

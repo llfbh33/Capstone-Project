@@ -48,7 +48,7 @@ function EntryPage() {
                         <h1>{`Entry: ${name}`}</h1>
 
                         <div className="entrypage-button-container">
-                            <div className="editentry-name-button">
+                            <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
                                   <OpenModalMenuItem
                                   buttonText='Edit Name'
                                   modalComponent={<EditEntryNameFormModal entry={entry}/>}
@@ -61,21 +61,23 @@ function EntryPage() {
                             </button>
                             {entry?.is_public
 
-                            ? <div className="editentry-name-button">
+                            ? <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
                                 <OpenModalMenuItem
                                 buttonText='Set Private'
+                                hidden={isPreview === 'Preview'}
                                 modalComponent={<RemovePostModal post={entry} />}
                                 />
                             </div>
 
-                            : <div className="editentry-name-button">
+                            : <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
                                 <OpenModalMenuItem
                                 buttonText='Set Public'
+                                hidden={isPreview === 'Preview'}
                                 modalComponent={<PostPostModal entry={entry} />}
                                 />
                             </div>
                             }
-                            <div className="editentry-name-button">
+                            <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
                                 <OpenModalMenuItem
                                 buttonText='Delete'
                                 modalComponent={<DeleteEntryFormModal entry={entry} />}

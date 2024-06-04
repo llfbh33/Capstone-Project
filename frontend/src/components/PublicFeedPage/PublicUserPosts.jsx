@@ -22,8 +22,8 @@ function PublicUserPosts () {
 
     return (
         <div>
-            <p className='mini-page-title' >Ready to write? Create a notebook to get started!</p>
-            <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
+            <p className='mini-page-title' ></p>
+            <h1 id='homepage-user-title'>{`${user?.name}'s Posts`}</h1>
             <p className="page-title-blocks">Your Public Entries</p>
             <div id='homepage-notebook-card-container'>
                 {entries.map(entry => (

@@ -26,7 +26,7 @@ function PublicPost() {
     const handleComment = async(e) => {
         e.preventDefault()
 
-        if (comment.length > 600 || comment.length <= 0) {
+        if (comment.length <= 0 || comment.length > 600) {
             return
         }
 
