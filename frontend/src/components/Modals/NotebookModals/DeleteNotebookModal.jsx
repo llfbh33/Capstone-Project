@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux"
 import { thunkDeleteNotebook } from "../../../redux/notebook"
 import { useModal } from "../../../context/Modal"
+import './NotebookModal.css'
 
 function DeleteNotebookFormModal({notebook}) {
     const dispatch = useDispatch()

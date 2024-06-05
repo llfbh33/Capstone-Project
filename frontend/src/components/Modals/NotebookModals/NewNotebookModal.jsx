@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 import { thunkCreateNotebook } from "../../../redux/notebook";
 import { useModal } from "../../../context/Modal";
-import "./NewNotebookModal.css";
+import "./NotebookModal.css";
 
 function NewNotebookFormModal() {
     const dispatch = useDispatch();
@@ -51,35 +51,36 @@ function NewNotebookFormModal() {
     };
 
   return (
-    <>
-      <h1>New Notebook</h1>
+    <div>
+      <h1 className="notebook-modal-title">New Notebook</h1>
       <form onSubmit={handleSubmit}>
-        <div>
-            <label>
-            What would you like to name your new notebook?
+        <div className="notebook-modal-info-1">
+            <label className="notebook-modal-label">What would you like to name your new notebook?</label>
             <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
             />
-            </label>
-            {errors.name ? <p className="error-validation">{errors.name}</p> : <p>{`${name.length}/100`}</p>}
+
+            <p className={errors.name ? "error-validation" : ''}>{`${name.length}/100`}</p>
         </div>
-        <div>
-            <div>Write a little about what you will use this notebook for!</div>
-            <div>This is not required but it is a helpful way to keep your writing organized.</div>
+        <div className="notebook-modal-info-2">
+            <div className="notebook-modal-label">Write a little about what you will use this notebook for!</div>
+            <div >This is not required but it is a helpful way to keep your writing organized.</div>
             <textarea
                 value={about}
                 onChange={(e) => setAbout(e.target.value)}
                 required
             />
-            {errors.about ? <p className="error-validation">{errors.about}</p> : <p>{`${about.length}/400`}</p>}
+            <p className={errors.about ? "error-validation" : ''}>{`${about.length}/400`}</p>
         </div>
 
-        <button type="submit">Create New Notebook</button>
+          <div className="notebook-modal-button-container">
+              <button type="submit" className="modal-button notebook-modal-button">Submit Changes</button>
+          </div>
       </form>
-    </>
+    </div>
   );
 }
 

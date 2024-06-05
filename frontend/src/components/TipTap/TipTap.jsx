@@ -1,6 +1,7 @@
 
-import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaQuoteLeft, FaRedo, FaUndo, FaUnderline } from 'react-icons/fa'
+import { FaBold, FaItalic, FaStrikethrough, FaHeading } from 'react-icons/fa'
 import './TipTap.css'
+//, FaQuoteLeft, FaRedo, FaUndo, FaUnderline
 
 
 const MenuBar = ({editor}) => {

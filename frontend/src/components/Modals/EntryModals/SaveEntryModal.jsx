@@ -12,10 +12,6 @@ function SaveEntryModal({entry, content, setIsPreview}) {
     const user = useSelector(state => state.session.user)
     const { closeModal } = useModal();
 
-    // useEffect(() => {
-    //     if (entry.content === content) closeModal();
-    // }, [])
-
     const saveChanges = async (e) => {
         e.preventDefault();
 
@@ -27,12 +23,14 @@ function SaveEntryModal({entry, content, setIsPreview}) {
             content: content,
             isPublic: entry.is_public
         }));
+
         setIsPreview('Edit Entry')
         await closeModal();
     }
 
     const deleteChanges = () => {
         console.log('Discard changes')
+        setIsPreview('Edit Entry')
         closeModal();
     }
 

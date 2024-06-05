@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useModal } from "../../../context/Modal";
-import "./NewNotebookModal.css";
+import "./NotebookModal.css";
 import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
 
 function EditNotebookFormModal({notebook}) {
@@ -10,15 +10,15 @@ function EditNotebookFormModal({notebook}) {
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState(notebook.name);
     const [about, setAbout] = useState(notebook.about);
-    const [validationErrors, setValidationErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
     useEffect(() => {
-        const errors = {};
-        if (name <= 0) errors.name = 'Notebook name is required'
-        if (name.length > 100) errors.name = 'Notebook name can not be over 100 characters'
-        if (about.length > 400) errors.about = 'Notebook about section can not be over 400 characters'
-        setValidationErrors(errors)
+        const validationErrors = {};
+        if (name <= 0) validationErrors.name = 'Notebook name is required'
+        if (name.length > 100) validationErrors.name = 'Notebook name can not be over 100 characters'
+        if (about.length > 400) validationErrors.about = 'Notebook about section can not be over 400 characters'
+        setErrors(validationErrors)
     }, [name, about]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function EditNotebookFormModal({notebook}) {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (Object.values(validationErrors).length) return;
+        if (Object.values(errors).length) return;
 
         const serverResponse = await dispatch(thunkEditNotebook ({
             id: notebook.id,
@@ -39,7 +39,7 @@ function EditNotebookFormModal({notebook}) {
         );
 
         if (serverResponse.name) {
-            setValidationErrors(serverResponse);
+            setErrors(serverResponse);
         } else {
             await dispatch(thunkLoadNotebooks())
             setName('')
@@ -49,22 +49,22 @@ function EditNotebookFormModal({notebook}) {
     };
 
     return (
-        <div id='notebook-edit-modal'>
-            <h1>Edit Notebook</h1>
+        <div>
+            <h1 className="notebook-modal-title">Edit Notebook</h1>
             <form onSubmit={handleSubmit}>
-                <div className="edit-notebook-info-1">
-                    <label className="edit-notebook-label">Do you want to change the name of your notebook?</label>
+                <div className="notebook-modal-info-1">
+                    <label className="notebook-modal-label">Do you want to change the name of your notebook?</label>
                     <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    {validationErrors.name ? <p className="error-validation">{validationErrors.name}</p> : <p>{`${name.length}/100`}</p>}
+                    <p className={errors.name ? "error-validation" : ''}>{`${name.length}/100`}</p>
                 </div>
 
-                <div className="edit-notebook-info-2">
-                    <div className="edit-notebook-label">Write a little about what you will use this notebook for!</div>
+                <div className="notebook-modal-info-2">
+                    <div className="notebook-modal-label">Write a little about what you will use this notebook for!</div>
                     <div>This is not required but it is a helpful way to keep your writing organized.</div>
                     <textarea
                         value={about}
@@ -73,11 +73,11 @@ function EditNotebookFormModal({notebook}) {
                         onChange={(e) => setAbout(e.target.value)}
                         required
                     />
-                    <p className={validationErrors.about ? "notebook-errors" : 'notebook-about-edit'}>{validationErrors.about ? `${validationErrors.about}` : `${about.length}/400` }</p>
+                    <p className={errors.about ? "notebook-modal-errors" : 'notebook-about-edit'}>{`${about.length}/400` }</p>
                 </div>
 
                 <div className="edit-notebook-button-container">
-                  <button type="submit" className="modal-button edit-notebook-button">Submit Changes</button>
+                  <button type="submit" className="modal-button notebook-modal-button">Submit Changes</button>
                 </div>
             </form>
         </div>

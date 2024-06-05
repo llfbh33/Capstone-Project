@@ -18,9 +18,9 @@ function PublicUserPosts () {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (entry) setLoaded(true);
+        if (entries) setLoaded(true);
         else setLoaded(false);
-    }, [loaded])
+    }, [entries])
 
     useEffect(() => {
         setEntries(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))

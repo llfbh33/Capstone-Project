@@ -1,14 +1,14 @@
 //imports for text editor
 import { Color } from '@tiptap/extension-color'
 import ListItem from '@tiptap/extension-list-item'
+import Underline from '@tiptap/extension-underline';
 import TextStyle from '@tiptap/extension-text-style'
-import Underline from '@tiptap/extension-underline'
 import StarterKit from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/react'
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { useState, useRef, useCallback } from "react";
 
 import SaveEntryModal from '../Modals/EntryModals/SaveEntryModal'
 import { thunkEditEntry, thunkLoadEntries } from "../../redux/entry";
@@ -24,27 +24,21 @@ function EntryEditPage({setIsPreview}) {
     const dispatch = useDispatch();
     const [content, setContent] = useState(entry.content);
     const { setModalContent } = useModal();
-    const [currentEntry, setCurrentEntry] = useState(entry)
 
-    useEffect(() => {
-      setCurrentEntry(entry)
-    }, [content])
 
 // creates a reference which is added to the main div of the edit area
     const refOne = useRef(null)
 // callback function which will be activated if content is changed
     const outsideClick = useCallback((e) => {
       document.removeEventListener('click', outsideClick, true)
-      console.log(currentEntry.content === content)
-      console.log(currentEntry.content, content)
       if (entry.content !== content) {
         if(!refOne.current.contains(e.target)) {
-            const modalComponent =<SaveEntryModal  entry={entry} content={content} setIsPreview={setIsPreview} />
+            const modalComponent =<SaveEntryModal  entry={entry} content={content} setIsPreview={setIsPreview}/>
             setModalContent(modalComponent);
         }
       }
       return
-    }, [content] )
+    }, [content, entry, setModalContent] )
 // adds an event listener to the page
     document.addEventListener('click', outsideClick, true)
 
@@ -71,6 +65,7 @@ function EntryEditPage({setIsPreview}) {
     const editor = useEditor({
         extensions,
         content: content,
+        Underline,
         onUpdate: ({editor}) => {
             const html = editor.getHTML()
             setContent(html);
@@ -109,7 +104,7 @@ function EntryEditPage({setIsPreview}) {
                           </div>
                       </div>
                       <div className="entry-content-container">
-                        <EditorContent editor={editor}/>
+                        <EditorContent editor={editor} />
                     </div>
                 </div>
 

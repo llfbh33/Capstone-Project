@@ -11,13 +11,11 @@ import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
 import LoadingPage from "../LoadingPage";
-import LandingPage from "../LandingPage/LandingPage";
 
 
 function EntryPage() {
     const {notebookId, entryId} = useParams();
     const entry = useSelector(state => state.entries[entryId]);
-    const [content, setContent] = useState('');
     const [name, setName] = useState("");
     const [isPreview, setIsPreview] = useState('Edit Entry')
     const [loaded, setLoaded] = useState(false);
@@ -31,9 +29,6 @@ function EntryPage() {
     useEffect(() =>{
         if(entry?.name) {
           setName(entry.name)
-        }
-        if (entry?.content) {
-          setContent(entry.content)
         }
     }, [entry])
 
@@ -101,7 +96,7 @@ function EntryPage() {
                     {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview}/> : <EntryPreviewPage entry={entry} /> }
                 </div>
             </div>
-            : <LandingPage /> }
+            : <LoadingPage /> }
         </div>
     )
 }
