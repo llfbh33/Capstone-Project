@@ -35,16 +35,16 @@ function SaveEntryModal({entry, content, setIsPreview}) {
     }
 
     return (
-        <div id='save-warning-modal'>
-            <div id='notebook-edit-modal'>
-                <h1>You have unsaved changes!</h1>
-                <div className="edit-notebook-info-1">
-                    <div className="edit-notebook-label">Would you like to save your changes before leaving?</div>
-                    <div className="edit-notebook-label">Any unsaved changes will be lost</div>
+        <div className='entry-modal-main-container'>
+            <div className='entry-modal-form-container'>
+                <h1 className="entry-modal-titles">You have unsaved changes!</h1>
+                <div className="modal">
+                    <div className="entry-modal-label">Would you like to save your changes before leaving?</div>
+                    <div className="entry-modal-label">Any unsaved changes will be lost</div>
                 </div>
-                <div className="edit-notebook-button-container">
-                  <button className="modal-button edit-notebook-button" onClick={saveChanges}>Submit Changes</button>
-                  <button className="modal-button edit-notebook-button" onClick={deleteChanges}>Leave Without Saving</button>
+                <div className="entry-modal-conformation-btn-container">
+                  <button className="modal-button conformation-btn" onClick={saveChanges}>Submit Changes</button>
+                  <button className="modal-button conformation-btn" onClick={deleteChanges}>Leave Without Saving</button>
                 </div>
             </div>
         </div>

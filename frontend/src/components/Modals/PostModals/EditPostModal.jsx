@@ -38,12 +38,12 @@ function EditPostFormModal({post}) {
 
     return (
 
-      <div id='notebook-edit-modal'>
-        <h1>Edit Post</h1>
+      <div className='post-modal-main-container'>
+        <h1 className="post-modal-titles">Edit Post</h1>
         <form onSubmit={handleSubmit}>
-          <div className="edit-notebook-info-2">
-              <label className="edit-notebook-label">Let others know a little about your writings intentions!</label>
-              <label>Keep it short and sweet, let your art speak for itself!</label>
+          <div className="post-modal-form-container">
+              <label className="post-modal-label">Let others know a little about your writings intentions!</label>
+              <label className="post-modal-label-2">Keep it short and sweet, let your art speak for itself!</label>
               <textarea
                   value={message}
                   rows={8}
@@ -52,10 +52,10 @@ function EditPostFormModal({post}) {
                   required
               />
 
-              <p className={validationErrors.message ? "notebook-errors" : 'notebook-about-edit'}>{validationErrors.message ? `${validationErrors.message}` : `${message.length}/100` }</p>
+              <p className={validationErrors.message ? "post-modal-errors" : 'post-modal-no-errors'}>{`${message.length}/100`}</p>
           </div>
-          <div className="edit-notebook-button-container">
-            <button type="submit" className="modal-button edit-notebook-button">Submit Changes</button>
+          <div className="post-modal-conformation-btn-container">
+            <button type="submit" className="modal-button delete-comment-button">Submit Changes</button>
           </div>
         </form>
     </div>

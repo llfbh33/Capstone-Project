@@ -74,7 +74,7 @@ function LandingPage() {
 
                 <footer id='landingpage-footer' >
                     <div id='landingpage-footer-subsection'>
-                        <Link to='https://github.com/llfbh33/Capstone-Project' className='landingpage-footer-link' target='_blank'>About</Link>
+                        <Link to='https://github.com/llfbh33' className='landingpage-footer-link' target='_blank'>Github</Link>
                         <Link className='landingpage-footer-link' onClick={() => alert('Linked in coming soon')}>Contact Us</Link>
                     </div>
                     <div>

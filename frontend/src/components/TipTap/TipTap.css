@@ -1,5 +1,32 @@
+#menuBar-container {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
 
-.ProseMirror {}
+#menuBar-container > button {
+ cursor: pointer;
+ height: 30px
+}
+
+#menuBar-container > button:after {
+  background-color: gray;
+}
+
+.text-editor {
+  border-radius: 5px;
+}
+
+.ProseMirror {
+  margin-top: 16px;
+  min-height: 100px;
+}
+.ProseMirror:focus {
+  outline: none;
+}
+
 .ProseMirror   > * + * {
       margin-top: 0.75em;
     }
@@ -19,13 +46,13 @@
     }
 
     .ProseMirror code {
-      background-color: rgba(#616161, 0.1);
+      background-color: #6161611a;
       color: #616161;
     }
 
     .ProseMirror pre {
-      background: #0D0D0D;
-      color: #FFF;
+      background: #0d0d0d;
+      color: #ffffff;
       font-family: 'JetBrainsMono', monospace;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
@@ -46,16 +73,29 @@
 
     .ProseMirror blockquote {
       padding-left: 1rem;
-      border-left: 2px solid rgba(#0D0D0D, 0.1);
+      border-left: 2px solid #0d0d0d1a;
     }
 
     .ProseMirror hr {
       border: none;
-      border-top: 2px solid rgba(#0D0D0D, 0.1);
+      border-top: 2px solid #0d0d0d1a;
       margin: 2rem 0;
     }
 
 
 .between-Menu-and-editor {
     height: 20px
+}
+
+#color-input {
+  height: 31.5px;
+  width: 100px;
+  border-radius: 5px;
+  border: 2px solid white;
+}
+
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0px;
+  cursor: pointer;
+
 }

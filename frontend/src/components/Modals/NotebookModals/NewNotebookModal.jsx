@@ -63,17 +63,19 @@ function NewNotebookFormModal() {
                 required
             />
 
-            <p className={errors.name ? "error-validation" : ''}>{`${name.length}/100`}</p>
+            <p className={errors.name ? "notebook-modal-errors" : 'notebook-modal-no-errors'}>{`${name.length}/100`}</p>
         </div>
         <div className="notebook-modal-info-2">
             <div className="notebook-modal-label">Write a little about what you will use this notebook for!</div>
             <div >This is not required but it is a helpful way to keep your writing organized.</div>
             <textarea
                 value={about}
+                rows={12}
+                cols={60}
                 onChange={(e) => setAbout(e.target.value)}
                 required
             />
-            <p className={errors.about ? "error-validation" : ''}>{`${about.length}/400`}</p>
+            <p className='notebook-modal-no-errors' >{`${about.length}/400`}</p>
         </div>
 
           <div className="notebook-modal-button-container">

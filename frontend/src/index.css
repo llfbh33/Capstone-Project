@@ -109,14 +109,16 @@ body {
 
 
 
-
-
-
-
-
-
-
-
 .modal-form-title {
     margin: 0px 0px 20px 0px
+}
+
+.conformation-btn {
+    width: 170px;
+    height: 34px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
 }

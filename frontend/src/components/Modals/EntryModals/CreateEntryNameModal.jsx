@@ -14,20 +14,20 @@ function CreateEntryNameFormModal() {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState('');
-    const [validationErrors, setValidationErrors] = useState({});
+    const [errors, setErrors] = useState({});
     const { closeModal } = useModal();
 
     useEffect(() => {
-        const errors = {};
-        if (name <= 0) errors.name = 'Please provide a name for your entry'
-        if (name.length > 100) errors.name = 'Name must be 100 characters or less'
-        setValidationErrors(errors)
+        const validationErrors = {};
+        if (name <= 0) validationErrors.name = 'Please provide a name for your entry'
+        if (name.length > 100) validationErrors.name = 'Name must be 100 characters or less'
+        setErrors(validationErrors)
     }, [name])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (validationErrors.name) return;
+        if (errors.name) return;
 
         const serverResponse = await dispatch(thunkCreateEntry ({
             userId: user.id,
@@ -48,23 +48,22 @@ function CreateEntryNameFormModal() {
     };
 
   return (
-    <div id='notebook-create-modal'>
-        <h1>Create an Entry</h1>
+    <div className='entry-modal-main-container'>
+        <h1 className="entry-modal-titles">Create an Entry</h1>
         <form onSubmit={handleSubmit}>
 
-            <div className="edit-notebook-info-1">
-                <label className="edit-notebook-label">What is a good name for this entry?</label>
+            <div className="entry-modal-form-container">
+                <label className="entry-modal-label">What is a good name for this entry?</label>
                 <input
-                    className="name-input"
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     required
                 />
-                <p className={validationErrors.name ? "entry-validation-errors" : 'no-errors'}>{`${name.length}/100`}</p>
+                <p className={errors.name ? 'entry-modal-errors' : 'entry-modal-no-errors'} >{`${name.length}/100`}</p>
             </div>
-            <div className="edit-notebook-button-container">
-                <button type="submit" className="modal-button edit-notebook-button">Submit Changes</button>
+            <div className="entry-modal-conformation-btn-container">
+                <button type="submit" className="modal-button conformation-btn">Submit Changes</button>
             </div>
 
         </form>

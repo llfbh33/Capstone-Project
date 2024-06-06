@@ -91,7 +91,7 @@ function EntryPage() {
                     </div>
                 </div>
 
-                <h1 id='entrypage-underline'></h1>
+                <h1 className='entrypage-underline'></h1>
                 <div>
                     {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview}/> : <EntryPreviewPage entry={entry} /> }
                 </div>

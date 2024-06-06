@@ -61,20 +61,23 @@ function PublicPost() {
                     <p className="message-element">{post?.post.message}</p>
                 </div>
             </div>
+            <div className="space-maker-div"></div>
             <form onSubmit={handleComment}>
                 <div>
                     <p>{`Let ${creator?.username} know what you think about their writing!`}</p>
-                    <div>
-                        <button type='submit'>Comment</button>
+                    <div className="comment-area-post">
                         <textarea
                         type='text'
-                        rows={4}
-                        cols={140}
+                        rows={5}
+                        cols={145}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         />
                     </div>
-                    <p className={comment.length > 600 || comment.length <= 0 ? 'comment-error' : 'comment-length'}>{`Comment must be under: ${comment.length}/600`}</p>
+                    <p className={comment.length > 600 || comment.length <= 0 ? 'post-comment-errors' : 'post-comment-no-errors'}>{`${comment.length}/600`}</p>
+                </div>
+                <div className="post-comment-btn-container">
+                    <button type='submit' className="modal-button">Comment</button>
                 </div>
             </form>
             {post?.comments.length ?

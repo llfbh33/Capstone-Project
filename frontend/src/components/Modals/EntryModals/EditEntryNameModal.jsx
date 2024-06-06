@@ -43,22 +43,22 @@ function EditEntryNameFormModal({entry}) {
     };
 
     return (
-        <div id='notebook-edit-modal'>
-            <h1>Edit Entries Name</h1>
+        <div className='entry-modal-main-container'>
+            <h1 className="entry-modal-titles" >Edit Entries Name</h1>
             <form onSubmit={handleSubmit}>
 
-                <div className="edit-notebook-info-1">
-                    <label className="edit-notebook-label">Do you want to change the name of your notebook?</label>
+                <div className="entry-modal-form-container">
+                    <label className="entry-modal-label">Do you want to change the name of your Entry?</label>
                     <input
                         type="text"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    <p className={validationErrors.name ? "notebook-errors" : 'no-errors'}>{validationErrors.name ? `${validationErrors.name}` : `${name.length}/100`}</p>
+                    <p className={validationErrors.name ? "entry-modal-errors" : 'entry-modal-no-errors'}>{`${name.length}/100`}</p>
                 </div>
-                <div className="edit-notebook-button-container">
-                    <button type="submit" className="modal-button edit-notebook-button">Submit Changes</button>
+                <div className="entry-modal-conformation-btn-container">
+                    <button type="submit" className="modal-button conformation-btn">Submit Changes</button>
                 </div>
 
             </form>

@@ -8,7 +8,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 import SaveEntryModal from '../Modals/EntryModals/SaveEntryModal'
 import { thunkEditEntry, thunkLoadEntries } from "../../redux/entry";
@@ -23,7 +23,12 @@ function EntryEditPage({setIsPreview}) {
     const entry = useSelector(state => state.entries[parseInt(entryId)]);
     const dispatch = useDispatch();
     const [content, setContent] = useState(entry.content);
+    const [saved, setSaved] = useState(true);
     const { setModalContent } = useModal();
+
+    useEffect(() => {
+        if (content !== entry.content) setSaved(false);
+    }, [content, entry])
 
 
 // creates a reference which is added to the main div of the edit area
@@ -86,29 +91,27 @@ function EntryEditPage({setIsPreview}) {
             }));
 
         await dispatch(thunkLoadEntries());
+        setSaved(true);
         return document.removeEventListener('click', outsideClick, true)
     };
 
 
     return (
         <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
-            <form onSubmit={handleSave} >
-                <div className='editentry-main-container'>
-                    <div id='entryedit-toolbar-container'>
-                          <div>
-                              <MenuBar editor={editor}/>
-                          </div>
-                          <div id='editentry-save-btn-container' >
-                              <p>{content === entry.content ? 'Saved' : ''}</p>
-                              <button className="modal-button entry-button" type='submit'>Save</button>
-                          </div>
-                      </div>
-                      <div className="entry-content-container">
-                        <EditorContent editor={editor} />
+            <div className='editentry-main-container'>
+                <div id='entryedit-toolbar-container'>
+                        <div>
+                            <MenuBar editor={editor}/>
+                        </div>
+                        <div id='editentry-save-btn-container' >
+                            <p>{saved ? 'Saved' : ''}</p>
+                            <button className="modal-button entry-button" onClick={handleSave}>Save</button>
+                        </div>
                     </div>
+                    <div className="entry-content-container">
+                    <EditorContent editor={editor} />
                 </div>
-
-            </form>
+            </div>
         </div>
     )
 }

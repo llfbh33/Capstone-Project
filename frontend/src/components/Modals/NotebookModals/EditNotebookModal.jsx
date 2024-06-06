@@ -60,7 +60,7 @@ function EditNotebookFormModal({notebook}) {
                         onChange={(e) => setName(e.target.value)}
                         required
                     />
-                    <p className={errors.name ? "error-validation" : ''}>{`${name.length}/100`}</p>
+                    <p className={errors.name ? "notebook-modal-errors" : 'notebook-modal-no-errors'}>{`${name.length}/100`}</p>
                 </div>
 
                 <div className="notebook-modal-info-2">
@@ -73,10 +73,10 @@ function EditNotebookFormModal({notebook}) {
                         onChange={(e) => setAbout(e.target.value)}
                         required
                     />
-                    <p className={errors.about ? "notebook-modal-errors" : 'notebook-about-edit'}>{`${about.length}/400` }</p>
+                    <p className="notebook-modal-no-errors">{`${about.length}/400` }</p>
                 </div>
 
-                <div className="edit-notebook-button-container">
+                <div className="notebook-modal-button-container">
                   <button type="submit" className="modal-button notebook-modal-button">Submit Changes</button>
                 </div>
             </form>

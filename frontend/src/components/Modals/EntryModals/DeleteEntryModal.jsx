@@ -22,11 +22,13 @@ function DeleteEntryFormModal({entry}) {
     }
 
     return (
-        <div>
-            <h1>{`Are you sure you want to delete "${entry.name}"`}</h1>
-            <div id='remove-post-button-container'>
-                <button className="modal-button delete-comment-button" onClick={deleteEntry}>Yes, Delete</button>
-                <button className="modal-button delete-comment-button" onClick={doNotDelete}>No, Keep</button>
+        <div className="entry-modal-main-container">
+            <h1 className="entry-modal-titles">{`Are you sure you want to delete:`}</h1>
+            <h1 className="entry-modal-titles">{`"${entry.name}" ?`}</h1>
+            <div className="entry-modal-errors"></div>
+            <div className='entry-modal-conformation-btn-container'>
+                <button className="modal-button conformation-btn" onClick={deleteEntry}>Yes, Delete</button>
+                <button className="modal-button conformation-btn" onClick={doNotDelete}>No, Keep</button>
             </div>
         </div>
     )

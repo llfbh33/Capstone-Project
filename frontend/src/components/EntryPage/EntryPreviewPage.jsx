@@ -29,14 +29,14 @@ function EntryPreviewPage() {
         <div className="entry-preview-content-container">
 
             {entry?.content
-            ? <div>
+            ? <div className="entry-preview-content-container">
                 <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
             </div>
-            : <p>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
+            : <p id='entry-preview-content'>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
 
             {entry?.content === '<p></p>' && <p>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
 
-            <h1 id='entrypage-underline'></h1>
+            <h1 className='entrypage-underline'></h1>
             <div>
                 {entry?.comments
                 ? <div>
@@ -74,7 +74,7 @@ function EntryPreviewPage() {
                 </div>
                 : <h3>You have no comments on this entry</h3>}
             </div>
-
+            <h1 className='entrypage-underline'></h1>
         </div>
     )}
 }

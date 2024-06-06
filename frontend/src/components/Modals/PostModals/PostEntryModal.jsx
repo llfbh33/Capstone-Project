@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import { useNavigate } from "react-router-dom";
+import './PostModals.css'
 
 
 function PostPostModal({entry}) {
@@ -45,19 +46,20 @@ function PostPostModal({entry}) {
     }
 
     return (
-        <div id='notebook-edit-modal'>
-            <h1>{`Post "${entry.name}" to the public feed?`}</h1>
-            <div>
-                <div>Would you like to include a message with your post?</div>
-                <div>This is not necessary, but it can help others understand what you are trying to acheive with your writing.</div>
-                <input
+        <div className='post-modal-main-container'>
+            <h1 className="post-modal-titles">{`Post "${entry.name}" to the public feed?`}</h1>
+            <div className="post-modal-form-container">
+                <div className="post-modal-label">Would you like to include a message with your post?</div>
+                <div className="post-modal-label-2">This is not necessary, but it can help others understand what you are trying to acheive with your writing.</div>
+                <textarea
                     type='text'
+                    rows={7}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}>
-                </input>
-                {validationErrors.message ? <p className="error-validation">{validationErrors.message}</p> : <p>{`${message.length}/250`}</p>}
+                </textarea>
+                <p className={validationErrors.message ? "post-modal-errors" : 'post-modal-no-errors'}>{`${message.length}/250`}</p>
             </div>
-            <div id='remove-post-button-container'>
+            <div className='post-modal-conformation-btn-container'>
                 <button className="modal-button delete-comment-button" onClick={postEntry}>Yes, Make Public</button>
                 <button className="modal-button delete-comment-button" onClick={doNotPost}>No, Keep Private</button>
             </div>

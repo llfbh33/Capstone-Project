@@ -1,0 +1,68 @@
+.post-modal-main-container {
+    padding: 10px;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-modal-titles {
+    margin: 12px;
+    width: 100%;
+    text-align: center;
+}
+
+.post-modal-label {
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+.post-modal-label-2 {
+    font-size: 18px;
+    width: 100%;
+    text-align: center;
+}
+
+.post-modal-form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 20px
+}
+
+.post-modal-form-container > textarea {
+    width: 80%;
+    border: 2px solid #3399FF;
+    color: white;
+    background-color: black;
+    border-radius: 6px;
+    padding: 12px;
+    resize: none;
+    font-size: 16px;
+}
+
+.post-modal-conformation-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin-top: 0px;
+}
+
+.post-modal-errors {
+    width: 100%;
+    height: 30px;
+    margin: 0px;
+    text-align: center;
+    color: red;
+    font-size: 16px;
+}
+
+.post-modal-no-errors {
+    width: 100%;
+    height: 30px;
+    margin: 0px;
+    text-align: center;
+    font-size: 16px;
+}

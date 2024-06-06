@@ -53,7 +53,7 @@ const deleteComment = (comment) => ({
   comment
 });
 
-// middleware functions for updating posts state
+// action creator functions for updating posts state
 const createPost = (post) => ({
   type: CREATE_POST,
   post
@@ -266,7 +266,7 @@ function entryReducer(state = initialState, action) {
     }
     case EDIT_COMMENT: {
         const newState = {...state};
-        const comments = newState[action.comment.entry_id].comments;
+        const comments = newState[action.comment.entry_id].comments;// what is comment
         const updateComment = comments.find(comment => comment.id = action.comment.id);
         comments.splice(comments.indexOf(updateComment), 1, action.comment);
         newState[action.comment.entry_id].comments = comments; // may not need to do this because of the way memory and pointers works.  test when you have time

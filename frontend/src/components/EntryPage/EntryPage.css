@@ -39,7 +39,7 @@
     height: 30px
 }
 
-#entrypage-underline {
+.entrypage-underline {
     border-bottom: 1px solid #3399FF;
     width: 100%;
 }
@@ -52,7 +52,7 @@
 
 #entryedit-toolbar-container {
     border-bottom: 2px solid #3399FF;
-    padding: 14px;
+    padding: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -119,4 +119,14 @@
     border-bottom: 1px solid grey;
     width: 65%;
     min-height: 50px;
+}
+
+
+
+#entry-preview-content {
+    border-left: 1px solid #4da2f7;
+    border-right: 1px solid #4da2f7;
+    margin: 0px;
+    padding: 0px 20px;
+    line-height: 1.5;
 }

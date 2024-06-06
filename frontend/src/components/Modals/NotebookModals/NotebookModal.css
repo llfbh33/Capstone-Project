@@ -45,6 +45,7 @@
     display: flex;
     justify-content: center;
 
+
 }
 
 .notebook-modal-button {
@@ -52,16 +53,23 @@
     height: 35px;
     font-size: 14px;
     margin-top: 10px;
+
 }
-
-
 
 .notebook-modal-errors {
     width: 100%;
-    height: 24px;
+    height: 30px;
     margin: 0px;
     text-align: center;
     color: red;
+    font-size: 16px;
+}
+
+.notebook-modal-no-errors {
+    width: 100%;
+    height: 30px;
+    margin: 0px;
+    text-align: center;
     font-size: 16px;
 }
 
