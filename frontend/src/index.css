@@ -6,23 +6,6 @@ body {
     background-color: #100647;
 }
 
-/* html {
-    /* background-color: rgb(138, 207, 138);
-} */
-
-/* .button {
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #00366B;
-    border: 1px solid #3399FF;
-    cursor: pointer;
-}
-.button:hover {
-    background-color: #024b94;
-} */
-
 .error-validation {
     color: red;
     font-size: medium;
@@ -44,6 +27,8 @@ body {
     background-size: cover;
     padding-right: 3%;
     min-height: 910px;
+    width: 97%;
+
 }
 
 /* include with every page the nav is located.  Keeps the nav in place */
@@ -105,8 +90,6 @@ body {
     display: flex;
     justify-content: space-between;
 }
-
-
 
 
 .modal-form-title {

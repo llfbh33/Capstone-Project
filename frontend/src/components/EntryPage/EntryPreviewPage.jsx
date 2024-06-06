@@ -45,8 +45,9 @@ function EntryPreviewPage() {
                         <div key={comment.id}>
 
                             <div className="entrypage-comment-title">
-                                <div>
-                                    {allUsers[comment.user_id]?.username}
+                                <div className="post-user-container">
+                                    <img src={allUsers[comment.user_id]?.profile_image} />
+                                    <div>{allUsers[comment.user_id]?.username}</div>
                                 </div>
                                 <div>
                                     {comment.user_id === currUser.id

@@ -130,3 +130,15 @@
     padding: 0px 20px;
     line-height: 1.5;
 }
+
+.post-user-container {
+    display: flex;
+    align-items: center;
+    
+}
+
+.post-user-container > img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}

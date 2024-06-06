@@ -88,7 +88,7 @@
 }
 
 #remove-post-button-container {
-    width: 100%;
+    width: 90%;
     display: flex;
     justify-content: space-around;
     margin: 14px
@@ -150,7 +150,8 @@
 
 
 .space-maker-div {
-    height: 50px
+    height: 50px;
+    width: 90%
 }
 
 .comment-area-post {
@@ -205,4 +206,13 @@
 .no-public-posts {
     margin: 10px;
     margin-left: 20px;
+}
+
+
+.small-label {
+    width: 100%
+}
+
+.public-post {
+    width: 96%
 }

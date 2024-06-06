@@ -60,8 +60,8 @@ function PostPostModal({entry}) {
                 <p className={validationErrors.message ? "post-modal-errors" : 'post-modal-no-errors'}>{`${message.length}/250`}</p>
             </div>
             <div className='post-modal-conformation-btn-container'>
-                <button className="modal-button delete-comment-button" onClick={postEntry}>Yes, Make Public</button>
-                <button className="modal-button delete-comment-button" onClick={doNotPost}>No, Keep Private</button>
+                <button className="modal-button conformation-btn" onClick={postEntry}>Yes, Make Public</button>
+                <button className="modal-button conformation-btn" onClick={doNotPost}>No, Keep Private</button>
             </div>
         </div>
     );

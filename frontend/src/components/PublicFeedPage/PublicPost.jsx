@@ -44,7 +44,7 @@ function PublicPost() {
 
     if (loaded) {
     return (
-        <div>
+        <div className="public-post">
             <div id="public-post-title">
                 <h1>Public Feed</h1>
                 <h1>{`${post?.name} by ${creator?.username}`}</h1>
@@ -64,7 +64,7 @@ function PublicPost() {
             <div className="space-maker-div"></div>
             <form onSubmit={handleComment}>
                 <div>
-                    <p>{`Let ${creator?.username} know what you think about their writing!`}</p>
+                    <p className="small-label">{`Let ${creator?.username} know what you think about their writing!`}</p>
                     <div className="comment-area-post">
                         <textarea
                         type='text'
