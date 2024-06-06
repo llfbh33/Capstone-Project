@@ -38,7 +38,7 @@ function CreateEntryNameFormModal() {
         }));
 
         if (serverResponse.name) {
-            setValidationErrors(serverResponse);
+            setErrors(serverResponse);
         } else {
             await dispatch(thunkLoadEntries())
             setName('')

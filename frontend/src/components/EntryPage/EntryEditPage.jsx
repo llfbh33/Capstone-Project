@@ -43,7 +43,7 @@ function EntryEditPage({setIsPreview}) {
         }
       }
       return
-    }, [content, entry, setModalContent] )
+    }, [content, entry, setModalContent, setIsPreview] )
 // adds an event listener to the page
     document.addEventListener('click', outsideClick, true)
 

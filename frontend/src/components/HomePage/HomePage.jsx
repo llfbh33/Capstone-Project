@@ -12,8 +12,8 @@ import './HomePage.css'
 
 
 function HomePage () {
-    const user = useSelector(state => state.session.user)
-    const notebooks = useSelector(state => state.notebooks)
+    const user = useSelector(state => state.session.user);
+    const notebooks = useSelector(state => state.notebooks);
     const navigate = useNavigate();
 
 
