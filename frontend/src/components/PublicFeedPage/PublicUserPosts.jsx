@@ -35,7 +35,7 @@ function PublicUserPosts () {
                 <h1 id='homepage-user-title'>{`${user?.name}'s Posts`}</h1>
                 <p className="page-title-blocks">Your Public Entries</p>
                 <div id='homepage-notebook-card-container'>
-                    {entries.map(entry => (
+                    {entries.length ? entries.map(entry => (
                         <div key={entry?.id}>
                             <div className="homepage-notebook-card"  >
 
@@ -65,7 +65,8 @@ function PublicUserPosts () {
 
                             </div>
                         </div>
-                    ))}
+                    ))
+                : <div className="no-public-posts">You have not made any public posts yet.</div>}
                 </div>
             </div>
             : <LoadingPage /> }

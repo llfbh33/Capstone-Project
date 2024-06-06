@@ -69,7 +69,7 @@ function PublicPost() {
                         <textarea
                         type='text'
                         rows={5}
-                        cols={145}
+                        cols={150}
                         value={comment}
                         onChange={(e) => setComment(e.target.value)}
                         />

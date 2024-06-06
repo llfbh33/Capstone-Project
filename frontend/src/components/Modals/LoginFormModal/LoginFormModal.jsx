@@ -17,20 +17,8 @@ function LoginFormModal() {
     const { closeModal } = useModal();
 
 
-    useEffect(() => {
-      setErrors(false)
-    }, [username])
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const exists = Object.values(users).filter(user => user.username === username)
-        console.log(exists)
-        if (!exists.length) {
-          setPassword('');
-          setErrors(true);
-          return
-        }
 
         const serverResponse = await dispatch(
             thunkLogin({
@@ -40,8 +28,7 @@ function LoginFormModal() {
         );
 
         if (serverResponse) {
-            setPassword('')
-            setErrors(true);
+            setErrors(serverResponse);
         } else {
             setUsername('')
             setPassword('')
@@ -58,21 +45,23 @@ function LoginFormModal() {
 
                     <label>User Name</label>
                         <input
-                          type="text"
-                          value={username}
-                          onChange={(e) => setUsername(e.target.value)}
-                          required
+                            type="text"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
+                            required
                         />
+                    <p className={errors ? 'login-error-validation' : 'regular-string'}>{errors.username}</p>
 
                     <label>Password</label>
                         <input
-                          type="password"
-                          value={password}
-                          onChange={(e) => setPassword(e.target.value)}
-                          required
+                            className="password-input"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
                         />
 
-                    <p className={errors ? 'login-error-validation' : 'regular-string'}>Incorrect password or username</p>
+                    <p className={errors ? 'login-error-validation' : 'regular-string'}>{errors.password}</p>
                     <button className='modal-button login-button' type="submit">Log In</button>
                 </div>
             </form>

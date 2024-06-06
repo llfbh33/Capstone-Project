@@ -57,7 +57,7 @@ function LeftNavigation() {
         <div id='main-left-nav-container'>
 
             <div>
-                <div id='left-nav-user-info' onClick={() => alert('Profile page and ability to change profile image coming soon')}>
+                <div id='left-nav-user-info'>
                     <div id='left-nav-user-info-inner'>
                         <img src={user?.profile_image} className="profile-image"/>
                         <div id='left-nav-user-name'>
@@ -86,13 +86,19 @@ function LeftNavigation() {
                                     : ''}
                                 </div>
                             </div>
-                            <div className="left-nav-mid-ele" onClick={() => alert('Feature coming soon')}>Theme</div>
+                            <div className={openMid === 'theme' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('theme')}>Theme</div>
+                            <div hidden={openMid === 'theme' ? false : true}>
+                                <div className="left-nav-small-line"></div>
+                                <div className="left-nav-small-ele">
+                                    <div className="left-nav-sml-ele-selected">PenCrafted (default)</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
-                    <div>
+                    {/* <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Tags coming soon')}>Tags</div>
-                    </div>
+                    </div> */}
 
                     <div>
                         <div className={openMain === '/public' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/public')}>Public Feed</div>
@@ -102,7 +108,7 @@ function LeftNavigation() {
                             <div className={openMid === 'user-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('user-posts')}>Your Posts</div>
                         </div>
                     </div>
-
+                {/*
                     <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Comments coming soon')}>Comments</div>
                     </div>
@@ -113,7 +119,7 @@ function LeftNavigation() {
 
                     <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Liked Posts coming soon')}>LikedPosts</div>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>

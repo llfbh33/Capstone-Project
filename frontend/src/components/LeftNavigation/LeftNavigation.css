@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
+    /* cursor: pointer; */
 }
 
 #left-nav-user-info-inner {

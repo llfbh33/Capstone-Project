@@ -16,9 +16,11 @@
 .login-error-validation {
     color: red;
     margin: 0px;
+    height: 20px
 }
 
 .regular-string {
     color: #100647;
     margin: 0px;
+    height: 20px;
 }

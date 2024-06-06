@@ -22,11 +22,11 @@ function DeleteCommentModal({comment}) {
     };
 
     return (
-        <div id='delete-comment-modal' >
-            <h3>{`Are you sure you want to delete this comment?`}</h3>
-            <div className="modal-yes-no">
-                <button className="modal-button delete-comment-button" onClick={deleteComment}>Yes, delete</button>
-                <button className="modal-button delete-comment-button" onClick={doNotDelete}>No, do not delete</button>
+        <div className='comment-modal-main-container' >
+            <h3 className='comment-modal-titles'>{`Are you sure you want to delete this comment?`}</h3>
+            <div className="comment-modal">
+                <button className="modal-button delete-comment" onClick={deleteComment}>Yes, delete</button>
+                <button className="modal-button delete-comment" onClick={doNotDelete}>No, do not delete</button>
             </div>
         </div>
     )
