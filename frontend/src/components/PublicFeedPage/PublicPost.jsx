@@ -51,6 +51,7 @@ function PublicPost() {
     if (loaded) {
     return (
         <div className="public-post">
+            <p className='mini-page-title' ></p>
             <div className="public-post-title">
                 <h1>Public Feed</h1>
                 <h1>{`${post?.name} by ${creator?.username}`}</h1>

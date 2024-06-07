@@ -1,56 +1,10 @@
 
-.postfeed-post-container {
-    margin: 10px;
-}
 
 #publicfeed-title {
     display: flex;
     justify-content: space-between;
     width: 60%;
     border-bottom: 1px solid #3399FF;
-}
-
-.post-name-and-user-container {
-    display: flex;
-    justify-content: space-between;
-    width: 84%;
-}
-
-.post-username-image-container {
-    display: flex;
-    align-items: center;
-    gap: 10px
-}
-
-.post-profile-image {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-}
-
-.post-bottom-border {
-    border-bottom: 1px solid #3399FF;
-    width: 90%;
-}
-
-.small-post-container {
-    border: 1px solid #3399FF;
-    height: 100px;
-    width: 84%;
-    margin: 10px;
-    margin-bottom: 28px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    object-fit: contain;
-    overflow: hidden;
-}
-
-.small-post-container:hover {
-    border: 2px solid #3399FF;
-    height: 97.25px;
-    width: 83.75%;
 }
 
 .small-post-content {
@@ -198,7 +152,7 @@
 
 
 
-
+/* Individual public post */
 .public-post {
     width: 100%
 }
@@ -254,4 +208,54 @@
     font-size: 16px;
     font-family: "Comic Neue", cursive;
     padding: 10px
+}
+
+
+
+
+.postfeed-post-container {
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.post-name-and-user-container {
+    display: flex;
+    justify-content: space-between;
+    width: 94%;
+}
+
+.post-username-image-container {
+    display: flex;
+    align-items: center;
+    gap: 16px
+}
+
+.post-profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.post-seporating-bottom-border {
+    border-bottom: 1px solid #3399FF;
+    width: 100%;
+}
+
+.small-post-container {
+    border: 1px solid black;
+    height: 130px;
+    width: 94%;
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    object-fit: contain;
+    overflow: hidden;
+}
+
+.small-post-container:hover {
+    border: 1px solid #3399FF;
 }

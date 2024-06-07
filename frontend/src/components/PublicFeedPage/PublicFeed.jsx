@@ -20,19 +20,17 @@ function PublicFeed() {
     return (
         <div>
             <p>Read what others have written and give them advice.  Remember to be respectful.</p>
-            <div id="publicfeed-title">
+            <div className="public-post-title">
                 <h1>Public Feed</h1>
                 <h1>All Entries</h1>
             </div>
 
-            <div>
+            <div className="public-post-content-container">
                 {posts.map(post => (
                     <div key={post.id} className="postfeed-post-container">
                         <div className="post-name-and-user-container">
                             <h3>{post.name}</h3>
                             <div className="post-username-image-container">
-                                <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
-                                <h3>{allUsers[post.user_id]?.username}</h3>
                                 {post.user_id === currUser.id
                                   ? <div className="postfeed-remove-post-button">
                                         <OpenModalMenuItem
@@ -40,13 +38,16 @@ function PublicFeed() {
                                         modalComponent={<RemovePostModal post={post} />}
                                         />
                                     </div>
-                                : ''}
+                                    : ''}
+                                <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
+                                <h3>{allUsers[post.user_id]?.username}</h3>
+
                             </div>
                         </div>
                         <div className="small-post-container" onClick={() => navigate(`/public/${post.id}`)}>
-                            <div className="small-post-content">{post.post.message}</div>
+                            <div className="small-post-content">{parser(post.content.slice(0, post.content.indexOf('</p>')))}</div>
                         </div>
-                        <div className="post-bottom-border"></div>
+                        <div className="post-seporating-bottom-border"></div>
                     </div>
                 ))}
             </div>
