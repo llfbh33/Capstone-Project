@@ -25,9 +25,12 @@ function LeftNavigation() {
         } else {
             setOpenMain(string)
         }
+        if (string === '/comments') {
+            navigate('/comments')
+        }
     }
 
-//Open and close of mid and sml size tabs / navigates
+//Open and close of mid and size tabs / navigates
     const midNavElementClick = (string) => {
         setOpenMid(string)
         setOpenSml('')
@@ -108,12 +111,12 @@ function LeftNavigation() {
                             <div className={openMid === 'user-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('user-posts')}>Your Posts</div>
                         </div>
                     </div>
-                {/*
-                    <div>
-                        <div className='left-nav-main-ele' onClick={() => alert('Comments coming soon')}>Comments</div>
-                    </div>
 
                     <div>
+                        <div className={openMain === '/comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/comments')}>Comments</div>
+                    </div>
+
+                    {/* <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Following coming soon')}>Following</div>
                     </div>
 

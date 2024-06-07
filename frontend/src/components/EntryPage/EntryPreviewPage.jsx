@@ -1,10 +1,12 @@
 import { useParams} from "react-router-dom";
 import { useSelector} from "react-redux";
 import { useEffect, useState } from "react";
+import { BsTrash3Fill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
 import parser from 'html-react-parser'
 
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
 
 
@@ -51,16 +53,16 @@ function EntryPreviewPage() {
                                 </div>
                                 <div>
                                     {comment.user_id === currUser.id
-                                    ? <div className="entrypage-delete-comment" >
+                                    ? <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
-                                        buttonText="Edit Comment"
+                                        itemText={<FaEdit />}
                                         modalComponent={<EditCommentModal comment={comment} />}
                                         />
                                     </div>
                                     : ''}
-                                    <div className="entrypage-delete-comment" >
+                                    <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
-                                        buttonText="Delete Comment"
+                                        itemText={<BsTrash3Fill />}
                                         modalComponent={<DeleteCommentModal comment={comment} />}
                                         />
                                     </div>

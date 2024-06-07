@@ -97,7 +97,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    cursor: pointer;
 }
 
 .homepage-delete-notebook {
@@ -115,5 +115,5 @@
 
 .homepage-edit-notebook > li:hover,
 .homepage-delete-notebook:hover {
-    color: rgb(171, 144, 230)
+    color: #4da2f7
 }

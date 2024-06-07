@@ -1,11 +1,16 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+// import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
 import { thunkCreateComment, thunkLoadEntries } from "../../redux/entry";
 import parser from 'html-react-parser'
+import { BsTrash3Fill } from "react-icons/bs";
+import { FaEdit } from "react-icons/fa";
+
+
 
 function PublicPost() {
     const { postId } = useParams();
@@ -101,16 +106,16 @@ function PublicPost() {
                                 </div>
                                 <div>
                                 {comment.user_id === currUser.id
-                                    ? <div className="entrypage-delete-comment" >
-                                        <OpenModalMenuItem
-                                            buttonText="Edit Comment"
-                                            modalComponent={<EditCommentModal comment={comment} />}
-                                        />
-                                    </div>
+                                    ? <div className="homepage-edit-notebook" >
+                                    <OpenModalMenuItem
+                                        itemText={<FaEdit />}
+                                        modalComponent={<EditCommentModal comment={comment} />}
+                                    />
+                                </div>
                                      : ''}
-                                    <div className="entrypage-delete-comment" >
+                                    <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
-                                            buttonText="Delete Comment"
+                                            itemText={<BsTrash3Fill />}
                                             modalComponent={<DeleteCommentModal comment={comment} />}
                                         />
                                     </div>

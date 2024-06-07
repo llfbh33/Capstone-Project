@@ -9,6 +9,7 @@ import PublicPost from '../components/PublicFeedPage/PublicPost';
 import PublicUserPosts from '../components/PublicFeedPage/PublicUserPosts';
 import NotFound from '../components/NotFound'
 import LoadingPage from '../components/LoadingPage';
+import CommentsPage from '../components/CommentsPage/CommentsPage';
 
 
 export const router = createBrowserRouter([
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: '/public/user',
         element: <PublicUserPosts />,
+      },
+      {
+        path: '/comments',
+        element: <CommentsPage />,
       },
       {
         path: '/loading',

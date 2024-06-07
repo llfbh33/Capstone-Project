@@ -1,10 +1,12 @@
 import { useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
 import { useNavigate } from "react-router-dom"
 import parser from 'html-react-parser'
+import { BsTrash3Fill } from "react-icons/bs";
+
 
 function PublicFeed() {
     const allEntries = useSelector(state => state.entries)
@@ -31,16 +33,17 @@ function PublicFeed() {
                         <div className="post-name-and-user-container">
                             <h3>{post.name}</h3>
                             <div className="post-username-image-container">
-                                {post.user_id === currUser.id
-                                  ? <div className="postfeed-remove-post-button">
-                                        <OpenModalMenuItem
-                                        buttonText="Remove post?"
-                                        modalComponent={<RemovePostModal post={post} />}
-                                        />
-                                    </div>
-                                    : ''}
                                 <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
                                 <h3>{allUsers[post.user_id]?.username}</h3>
+
+                                {post.user_id === currUser.id
+                                ? <div className="homepage-edit-notebook">
+                                        <OpenModalMenuItem
+                                            itemText={<BsTrash3Fill />}
+                                            modalComponent={<RemovePostModal post={post} />}
+                                        />
+                                    </div>
+                                : ''}
 
                             </div>
                         </div>
