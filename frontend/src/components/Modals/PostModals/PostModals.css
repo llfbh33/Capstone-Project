@@ -66,3 +66,13 @@
     text-align: center;
     font-size: 16px;
 }
+
+.conformation-btn {
+    width: 170px;
+    height: 34px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}

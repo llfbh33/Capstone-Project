@@ -3,7 +3,8 @@
 body {
     margin: 0px;
     font-family: "Comic Neue", cursive;
-    background-color: #100647;
+    background-color: black;
+    /* background-color: #100647; */
 }
 
 .error-validation {
@@ -22,7 +23,7 @@ body {
     color: white;
     display: flex;
     flex-direction: row;
-    height: 100vh;
+    height: 100%;
     overflow:auto;
     background-size: cover;
     padding-right: 3%;

@@ -15,7 +15,13 @@ function PublicPost() {
     const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
-    const [loaded, setLoaded] = useState(false)
+    const [commentList, setCommentList] = useState([])
+    const [loaded, setLoaded] = useState(false);
+
+    useEffect(() => {
+        const listComments = [...post.comments].reverse()
+        setCommentList(listComments)
+    }, [post])
 
     useEffect(() => {
         if (post) {
@@ -45,33 +51,34 @@ function PublicPost() {
     if (loaded) {
     return (
         <div className="public-post">
-            <div id="public-post-title">
+            <div className="public-post-title">
                 <h1>Public Feed</h1>
                 <h1>{`${post?.name} by ${creator?.username}`}</h1>
             </div>
-            <div className="post-content-container">
+            <div className="public-post-content-container">
                 <p className="post-content">{parser(post.content)}</p>
             </div>
-            <div className='post-message-container'>
+            <div className='public-post-message-container'>
                 <div>
                     <p>{`Posted on: ${post?.post.created_at.slice(0, 17)}`}</p>
-                    <p>{`Message from ${creator?.username}:`}</p>
+                    <h3>{`Message from ${creator?.username}:`}</h3>
                 </div>
                 <div className="message-container">
                     <p className="message-element">{post?.post.message}</p>
                 </div>
             </div>
             <div className="space-maker-div"></div>
+
             <form onSubmit={handleComment}>
-                <div>
-                    <p className="small-label">{`Let ${creator?.username} know what you think about their writing!`}</p>
-                    <div className="comment-area-post">
+                <div className='public-post-comment-form'>
+                    <p className="public-post-small-label">{`Let ${creator?.username} know what you think about their writing!`}</p>
+                    <div className="public-post-comment-input-area">
                         <textarea
-                        type='text'
-                        rows={5}
-                        cols={150}
-                        value={comment}
-                        onChange={(e) => setComment(e.target.value)}
+                            type='text'
+                            rows={4}
+                            cols={140}
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
                         />
                     </div>
                     <p className={comment.length > 600 || comment.length <= 0 ? 'post-comment-errors' : 'post-comment-no-errors'}>{`${comment.length}/600`}</p>
@@ -80,40 +87,40 @@ function PublicPost() {
                     <button type='submit' className="modal-button">Comment</button>
                 </div>
             </form>
-            {post?.comments.length ?
-            <div className="publicpost-comment-container">
-                <h2>Comments:</h2>
-                {post.comments.map(comment => (
-                    <div key={comment.id}>
-                        <div className="entrypage-comment-title">
-                            <div className="user-info-for-comment">
-                                <img src={allUsers[comment.user_id]?.profile_image} />
-                                <div>{allUsers[comment.user_id]?.username}</div>
-                            </div>
+
+            {commentList.length ?
+                <div className="publicpost-comment-container">
+                    <h2>Comments:</h2>
+                    {commentList.map(comment => (
+                        <div key={comment.id}>
+                            <div className="entrypage-comment-title">
+                                <div className="user-info-for-comment">
+                                    <img src={allUsers[comment.user_id]?.profile_image} />
+                                    <div>{allUsers[comment.user_id]?.username}</div>
+                                </div>
                                 <div>
                                 {comment.user_id === currUser.id
                                     ? <div className="entrypage-delete-comment" >
                                         <OpenModalMenuItem
-                                        buttonText="Edit Comment"
-                                        modalComponent={<EditCommentModal comment={comment} />}
+                                            buttonText="Edit Comment"
+                                            modalComponent={<EditCommentModal comment={comment} />}
                                         />
                                     </div>
-                                    : ''}
+                                     : ''}
                                     <div className="entrypage-delete-comment" >
                                         <OpenModalMenuItem
-                                        buttonText="Delete Comment"
-                                        modalComponent={<DeleteCommentModal comment={comment} />}
+                                            buttonText="Delete Comment"
+                                            modalComponent={<DeleteCommentModal comment={comment} />}
                                         />
                                     </div>
                                 </div>
                             </div>
                             <div className="entrypage-comment">{comment.comment}</div>
-                        </div>
+                         </div>
 
-                        ))}
-                        </div>
-                    : <h3>Be the first to leave a comment!</h3>}
-
+                     ))}
+                 </div>
+             : <h3>Be the first to leave a comment!</h3>}
 
         </div>
     )

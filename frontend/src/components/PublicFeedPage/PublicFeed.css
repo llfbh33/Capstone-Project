@@ -94,13 +94,6 @@
     margin: 14px
 }
 
-#public-post-title {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    border-bottom: 1px solid #4da2f7;
-}
-
 .post-content-container {
     width: 85%;
     margin: 20px;
@@ -146,12 +139,6 @@
     width: 30px;
     height: 30px;
     border-radius: 50%;
-}
-
-
-.space-maker-div {
-    height: 50px;
-    width: 90%
 }
 
 .comment-area-post {
@@ -209,10 +196,62 @@
 }
 
 
-.small-label {
+
+
+
+.public-post {
     width: 100%
 }
 
-.public-post {
-    width: 96%
+.public-post-title {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    border-bottom: 1px solid #4da2f7;
+}
+
+.public-post-content-container {
+    width: 100%;
+    border: 1px solid #4da2f7;
+    line-height: 1.5;
+    font-size: 20px;
+}
+
+.public-post-content-container > .post-content {
+    margin: 30px;
+}
+
+.public-post-message-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.space-maker-div {
+    height: 50px;
+    width: 100%
+}
+
+.public-post-small-label {
+    width: 100%
+}
+
+.public-post-comment-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.public-post-comment-input-area > textarea {
+    resize: none;
+    color: white;
+    background-color: black;
+    border: 1px solid #4da2f7;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: "Comic Neue", cursive;
+    padding: 10px
 }
