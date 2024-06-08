@@ -1,12 +1,25 @@
 
 import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaQuoteLeft, FaRedo, FaUndo, FaUnderline, FaListUl, FaListOl } from 'react-icons/fa'
 import { RxRulerHorizontal } from "react-icons/rx";
-import { TbLetterSSmall } from "react-icons/tb";
+import { TbLetterSSmall, TbLetterXSmall, TbLetterMSmall, TbLetterLSmall } from "react-icons/tb";
+import { TfiSmallcap } from "react-icons/tfi";
+
+import { useState } from 'react';
 import './TipTap.css'
 
 
 
 const MenuBar = ({editor}) => {
+  let count = 1
+
+  const handleFontChange = () => {
+    count += 1;
+    if (count >= 6) {
+      count = 1
+    }
+    editor.chain().focus().toggleHeading({ level: count }).run()
+  }
+
   if (!editor) {
     return null
   }
@@ -52,12 +65,6 @@ const MenuBar = ({editor}) => {
       >
         <FaStrikethrough />
       </button>
-      {/* <button
-        onClick={() => editor.chain().focus().setParagraph().run()}
-        className={editor.isActive('paragraph') ? 'is-active' : ''}
-      >
-        paragraph
-      </button> */}
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
         className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
@@ -120,35 +127,52 @@ const MenuBar = ({editor}) => {
         value={editor.getAttributes('textStyle').color}
         data-testid="setColor"
       />
+      <div className='font-changing-container'>
+        <button
+          id='font-size-x-sml'
+          onClick={handleFontChange}
+          className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
+        >
+          <TfiSmallcap />
+        </button>
+        <div className='font-size-change'>{size}</div>
+      </div>
+
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
         className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
+        hidden={size !== 'x-lg'}
       >
-        X-LG
+        <TbLetterXSmall /><TbLetterLSmall />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
         className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
+        hidden={size !== 'lg'}
       >
-        LG
+        <TbLetterLSmall />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
         className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
+        hidden={size !== 'med'}
       >
-        MED
+        <TbLetterMSmall />
       </button>
       <button
         onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
         className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
+        hidden={size !== 'sml'}
       >
-        SM
+        <TbLetterSSmall />
       </button>
       <button
+        id='font-size-x-sml'
         onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
         className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
+        hidden={size !== 'x-sml'}
       >
-        X-SM
+        <TbLetterXSmall /><TbLetterSSmall />
       </button>
     </div>
   )

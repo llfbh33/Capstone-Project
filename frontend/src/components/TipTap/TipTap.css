@@ -19,6 +19,22 @@
   border-radius: 5px;
 }
 
+#font-size-x-sml {
+  font-size: 20px;
+  border: 2px solid green;
+}
+
+.font-size-change {
+  color: white;
+
+}
+
+.font-changing-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
 .ProseMirror {
   margin-top: 16px;
   min-height: 100px;
