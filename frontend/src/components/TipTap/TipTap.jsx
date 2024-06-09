@@ -1,23 +1,21 @@
 
 import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaQuoteLeft, FaRedo, FaUndo, FaUnderline, FaListUl, FaListOl } from 'react-icons/fa'
-import { RxRulerHorizontal } from "react-icons/rx";
-import { TbLetterSSmall, TbLetterXSmall, TbLetterMSmall, TbLetterLSmall } from "react-icons/tb";
 import { TfiSmallcap } from "react-icons/tfi";
-
 import { useState } from 'react';
 import './TipTap.css'
 
 
 
 const MenuBar = ({editor}) => {
-  let count = 1
+  const [size, setSize] = useState(2)
 
   const handleFontChange = () => {
-    count += 1;
-    if (count >= 6) {
-      count = 1
+    setSize(prevState => prevState + 1)
+    if (size >= 6) {
+      setSize(2)
     }
-    editor.chain().focus().toggleHeading({ level: count }).run()
+    console.log('size', size)
+    editor.chain().focus().toggleHeading({ level: size }).run()
   }
 
   if (!editor) {
@@ -90,12 +88,30 @@ const MenuBar = ({editor}) => {
       >
         <FaQuoteLeft />
       </button>
-      <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-        <RxRulerHorizontal />
-      </button>
-      <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-        hard break
-      </button>
+      <input
+        id='color-input'
+        type="color"
+        onInput={event => editor.chain().focus().setColor(event.target.value).run()}
+        value={editor.getAttributes('textStyle').color}
+        data-testid="setColor"
+      />
+      <div className='font-changing-container'>
+        <button
+          id='font-size-x-sml'
+          onClick={handleFontChange}
+          className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
+        >
+          <TfiSmallcap />
+        </button>
+        <div className='font-size-change'>{
+          size === 6 ? 'small'
+          : size === 2 ? 'x-small'
+          : size === 3 ? 'x-large'
+          : size === 4 ? 'large'
+          : size === 5 ? 'medium' : ''
+        }</div>
+      </div>
+
       <button
         onClick={() => editor.chain().focus().undo().run()}
         disabled={
@@ -119,60 +135,6 @@ const MenuBar = ({editor}) => {
         }
       >
         <FaRedo />
-      </button>
-      <input
-        id='color-input'
-        type="color"
-        onInput={event => editor.chain().focus().setColor(event.target.value).run()}
-        value={editor.getAttributes('textStyle').color}
-        data-testid="setColor"
-      />
-      <div className='font-changing-container'>
-        <button
-          id='font-size-x-sml'
-          onClick={handleFontChange}
-          className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-        >
-          <TfiSmallcap />
-        </button>
-        <div className='font-size-change'>{size}</div>
-      </div>
-
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-        className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
-        hidden={size !== 'x-lg'}
-      >
-        <TbLetterXSmall /><TbLetterLSmall />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-        className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
-        hidden={size !== 'lg'}
-      >
-        <TbLetterLSmall />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
-        className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
-        hidden={size !== 'med'}
-      >
-        <TbLetterMSmall />
-      </button>
-      <button
-        onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
-        className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
-        hidden={size !== 'sml'}
-      >
-        <TbLetterSSmall />
-      </button>
-      <button
-        id='font-size-x-sml'
-        onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
-        className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
-        hidden={size !== 'x-sml'}
-      >
-        <TbLetterXSmall /><TbLetterSSmall />
       </button>
     </div>
   )

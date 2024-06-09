@@ -15,13 +15,13 @@ function CommentsPage () {
     const allEntries = useSelector(state => state.entries)
     const [userEntries, setUserEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true && entry.comments.length >= 1));
     const [commentEntries, setCommentEntries] = useState('');
-    const [loaded, setLoaded] = useState(false);
+    // const [loaded, setLoaded] = useState(false);
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (userEntries) setLoaded(true);
-        else setLoaded(false);
-    }, [userEntries])
+    // useEffect(() => {
+    //     if (userEntries) setLoaded(true);
+    //     else setLoaded(false);
+    // }, [userEntries])
 
     useEffect(() => {
         setUserEntries(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true && entry.comments.length >= 1));
