@@ -88,7 +88,6 @@ def edit_entry(entry_id):
     """
     form = EntryForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-    print('entry data', form.data)
     if form.validate_on_submit():
 
         currEntry = Entry.query.get(entry_id)

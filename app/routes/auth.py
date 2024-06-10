@@ -41,7 +41,6 @@ def login():
         # Add the user to the session, we are logged in!
         user = User.query.filter(User.username == form.data['username']).first()
         login_user(user)
-        print('---->> here', current_user.is_authenticated)
         return user.to_dict()
     return form.errors, 401
 

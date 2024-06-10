@@ -104,7 +104,6 @@ export const thunkCreateEntry = (entry) => async (dispatch) => {
 
 
 export const thunkEditEntry = (entry) => async (dispatch) => {
-  console.log('entry obj ----->', entry)
     const response = await fetch(`/api/entries/${entry.id}/edit`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -127,7 +126,6 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
 
 
 export const thunkDeleteEntry = (entryId) => async (dispatch) => {
-  console.log(entryId)
     const response = await fetch(`/api/entries/${entryId}/delete`);
     if (response.ok) {
         return dispatch(deleteEntry(entryId))

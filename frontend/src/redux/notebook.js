@@ -52,7 +52,6 @@ export const thunkCreateNotebook = (notebook) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       return dispatch(createNotebook(data));
     } else {
       const errors = await response.json();
@@ -62,7 +61,6 @@ export const thunkCreateNotebook = (notebook) => async (dispatch) => {
 
 
 export const thunkEditNotebook = (notebook) => async (dispatch) => {
-    console.log(notebook)
     const response = await fetch(`/api/notebooks/${notebook.id}/edit`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -74,11 +72,9 @@ export const thunkEditNotebook = (notebook) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      console.log(data)
       return dispatch(editNotebook(data));
     } else {
       const errors = await response.json();
-      console.log(errors)
       return errors;
     }
 };

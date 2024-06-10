@@ -18,7 +18,6 @@ def upload_image():
         image = form.data["image"]
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-        print('return ==========>>', upload)
 
         if "url" not in upload:
         # if the dictionary doesn't have a url key
@@ -28,14 +27,12 @@ def upload_image():
         #     return render_template("post_form.html", form=form, errors=[upload])
 
         url = upload["url"]
-        print('=====>> url ', url)
         # new_image = Post(image= url)
         # db.session.add(new_image)
         # db.session.commit()
         # return redirect("/posts/all")
 
     if form.errors:
-        print('=====>>> errors', form.errors)
         return
         # return render_template("post_form.html", form=form, errors=form.errors)
 

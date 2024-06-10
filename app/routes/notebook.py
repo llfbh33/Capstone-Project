@@ -63,7 +63,6 @@ def edit_notebook(notebook_id):
     form = NotebookForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print('form', form)
     if form.validate_on_submit():
 
         currNotebook = Notebook.query.get(notebook_id)
