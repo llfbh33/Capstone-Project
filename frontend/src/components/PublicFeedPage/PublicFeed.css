@@ -87,6 +87,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
 .user-info-for-comment > img {
@@ -132,7 +133,7 @@
 }
 
 .post-comment-btn-container {
-    width: 100%;
+    width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -160,8 +161,9 @@
 .public-post-title {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 94%;
     border-bottom: 1px solid #4da2f7;
+    overflow-wrap: break-word;
 }
 
 .public-post-content-container {
@@ -176,7 +178,7 @@
 }
 
 .public-post-message-container {
-    width: 100%;
+    width: 80%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +195,7 @@
 }
 
 .public-post-comment-form {
-    width: 100%;
+    width: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -223,7 +225,14 @@
 .post-name-and-user-container {
     display: flex;
     justify-content: space-between;
-    width: 94%;
+    width: 100%;
+    /* margin-right: 267px; */
+    overflow-wrap: break-word;
+}
+
+.post-name {
+    width: 70%;
+    overflow-wrap: break-word;
 }
 
 .post-username-image-container {
@@ -247,15 +256,195 @@
     border: 1px solid black;
     height: 130px;
     width: 94%;
+    max-width: 94%;
     margin-bottom: 28px;
+    margin-right: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     object-fit: contain;
     overflow: hidden;
+    overflow-wrap: break-word;
+}
+
+.small-post-content {
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-wrap: break-word;
 }
 
 .small-post-container:hover {
     border: 1px solid #3399FF;
+}
+
+.wrap-name-post {
+    max-width: 70%;
+    overflow-wrap: break-word;
+}
+
+.public-feed-title {
+    min-width: 300px;
+}
+
+.entrypage-comment-title {
+    width: 75%;
+}
+
+.publicfeed-post-title {
+    display: flex;
+    justify-content: space-between;
+    width: 99%;
+    /* border-bottom: 1px solid #4da2f7; */
+    overflow-wrap: break-word;
+}
+
+
+.public-post-singular {
+    width: 100%
+}
+
+.public-post-title-singular {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1300px;
+    /* border-bottom: 1px solid #4da2f7; */
+    overflow-wrap: break-word;
+}
+
+.wrap-name-post-singular {
+    overflow-wrap: break-word;
+    max-width: 70%;
+}
+
+.public-post-content-container-singular {
+    min-width: 90%;
+    border: 1px solid #4da2f7;
+    line-height: 1.5;
+    font-size: 20px;
+    overflow-wrap: break-word;
+    padding: 0px 20px;
+    max-width: 1230px
+}
+
+.message-container-singular {
+    border: 1px solid #4da2f7;
+    height: 80px;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.public-post-message-container-singular {
+    min-width: 90%;
+    max-width: 93%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.public-post-comment-form-singular {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.public-post-comment-input-area > textarea {
+    resize: none;
+    color: white;
+    background-color: black;
+    border: 1px solid #4da2f7;
+    border-radius: 7px;
+    font-size: 16px;
+    font-family: "Comic Neue", cursive;
+    padding: 10px
+}
+
+.post-comment-btn-container-singular {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.post-comment-btn-container-singular > button{
+    height: 30px;
+    width: 200px
+}
+
+.singular-post-container {
+    width: 100%
+}
+
+.public-post-comment-title-singular {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-right: 30px;
+    width: 100%;
+}
+
+.edit-delete-btns-singular {
+    display: flex;
+}
+
+
+.entrypage-comment-title > div {
+    display: flex;
+    gap: 12px
+}
+
+.entrypage-comment-title > div > button {
+    width: 140px;
+    height: 30px
+}
+
+
+.entrypage-delete-comment > button {
+    background-color: #100647;
+    color: white;
+    border-radius: 10px;
+    height: 30px;
+    border: 1px solid #3399FF;
+    cursor: pointer;
+    width: 140px;
+    height: 30px
+}
+
+
+.entrypage-delete-comment > button:hover {
+    background-color: #231764;
+    border: 1px solid #4da2f7;
+}
+
+
+.singular-post-comment {
+    margin-top: 10px;
+    display: flex;
+    margin-left: 5%;
+    border-bottom: 1px solid grey;
+    width: 86%;
+    min-height: 50px;
+}
+
+.user-info-for-comment-singular {
+    display: flex;
+    align-items: center;
+    gap:20px
+}
+
+.user-info-for-comment-singular  > img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.singular-space-container {
+    height: 40px;
 }

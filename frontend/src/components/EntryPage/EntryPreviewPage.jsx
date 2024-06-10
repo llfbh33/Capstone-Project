@@ -32,7 +32,7 @@ function EntryPreviewPage() {
 
             {entry?.content
             ? <div className="entry-preview-content-container">
-                <div id='entry-preview-content' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
+                <div id='entry-preview-content-preview' type='HTML'>{entry.content ? parser(entry.content) : ''}</div>
             </div>
             : <p id='entry-preview-content'>{`It looks like you havn't written anything yet.  Click on the edit entry button to get started!`}</p>}
 
@@ -44,14 +44,14 @@ function EntryPreviewPage() {
                 ? <div>
                     <h2>Comments on your Entry:</h2>
                     {entry?.comments.map(comment => (
-                        <div key={comment.id}>
+                        <div key={comment.id} className="singular-post-container">
 
-                            <div className="entrypage-comment-title">
-                                <div className="post-user-container">
+                            <div className="public-post-comment-title-singular">
+                                <div className="user-info-for-comment-singular">
                                     <img src={allUsers[comment.user_id]?.profile_image} />
                                     <div>{allUsers[comment.user_id]?.username}</div>
                                 </div>
-                                <div>
+                                <div className="edit-delete-btns-singular">
                                     {comment.user_id === currUser.id
                                     ? <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
@@ -77,7 +77,9 @@ function EntryPreviewPage() {
                 </div>
                 : <h3>You have no comments on this entry</h3>}
             </div>
+            <div className="singular-space-container"></div>
             <h1 className='entrypage-underline'></h1>
+
         </div>
     )}
 }

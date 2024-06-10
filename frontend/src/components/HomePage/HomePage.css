@@ -4,6 +4,7 @@
     margin: 0;
     width: 80%;
     border-bottom: 1px solid #3399FF;
+    overflow-wrap: break-word;
 }
 
 #homepage-underline {
@@ -17,6 +18,7 @@
     flex-wrap: wrap;
     width: 96%;
     padding: 14px 0px;
+    overflow-wrap: break-word;
 }
 
 .homepage-notebook-card {

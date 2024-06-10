@@ -37,7 +37,7 @@ function HomePage () {
                                     <div>{notebook?.name}</div>
                                 </div>
                                 <div className='notebook-about-section-container'>
-                                    <div>{`${notebook?.about.slice(0, 120)}...`}</div>
+                                    <div>{`${notebook?.about.slice(0, 70)}...`}</div>
                                 </div>
                              </div>
                             <div className="notebook-edit-delete-container">

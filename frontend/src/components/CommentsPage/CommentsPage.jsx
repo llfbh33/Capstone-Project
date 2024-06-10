@@ -46,7 +46,7 @@ function CommentsPage () {
             <div>
                 <p className='mini-page-title' ></p>
                 <h1 id='homepage-user-title'>{`${user?.name}'s Comments`}</h1>
-                <p className="comments-page-mini-title">All of your entries others have commented on:</p>
+                <p className="comments-page-mini-title">All of your posts others have commented on:</p>
                 <div id='homepage-notebook-card-container'>
                     {userEntries.length ? userEntries.map(entry => (
                         <div key={entry?.id}>
@@ -84,9 +84,9 @@ function CommentsPage () {
             </div>
             <div>
                 <p className='mini-page-title' ></p>
-                <p className="comments-mini-page-title">All public posts you have commented on:</p>
+                <p className="comments-page-mini-title">All public posts you have commented on:</p>
                 <div id='homepage-notebook-card-container'>
-                    {commentEntries ? commentEntries.map(entry => (
+                    {commentEntries.length ? commentEntries.map(entry => (
                         <div key={entry?.id}>
                             <div className="homepage-notebook-card"  >
 

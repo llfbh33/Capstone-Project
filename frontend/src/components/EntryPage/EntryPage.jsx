@@ -41,14 +41,14 @@ function EntryPage() {
     }
 
     return (
-        <div>
+        <div className='set-entry-page-size'>
             {loaded ?
             <div>
 
                 <div id='entrypage-entry-notebook-title'>
                     <h2>{`Notebook: ${notebook?.name}`}</h2>
                     <div id='entrypage-entrytitle-buttons'>
-                        <h1>{`Entry: ${name}`}</h1>
+                        <h1 className="set-entry-word-wrap">{`Entry: ${name}`}</h1>
 
                         <div className="entrypage-button-container">
                             <div className="editentry-name-button" hidden={isPreview === 'Preview'}>

@@ -22,7 +22,7 @@ function PublicFeed() {
     return (
         <div>
             <p>Read what others have written and give them advice.  Remember to be respectful.</p>
-            <div className="public-post-title">
+            <div className="publicfeed-post-title">
                 <h1>Public Feed</h1>
                 <h1>All Entries</h1>
             </div>
@@ -31,7 +31,7 @@ function PublicFeed() {
                 {posts.map(post => (
                     <div key={post.id} className="postfeed-post-container">
                         <div className="post-name-and-user-container">
-                            <h3>{post.name}</h3>
+                            <h3 className="post-name">{post.name}</h3>
                             <div className="post-username-image-container">
                                 <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
                                 <h3>{allUsers[post.user_id]?.username}</h3>

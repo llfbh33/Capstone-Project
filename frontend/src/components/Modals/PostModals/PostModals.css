@@ -10,6 +10,7 @@
     margin: 12px;
     width: 100%;
     text-align: center;
+    overflow-wrap: break-word;
 }
 
 .post-modal-label {
@@ -19,7 +20,7 @@
 }
 
 .post-modal-label-2 {
-    font-size: 18px;
+    font-size: 16px;
     width: 100%;
     text-align: center;
 }
@@ -75,4 +76,9 @@
     align-items: center;
     justify-content: space-around;
 
+}
+
+.delete-post-wrap {
+    overflow-wrap: break-word;
+    width: 95%
 }

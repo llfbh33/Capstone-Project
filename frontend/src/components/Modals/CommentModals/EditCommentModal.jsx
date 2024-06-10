@@ -44,7 +44,7 @@ function EditCommentModal({comment}) {
                         onChange={e => setUpdateComment(e.target.value)}
                     />
                     <div className='comment-validation-and-button'>
-                        <p className={updateComment.length > 600 || updateComment.length <= 0? 'comment-error' : 'comment-length'}>{`Comment must be under: ${updateComment.length}/600`}</p>
+                        <p className={updateComment.length > 600 || updateComment.length <= 0? 'comment-error' : 'comment-length'}>{`${updateComment.length}/600`}</p>
                         <button className=' edit-comment-button modal-button' type='submit'>Edit Comment</button>
                     </div>
                 </div>

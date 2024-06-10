@@ -16,3 +16,7 @@
     margin-right: 30px;
     border-radius: 5px;
 }
+
+.set-notebook-word-wrap {
+    overflow-wrap: break-word;
+}

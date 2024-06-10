@@ -75,7 +75,7 @@ function NewNotebookFormModal() {
                 onChange={(e) => setAbout(e.target.value)}
                 required
             />
-            <p className='notebook-modal-no-errors' >{`${about.length}/400`}</p>
+            <p className={errors.about ? "notebook-modal-errors" : 'notebook-modal-no-errors'} >{`${about.length}/400`}</p>
         </div>
 
           <div className="notebook-modal-button-container">

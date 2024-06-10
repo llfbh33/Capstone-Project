@@ -34,7 +34,7 @@ function NotebookPage () {
     }
 
     return (
-            <div>
+            <div className='set-notebook-word-wrap'>
                 <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
                 </div>

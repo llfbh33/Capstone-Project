@@ -65,7 +65,7 @@ function SignupFormModal() {
                           onChange={(e) => setName(e.target.value)}
                           required
                         />
-                    <p className={errors.name ? 'error-validation' : ''}>{`${name.length}/50`}</p>
+                    <p className={errors.name ? 'error-validation' : ''}>{errors.name ? `${errors.name} - ${name.length}/50` : `${name.length}/50`}</p>
 
                     <label>Username</label>
                         <input
@@ -74,7 +74,7 @@ function SignupFormModal() {
                           onChange={(e) => setUsername(e.target.value)}
                           required
                         />
-                    <p className={errors.username ? 'error-validation' : ''}>{`${username.length}/50`}</p>
+                    <p className={errors.username ? 'error-validation' : ''}>{errors.username ? `${errors.username} - ${username.length}/50` : `${username.length}/50`}</p>
 
                     <label>Password</label>
                         <input
@@ -83,7 +83,7 @@ function SignupFormModal() {
                           onChange={(e) => setPassword(e.target.value)}
                           required
                         />
-                    <p className={errors.password ? 'error-validation' : ''}>{`${password.length}/50`}</p>
+                    <p className={errors.password ? 'error-validation' : ''}>{errors.password ? `${errors.password} - ${password.length}/50` : `${password.length}/50`}</p>
 
                     <label>Confirm Password</label>
                         <input
