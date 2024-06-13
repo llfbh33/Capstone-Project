@@ -21,7 +21,15 @@ Render
 
 ## Index
 
-* [[Feature List|https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP]]
-* [[User Stories|https://github.com/llfbh33/Capstone-Project/wiki/User-Stories]]
-* [[Database Schema|https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema]]
-* [[Wireframes|https://github.com/llfbh33/Capstone-Project/wiki/WireFrames]]
+[Feature List](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
+| [User Stories](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
+| [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
+| [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
+
+
+## Images and page titles go here
+
+
+## Endpoints
+
+
