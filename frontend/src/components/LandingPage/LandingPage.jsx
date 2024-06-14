@@ -77,7 +77,7 @@ function LandingPage() {
                         <Link to='https://github.com/llfbh33' className='landingpage-footer-link' target='_blank'>Github</Link>
                         <Link className='landingpage-footer-link' onClick={() => alert("Aubrie Woodbine's LinkedIn is coming soon!")}>Contact Us</Link>
                     </div>
-                    <div>
+                    <div id='landingpage-footer-subsection'>
                         PenCrafted by Aubrie Woodbine
                     </div>
                 </footer>

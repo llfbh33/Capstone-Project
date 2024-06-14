@@ -26,7 +26,7 @@
     color: white;
     font-size: 18px;
     padding: 10px;
-    width: 120px;
+    width: 120px; /* change under 850px */
     height: 36px;
     cursor: pointer;
     background-color: #100647;
@@ -39,21 +39,19 @@
   }
 
 
-  /* background-color: #00366B; */
 
-
-
-/* replace with landingpage-section1-3-container background image when you have it */
-#landingpage-section-1,
-#landingpage-section-2,
-#landingpage-section-3 {
-    background-color: black;
-    color: white;
+#main-landingpage-container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* background-color: #f5f5f5; */
+    /* padding: 20px; */
 }
 
 #landingpage-section-1 {
     width: 100%;
-    height: 500px;
+    min-height: 550px;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -110,14 +108,12 @@
 
 #landingpage-section-4 {
     background-color: #100647;
-    height: 500px;
     border-top: 1px solid #3399FF;
     border-bottom: 1px solid #3399FF;
     color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
 }
 
 #landingpage-section4-title {
@@ -176,4 +172,90 @@
 
 .landingpage-footer-link:hover {
     text-decoration: underline;
+}
+
+
+/* Media Queries for Responsiveness */
+
+@media (max-width: 850px) {
+
+    #landingpage-navigation-container > img {
+        height: 50%
+    }
+
+    #landingpage-section4-title,
+    #landingpage-section4-minititle {
+        font-size: 1.2em;
+    }
+
+    .landingpage-section-1-midtitle {
+        font-size: 1.2em;
+    }
+
+    #landingpage-section-1 {
+        max-height: 500px;
+        height: 40%;
+        min-height: 400px;
+    }
+
+    #landingpage-section-1 > img {
+        max-width: 700px;
+        width: 80%;
+        margin-left: 0px;
+    }
+
+    #landingpage-navigation-in-out-container > button {
+        width: 120px
+    }
+}
+
+@media (max-width: 650px) {
+
+    /* Navigation bar */
+    #landingpage-navigation-in-out-container {
+        display: flex;
+    }
+
+    #landingpage-navigation-in-out-container > button {
+        width: 70px;
+        height: 26px;
+        font-size: .8em;
+    }
+
+
+    /* Main Landing Page */
+    #landingpage-section-1 {
+        max-height: 400px;
+        min-height: 300px;
+    }
+
+    #landingpage-section-2 > button{
+        font-size: .8em;
+        width: 140px;
+        height: 28px
+    }
+
+    #landingpage-section-3 {
+        height: 100%;
+    }
+
+    #landingpage-section4-title,
+    #landingpage-section4-minititle,
+    .landingpage-section-1-midtitle {
+        font-size: 1em;
+    }
+
+    #landingpage-minititle-list-container li {
+        font-size: 0.8em;
+    }
+
+    #landingpage-footer {
+        font-size: .9em;
+        padding: 0px;
+    }
+
+    #landingpage-footer-subsection {
+        gap: 1px;
+        width: 160px
+    }
 }
