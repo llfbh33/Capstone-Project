@@ -32,6 +32,7 @@ https://capstone-project-lm4v.onrender.com
 | [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
 | [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
 
+[Contact](doc:linking-to-pages#contact)
 
 ## Images and page titles go here
 
@@ -1067,3 +1068,21 @@ https://capstone-project-lm4v.onrender.com
         ],
     }
     ```
+
+## Features
+
+- <strong>Private Writing Space</strong>: Keep your writing projects secure and accessible only to you. Organize your notes, drafts, and completed works in a personal space.
+- <strong>Organized Notes</strong>: Use notebooks to organize your writing projects for easy navigation and management.
+- <strong>Community Sharing</strong>: Share your work with the PenCrafted community to receive constructive feedback and engage with fellow writers.
+- <strong>Rich Text Editor</strong>: Write and format your work with a powerful text editor that supports various writing styles and needs.
+
+## Future Implimentation Goals
+
+- <strong>Tags</strong>: Allow users to categorize and search for writing pieces using tags.
+- <strong>Likes on Posts</strong>: Enable users to like posts, helping to highlight popular content.
+- <strong>Followers</strong>: Introduce a follow system so users can keep up with their favorite writers.
+- <strong>Share on Facebook</strong>: Provide an option for users to share their writing on Facebook to reach a broader audience.
+
+# Contact <a name="acontact"></a>
+
+- LinkedIn
