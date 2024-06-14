@@ -14,7 +14,7 @@ https://capstone-project-lm4v.onrender.com
 
 
 ## Implemented Technologies
- 
+
 ![React-icon svg](https://github.com/llfbh33/Capstone-Project/assets/145170944/97103a00-5148-4209-924f-69f0e9899bcf)
 ![redux-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/68b638dc-0472-4ab7-bf1e-32716bd8981a)
 ![flask-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/e40f0301-24b8-4b27-ad2f-a9b4fd573e4b)
@@ -36,6 +36,1034 @@ https://capstone-project-lm4v.onrender.com
 ## Images and page titles go here
 
 
-## Endpoints
+## Endpoint Documentation
 
 
+### Authentication
+* Request: GET api/auth
+* Purpose: Checks the authentication of the user, runs at initial render and every rerender
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "name": "STRING",
+        "username": "STRING",
+        "profile_image": "STRING",
+        "theme": "STRING"
+    }
+    ```
+* Error Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+
+### Login
+* Request: POST api/auth/login
+* Purpose: To log in a user
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "name": "STRING",
+        "username": "STRING",
+        "profile_image": "STRING",
+        "theme": "STRING"
+    }
+    ```
+* Error Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible responses:
+
+    ```json
+    {
+        "password": [
+            "No such user exists."
+        ],
+        "username": [
+            "Username provided not found.",
+            "Password was incorrect."
+        ]
+    }
+    ```
+
+
+### Unauthorized
+* Request: POST api/auth/unauthorized
+* Purpose: To alert that the user is unauthorized, endpoint is hit  in the event that a login attempt falid
+* Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "Unauthorized"
+    }
+    ```
+
+### Logout
+* Request: POST api/auth/logout
+* Purpose: To log out a user
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "User logged out"
+    }
+    ```
+
+
+### Sign Up
+* Request: POST api/auth/signup
+* Purpose: Sign up a user
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "name": "STRING",
+        "username": "STRING",
+        "profile_image": "STRING",
+        "theme": "STRING"
+    }
+    ```
+* Error Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Error Response for all remaining endpoints if not logged in:
+* Error Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+      "message": "Unauthorized"
+    }
+    ```
+
+## Users
+
+### Get All Users
+* Request: GET api/users
+* Purpose: Returns a list of all users
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "users" : [
+            {
+                "id": "INTEGER",
+                "name": "STRING",
+                "username": "STRING",
+                "profile_image": "STRING",
+                "theme": "STRING"
+            },
+            {
+                "id": "INTEGER",
+                "name": "STRING",
+                "username": "STRING",
+                "profile_image": "STRING",
+                "theme": "STRING"
+            },
+        ]
+    }
+    ```
+
+### Get User By id
+* Request: GET api/users/:userId
+* Purpose: Returns a dictionary of a specific user by their id
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        {
+            "id": "INTEGER",
+            "name": "STRING",
+            "username": "STRING",
+            "profile_image": "STRING",
+            "theme": "STRING"
+        },
+    }
+    ```
+
+## Notebooks
+
+### Get All Notebooks
+* Request: GET api/notebooks
+* Purpose: Returns a list of all notebooks created by the current user
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "notebooks" : [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "about": "STRING",
+                "created_at": "DATE"
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "about": "STRING",
+                "created_at": "DATE"
+            },
+        ]
+    }
+    ```
+
+### Get Notebook By id
+* Request: GET api/notebooks/:notebookId
+* Purpose: Returns a dictionary of a specific notebook by its id
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "about": "STRING",
+        "created_at": "DATE"
+    }
+    ```
+
+### Create New Notebook
+* Request: POST api/notebooks/new
+* Purpose: Creates a new notebook within the database with the provided inputs and returns a dictionary of the new notebook.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "about": "STRING",
+        "created_at": "DATE"
+    }
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Edit Notebook By id
+* Request: POST api/notebooks/:notebookId/edit
+* Purpose: Edits a specific notebook by its id and returns the updated version as a dictionary. Updates the notebook in the database.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "about": "STRING",
+        "created_at": "DATE"
+    }
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Delete Notebook By Id
+* Request: GEt api/notebooks/:notebookId/delete
+* Purpose: Deletes a specific notebook by its id and returns a success message.  Removes the notebook from the database, as a result also deletes any entries within the notebook, any comments on those entries, and any posts associated with those entries.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "Notebook has been successfully deleted"
+    }
+    ```
+
+## Entries
+
+### Get All Entries
+* Request: GET api/entries
+* Purpose: Returns a list of all entries and returns them as a list along with its post if applicable and a list of comments if applicable.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+                "post": {
+                    "id": "INTEGER",
+                    "entry_id": "INTEGER",
+                    "message": "STRING",
+                    "created_at": "DATE",
+                }
+            },
+        ]
+    }
+    ```
+
+### Get Entry By id
+* Request: GET api/entries/:entryId
+* Purpose: Returns a dictionary of a specific entry by its id along with its post if applicable and a list of comments if applicable.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "content": "TEXT",
+        "is_public": "BOOLEAN - default(false)",
+        "created_at": "DATE",
+        "updated_at": "DATE",
+        "comments": [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            }
+        ],
+        "post": {
+            "id": "INTEGER",
+            "entry_id": "INTEGER",
+            "message": "STRING",
+            "created_at": "DATE",
+        }
+    },
+    ```
+
+### Create New Entry
+* Request: POST api/entries/new
+* Purpose: Creates a new entry within the database with the provided inputs and returns a dictionary of the new entry, along with an empty comments array.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "content": "TEXT",
+        "is_public": "BOOLEAN - default(false)",
+        "created_at": "DATE",
+        "updated_at": "DATE",
+        "comments": [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            }
+        ],
+    },
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Edit Entry By id
+* Request: POST api/entries/:entryId/edit
+* Purpose: Edits a specific entry by its id and returns the updated version as a dictionary. Updates the entry in the database.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "content": "TEXT",
+        "is_public": "BOOLEAN - default(false)",
+        "created_at": "DATE",
+        "updated_at": "DATE",
+        "comments": [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            }
+        ],
+        "post": {
+            "id": "INTEGER",
+            "entry_id": "INTEGER",
+            "message": "STRING",
+            "created_at": "DATE",
+        }
+    },
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Delete Entry By Id
+* Request: GEt api/entries/:entryId/delete
+* Purpose: Deletes a specific entry by its id and returns a success message.  Removes the entry from the database, as a result also deletes any coresponding comments or post.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "Entry has been successfully deleted"
+    }
+    ```
+
+
+## Posts
+
+### Get All Posts
+* Request: GET api/posts
+* Purpose: Returns a list of all entries which have been posted, posted information, and any comments attached to those posts.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+                "post": {
+                    "id": "INTEGER",
+                    "entry_id": "INTEGER",
+                    "message": "STRING",
+                    "created_at": "DATE",
+                }
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+                "post": {
+                    "id": "INTEGER",
+                    "entry_id": "INTEGER",
+                    "message": "STRING",
+                    "created_at": "DATE",
+                }
+            },
+        ]
+    }
+    ```
+
+### Get All Post By Current User
+* Request: GET api/posts/user
+* Purpose: Returns a list of all entries which have been posted by the current user, posted information, and any comments attached to those posts.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+                "post": {
+                    "id": "INTEGER",
+                    "entry_id": "INTEGER",
+                    "message": "STRING",
+                    "created_at": "DATE",
+                }
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "name": "STRING",
+                "content": "TEXT",
+                "is_public": "BOOLEAN - default(false)",
+                "created_at": "DATE",
+                "updated_at": "DATE",
+                "comments": [
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    },
+                    {
+                        "id": "INTEGER",
+                        "user_id": "INTEGER",
+                        "entry_id": "INTEGER",
+                        "comment": "STRING",
+                        "created_at": "DATE",
+                    }
+                ],
+                "post": {
+                    "id": "INTEGER",
+                    "entry_id": "INTEGER",
+                    "message": "STRING",
+                    "created_at": "DATE",
+                }
+            },
+        ]
+    }
+    ```
+
+### Get Post By id
+* Request: GET api/posts/:postId
+* Purpose: Returns a posted entry with post information, and any comments associated with that entry.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "content": "TEXT",
+        "is_public": "BOOLEAN - default(false)",
+        "created_at": "DATE",
+        "updated_at": "DATE",
+        "comments": [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            }
+        ],
+        "post": {
+            "id": "INTEGER",
+            "entry_id": "INTEGER",
+            "message": "STRING",
+            "created_at": "DATE",
+        }
+    }
+    ```
+
+### Create New Post
+* Request: POST api/posts/new
+* Purpose: Creates a new post within the database with the provided inputs and returns an updated dictionary of the posted entry (sets boolean is_posted to true) with the new post attached.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "name": "STRING",
+        "content": "TEXT",
+        "is_public": "BOOLEAN - default(false)",
+        "created_at": "DATE",
+        "updated_at": "DATE",
+        "comments": [
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            },
+            {
+                "id": "INTEGER",
+                "user_id": "INTEGER",
+                "entry_id": "INTEGER",
+                "comment": "STRING",
+                "created_at": "DATE",
+            }
+        ],
+    },
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "name": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+        "password": [
+            "This field is required",
+            "Field must be at least 8 characters long."
+        ],
+        "username": [
+            "This field is required",
+            "Field must be between 8 and 50 characters long.",
+            "Username is already in use."
+        ]
+    }
+    ```
+
+### Edit Post By id
+* Request: POST api/posts/:postId/edit
+* Purpose: Edits a specific posts internal information, just message, and returns the updated post.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "post": {
+            "id": "INTEGER",
+            "entry_id": "INTEGER",
+            "message": "STRING",
+            "created_at": "DATE",
+        }
+    },
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "message": [
+            "Message can not be longer that 400 characters"
+        ],
+    }
+    ```
+
+### Delete Post By Id
+* Request: GET api/posts/:postId/delete
+* Purpose: Deletes a specific post by its id, set the 'is_public' boolean for the corresponding entry to false, and returns a success message.  Removes the post from the database.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "Entry has been successfully deleted"
+    }
+    ```
+
+## Comments
+
+### Create New Comment
+* Request: POST api/comments/new
+* Purpose: Creates a new comment within the database with the provided inputs and returns the new comment as a dictionary.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "entry_id": "INTEGER",
+        "comment": "STRING",
+        "created_at": "DATE",
+    }
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "comment": [
+            "This field is required",
+            "Field must be between 4 and 50 characters long."
+        ],
+    }
+    ```
+
+### Edit Comment By id
+* Request: POST api/comments/:commentId/edit
+* Purpose: Edits a comment by id with the provided information and returns the updated comment as a dictionary.
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "id": "INTEGER",
+        "user_id": "INTEGER",
+        "entry_id": "INTEGER",
+        "comment": "STRING",
+        "created_at": "DATE",
+    }
+    ```
+
+* Error Response:
+    * Status Code: 400, 500
+    * Headers:
+        * Content-Type: application/json
+    * Body, form.data posible error responses:
+
+    ```json
+    {
+        "message": [
+            "Comment can not be longer that 600 characters"
+        ],
+    }
+    ```
+
+### Delete Comment By Id
+* Request: GET api/comments/:commentId/delete
+* Purpose: Deletes a comment by its id only if the current user is the creator of the comment or the creator of the post which the comment is attached to, removes the comment from the database and returns a success response
+* Successful Response:
+    * Status Code: 200
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": "Comment has been successfully deleted"
+    }
+    ```
+
+* Error Response:
+    * Status Code: 401
+    * Headers:
+        * Content-Type: application/json
+    * Body:
+
+    ```json
+    {
+        "message": [
+            "You are not the owner of this comment, nor are you the creator of the post it is posted to"
+        ],
+    }
+    ```

@@ -41,6 +41,8 @@ def entry(entry_id):
     comments = []
     for comment in entry.comments:
         comments.append(comment.to_dict())
+    if entry.posts:
+        entry['post'] = entry.posts[0].to_dict()
 
     entry_return = entry.to_dict()
     entry_return['comments'] = comments
@@ -105,12 +107,8 @@ def edit_entry(entry_id):
             comment_list.append(comment.to_dict())
         entry_retrun['comments'] = comment_list
 
-        post_list = []
-        for post in currEntry.posts:
-            post_list.append(post.to_dict())
-
-        if post_list:
-            entry_retrun['post'] = post_list[0]
+        if currEntry.posts:
+            entry_retrun['post'] =currEntry.posts[0].to_dict()
 
         return entry_retrun
     else:
