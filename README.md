@@ -1,6 +1,29 @@
 # PenCrafted
 
-## Overview
+## Wiki Index
+
+[Feature List](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
+| [User Stories](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
+| [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
+| [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
+
+## ReadMe Index
+
+[Projject Overview](#project-overview)
+| [Project Journey](#project-journey)
+| [Live Link](#live-link)
+| [Implemented Technologies](#implemented-technologies)
+| [Endpoint Documentation](#endpoint-documentation)
+| [User Endpoints](#users)
+| [Notebook Endpoints](#notebooks)
+| [Entries Endpoints](#entries)
+| [Posts Endpoints](#posts)
+| [Comments Endpoints](#comments)
+| [Features](#features)
+| [Future Implimentation Goals](#future-implimentation-goals)
+| [Contact](#contact)
+
+## Project Overview
 
 PenCrafted is a creative writing website designed to inspire and support writers of all levels. Inspired by the functionality of EverNote, PenCrafted offers a user-friendly platform where you can craft and organize your writing projects. Whether you want to keep your work private or share it with the PenCrafted community for constructive criticism, PenCrafted provides the tools you need to enhance your writing journey.
 
@@ -24,26 +47,6 @@ https://capstone-project-lm4v.onrender.com
 ![postgres-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/9a37dfbd-82ad-41a4-9925-f80d2ea07651)
 ![render-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/9141c5c5-9743-4210-a6bc-8c6f2a2492c7)
 
-
-## Wiki Index
-
-[Feature List](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
-| [User Stories](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
-| [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
-| [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
-
-## ReadMe Index
-
-
-| [Endpoint Documentation](#endpoint-documentation)
-| [User Endpoints](#users)
-| [Notebook Endpoints](#notebooks)
-| [Entries Endpoints](#entries)
-| [Posts Endpoints](#posts)
-| [Comments Endpoints](#comments)
-| [Features](#features)
-| [Future Implimentation Goals](#future-implimentation-goals)
-| [Contact](#contact)
 
 ## Images and page titles go here
 
