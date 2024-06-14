@@ -32,7 +32,7 @@ https://capstone-project-lm4v.onrender.com
 | [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
 | [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
 
-[Contact](doc:linking-to-pages#contact)
+[Contact](#contact)
 
 ## Images and page titles go here
 
@@ -1083,6 +1083,6 @@ https://capstone-project-lm4v.onrender.com
 - <strong>Followers</strong>: Introduce a follow system so users can keep up with their favorite writers.
 - <strong>Share on Facebook</strong>: Provide an option for users to share their writing on Facebook to reach a broader audience.
 
-# Contact <a name="acontact"></a>
+## Contact
 
 - LinkedIn
