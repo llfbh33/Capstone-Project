@@ -25,20 +25,30 @@ https://capstone-project-lm4v.onrender.com
 ![render-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/9141c5c5-9743-4210-a6bc-8c6f2a2492c7)
 
 
-## Index
+## Wiki Index
 
 [Feature List](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
 | [User Stories](https://github.com/llfbh33/Capstone-Project/wiki/Features---MVP)
 | [Database Schema](https://github.com/llfbh33/Capstone-Project/wiki/Database-Schema)
 | [Wireframes](https://github.com/llfbh33/Capstone-Project/wiki/WireFrames)
 
-[Contact](#contact)
+## ReadMe Index
+
+
+| [Endpoint Documentation](#endpoint-documentation)
+| [User Endpoints](#users)
+| [Notebook Endpoints](#notebooks)
+| [Entries Endpoints](#entries)
+| [Posts Endpoints](#posts)
+| [Comments Endpoints](#comments)
+| [Features](#features)
+| [Future Implimentation Goals](#future-implimentation-goals)
+| [Contact](#contact)
 
 ## Images and page titles go here
 
 
 ## Endpoint Documentation
-
 
 ### Authentication
 * Request: GET api/auth
