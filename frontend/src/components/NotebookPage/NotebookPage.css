@@ -4,8 +4,7 @@
 }
 
 .notebookpage-about-section {
-    text-align: center;
-    width: 70%;
+    text-align: left;
     padding: 20px;
     font-size: 18px;
 }
@@ -18,5 +17,36 @@
 }
 
 .set-notebook-word-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     overflow-wrap: break-word;
+    width: 80%
+}
+
+@media (max-width: 950px) {
+    .set-notebook-word-wrap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 85%
+    }
+
+    #homepage-notebook-card-container {
+        justify-content: center;
+    }
+
+    #homepage-user-title,
+    .page-title-blocks,
+    #notebookpage-about-section-container {
+        width: 100%;
+        text-align: center;
+    }
+
+    .notebookpage-about-section {
+        text-align: center;
+        width: 94%;
+    }
 }

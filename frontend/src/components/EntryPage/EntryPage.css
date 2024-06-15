@@ -164,3 +164,28 @@
     line-height: 1.5;
     overflow-wrap: break-word;
 }
+
+
+@media (max-width: 850px) {
+    .set-entry-page-size {
+        border: 2px solid green;
+        width: 90%;
+        /* margin: 20px; */
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    #entrypage-entry-notebook-title,
+    #entrypage-entry-notebook-title h2 {
+        width: 80%;
+        /* disp */
+        flex-wrap: wrap;
+        flex: 1 1 auto;
+        min-width: 0;
+        min-height: 0;
+        text-overflow: ellipsis;
+        overflow-wrap: break-word;
+
+    }
+}

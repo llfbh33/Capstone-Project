@@ -41,6 +41,8 @@ body {
 
 /* Make sure to shift container content to make room for the navigation */
 .main-insite-content-container {
+    display: flex;
+    justify-content: center;
     margin-left: 340px;
     width: 100%;
 }
@@ -105,4 +107,32 @@ body {
     align-items: center;
     justify-content: space-around;
 
+}
+
+
+@media (max-width: 950px) {
+
+    .left-hand-nav-container {
+        width: 100%;
+        height: 80px;
+        position: static;
+    }
+
+    /* Make sure to shift container content to make room for the navigation */
+    .main-insite-container {
+        display: flex;
+        flex-direction: column;
+        padding: 0px;
+        width: 100%
+    }
+
+    .main-insite-content-container {
+        margin: 0px;
+        display: flex;
+        justify-content: center;
+    }
+
+    .page-title-blocks {
+        font-size: 1em;
+    }
 }

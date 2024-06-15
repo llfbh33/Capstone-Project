@@ -177,7 +177,7 @@
 
 /* Media Queries for Responsiveness */
 
-@media (max-width: 850px) {
+@media (max-width: 950px) {
 
     #landingpage-navigation-container > img {
         height: 50%

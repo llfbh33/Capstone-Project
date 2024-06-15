@@ -23,14 +23,14 @@ function HomePage () {
 
 
     return (
-        <div>
-            <p className='mini-page-title' >Ready to write? Create a notebook to get started!</p>
+        <div className="homepage-main-container">
+            <p className='mini-page-explination' >Ready to write? Create a notebook to get started!</p>
             <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
-            <p className="page-title-blocks">Your Notebooks</p>
+            <p className="page-title-explainer">Your Notebooks</p>
             <div id='homepage-notebook-card-container'>
 
                 {Object.values(notebooks).map(notebook => (
-                    <div key={notebook?.id}>
+                    <div key={notebook?.id} className="notebook-card-container-media-query">
                         <div className="homepage-notebook-card"  >
                             <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
                                 <div>
