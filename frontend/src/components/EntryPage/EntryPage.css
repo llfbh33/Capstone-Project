@@ -8,12 +8,14 @@
 
 #entrypage-entry-title h2 {
     width: 90%;
+    word-break: break-all;
     overflow-wrap: break-word;
     border-bottom: 1px solid #3399FF;
 }
 
 #entrypage-entry-title  h1 {
     width: 80%;
+    word-break: break-all;
     overflow-wrap: break-word;
     border-bottom: 1px solid #3399FF;
 }
@@ -38,12 +40,12 @@
     border-radius: 10px;
     border: 1px solid #3399FF;
     cursor: pointer;
-    width: 110px;
+    width: 125px;
     height: 30px;
 }
 
 .entry-button {
-    width: 110px;
+    width: 125px;
     height: 30px
 }
 
@@ -192,8 +194,19 @@
     }
 
     #entrypage-entrytitle-buttons {
+        display: flex;
         flex-direction: column;
-        align-items: start;
+        align-items: center;
+    }
+
+    #entrypage-entrytitle-buttons h1 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .entrypage-button-container {
+        width: 100%;
+        justify-content: space-around;
     }
 }
 

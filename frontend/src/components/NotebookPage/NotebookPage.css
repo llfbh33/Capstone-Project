@@ -1,7 +1,9 @@
 /* Uses the majority of the Homepage css */
 
 #notebookpage-about-section-container {
-    /* width: 96%; */
+    width: 100%;
+    word-break: break-all;
+    overflow-wrap: break-word;
 }
 
 .notebookpage-about-section {

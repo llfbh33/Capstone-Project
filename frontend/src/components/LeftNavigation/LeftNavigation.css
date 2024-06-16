@@ -98,7 +98,7 @@
     overflow: hidden;
 }
 
-.left-nav-sml-ele-selected {
+.left-nav-sml-ele-selected  div {
     margin: 6px 0px;
     color: lightblue;
     text-overflow: ellipsis;
@@ -185,6 +185,10 @@
         justify-content: space-around;
         border: none;
         height: 100%;
+    }
+
+    #left-nav-user-name {
+        text-align: center;
     }
 
     #left-nav-signout-container {
