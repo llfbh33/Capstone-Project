@@ -228,4 +228,8 @@
         text-align: center;
     }
 
+    #entryedit-toolbar-container {
+        height: 80px;
+    }
+
 }

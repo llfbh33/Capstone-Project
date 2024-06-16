@@ -90,7 +90,7 @@ const MenuBar = ({editor}) => {
       <Tooltip text='Ordered List'>
           <button
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
-            className={editor.isActive('orderedList') ? 'is-active' : ''}
+            className={editor.isActive('orderedList') ? 'is-active' : 'icon-button'}
           >
             <FaListOl />
           </button>

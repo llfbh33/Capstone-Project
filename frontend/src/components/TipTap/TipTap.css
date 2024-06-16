@@ -142,3 +142,11 @@ input[type='color']::-webkit-color-swatch-wrapper {
   cursor: pointer;
 
 }
+
+
+@media (max-width: 610px) {
+  #menuBar-container {
+    gap: 0px;
+    flex-wrap: wrap;
+  }
+}
