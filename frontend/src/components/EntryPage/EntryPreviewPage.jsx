@@ -40,7 +40,7 @@ function EntryPreviewPage() {
 
             <h1 className='entrypage-underline'></h1>
             <div>
-                {entry?.comments
+                {entry.comments.length
                 ? <div>
                     <h2>Comments on your Entry:</h2>
                     {entry?.comments.map(comment => (

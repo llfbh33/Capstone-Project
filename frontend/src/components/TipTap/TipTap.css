@@ -3,7 +3,10 @@
   height: 40px;
   display: flex;
   align-items: center;
-  gap: 7px;
+  /* justify-content: space-between; */
+  gap: 2%;
+  padding: 10px
+  /* background-color: white; */
 }
 
 #menuBar-container > button {
@@ -42,6 +45,30 @@
 .ProseMirror:focus {
   outline: none;
 }
+
+.icon-button {
+  height: 30px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.8s;
+}
+
+.icon-button:hover {
+  background-color: grey;
+}
+
+.is-active {
+  height: 30px;
+  border-radius: 6px;
+  background-color: grey;
+  cursor: pointer;
+}
+
+.icon-button i {
+  font-size: 20px;
+}
+
+
 
 .ProseMirror   > * + * {
       margin-top: 0.75em;

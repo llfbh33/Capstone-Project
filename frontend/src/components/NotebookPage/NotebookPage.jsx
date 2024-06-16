@@ -34,7 +34,7 @@ function NotebookPage () {
     }
 
     return (
-            <div className='set-notebook-word-wrap'>
+            <div className='homepage-main-container'>
                 <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
                 </div>
@@ -54,11 +54,13 @@ function NotebookPage () {
                                     <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(entry)}>
                                         <div>{entry?.name}</div>
                                     </div>
-                                    <div className="homepage-edit-notebook">
+                                    <div className="notebook-edit-delete-container">
+                                        <div className='homepage-edit-notebook'>
                                             <OpenModalMenuItem
                                             itemText={<BsTrash3Fill />}
                                             modalComponent={<DeleteEntryFormModal entry={entry} />}
                                             />
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -98,17 +98,17 @@ function EntryEditPage({setIsPreview}) {
 
     return (
         <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
-            <div className='editentry-main-container'>
+            <div id='editentry-save-btn-container' >
+                <button className="modal-button entry-button" onClick={handleSave}>Save</button>
+                <p>{saved ? 'Saved' : ''}</p>
+            </div>
+            <div className='editentry-container'>
                 <div id='entryedit-toolbar-container'>
-                        <div>
+                        <div className='edit-entry-tool-bar'>
                             <MenuBar editor={editor}/>
                         </div>
-                        <div id='editentry-save-btn-container' >
-                            <p>{saved ? 'Saved' : ''}</p>
-                            <button className="modal-button entry-button" onClick={handleSave}>Save</button>
-                        </div>
                     </div>
-                    <div className="entry-content-container">
+                <div className="entry-content-container">
                     <EditorContent editor={editor} />
                 </div>
             </div>

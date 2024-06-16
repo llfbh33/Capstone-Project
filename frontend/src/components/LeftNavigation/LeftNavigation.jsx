@@ -108,7 +108,7 @@ function LeftNavigation() {
                                     {notebooks
                                         ? Object.values(notebooks).map(notebook => (
                                             <div className={openSml === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => handleClickNotebook(notebook.id)}>
-                                                <div>{notebook?.name.slice(0, 25)}</div>
+                                                <div>{notebook?.name}</div>
                                             </div>
                                             ))
                                     : ''}
