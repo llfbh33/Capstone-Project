@@ -65,7 +65,8 @@
 .editentry-container {
     border: 3px solid #3399FF;
     border-radius: 8px 8px 0px 0px;
-    width: 100%
+    width: 100%;
+    box-shadow: 0 1px 36px rgba(121, 140, 250, 0.799);
 }
 
 #entryedit-toolbar-container {

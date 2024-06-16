@@ -148,5 +148,9 @@ input[type='color']::-webkit-color-swatch-wrapper {
   #menuBar-container {
     gap: 0px;
     flex-wrap: wrap;
+    height: 70px;
+    display: flex;
+    justify-content: space-around;
+    gap: 6px
   }
 }

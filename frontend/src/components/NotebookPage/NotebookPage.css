@@ -9,7 +9,9 @@
 .notebookpage-about-section {
     text-align: left;
     padding: 12px;
+    padding-bottom: 30px;
     font-size: 18px;
+    border-bottom: 1px solid #3399FF;
 }
 
 .delete-notebook-btn {
@@ -36,6 +38,7 @@
     .page-title-blocks,
     #notebookpage-about-section-container {
         width: 100%;
+        align-items: center;
         text-align: center;
     }
 
