@@ -1098,4 +1098,4 @@ https://capstone-project-lm4v.onrender.com
 
 ## Contact
 
-- LinkedIn
+- [LinkedIn](https://www.linkedin.com/in/aubrie-woodbine-b91781314/)
