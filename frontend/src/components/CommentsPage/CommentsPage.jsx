@@ -42,7 +42,7 @@ function CommentsPage () {
 
 
     return (
-        <div>
+        <div className="homepage-main-container">
             <div>
                 <p className='mini-page-title' ></p>
                 <h1 id='homepage-user-title'>{`${user?.name}'s Comments`}</h1>

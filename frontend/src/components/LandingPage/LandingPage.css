@@ -50,7 +50,8 @@
 
 #landingpage-section-1 {
     width: 100%;
-    min-height: 550px;
+    max-height: 660px;
+    height: 60vw;
     color: white;
     display: flex;
     flex-direction: column;
@@ -59,10 +60,25 @@
     gap: 36px
 }
 
-#landingpage-section-1 > img {
-    width: 700px;
-    margin-left: 32px;
+
+/* Main Landing page image */
+.landingpage-background-image {
+    width: 100%;
+    max-width: 900px;
+    max-height: 500px;
+    margin: 10px 100px;
+    width: auto;
+    height: auto;
 }
+
+.landingpage-background-image img {
+    max-width: 900px;
+    max-height: 500px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 
 .landingpage-section-1-midtitle {
     font-size: 26px;
@@ -190,18 +206,6 @@
 
     .landingpage-section-1-midtitle {
         font-size: 1.2em;
-    }
-
-    #landingpage-section-1 {
-        max-height: 500px;
-        height: 40%;
-        min-height: 400px;
-    }
-
-    #landingpage-section-1 > img {
-        max-width: 700px;
-        width: 80%;
-        margin-left: 0px;
     }
 
     #landingpage-navigation-in-out-container > button {

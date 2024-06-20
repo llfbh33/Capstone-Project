@@ -81,7 +81,7 @@
 }
 
 .edit-entry-tool-bar {
-    width: 95%
+    width: 95%;
 }
 
 .entry-content-container {
@@ -244,6 +244,11 @@
 
     #entryedit-toolbar-container {
         height: 80px;
+    }
+
+    .edit-entry-tool-bar {
+        /* width: 95%; */
+        display: flex;
     }
 
 }
