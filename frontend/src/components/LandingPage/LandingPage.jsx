@@ -37,11 +37,13 @@ function LandingPage() {
                         <div className='landingpage-section-1-midtitle'>Your Writing Journey Starts Here: Create, Share, Improve! Sign in now!</div>
                     </section>
                     <section id='landingpage-section-2'>
-                        <OpenModalMenuItem
-                        buttonText="Continue"
-                        modalComponent={<LoginFormModal />}
-                        />
-                        <button className='button landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
+                        <div id='landingpage-section-2-container'>
+                            <OpenModalMenuItem
+                            buttonText="Continue"
+                            modalComponent={<LoginFormModal />}
+                            />
+                            <button className='button landingpage-demo-login-btn' onClick={handledemologin}>Login as Demo User</button>
+                        </div>
                     </section>
                     <section id='landingpage-section-3'>
 

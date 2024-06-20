@@ -65,15 +65,16 @@
 .landingpage-background-image {
     width: 100%;
     max-width: 900px;
-    max-height: 500px;
+    /* max-height: 500px; */
     margin: 10px 100px;
     width: auto;
-    height: auto;
+    /* height: auto; */
+    min-width: 280px;
 }
 
 .landingpage-background-image img {
-    max-width: 900px;
-    max-height: 500px;
+    /* max-width: 900px; */
+    /* max-height: 500px; */
     width: 100%;
     height: 100%;
     object-fit: contain;
@@ -85,26 +86,38 @@
 }
 
 #landingpage-section-2 {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#landingpage-section-2-container {
     height: 200px;
+    max-width: 700px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 10px
+    gap: 10px;
+    object-fit: contain;
+    padding: 20px;
 }
 
 .landingpage-section-2-midtitle {
     font-size: 24px;
 }
 
-#landingpage-section-2 > button{
+#landingpage-section-2-container > button{
     list-style: none;
     background-color: #100647;
     border: 1px solid #3399FF;
     color: white;
-    width: 280px;
-    height: 40px;
-    font-size: 18px;
+    max-width: 380px;
+    width: 45%;
+    max-height: 40px;
+    height: 20%;
+    font-size: 21px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -113,7 +126,7 @@
     font-family: "Comic Neue", cursive;
 }
 
-#landingpage-section-2 > button:hover {
+#landingpage-section-2-container > button:hover {
     background-color: #231764;
     border: 1px solid #4da2f7;
 }
@@ -155,8 +168,9 @@
 }
 
 .landingpage-demo-login-btn {
-    width: 280px;
-    height: 40px;
+    max-width: 280px;
+    max-height: 40px;
+    width: auto;
     border-radius: 5px;
     margin: 10px
 }
@@ -193,6 +207,21 @@
 
 /* Media Queries for Responsiveness */
 
+@media (max-width: 1000px) {
+    #landingpage-section-2-container {
+        height: 20vw;
+        /* max-width: 700px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        object-fit: contain;
+        padding: 20px; */
+    }
+}
+
 @media (max-width: 950px) {
 
     #landingpage-navigation-container > img {
@@ -205,11 +234,15 @@
     }
 
     .landingpage-section-1-midtitle {
-        font-size: 1.2em;
+        font-size: 2.68vw;
     }
 
     #landingpage-navigation-in-out-container > button {
         width: 120px
+    }
+
+    #landingpage-section-2-container > button{
+        font-size: 2.2vw;
     }
 }
 
@@ -244,8 +277,7 @@
     }
 
     #landingpage-section4-title,
-    #landingpage-section4-minititle,
-    .landingpage-section-1-midtitle {
+    #landingpage-section4-minititle {
         font-size: 1em;
     }
 
@@ -261,5 +293,21 @@
     #landingpage-footer-subsection {
         gap: 1px;
         width: 160px
+    }
+
+}
+
+
+@media (max-width: 500px) {
+    .landingpage-section-1-midtitle {
+        font-size: .82em;
+        text-align: center;
+        line-height: 1.5;;
+        margin: 0px 10px;
+    }
+
+    #landingpage-section-2-container > button{
+        width: 207px;
+        font-size: 12px;
     }
 }
