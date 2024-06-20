@@ -45,7 +45,7 @@ function NotebookPage () {
                     </div>
                 </div>
                 <h1 id='homepage-underline'></h1>
-                <p className="page-title-blocks">Your Entries</p>
+                <p className="page-title-explainer">Your Entries</p>
                 <div id='homepage-notebook-card-container'>
                     {entries
                         ? Object.values(noteEntries).map(entry => (

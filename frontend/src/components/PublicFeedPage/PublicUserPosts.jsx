@@ -28,12 +28,12 @@ function PublicUserPosts () {
 
 
     return (
-        <div>
+        <div className="homepage-main-container">
             {loaded ?
             <div>
                 <p className='mini-page-title' ></p>
                 <h1 id='homepage-user-title'>{`${user?.name}'s Posts`}</h1>
-                <p className="page-title-blocks">Your Public Entries</p>
+                <p className="page-title-explainer">Your Public Entries</p>
                 <div id='homepage-notebook-card-container'>
                     {entries.length ? entries.map(entry => (
                         <div key={entry?.id}>

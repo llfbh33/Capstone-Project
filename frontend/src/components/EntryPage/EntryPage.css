@@ -10,14 +10,19 @@
     width: 90%;
     word-break: break-all;
     overflow-wrap: break-word;
-    border-bottom: 1px solid #3399FF;
+    padding-left: 30px;
+    border-radius: 26px;
+    box-shadow: -8px 10px 8px -1px rgba(51, 153, 255, 0.418), 0px 12px 24px -8px rgba(51, 153, 255, 0.479);
 }
 
 #entrypage-entry-title  h1 {
     width: 80%;
     word-break: break-all;
     overflow-wrap: break-word;
-    border-bottom: 1px solid #3399FF;
+    padding: 0px 30px;
+    margin-bottom: 30px;
+    border-radius: 26px;
+    box-shadow: -8px 10px 8px -1px rgba(51, 153, 255, 0.418), 0px 12px 24px -8px rgba(51, 153, 255, 0.479);
 }
 
 #entrypage-entrytitle-buttons {
