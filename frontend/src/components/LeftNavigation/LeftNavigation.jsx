@@ -58,14 +58,19 @@ function LeftNavigation() {
 
 //Open and close of mid and size tabs / navigates
     const midNavElementClick = (string) => {
-        setOpenMid(string)
-        setOpenSml('')
-        if (string === 'notebooks'){
-            navigate('/')
-        } else if (string === 'all-posts') {
-            navigate('/public')
-        } else if (string === 'user-posts') {
-            navigate('/public/user')
+        if (openMid === string) {
+            setOpenMid('')
+        }else {
+            setOpenMid(string)
+            setOpenSml('')
+
+            if (string === 'notebooks'){
+                navigate('/')
+            } else if (string === 'all-posts') {
+                navigate('/public')
+            } else if (string === 'user-posts') {
+                navigate('/public/user')
+            }
         }
     };
 
@@ -102,6 +107,7 @@ function LeftNavigation() {
                         <div className={openMain === '/' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/')}>Home</div>
 
                         <div hidden={openMain === '/' ? false : true}>
+                            <div className="left-nav-mid-line"></div>
                             <div className={openMid === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
                             <div hidden={openMid === 'notebooks' ? false : true}>
                                 <div className="left-nav-small-line"></div>
@@ -118,7 +124,7 @@ function LeftNavigation() {
                             <div className={openMid === 'theme' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('theme')}>Theme</div>
                             <div hidden={openMid === 'theme' ? false : true}>
                                 <div className="left-nav-small-line"></div>
-                                <div className="left-nav-small-ele">
+                                <div className="left-nav-small-ele-default">
                                     <div className="left-nav-sml-ele-selected">PenCrafted (default)</div>
                                 </div>
                             </div>
@@ -140,6 +146,7 @@ function LeftNavigation() {
 
                         <div>
                             <div className={openMain === '/comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/comments')}>Comments</div>
+                            <div className="left-nav-mid-line" hidden={openMain !== '/comments'} ></div>
                         </div>
 
                     {/* <div>

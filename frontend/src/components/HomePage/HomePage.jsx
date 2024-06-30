@@ -7,6 +7,7 @@ import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
+import { useModal } from '../../context/Modal';
 import './HomePage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
@@ -18,6 +19,7 @@ function HomePage () {
     const notebooks = useSelector(state => state.notebooks);
     const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
+    const { setModalContent } = useModal();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -30,7 +32,11 @@ function HomePage () {
 
     const handleClickNotebook = (id) => {
         navigate(`/notebook/${id}`)
+    }
 
+    const handleNewNotebook = () => {
+        let modalComponent =<NewNotebookFormModal />
+        setModalContent(modalComponent);
     }
 
     if (loading) {
@@ -74,12 +80,9 @@ function HomePage () {
                     </div>
                 ))}
 
-                <div id='homepage-new-notebook-card'>
+                <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
                     <div id='create-notebook-title'>
-                        <OpenModalMenuItem
-                        itemText="Click here to create a new Notebook"
-                        modalComponent={<NewNotebookFormModal />}
-                        />
+                        Click here to create a new Notebook
                     </div>
                 </div>
 
