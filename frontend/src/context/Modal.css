@@ -30,3 +30,11 @@
   width: 600px; */
   padding: 20px;
 }
+
+
+@media(max-width: 650px) {
+  #modal-content {
+    width: 70%;
+    max-height: 90%;
+  }
+}
