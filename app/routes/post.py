@@ -105,6 +105,12 @@ def create_entry():
         post_return = entry.to_dict()
         post_return['post'] = post.to_dict()
 
+        entry_comments = []
+        for comment in entry.comments:
+            entry_comments.append(comment.to_dict())
+
+        post_return['comments'] = entry_comments
+
         return post_return
     else:
         return form.errors, 400
