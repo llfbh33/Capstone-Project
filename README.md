@@ -53,6 +53,9 @@ https://capstone-project-lm4v.onrender.com
 #### Landing Page
 ![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-landing-page.png)
 
+#### Home Page
+![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-homepage.png)
+
 
 ## Endpoint Documentation
 
