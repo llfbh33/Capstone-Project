@@ -257,7 +257,6 @@
     width: 94%;
     max-width: 94%;
     margin-bottom: 28px;
-    margin-right: 60px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -265,6 +264,9 @@
     object-fit: contain;
     overflow: hidden;
     overflow-wrap: break-word;
+    border: 1px solid #3399FF;
+    box-shadow: 0 1px 20px rgba(121, 140, 250, 0.799);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .small-post-content {
@@ -277,6 +279,8 @@
 
 .small-post-container:hover {
     border: 1px solid #3399FF;
+    box-shadow: 0 8px 50px rgba(121, 140, 250, 0.799);
+    transform: translateY(-6px);
 }
 
 .wrap-name-post {
@@ -295,7 +299,6 @@
 .publicfeed-post-title {
     display: flex;
     justify-content: space-between;
-    width: 99%;
     overflow-wrap: break-word;
 }
 
@@ -319,20 +322,25 @@
 .public-post-content-container-singular {
     min-width: 90%;
     border: 1px solid #4da2f7;
+    border-radius: 5px;
     line-height: 1.5;
     font-size: 20px;
     overflow-wrap: break-word;
     padding: 20px 20px;
-    max-width: 1230px
+    max-width: 1230px;
+    box-shadow: 0 1px 36px rgba(121, 140, 250, 0.799);
 }
 
 .message-container-singular {
     border: 1px solid #4da2f7;
-    height: 80px;
+    min-height: 80px;
+    margin-left: 20px;
+    border-radius: 5px;
     width: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 1px 36px rgba(121, 140, 250, 0.799);
 }
 
 .public-post-message-container-singular {
@@ -370,7 +378,7 @@
     border-radius: 7px;
     font-size: 16px;
     font-family: "Comic Neue", cursive;
-    /* padding: 10px */
+    box-shadow: 0 1px 36px rgba(121, 140, 250, 0.799);
 }
 
 .post-comment-btn-container-singular {
@@ -480,9 +488,23 @@
         margin-top: 10px;
         margin-bottom: 16px
     }
-}
 
-@media(max-width: 850px) {
+    .users-posts-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mini-page-explination {
+        text-align: center;
+    }
+
+    .post-name {
+        width: 100%;
+        text-align: center;
+        box-shadow: 0px 1px 0px 0px rgba(121, 140, 250, 0.466);
+    }
+
     .post-name-and-user-container {
         flex-direction: column;
     }
@@ -497,8 +519,10 @@
     }
 }
 
+@media(max-width: 850px) {
 
-@media(max-width: 650px) {
+
+
     .public-post-title-singular {
         flex-direction: column;
         align-items: center;
@@ -510,12 +534,27 @@
         max-width: 100%;
         text-align: center;
     }
+}
 
+
+@media(max-width: 650px) {
     .public-post-message-container-singular {
         flex-direction: column;
     }
 
     .public-post-message-container-singular div {
         width: 100%;
+    }
+
+    .message-container-singular {
+        margin-left: 0px
+    }
+
+    .publicfeed-post-title {
+        flex-direction: column;
+    }
+
+    .publicfeed-post-title h1 {
+        margin: 10px 0px;
     }
 }

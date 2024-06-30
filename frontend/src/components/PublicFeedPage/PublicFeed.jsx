@@ -21,7 +21,7 @@ function PublicFeed() {
 
     return (
         <div className="public-feed-main-container">
-            <p>Read what others have written and give them advice.  Remember to be respectful.</p>
+            <p className='mini-page-explination'>Read what others have written and give them advice.  Remember to be respectful.</p>
             <div className="publicfeed-post-title">
                 <h1>Public Feed</h1>
                 <h1>All Entries</h1>
