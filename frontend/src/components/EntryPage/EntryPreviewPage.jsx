@@ -79,7 +79,6 @@ function EntryPreviewPage() {
             </div>
             <div className="singular-space-container"></div>
             <h1 className='entrypage-underline'></h1>
-
         </div>
     )}
 }

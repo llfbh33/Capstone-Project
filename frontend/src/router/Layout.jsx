@@ -5,7 +5,6 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import LeftNavigation from "../components/LeftNavigation/LeftNavigation";
 import loadState from "../utils/loadData";
-import { thunkLoadUsers } from "../redux/users";
 import LoadingPage from "../components/LoadingPage/LoadingPage";
 
 
