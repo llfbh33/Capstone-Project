@@ -9,7 +9,7 @@
 
 ## ReadMe Index
 
-[Projject Overview](#project-overview)
+[Project Overview](#project-overview)
 | [Project Journey](#project-journey)
 | [Live Link](#live-link)
 | [Implemented Technologies](#implemented-technologies)
@@ -60,7 +60,7 @@ https://capstone-project-lm4v.onrender.com
 ![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-edit-entry-page.png)
 
 #### Edit Entry Save Modal
-![image]()
+![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-edit-save-modal.png)
 
 #### Public post
 ![image]()
