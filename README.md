@@ -48,7 +48,9 @@ https://capstone-project-lm4v.onrender.com
 ![render-icon](https://github.com/llfbh33/Capstone-Project/assets/145170944/9141c5c5-9743-4210-a6bc-8c6f2a2492c7)
 
 
-## Images and page titles go here
+## App Layout
+
+#### Landing Page
 
 
 ## Endpoint Documentation
