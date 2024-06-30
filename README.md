@@ -63,7 +63,7 @@ https://capstone-project-lm4v.onrender.com
 ![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-edit-save-modal.png)
 
 #### Public post
-![image]()
+![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-public-post.png)
 
 
 ## Endpoint Documentation
