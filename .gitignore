@@ -6,3 +6,5 @@ __pycache__/
 .vscode/
 *.db
 node_modules/
+TODO.txt
+forReference.md
