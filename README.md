@@ -56,6 +56,15 @@ https://capstone-project-lm4v.onrender.com
 #### Home Page
 ![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-homepage.png)
 
+#### Edit Entry Page
+![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-edit-entry-page.png)
+
+#### Edit Entry Save Modal
+![image]()
+
+#### Public post
+![image]()
+
 
 ## Endpoint Documentation
 
