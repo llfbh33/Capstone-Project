@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-// import { thunkLoadNotebooks } from "../../../redux/notebook";
 import { thunkEditEntry } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import "./EntryModals.css";
@@ -36,7 +35,6 @@ function EditEntryNameFormModal({entry}) {
         if (serverResponse.name) {
             setValidationErrors(serverResponse);
         } else {
-            // await dispatch(thunkLoadNotebooks())
             setName('')
             closeModal();
         }

@@ -9,7 +9,6 @@ import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
 import { useModal } from '../../context/Modal';
 import './NotebookPage.css'
 
-// adjust this page for entries instead of notebooks
 
 function NotebookPage () {
     const {notebookId} = useParams();

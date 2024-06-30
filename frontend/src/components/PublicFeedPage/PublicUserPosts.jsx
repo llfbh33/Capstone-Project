@@ -7,7 +7,8 @@ import { FaEdit } from "react-icons/fa";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import EditPostFormModal from "../Modals/PostModals/EditPostModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
-import LoadingPage from "../LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
+
 
 
 function PublicUserPosts () {
@@ -26,6 +27,9 @@ function PublicUserPosts () {
         setEntries(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
     }, [allEntries, user])
 
+    if (!loaded) {
+        return <LoadingPage />
+    }
 
     return (
         <div className="homepage-main-container">

@@ -1,38 +1,11 @@
-// import { NavLink } from "react-router-dom";
-// import ProfileButton from "./ProfileButton";
-import "./LandingPage.css";
 
-import { useState, useEffect, useRef } from "react";
+import "./LandingPage.css";
 
 import LoginFormModal from "../Modals/LoginFormModal";
 import SignupFormModal from "../Modals/SignupFormModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 
 function Navigation() {
-  const [showMenu, setShowMenu] = useState(false);
-  // const user = useSelector((store) => store.session.user);
-  const ulRef = useRef();
-
-  // const toggleMenu = (e) => {
-  //   e.stopPropagation(); // Keep from bubbling up to document and triggering closeMenu
-  //   setShowMenu(!showMenu);
-  // };
-
-  useEffect(() => {
-    if (!showMenu) return;
-
-    const closeMenu = (e) => {
-      if (ulRef.current && !ulRef.current.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-
-    document.addEventListener("click", closeMenu);
-
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
-
-  const closeMenu = () => setShowMenu(false);
 
   return (
     <div id='landingpage-navigation-container' >
@@ -40,12 +13,10 @@ function Navigation() {
         <div id='landingpage-navigation-in-out-container'>
             <OpenModalMenuItem
               buttonText="Log In"
-              onItemClick={closeMenu}
               modalComponent={<LoginFormModal />}
             />
             <OpenModalMenuItem
               buttonText="Sign Up"
-              onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
             />
         </div>

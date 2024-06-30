@@ -132,14 +132,8 @@
 
     #homepage-user-title,
     .page-title-explainer {
-        /* width: 60%; */
+        padding: 0px;
         text-align: center;
+        border-radius: 5px;
     }
 }
-
-
-/* #homepage-underline {
-    border-bottom: 1px solid #3399FF;
-    width: 81%;
-    margin: 0px
-} */

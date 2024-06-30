@@ -20,7 +20,7 @@ function PublicFeed() {
     }, [allEntries])
 
     return (
-        <div>
+        <div className="public-feed-main-container">
             <p>Read what others have written and give them advice.  Remember to be respectful.</p>
             <div className="publicfeed-post-title">
                 <h1>Public Feed</h1>
@@ -33,9 +33,10 @@ function PublicFeed() {
                         <div className="post-name-and-user-container">
                             <h3 className="post-name">{post.name}</h3>
                             <div className="post-username-image-container">
-                                <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
-                                <h3>{allUsers[post.user_id]?.username}</h3>
-
+                                <div className="image-and-username">
+                                    <img src={allUsers[post.user_id]?.profile_image} className="post-profile-image"/>
+                                    <h3>{allUsers[post.user_id]?.username}</h3>
+                                </div>
                                 {post.user_id === currUser.id
                                 ? <div className="homepage-edit-notebook">
                                         <OpenModalMenuItem

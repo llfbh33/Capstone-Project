@@ -84,8 +84,8 @@ function PublicPost() {
                     <div className="public-post-comment-input-area">
                         <textarea
                             type='text'
-                            rows={4}
-                            cols={140}
+                            // rows={4}
+                            // cols={140}
                             value={comment}
                             onChange={(e) => setComment(e.target.value)}
                         />

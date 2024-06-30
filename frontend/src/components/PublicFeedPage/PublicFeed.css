@@ -226,7 +226,6 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    /* margin-right: 267px; */
     overflow-wrap: break-word;
 }
 
@@ -297,7 +296,6 @@
     display: flex;
     justify-content: space-between;
     width: 99%;
-    /* border-bottom: 1px solid #4da2f7; */
     overflow-wrap: break-word;
 }
 
@@ -309,8 +307,7 @@
 .public-post-title-singular {
     display: flex;
     justify-content: space-between;
-    max-width: 1300px;
-    /* border-bottom: 1px solid #4da2f7; */
+    width: 100%;
     overflow-wrap: break-word;
 }
 
@@ -354,15 +351,26 @@
     align-items: center;
 }
 
+.public-post-comment-input-area {
+    width: 90%;
+    height: 80px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .public-post-comment-input-area > textarea {
-    resize: none;
+    /* resize: none; */
+    width: 100%;
+    height: 80%;
     color: white;
     background-color: black;
     border: 1px solid #4da2f7;
     border-radius: 7px;
     font-size: 16px;
     font-family: "Comic Neue", cursive;
-    padding: 10px
+    /* padding: 10px */
 }
 
 .post-comment-btn-container-singular {
@@ -447,4 +455,67 @@
 
 .singular-space-container {
     height: 40px;
+}
+
+.image-and-username {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(max-width: 950px) {
+    .public-feed-main-container,
+    .public-post-singular {
+        width: 90%;
+    }
+
+    .public-post-message-container-singular {
+        max-width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .small-post-container {
+        margin: 0px;
+        margin-top: 10px;
+        margin-bottom: 16px
+    }
+}
+
+@media(max-width: 850px) {
+    .post-name-and-user-container {
+        flex-direction: column;
+    }
+
+    .post-name-and-user-container h3 {
+        margin: 8px;
+    }
+
+    .post-username-image-container {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+
+
+@media(max-width: 650px) {
+    .public-post-title-singular {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .public-post-title-singular h1,
+    .wrap-name-post-singular {
+        width: 100%;
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .public-post-message-container-singular {
+        flex-direction: column;
+    }
+
+    .public-post-message-container-singular div {
+        width: 100%;
+    }
 }

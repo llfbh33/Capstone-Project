@@ -8,17 +8,33 @@ import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
 import './HomePage.css'
+import { useEffect, useState } from "react";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 
 
 function HomePage () {
     const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
+    const [theseNotebooks, setTheseNotebooks] = useState('');
+    const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (notebooks) setTheseNotebooks(notebooks)
+    }, [notebooks])
+
+    useEffect(() => {
+        if (theseNotebooks) setLoading(false)
+    }, [theseNotebooks])
 
     const handleClickNotebook = (id) => {
         navigate(`/notebook/${id}`)
+
+    }
+
+    if (loading) {
+        return <LoadingPage />
     }
 
 

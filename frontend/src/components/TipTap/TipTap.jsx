@@ -15,7 +15,6 @@ const MenuBar = ({editor}) => {
     if (size >= 6) {
       setSize(2)
     }
-    console.log('size', size)
     editor.chain().focus().toggleHeading({ level: size }).run()
   }
 
@@ -35,7 +34,6 @@ const MenuBar = ({editor}) => {
                 .toggleBold()
                 .run()
             }
-            // id='icon-button'
             className={editor.isActive('bold') ? 'is-active' : 'icon-button'}
           >
             <FaBold />

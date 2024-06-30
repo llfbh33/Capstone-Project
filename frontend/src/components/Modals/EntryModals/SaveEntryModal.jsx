@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { thunkEditEntry } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal";
 import "./EntryModals.css";
-// import { useEffect } from "react";
 
 
 
@@ -29,7 +28,6 @@ function SaveEntryModal({entry, content, setIsPreview}) {
     }
 
     const deleteChanges = () => {
-        console.log('Discard changes')
         setIsPreview('Edit Entry')
         closeModal();
     }

@@ -138,7 +138,6 @@ def delete_notebook(post_id):
     """
     Remove an entry from being public and delete the post
     """
-    print('I have arrived')
     post_to_delete = Post.query.get(post_id)
 
     entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()

@@ -103,3 +103,7 @@ first walk through full crud - then validations
 
 - Go through each modal and adjust accordingly
 - comment out all tabs on left nav bar that will not be used
+
+
+
+file_template = %%(year)d%%(month).2d%%(day).2d_%%(hour).2d%%(minute).2d%%(second).2d_%%(slug)s

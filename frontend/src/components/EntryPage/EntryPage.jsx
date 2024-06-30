@@ -10,7 +10,7 @@ import EntryEditPage from "./EntryEditPage";
 import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
-import LoadingPage from "../LoadingPage";
+import LoadingPage from "../LoadingPage/LoadingPage";
 
 
 function EntryPage() {
@@ -23,7 +23,6 @@ function EntryPage() {
 
     useEffect(() => {
         if (entry) setLoaded(true);
-        // else setLoaded(false);
     }, [entry])
 
     useEffect(() =>{
