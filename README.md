@@ -51,6 +51,7 @@ https://capstone-project-lm4v.onrender.com
 ## App Layout
 
 #### Landing Page
+![image](https://github.com/llfbh33/Capstone-Project/blob/main/capstone-landing-page.png)
 
 
 ## Endpoint Documentation
