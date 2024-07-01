@@ -1,5 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FaGithub } from "react-icons/fa6";
+import { CiLinkedin } from "react-icons/ci";
 
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import LoginFormModal from "../Modals/LoginFormModal";
@@ -78,8 +80,8 @@ function LandingPage() {
 
                 <footer id='landingpage-footer' >
                     <div id='landingpage-footer-subsection'>
-                        <Link to='https://github.com/llfbh33' className='landingpage-footer-link' target='_blank'>Github</Link>
-                        <Link className='landingpage-footer-link' onClick={() => alert("Aubrie Woodbine's LinkedIn is coming soon!")}>Contact Us</Link>
+                        <Link to='https://github.com/llfbh33' className='landingpage-footer-link' target='_blank'><FaGithub /></Link>
+                        <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='landingpage-footer-link' target='_blank'><CiLinkedin /></Link>
                     </div>
                     <div id='landingpage-footer-subsection'>
                         PenCrafted by Aubrie Woodbine

@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { FaGithub } from "react-icons/fa6";
+import { CiLinkedin } from "react-icons/ci";
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
@@ -149,13 +151,18 @@ function LeftNavigation() {
                             <div className="left-nav-mid-line" hidden={openMain !== '/comments'} ></div>
                         </div>
 
-                    {/* <div>
+                    {/* {/* <div>
                         <div className='left-nav-main-ele' onClick={() => alert('Following coming soon')}>Following</div>
-                    </div>
+                    </div> */}
 
                     <div>
-                        <div className='left-nav-main-ele' onClick={() => alert('Liked Posts coming soon')}>LikedPosts</div>
-                    </div> */}
+                        <div className={openMain === '/dev-links' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/dev-links')}>Dev Links</div>
+                        <div className="left-nav-mid-line" hidden={openMain !== '/dev-links'} ></div>
+                        <div hidden={openMain === '/dev-links' ? false : true} className="developer-link-container">
+                            <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
+                            <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
+                        </div>
+                    </div>
                     <div className="signout-on-media-query">
                         <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
                     </div>

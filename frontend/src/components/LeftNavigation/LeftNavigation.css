@@ -143,8 +143,25 @@
     display: none;
 }
 
+.developer-link-container {
+    margin: 12px;
+}
 
+.developer-links {
+    color:#7e7b7b;
+    font-size: 30px;
+    text-decoration: none;
+    border-radius: 50%;
+    width: 80px;
+    margin: 22px;
+}
 
+.developer-links:hover {
+    color: white; 
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.6),
+                 0 0 30px rgba(255, 255, 255, 0.4);
+}
 
 
 

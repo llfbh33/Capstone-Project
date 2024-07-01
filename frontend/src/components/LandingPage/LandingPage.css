@@ -180,21 +180,23 @@
 
 #landingpage-footer-subsection {
     display: flex;
-    gap: 40px
+    gap: 60px;
+    margin-left: 30px
 }
 
 .landingpage-footer-link {
-    color:white;
+    color:#7e7b7b;
+    font-size: 30px;
     text-decoration: none;
-    height: 40px;
-    width: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    border-radius: 50%;
+    height: 32px;
 }
 
 .landingpage-footer-link:hover {
-    text-decoration: underline;
+    color: white;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
+                 0 0 20px rgba(255, 255, 255, 0.6),
+                 0 0 30px rgba(255, 255, 255, 0.4);
 }
 
 
