@@ -45,10 +45,9 @@ function HomePage () {
 
 
     return (
-        <div className="homepage-main-container">
-            <p className='mini-page-explination' >Ready to write? Create a notebook to get started!</p>
-            <h1 id='homepage-user-title'>{`${user?.name}'s Home`}</h1>
-            <p className="page-title-explainer">Your Notebooks</p>
+        <div className="main-container">
+            <h1 className='title page-title'>{`${user?.name}'s Home`}</h1>
+            <p className="title page-subtitle">Your Notebooks</p>
             <div id='homepage-notebook-card-container'>
 
                 {Object.values(notebooks).map(notebook => (
@@ -82,7 +81,7 @@ function HomePage () {
 
                 <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
                     <div id='create-notebook-title'>
-                        Click here to create a new Notebook
+                        Ready to write? Create a notebook to get started!
                     </div>
                 </div>
 

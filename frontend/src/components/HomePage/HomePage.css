@@ -1,33 +1,9 @@
-/* Main Container */
-.homepage-main-container {
-    width: 100%;
-}
 
-/* Titles on the home page */
-.mini-page-explination {
-    padding-left: 10px;
-}
-
-#homepage-user-title {
-    padding: 10px 10px 10px 30px;
-    width: 70%;
-    border-radius: 26px;
-    box-shadow: -8px 10px 8px -1px rgba(51, 153, 255, 0.418), 0px 12px 24px -8px rgba(51, 153, 255, 0.479);
-}
-
-.page-title-explainer {
-    padding: 10px 10px 10px 30px;
-    font-size: 1.2em;
-    width: 200px;
-    border-radius: 26px;
-    box-shadow: -8px 10px 8px -1px rgba(51, 153, 255, 0.418), 0px 12px 24px -8px rgba(51, 153, 255, 0.479);
-}
 
 /* Styling for notebook cards */
 #homepage-notebook-card-container {
     display: flex;
     flex-wrap: wrap;
-    padding: 20px 0px;
 }
 
 .homepage-notebook-card {

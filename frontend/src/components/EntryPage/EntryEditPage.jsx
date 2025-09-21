@@ -1,9 +1,9 @@
 //imports for text editor
 import { Color } from '@tiptap/extension-color'
-import ListItem from '@tiptap/extension-list-item'
-import Underline from '@tiptap/extension-underline';
-import TextStyle from '@tiptap/extension-text-style'
-import StarterKit from '@tiptap/starter-kit'
+import { ListItem } from '@tiptap/extension-list-item'
+import { Underline } from '@tiptap/extension-underline';
+import { TextStyle } from '@tiptap/extension-text-style'
+import { StarterKit } from '@tiptap/starter-kit'
 import { useEditor, EditorContent } from '@tiptap/react'
 
 import { useParams } from "react-router-dom";
