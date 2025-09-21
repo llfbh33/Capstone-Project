@@ -2,12 +2,16 @@
 body.light {
     --bg: white;
     --bg-nav: #a7cef5;
+    --nav-hover: rgb(108, 104, 104);
+    --nav-selected: #3616ec;
     --text: black;
 }
 
 body.dark {
     --bg: black;
     --bg-nav: #100647;
+    --nav-hover: rgb(158, 156, 156);
+    --nav-selected: lightblue;
     --text: white
 }
 
