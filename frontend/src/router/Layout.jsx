@@ -1,7 +1,7 @@
 import { useEffect, useState} from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { ModalProvider, Modal } from "../context/Modal";
+import { ModalProvider, Modal } from "../context/Modal/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import LeftNavigation from "../components/LeftNavigation/LeftNavigation";
 import loadState from "../utils/loadData";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import './PostModals.css'
 

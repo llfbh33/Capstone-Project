@@ -7,8 +7,8 @@ import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import LoginFormModal from "../Modals/LoginFormModal";
 import Navigation from './Navigation'
 import { thunkLogin } from "../../redux/session";
-import { ModalProvider, Modal } from "../../context/Modal";
-import { useAppTheme } from '../../context/ThemeContext';
+import { ModalProvider, Modal } from "../../context/Modal/Modal";
+import { useAppTheme } from '../../context/Theme/ThemeContext';
 
 import './LandingPage.css'
 

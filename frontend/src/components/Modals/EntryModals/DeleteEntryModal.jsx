@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 
 import { thunkDeleteEntry } from "../../../redux/entry"
-import { useModal } from "../../../context/Modal"
+import { useModal } from "../../../context/Modal/Modal";
 import './EntryModals.css'
 
 function DeleteEntryFormModal({entry}) {

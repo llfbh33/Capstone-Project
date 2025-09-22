@@ -24,7 +24,7 @@ body {
     font-family: "Comic Neue", cursive;
     background-color: var(--bg);
     color: var(--text)
-    /* background-color: #100647; */
+        /* background-color: #100647; */
 }
 
 .error-validation {
@@ -55,14 +55,15 @@ body {
 .left-hand-nav-container {
     width: 300px;
     height: 100vh;
-    position: relative;
+    position: fixed;
 }
 
 .main-insite-content-container {
-    display: flex;
-    justify-content: center;
+    flex: 1;
+    /* leave space for sidebar */
+    margin-left: 300px;
+    overflow-y: auto;
     padding: 0px 20px;
-    width: 100%;
 }
 
 

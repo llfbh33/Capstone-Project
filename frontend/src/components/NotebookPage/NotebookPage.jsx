@@ -6,7 +6,7 @@ import { BsTrash3Fill } from "react-icons/bs";
 import CreateEntryNameFormModal from '../Modals/EntryModals/CreateEntryNameModal';
 import DeleteEntryFormModal from '../Modals/EntryModals/DeleteEntryModal';
 import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
-import { useModal } from '../../context/Modal';
+import { useModal } from '../../context/Modal/Modal';
 import './NotebookPage.css'
 
 

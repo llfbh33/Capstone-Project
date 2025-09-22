@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 
 import { thunkEditEntry } from "../../../redux/entry";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal/Modal";
 import "./EntryModals.css";
 
 

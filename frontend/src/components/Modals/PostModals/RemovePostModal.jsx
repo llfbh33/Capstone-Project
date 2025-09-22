@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { thunkDeletePost, thunkLoadEntries } from "../../../redux/entry"
-import { useModal } from "../../../context/Modal"
+import { useModal } from "../../../context/Modal/Modal";
 
 
 function RemovePostModal({post}) {

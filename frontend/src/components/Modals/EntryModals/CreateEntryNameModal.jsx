@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { thunkCreateEntry, thunkLoadEntries } from "../../../redux/entry";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal/Modal";
 import "./EntryModals.css";
 
 

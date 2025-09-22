@@ -7,7 +7,7 @@ import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
-import { useModal } from '../../context/Modal';
+import { useModal } from '../../context/Modal/Modal';
 import './HomePage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { thunkCreateNotebook } from "../../../redux/notebook";
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal/Modal";
 import "./NotebookModal.css";
 
 function NewNotebookFormModal() {

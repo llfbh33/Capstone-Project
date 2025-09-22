@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useModal } from "../../../context/Modal";
+import { useModal } from "../../../context/Modal/Modal";
 import "./NotebookModal.css";
 import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
 

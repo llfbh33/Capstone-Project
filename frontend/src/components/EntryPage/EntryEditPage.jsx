@@ -12,7 +12,7 @@ import { useState, useRef, useCallback, useEffect } from "react";
 
 import SaveEntryModal from '../Modals/EntryModals/SaveEntryModal'
 import { thunkEditEntry, thunkLoadEntries } from "../../redux/entry";
-import { useModal } from "../../context/Modal";
+import { useModal } from "../../context/Modal/Modal";
 import MenuBar from "../TipTap/TipTap";
 import './EntryPage.css'
 

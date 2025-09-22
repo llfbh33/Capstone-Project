@@ -5,7 +5,8 @@ import { RouterProvider } from "react-router-dom";
 import configureStore from "./redux/store";
 import { router } from "./router";
 import * as sessionActions from "./redux/session";
-import { ThemeProvider } from "./context/ThemeContext";
+import { ThemeProvider } from "./context/Theme/ThemeContext";
+import { NavProvider } from "./context/Navigation/NavigationContext";
 
 import "./index.css";
 
@@ -22,7 +23,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ReduxProvider store={store}>
       <ThemeProvider>
-        <RouterProvider router={router} />
+        <NavProvider>
+          <RouterProvider router={router} />
+        </NavProvider>
       </ThemeProvider>
     </ReduxProvider>
   </React.StrictMode>

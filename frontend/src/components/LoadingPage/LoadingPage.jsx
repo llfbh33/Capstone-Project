@@ -1,5 +1,5 @@
 import './LoadingPage.css'
-import { useAppTheme } from '../../context/ThemeContext'
+import { useAppTheme } from '../../context/Theme/ThemeContext';
 
 const LoadingPage = () => {
     const { theme } = useAppTheme();

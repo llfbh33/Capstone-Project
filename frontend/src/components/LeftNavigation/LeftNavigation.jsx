@@ -3,7 +3,8 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
-import { useAppTheme } from "../../context/ThemeContext";
+import { useAppTheme } from "../../context/Theme/ThemeContext";
+import { useNav } from "../../context/Navigation/NavigationContext";
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
@@ -21,7 +22,9 @@ function LeftNavigation() {
     const [mediaQuery, setMediaQuery] = useState(window.innerWidth < 950);
     const [navVisible, setNavVisible] = useState(!mediaQuery)
     const { theme, setTheme } = useAppTheme();
-    console.log('theme', theme)
+    const { activeNav, setActiveNav } = useNav();
+    console.log('activeNav', activeNav);
+    console.log('openMain', openMain);
 
     useEffect(() => {
         // setting a watch on if the minimum width is 950px
@@ -45,6 +48,34 @@ function LeftNavigation() {
             mediaQueryLarge.removeEventListener('change', makeNavTabsInvisible);
         };
     }, [])
+
+
+
+    const sidePanelClick = (change, level) => {
+        if (change === 'home') {
+            const newState = {
+                main: { title: 'home', route: '/', open: !activeNav.main.open },
+                mid: { title: 'notebooks', route: '/', open: false },
+                small: { title: null, id: null, route: null, open: false},
+            }
+            setActiveNav(newState);
+        } else if (change === 'notebooks') {
+            const newState = {
+                main: { title: 'home', route: '/', open: true },
+                mid: { title: 'notebooks', route: '/', open: !activeNav.mid.open },
+                small: { title: null, id: null, route: null, open: false},
+            }
+            setActiveNav(newState);
+        }
+
+        if (level === 'small') {
+            setActiveNav((prev) => ({
+                ...prev,
+                small: change,
+            }))
+            navigate(change.route)
+        }
+    }
 
     // Open and close of main navigation tabs
     const mainNavElementClick = (string) => {
@@ -109,17 +140,17 @@ function LeftNavigation() {
                 </div>
                 <div id="navigation-container" style={{ display: navVisible ? 'block' : 'none' }}>
                     {/* <div> */}
-                    <div className={openMain === '/' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/')}>Home</div>
+                    <div className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => sidePanelClick('home')}>Home</div>
 
-                    <div hidden={openMain === '/' ? false : true}>
+                    <div hidden={!activeNav.main.open}>
                         <div className="left-nav-mid-line"></div>
-                        <div className={openMid === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('notebooks')}>Notebooks</div>
-                        <div hidden={openMid === 'notebooks' ? false : true}>
+                        <div className={activeNav.mid.title === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => sidePanelClick('notebooks')}>Notebooks</div>
+                        <div hidden={!activeNav.mid.open}>
                             <div className="left-nav-small-line"></div>
                             <div className="left-nav-small-ele">
                                 {notebooks
                                     ? Object.values(notebooks).map(notebook => (
-                                        <div className={openSml === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                        <div className={activeNav.small.id === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => sidePanelClick({title: notebook.name, id: notebook.id, route: `notebook/${notebook.id}`, open: true}, 'small')}>
                                             <div>{notebook?.name}</div>
                                         </div>
                                     ))

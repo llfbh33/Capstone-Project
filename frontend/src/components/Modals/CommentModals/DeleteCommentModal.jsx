@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { thunkDeleteComment, thunkLoadEntries } from '../../../redux/entry';
-import { useModal } from '../../../context/Modal';
+import { useModal } from "../../../context/Modal/Modal";
 import './CommentModals.css';
 
 

@@ -4,7 +4,7 @@ import "./LandingPage.css";
 import LoginFormModal from "../Modals/LoginFormModal";
 import SignupFormModal from "../Modals/SignupFormModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
-import { useAppTheme } from "../../context/ThemeContext";
+import { useAppTheme } from "../../context/Theme/ThemeContext";
 
 function Navigation() {
   const { theme, setTheme } = useAppTheme();
