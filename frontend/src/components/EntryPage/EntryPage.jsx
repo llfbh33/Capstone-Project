@@ -44,10 +44,10 @@ function EntryPage() {
             {loaded ?
             <div>
 
-                <div id='entrypage-entry-title'>
-                    <h2>{`Notebook: ${notebook?.name}`}</h2>
+                <div >
+                    <h1 className='title page-title'>{`Notebook: ${notebook?.name}`}</h1>
                     <div id='entrypage-entrytitle-buttons'>
-                        <h1>{`Entry: ${name}`}</h1>
+                        <p className="title page-subtitle">{`Entry: ${name}`}</p>
 
                         <div className="entrypage-button-container">
                             <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
