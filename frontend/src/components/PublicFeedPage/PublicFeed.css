@@ -203,8 +203,8 @@
 
 .public-post-comment-input-area > textarea {
     resize: none;
-    color: white;
-    background-color: black;
+    color: var(--text);
+    background-color: var(--bg);
     border: 1px solid #4da2f7;
     border-radius: 7px;
     font-size: 16px;
@@ -372,8 +372,8 @@
     /* resize: none; */
     width: 100%;
     height: 80%;
-    color: white;
-    background-color: black;
+    color: var(--text);
+    background-color: var(--bg);
     border: 1px solid #4da2f7;
     border-radius: 7px;
     font-size: 16px;
@@ -423,8 +423,8 @@
 
 
 .entrypage-delete-comment > button {
-    background-color: #100647;
-    color: white;
+    background-color: var(--bg-nav);
+    color: var(--text);
     border-radius: 10px;
     height: 30px;
     border: 1px solid #3399FF;
@@ -435,7 +435,7 @@
 
 
 .entrypage-delete-comment > button:hover {
-    background-color: #231764;
+    background-color: var(--button-hover);
     border: 1px solid #4da2f7;
 }
 

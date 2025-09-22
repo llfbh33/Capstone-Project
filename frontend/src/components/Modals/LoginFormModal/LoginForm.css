@@ -20,7 +20,7 @@
 }
 
 .regular-string {
-    color: #100647;
+    color: var(--bg-nav);
     margin: 0px;
     height: 20px;
 }

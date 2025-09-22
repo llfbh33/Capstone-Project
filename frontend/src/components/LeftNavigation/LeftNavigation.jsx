@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
+import { useAppTheme } from "../../context/ThemeContext";
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
@@ -19,16 +20,8 @@ function LeftNavigation() {
     // State the small screen based on the current window width
     const [mediaQuery, setMediaQuery] = useState(window.innerWidth < 950);
     const [navVisible, setNavVisible] = useState(!mediaQuery)
-    const [theme, setTheme] = useState(() =>
-        window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-    );
-
+    const { theme, setTheme } = useAppTheme();
     console.log('theme', theme)
-
-    useEffect(() => {
-        document.body.classList.remove('light', 'dark');
-        document.body.classList.add(theme);
-    }, [theme]);
 
     useEffect(() => {
         // setting a watch on if the minimum width is 950px

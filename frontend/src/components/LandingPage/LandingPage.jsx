@@ -8,11 +8,18 @@ import LoginFormModal from "../Modals/LoginFormModal";
 import Navigation from './Navigation'
 import { thunkLogin } from "../../redux/session";
 import { ModalProvider, Modal } from "../../context/Modal";
+import { useAppTheme } from '../../context/ThemeContext';
 
 import './LandingPage.css'
 
 function LandingPage() {
     const dispatch = useDispatch();
+    const { theme } = useAppTheme();
+
+    const appImage = {
+        light: 'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/landing-page-title-image-light.png',
+        dark: 'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/landing-page-title-image.png',
+    }
 
     const handledemologin = async (e) => {
         e.preventDefault();
@@ -34,7 +41,7 @@ function LandingPage() {
                 <div id='landingpage-section1-3-container' >
                     <section id='landingpage-section-1'>
                         <div className='landingpage-background-image'>
-                            <img src='https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/landing-page-title-image.png' />
+                            <img src={theme === 'dark' ? appImage.dark : appImage.light} />
                         </div>
                         <div className='landingpage-section-1-midtitle'>Your Writing Journey Starts Here: Create, Share, Improve! Sign in now!</div>
                     </section>

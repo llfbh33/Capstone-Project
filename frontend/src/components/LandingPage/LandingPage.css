@@ -1,6 +1,6 @@
 /* main landing page navigation bar container*/
 #landingpage-navigation-container {
-    background-color: #100647;
+    background-color: var(--bg-nav);
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -23,18 +23,18 @@
     margin: 10px;
     border: 1px solid #3399FF;
     border-radius: 10px;
-    color: white;
+    color: var(--text);
     font-size: 18px;
     padding: 10px;
     width: 120px; /* change under 850px */
     height: 36px;
     cursor: pointer;
-    background-color: #100647;
+    background-color: var(--bg-nav);
     font-family: "Comic Neue", cursive;
   }
 
   #landingpage-navigation-in-out-container > button:hover {
-    background-color: #231764;
+    background-color: var(--button-hover);
     border: 1px solid #4da2f7;
   }
 
@@ -49,7 +49,7 @@
     width: 100%;
     max-height: 660px;
     height: 60vw;
-    color: white;
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -103,9 +103,9 @@
 
 #landingpage-section-2-container > button{
     list-style: none;
-    background-color: #100647;
+    background-color: var(--bg-nav);
     border: 1px solid #3399FF;
-    color: white;
+    color: var(--text);
     max-width: 380px;
     width: 45%;
     max-height: 40px;
@@ -120,7 +120,7 @@
 }
 
 #landingpage-section-2-container > button:hover {
-    background-color: #231764;
+    background-color: var(--button-hover);
     border: 1px solid #4da2f7;
 }
 
@@ -129,10 +129,10 @@
 }
 
 #landingpage-section-4 {
-    background-color: #100647;
+    background-color: var(--bg-nav);
     border-top: 1px solid #3399FF;
     border-bottom: 1px solid #3399FF;
-    color: white;
+    color: var(--text);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,8 +169,8 @@
 }
 
 #landingpage-footer {
-    color: white;
-    background-color: black;
+    color: var(--text);
+    background-color: var(--bg);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -193,7 +193,7 @@
 }
 
 .landingpage-footer-link:hover {
-    color: white;
+    color: var(--text);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
                  0 0 20px rgba(255, 255, 255, 0.6),
                  0 0 30px rgba(255, 255, 255, 0.4);

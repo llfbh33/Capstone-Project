@@ -22,8 +22,8 @@
 
 #modal-content {
   position: absolute;
-  background-color: #100647;
-  color: white;
+  background-color: var(--bg-modal);
+  color: var(--text);
   border: 2px solid #3399FF;
   border-radius: 16px;
   /* height: 400px;

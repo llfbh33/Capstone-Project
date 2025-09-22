@@ -1,18 +1,22 @@
 /* TODO: Add sitewide styles */
 body.light {
     --bg: white;
-    --bg-nav: #a7cef5;
+    --bg-modal: #e0ebf7;
+    --bg-nav: #bbd9f7;
     --nav-hover: rgb(108, 104, 104);
     --nav-selected: #3616ec;
     --text: black;
+    --button-hover: #94aee2;
 }
 
 body.dark {
     --bg: black;
+    --bg-modal: #100647;
     --bg-nav: #100647;
     --nav-hover: rgb(158, 156, 156);
     --nav-selected: lightblue;
-    --text: white
+    --text: white;
+    --button-hover: #231764;
 }
 
 body {
@@ -141,8 +145,8 @@ body {
 }
 
 .modal-button {
-    background-color: #100647;
-    color: white;
+    background-color: var(--bg-nav);
+    color: var(--text);
     border-radius: 10px;
     border: 1px solid #3399FF;
     font-family: "Comic Neue", cursive;
@@ -151,7 +155,7 @@ body {
 
 
 .modal-button:hover {
-    background-color: #231764;
+    background-color: var(--button-hover);
     border: 1px solid #4da2f7;
 }
 
