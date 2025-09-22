@@ -59,11 +59,11 @@ function PublicPost() {
     if (loaded) {
     return (
         <div className="public-post-singular">
-            <p className='mini-page-title' ></p>
-            <div className="public-post-title-singular">
-                <h1 className="public-feed-title">Public Feed</h1>
-                <h1 className="wrap-name-post-singular">{`${post?.name} by ${creator?.username}`}</h1>
-            </div>
+            {/* <p className='mini-page-title' ></p> */}
+            {/* <div className="public-post-title-singular"> */}
+                {/* <h1 className="public-feed-title">Public Feed</h1> */}
+                <h1 className='title page-title'>{`${post?.name} by ${creator?.username}`}</h1>
+            {/* </div> */}
             <div className="public-post-content-container-singular">
                 <p className="post-content">{parser(post.content)}</p>
             </div>
