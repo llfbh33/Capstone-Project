@@ -6,7 +6,7 @@ const NavContext = createContext();
 export function NavProvider({ children }) {
     const [activeNav, setActiveNav] = useState({
       main: { title: 'home', route: '/', open: false },
-      mid: { title: 'notebooks', route: '/', open: false},
+      mid: { title: null, route: null, open: false},
       small: { title: null, route: null, open: false},
     });
 

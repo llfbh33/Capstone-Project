@@ -7,24 +7,22 @@ import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
-import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
 import { useNav } from "../../context/Navigation/NavigationContext";
 import { useModal } from '../../context/Modal/Modal';
-import './HomePage.css'
+// import './NotebooksPage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
 
 
-function HomePage () {
+function NotebooksPage () {
     const user = useSelector(state => state.session.user);
+    const { activeNav, setActiveNav } = useNav();
     const notebooks = useSelector(state => state.notebooks);
-    const entries = useSelector(state => state.entries);
     const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
     const { setModalContent } = useModal();
     const navigate = useNavigate();
-    const { activeNav, setActiveNav } = useNav();
 
     useEffect(() => {
         if (notebooks) setTheseNotebooks(notebooks)
@@ -42,6 +40,7 @@ function HomePage () {
         };
         setActiveNav(newActiveState);
         navigate(`/notebook/${id}`);
+        navigate(`/notebook/${id}`)
     }
 
     const handleNewNotebook = () => {
@@ -56,11 +55,11 @@ function HomePage () {
 
     return (
         <div className="main-container">
-            <h1 className='title page-title'>{`${user?.name}'s Home`}</h1>
-            <p className="title page-subtitle">Recently Created Notebooks</p>
-            <div id='homepage-card-container'>
+            <h1 className='title page-title'>{`${user?.name}'s Notebooks`}</h1>
+            {/* <p className="title page-subtitle">Your Notebooks</p> */}
+            <div id='homepage-notebook-card-container'>
 
-                {Object.values(notebooks).reverse().slice(0,3).map(notebook => (
+                {Object.values(notebooks).map(notebook => (
                     <div key={notebook?.id} className="notebook-card-container-media-query">
                         <div className="homepage-notebook-card"  >
                             <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
@@ -88,43 +87,17 @@ function HomePage () {
                         </div>
                     </div>
                 ))}
-                {/* <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
+
+                <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
                     <div id='create-notebook-title'>
                         Ready to write? Create a notebook to get started!
                     </div>
-                </div> */}
+                </div>
 
             </div>
-            <p className="title page-subtitle">Recently Created Entries</p>
-                <div id='homepage-card-container'>
-                    {entries
-                        ? Object.values(entries).reverse().slice(0,3).map(entry => (
-                            <div key={entry.id}>
-                                <div className="homepage-notebook-card"  >
-                                    <div className="homepage-notebook-card-details" onClick={() => handleClickEntry(entry)}>
-                                        <div>{entry?.name}</div>
-                                    </div>
-                                    <div className="notebook-edit-delete-container">
-                                        <div className='homepage-edit-notebook'>
-                                            <OpenModalMenuItem
-                                            itemText={<BsTrash3Fill />}
-                                            modalComponent={<DeleteEntryFormModal entry={entry} />}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            ))
-                    : ''}
-                    {/* <div id='homepage-new-notebook-card' onClick={handleNewEntry} >
-                        <div id='create-notebook-title' >
-                            Click here to create a new Entry
-                        </div>
-                    </div> */}
-                </div>
         </div>
     )
 }
 
 
-export default HomePage;
+export default NotebooksPage;

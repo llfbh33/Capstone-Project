@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 function useNavigation() {
   const [navigation, setNavigation] = useState({
     main: 'home',
-    mid: 'notebooks',
+    mid: null,
     small: null,
   });
 

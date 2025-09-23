@@ -5,6 +5,8 @@ import { FaGithub } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
 import { useAppTheme } from "../../context/Theme/ThemeContext";
 import { useNav } from "../../context/Navigation/NavigationContext";
+import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
+import ProfileModal from "../Modals/ProfileModal/ProfileModal";
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
@@ -23,8 +25,8 @@ function LeftNavigation() {
     const [navVisible, setNavVisible] = useState(!mediaQuery)
     const { theme, setTheme } = useAppTheme();
     const { activeNav, setActiveNav } = useNav();
-    console.log('activeNav', activeNav);
-    console.log('openMain', openMain);
+    // console.log('activeNav', activeNav);
+    // console.log('openMain', openMain);
 
     useEffect(() => {
         // setting a watch on if the minimum width is 950px
@@ -51,19 +53,39 @@ function LeftNavigation() {
 
 
 
-    const sidePanelClick = (change, level) => {
-        if (change === 'home') {
+    const sidePanelClick = (level, change) => {
+        console.log('change', change)
+        if (level === 'main') {
             const newState = {
-                main: { title: 'home', route: '/', open: !activeNav.main.open },
-                mid: { title: 'notebooks', route: '/', open: false },
-                small: { title: null, id: null, route: null, open: false},
-            }
+                main: change,
+                mid: { title: null, route: null, open: false },
+                small: { title: null, route: null, open: false },
+            };
             setActiveNav(newState);
-        } else if (change === 'notebooks') {
+            navigate(change.route);
+            return;
+        } else if (level === 'mid') {
+            const newState = {
+                main: {...activeNav.main},
+                mid: change,
+                small: { title: null, route: null, open: false },
+            };
+            setActiveNav(newState);
+            navigate(change.route);
+        }
+        // if (change === 'home') {
+        //     const newState = {
+        //         main: { title: 'home', route: '/', open: !activeNav.main.open },
+        //         mid: { title: 'notebooks', route: '/', open: false },
+        //         small: { title: null, id: null, route: null, open: false },
+        //     }
+        //     setActiveNav(newState);
+        // } else
+        if (change === 'notebooks') {
             const newState = {
                 main: { title: 'home', route: '/', open: true },
                 mid: { title: 'notebooks', route: '/', open: !activeNav.mid.open },
-                small: { title: null, id: null, route: null, open: false},
+                small: { title: null, id: null, route: null, open: false },
             }
             setActiveNav(newState);
         }
@@ -130,7 +152,12 @@ function LeftNavigation() {
             <div className="adjust-for-media-query">
                 <div id='left-nav-user-info'>
                     <div id='left-nav-user-info-inner'>
-                        <img src={user?.profile_image} className="profile-image nav-profile-image" />
+                        <div className="nav-profile-image">
+                            <OpenModalMenuItem
+                                itemText={<img src={user?.profile_image} className="profile-image" />}
+                                modalComponent={<ProfileModal user={user} />}
+                            />
+                        </div>
                         <div id='left-nav-user-name'>
                             <div>{`Hello ${user?.name}`}</div>
                             <div>{user?.username}</div>
@@ -140,9 +167,38 @@ function LeftNavigation() {
                 </div>
                 <div id="navigation-container" style={{ display: navVisible ? 'block' : 'none' }}>
                     {/* <div> */}
-                    <div className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => sidePanelClick('home')}>Home</div>
-
-                    <div hidden={!activeNav.main.open}>
+                    <div
+                        className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
+                        onClick={() => sidePanelClick('main', { title: 'home', route: '/', open: false })}
+                    >
+                        Home
+                    </div>
+                    <div className={activeNav.main.title === 'home' ? "left-nav-mid-line" : ""}></div>
+                    <div>
+                        <div
+                            className={activeNav.main.title === 'notebooks' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
+                            onClick={() => sidePanelClick('main', {title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true})}
+                        >
+                            Notebooks
+                        </div>
+                        <div className={activeNav.main.title === 'notebooks' ? "left-nav-mid-line" : ""}></div>
+                        <div hidden={!activeNav.main.open}>
+                            <div className="left-nav-small-ele">
+                                {notebooks
+                                    ? Object.values(notebooks).map(notebook => (
+                                        <div
+                                            className={activeNav.mid.title === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"}
+                                            key={notebook?.id}
+                                            onClick={() => sidePanelClick('mid', { title: notebook.id, route: `notebook/${notebook.id}`, open: true })}>
+                                            <div>{notebook?.name}</div>
+                                            <div className={activeNav.mid.title === notebook.id ? "left-nav-small-line" : ""}></div>
+                                        </div>
+                                    ))
+                                    : ''}
+                            </div>
+                        </div>
+                    </div>
+                    {/* <div hidden={!activeNav.main.open}>
                         <div className="left-nav-mid-line"></div>
                         <div className={activeNav.mid.title === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => sidePanelClick('notebooks')}>Notebooks</div>
                         <div hidden={!activeNav.mid.open}>
@@ -150,14 +206,14 @@ function LeftNavigation() {
                             <div className="left-nav-small-ele">
                                 {notebooks
                                     ? Object.values(notebooks).map(notebook => (
-                                        <div className={activeNav.small.id === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => sidePanelClick({title: notebook.name, id: notebook.id, route: `notebook/${notebook.id}`, open: true}, 'small')}>
+                                        <div className={activeNav.small.id === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => sidePanelClick({ title: notebook.name, id: notebook.id, route: `notebook/${notebook.id}`, open: true }, 'small')}>
                                             <div>{notebook?.name}</div>
                                         </div>
                                     ))
                                     : ''}
                             </div>
-                        </div>
-                        <div className={openMid === 'theme' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('theme')}>Theme</div>
+                        </div> */}
+                    {/* <div className={openMid === 'theme' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('theme')}>Theme</div>
                         <div hidden={openMid === 'theme' ? false : true}>
                             <div className="left-nav-small-line"></div>
                             <div className={theme === 'dark' ? "left-nav-small-ele-default" : "left-nav-small-ele"}>
@@ -172,8 +228,8 @@ function LeftNavigation() {
                                     onClick={() => setTheme('light')}
                                 >Light</div>
                             </div>
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
                     {/* </div> */}
 
                     {/* <div>

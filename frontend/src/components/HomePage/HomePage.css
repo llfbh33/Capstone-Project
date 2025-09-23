@@ -1,6 +1,10 @@
 
 
 /* Styling for notebook cards */
+#homepage-card-container {
+    display: flex;
+}
+
 #homepage-notebook-card-container {
     display: flex;
     flex-wrap: wrap;

@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 
 import LandingPageSwapper from './LandingPageSwapper';
 import HomePage from '../components/HomePage/HomePage';
+import NotebooksPage from '../components/NotebookPage/NotebooksPage';
 import NotebookPage from '../components/NotebookPage/NotebookPage';
 import EntryPage from '../components/EntryPage/EntryPage';
 import PublicFeed from '../components/PublicFeedPage/PublicFeed';
@@ -18,6 +19,10 @@ export const router = createBrowserRouter([
       {
         path: '/',
         element: <HomePage />,
+      },
+      {
+        path: '/notebooks',
+        element: <NotebooksPage />
       },
       {
         path: '/notebook/:notebookId',
