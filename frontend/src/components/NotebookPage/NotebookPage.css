@@ -11,7 +11,7 @@
     padding: 12px;
     padding-bottom: 30px;
     font-size: 18px;
-    border-bottom: 1px solid #3399FF;
+    /* border-bottom: 1px solid #3399FF; */
 }
 
 .delete-notebook-btn {

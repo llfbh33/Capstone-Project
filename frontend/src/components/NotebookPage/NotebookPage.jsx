@@ -34,17 +34,18 @@ function NotebookPage () {
 
     return (
             <div className='homepage-main-container'>
-                <div className='top-statement-bar'>
+                {/* <div className='top-statement-bar'>
                     <p className='mini-page-title' >Create an entry in your notebook or keep working on one you have already made.</p>
-                </div>
-                <h1 id='homepage-user-title'>{`Notebook: ${currNotebook?.name}`}</h1>
+                </div> */}
+                <h1 className='title page-title'>{`${currNotebook?.name}`}</h1>
+                <p className="title page-subtitle">{`Description`}</p>
                 <div id='notebookpage-about-section-container' >
                     <div className='notebookpage-about-section'>
                         {currNotebook?.about}
                     </div>
                 </div>
-                <h1 id='homepage-underline'></h1>
-                <p className="page-title-explainer">Your Entries</p>
+                {/* <h1 id='homepage-underline'></h1> */}
+                <p className="title page-subtitle">{`Entries`}</p>
                 <div id='homepage-notebook-card-container'>
                     {entries
                         ? Object.values(noteEntries).map(entry => (
