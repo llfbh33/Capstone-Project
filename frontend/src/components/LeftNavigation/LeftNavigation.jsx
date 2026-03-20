@@ -25,8 +25,7 @@ function LeftNavigation() {
     const [navVisible, setNavVisible] = useState(!mediaQuery)
     const { theme, setTheme } = useAppTheme();
     const { activeNav, setActiveNav } = useNav();
-    // console.log('activeNav', activeNav);
-    // console.log('openMain', openMain);
+
 
     useEffect(() => {
         // setting a watch on if the minimum width is 950px
@@ -54,7 +53,6 @@ function LeftNavigation() {
 
 
     const sidePanelClick = (level, change) => {
-        console.log('change', change)
         if (level === 'main') {
             const newState = {
                 main: change,
@@ -101,6 +99,7 @@ function LeftNavigation() {
 
     // Open and close of main navigation tabs
     const mainNavElementClick = (string) => {
+        console.log(string)
         if (openMain !== string) {
             setOpenMain(string)
         } else if (openMain === string) {
@@ -110,6 +109,9 @@ function LeftNavigation() {
         }
         if (string === '/comments') {
             navigate('/comments')
+        }
+        if (string === '/public') {
+            navigate('/public')
         }
     };
 
@@ -166,88 +168,57 @@ function LeftNavigation() {
                     </div>
                 </div>
                 <div id="navigation-container" style={{ display: navVisible ? 'block' : 'none' }}>
-                    {/* <div> */}
-                    <div
-                        className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                        onClick={() => sidePanelClick('main', { title: 'home', route: '/', open: false })}
-                    >
-                        Home
+                    
+                    <div>
+                        <div
+                            className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
+                            onClick={() => sidePanelClick(
+                                'main', 
+                                { title: 'home', route: '/', open: false }
+                            )}
+                        >
+                            Home
+                        </div>
+                        <div className={activeNav.main.title === 'home' ? "left-nav-mid-line" : ""}></div>
                     </div>
-                    <div className={activeNav.main.title === 'home' ? "left-nav-mid-line" : ""}></div>
+
                     <div>
                         <div
                             className={activeNav.main.title === 'notebooks' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                            onClick={() => sidePanelClick('main', {title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true})}
+                            onClick={() => sidePanelClick(
+                                'main', 
+                                {title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true}
+                            )}
                         >
                             Notebooks
                         </div>
                         <div className={activeNav.main.title === 'notebooks' ? "left-nav-mid-line" : ""}></div>
-                        <div hidden={!activeNav.main.open}>
-                            <div className="left-nav-small-ele">
-                                {notebooks
-                                    ? Object.values(notebooks).map(notebook => (
-                                        <div
-                                            className={activeNav.mid.title === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"}
-                                            key={notebook?.id}
-                                            onClick={() => sidePanelClick('mid', { title: notebook.id, route: `notebook/${notebook.id}`, open: true })}>
-                                            <div>{notebook?.name}</div>
-                                            <div className={activeNav.mid.title === notebook.id ? "left-nav-small-line" : ""}></div>
-                                        </div>
-                                    ))
-                                    : ''}
-                            </div>
-                        </div>
                     </div>
-                    {/* <div hidden={!activeNav.main.open}>
-                        <div className="left-nav-mid-line"></div>
-                        <div className={activeNav.mid.title === 'notebooks' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => sidePanelClick('notebooks')}>Notebooks</div>
-                        <div hidden={!activeNav.mid.open}>
-                            <div className="left-nav-small-line"></div>
-                            <div className="left-nav-small-ele">
-                                {notebooks
-                                    ? Object.values(notebooks).map(notebook => (
-                                        <div className={activeNav.small.id === notebook.id ? "left-nav-sml-ele-selected" : "left-nav-sml-ele"} key={notebook?.id} onClick={() => sidePanelClick({ title: notebook.name, id: notebook.id, route: `notebook/${notebook.id}`, open: true }, 'small')}>
-                                            <div>{notebook?.name}</div>
-                                        </div>
-                                    ))
-                                    : ''}
-                            </div>
-                        </div> */}
-                    {/* <div className={openMid === 'theme' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('theme')}>Theme</div>
-                        <div hidden={openMid === 'theme' ? false : true}>
-                            <div className="left-nav-small-line"></div>
-                            <div className={theme === 'dark' ? "left-nav-small-ele-default" : "left-nav-small-ele"}>
-                                <div
-                                    className="left-nav-sml-ele-selected"
-                                    onClick={() => setTheme('dark')}
-                                >Dark</div>
-                            </div>
-                            <div className={theme === 'light' ? "left-nav-small-ele-default" : "left-nav-small-ele"}>
-                                <div
-                                    className="left-nav-sml-ele-selected"
-                                    onClick={() => setTheme('light')}
-                                >Light</div>
-                            </div>
-                        </div> */}
-                    {/* </div> */}
-                    {/* </div> */}
-
-                    {/* <div>
-                        <div className='left-nav-main-ele' onClick={() => alert('Tags coming soon')}>Tags</div>
-                    </div> */}
-
+                        
                     <div>
-                        <div className={openMain === '/public' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/public')}>Public Feed</div>
-                        <div hidden={openMain === '/public' ? false : true}>
-                            <div className="left-nav-mid-line"></div>
-                            <div className={openMid === 'all-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('all-posts')}>All Posts</div>
-                            <div className={openMid === 'user-posts' ? "left-nav-mid-ele-selected" : "left-nav-mid-ele"} onClick={() => midNavElementClick('user-posts')}>Your Posts</div>
+                        <div 
+                            className={activeNav.main.title === 'publicFeed' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} 
+                            onClick={() => sidePanelClick(
+                                'main', 
+                                {title: 'publicFeed', route: '/public', open: activeNav.main.title === 'publicFeed' ? !activeNav.main.open : true}
+                                )}
+                        >
+                            Public Feed
                         </div>
+                        <div className={activeNav.main.title === 'publicFeed' ? "left-nav-mid-line" : ""}></div>
                     </div>
 
                     <div>
-                        <div className={openMain === '/comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/comments')}>Comments</div>
-                        <div className="left-nav-mid-line" hidden={openMain !== '/comments'} ></div>
+                        <div 
+                            className={activeNav.main.title === 'comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} 
+                            onClick={() => sidePanelClick(
+                                'main', 
+                                {title: 'comments', route: '/comments', open: activeNav.main.title === 'comments' ? !activeNav.main.open : true}
+                                )}
+                        >
+                            Comments
+                        </div>
+                        <div className={activeNav.main.title === 'comments' ? "left-nav-mid-line" : ""}></div>
                     </div>
 
                     {/* {/* <div>
