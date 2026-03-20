@@ -155,7 +155,7 @@ function LeftNavigation() {
                         <div>
                             <OpenModalMenuItem 
                                 itemText={<img src={user?.profile_image} className="profile-image nav-profile-image" />}
-                                modalComponent={<ProfileModal user={user} />}
+                                modalComponent={<ProfileModal />}
                             />
                         </div>
                         <div id='left-nav-user-name'>
