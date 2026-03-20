@@ -9,6 +9,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 11;
 }
 
 #modal-background {
@@ -17,6 +18,7 @@
   right: 0;
   left: 0;
   bottom: 0;
+  z-index: 10;
   background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -29,12 +31,15 @@
   /* height: 400px;
   width: 600px; */
   padding: 20px;
+  z-index: 12;
+  min-width: 400px;
 }
 
 
 @media(max-width: 650px) {
   #modal-content {
-    width: 70%;
+    min-width: 80%;
+    max-width: 100%;
     max-height: 90%;
   }
 }

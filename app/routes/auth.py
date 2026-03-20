@@ -2,6 +2,7 @@ from flask import Blueprint, request
 from app.models import User, db
 from app.forms import LoginForm
 from app.forms import SignUpForm
+from app.forms import EditUserForm
 from flask_login import current_user, login_user, logout_user, login_required
 from random import choice
 
@@ -71,6 +72,34 @@ def sign_up():
         db.session.add(user)
         db.session.commit()
         login_user(user)
+        return user.to_dict()
+    return form.errors, 401
+
+@auth_routes.route('/edit', methods=['PATCH'])
+@login_required
+def edit_user():
+    """
+    Edits a user and updates their information
+    """
+    # curr = current_user
+    authentic = authenticate()
+    print('PRINTING HERE ++++>', authentic)
+    data = request.get_json()
+    user = User.query.get(data['id'])
+
+    form = EditUserForm(user_id=user.id, data=data)
+    form['csrf_token'].data = request.cookies['csrf_token']
+
+    if form.validate_on_submit():
+        user.name = form.data['name']
+        user.username = form.data['username']
+        user.profile_image = form.data['profile_image']
+
+        # only reset password if provided
+        if form.data['password']:
+            user.set_password(form.data['password'])
+
+        db.session.commit()
         return user.to_dict()
     return form.errors, 401
 

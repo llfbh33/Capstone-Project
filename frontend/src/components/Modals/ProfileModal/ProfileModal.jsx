@@ -4,19 +4,24 @@ import { useDispatch, useSelector } from "react-redux";
 import { useModal } from "../../../context/Modal/Modal";
 // import "./NotebookModal.css";
 import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
+import { thunkEditUser } from "../../../redux/session";
 import { useAppTheme } from "../../../context/Theme/ThemeContext";
 import { MdEdit } from "react-icons/md";
 import "./ProfileModal.css";
 
-function ProfileModal({user}) {
-    console.log('user', user)
+function ProfileModal({ }) {
+    const user = useSelector(state => state.session.user)
     const { theme, setTheme } = useAppTheme();
     const [updateUser, setUpdateUser] = useState({
+        id: user.id,
         name: user.name,
         username: user.username,
         profile_image: user.profile_image,
         theme: user.theme,
     });
+    const [editUser, setEditUser] = useState(false);
+    const [errors, setErrors] = useState({});
+    const dispatch = useDispatch();
     // const dispatch = useDispatch();
     // const user = useSelector(state => state.session.user)
     // const [name, setName] = useState(notebook.name);
@@ -59,38 +64,91 @@ function ProfileModal({user}) {
     //     }
     // };
 
-    const handleEditUser = async() => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
+        // need to put in checks on unique user names and lengths of characters.  Validations here
+
+        const response = await dispatch(thunkEditUser(updateUser));
+
+        if (response) {
+            setErrors(response);
+        } else {
+            console.log('response', response);
+        }
+        console.log('we now handle editing the user');
+        setUpdateUser({...user});
+        setEditUser(false)
     }
+    console.log('user', user)
 
     return (
         <div>
             <h1 className="notebook-modal-title">PROFILE MODAL</h1>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                 <h3 style={{ textDecoration: 'underline' }}>User Information</h3>
-                <MdEdit/>
+                {!editUser && (
+                    <MdEdit
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => setEditUser(!editUser)}
+                    />
+                )}
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-                <p>Name:</p>
-                <p>{updateUser.name}</p>
-            </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-                <p>User Name:</p>
-                <p>{updateUser.username}</p>
-            </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
-                <p>Profile Image</p>
-                <img src={updateUser.profile_image} className="profile-image"/>
-            </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%'}}>
+            {!editUser && (
+                <div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>Name:</p>
+                        <p>{user.name}</p>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>User Name:</p>
+                        <p>{user.username}</p>
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>Profile Image</p>
+                        <img src={user.profile_image} className="profile-image" />
+                    </div>
+                </div>
+            )}
+            {editUser && (
+                <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>Name:</p>
+                        <input
+                            value={updateUser.name}
+                            onChange={(e) => setUpdateUser((prev) => ({ ...prev, name: e.target.value }))}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>User Name:</p>
+                        <input
+                            value={updateUser.username}
+                            onChange={(e) => setUpdateUser((prev) => ({ ...prev, username: e.target.value }))}
+                        />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
+                        <p>Profile Image</p>
+                        <input
+                            value={updateUser.profile_image}
+                            onChange={(e) => setUpdateUser((prev) => ({ ...prev, profile_image: e.target.value }))}
+                        />
+                    </div>
+                    <div style={{ alignSelf: 'flex-end', height: '50px', alignContent: 'flex-end'}}>
+                        <button
+                            onClick={handleSubmit}
+                        >Apply</button>
+                    </div>
+                </div>
+            )}
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
                 <h3 style={{ textDecoration: 'underline' }}>Display</h3>
             </div>
-            <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%'}}>
+            <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
                 <p>Theme</p>
                 <select
                     className="theme-select"
                     value={theme}
-                    onChange={(e) => setTheme(e.target.value) }
+                    onChange={(e) => setTheme(e.target.value)}
                 >
                     <option value='dark'>Dark</option>
                     <option value='light' >Light</option>

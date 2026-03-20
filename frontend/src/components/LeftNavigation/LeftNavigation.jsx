@@ -152,9 +152,9 @@ function LeftNavigation() {
             <div className="adjust-for-media-query">
                 <div id='left-nav-user-info'>
                     <div id='left-nav-user-info-inner'>
-                        <div className="nav-profile-image">
-                            <OpenModalMenuItem
-                                itemText={<img src={user?.profile_image} className="profile-image" />}
+                        <div>
+                            <OpenModalMenuItem 
+                                itemText={<img src={user?.profile_image} className="profile-image nav-profile-image" />}
                                 modalComponent={<ProfileModal user={user} />}
                             />
                         </div>
