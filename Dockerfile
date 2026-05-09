@@ -22,7 +22,12 @@ RUN npm run build
 
 WORKDIR /var/www
 
-CMD flask db upgrade && flask seed all && gunicorn app:app
+CMD gunicorn app:app
+
+# flask db upgrade && flask seed all && 
+
+
+
 
 # FROM python:3.9.18-alpine3.18
 
