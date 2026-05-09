@@ -12,10 +12,10 @@ export default defineConfig((mode) => ({
     }),
   ],
   build: { chunkSizeWarningLimit: 1000, },
-  server: {
+  server: mode === "development" ? {
     open: true,
     proxy: {
       "/api": "http://127.0.0.1:8000",  // needs to be 5000 on laptop
     },
-  },
+  } : undefined
 }));
