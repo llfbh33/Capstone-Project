@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { useModal } from "../../../context/Modal/Modal";
 // import "./NotebookModal.css";
-import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
+// import { thunkEditNotebook, thunkLoadNotebooks } from "../../../redux/notebook";
 import { thunkEditUser } from "../../../redux/session";
 import { useAppTheme } from "../../../context/Theme/ThemeContext";
 import { MdEdit } from "react-icons/md";
 import "./ProfileModal.css";
 
-function ProfileModal({ }) {
+function ProfileModal() {
     const user = useSelector(state => state.session.user)
     const { theme, setTheme } = useAppTheme();
     const [updateUser, setUpdateUser] = useState({
@@ -80,7 +79,7 @@ function ProfileModal({ }) {
         setUpdateUser({...user});
         setEditUser(false)
     }
-    console.log('user', user)
+
 
     return (
         <div>
@@ -126,6 +125,7 @@ function ProfileModal({ }) {
                             onChange={(e) => setUpdateUser((prev) => ({ ...prev, username: e.target.value }))}
                         />
                     </div>
+                    <p className={errors.about ? "notebook-modal-errors" : 'notebook-modal-no-errors'}>{`${errors.about.length}/400` }</p>
                     <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}>
                         <p>Profile Image</p>
                         <input

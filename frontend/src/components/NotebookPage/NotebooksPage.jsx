@@ -7,7 +7,7 @@ import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
-import { useNav } from "../../context/Navigation/NavigationContext";
+// import { useNav } from "../../context/Navigation/NavigationContext";
 import { useModal } from '../../context/Modal/Modal';
 // import './NotebooksPage.css'
 import { useEffect, useState } from "react";
@@ -17,7 +17,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 
 function NotebooksPage () {
     const user = useSelector(state => state.session.user);
-    const { activeNav, setActiveNav } = useNav();
+    // const { activeNav, setActiveNav } = useNav();
     const notebooks = useSelector(state => state.notebooks);
     const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
@@ -33,12 +33,12 @@ function NotebooksPage () {
     }, [theseNotebooks])
 
     const handleClickNotebook = (id) => {
-        const newActiveState = {
-            main: {title: 'notebooks', route: '/notebooks', open: true},
-            mid: { title: id, route: `/notebook/${id}`, open: true},
-            small: { title: null, route: null, open: false}
-        };
-        setActiveNav(newActiveState);
+        // const newActiveState = {
+        //     main: {title: 'notebooks', route: '/notebooks', open: true},
+        //     mid: { title: id, route: `/notebook/${id}`, open: true},
+        //     small: { title: null, route: null, open: false}
+        // };
+        // setActiveNav(newActiveState);
         navigate(`/notebook/${id}`);
         navigate(`/notebook/${id}`)
     }

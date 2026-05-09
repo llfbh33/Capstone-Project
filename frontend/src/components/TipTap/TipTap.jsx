@@ -1,5 +1,5 @@
 
-import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaQuoteLeft, FaRedo, FaUndo, FaUnderline, FaListUl, FaListOl } from 'react-icons/fa'
+import { FaBold, FaItalic, FaStrikethrough, FaHeading, FaRedo, FaUndo, FaListUl, FaListOl } from 'react-icons/fa'
 import { TfiSmallcap } from "react-icons/tfi";
 import { useState } from 'react';
 import './TipTap.css'

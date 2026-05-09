@@ -217,7 +217,7 @@ def seed_entries():
         )
     eight  = Entry(
         user_id = 2,
-        notebook_id = 4,
+        notebook_id = 2,
         name = 'May 31, 2024',
         content='''This is a test to make sure that the posts are coming out correctly.  That we can search by all posts and search by the individual users posts''',
         is_public=True

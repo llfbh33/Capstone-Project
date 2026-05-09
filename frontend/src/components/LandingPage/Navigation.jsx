@@ -7,7 +7,7 @@ import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import { useAppTheme } from "../../context/Theme/ThemeContext";
 
 function Navigation() {
-  const { theme, setTheme } = useAppTheme();
+  const { theme } = useAppTheme();
 
   const appImage = {
     light: 'https://profile-images-pencrafted-capstone.s3.us-west-2.amazonaws.com/nav-title-00366B-light.png',

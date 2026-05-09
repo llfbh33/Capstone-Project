@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
+// is this page in use any more?
 function useNavigation() {
   const [navigation, setNavigation] = useState({
     main: 'home',
@@ -7,12 +8,7 @@ function useNavigation() {
     small: null,
   });
 
-  useEffect(() => {
-    // Save to localStorage whenever theme changes
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-
-  return [theme, setTheme];
+  return [navigation, setNavigation];
 }
 
-export default useTheme;
+export default useNavigation;

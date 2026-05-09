@@ -3,7 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaGithub } from "react-icons/fa6";
 import { CiLinkedin } from "react-icons/ci";
-import { useAppTheme } from "../../context/Theme/ThemeContext";
+// import { useAppTheme } from "../../context/Theme/ThemeContext";
 import { useNav } from "../../context/Navigation/NavigationContext";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
 import ProfileModal from "../Modals/ProfileModal/ProfileModal";
@@ -16,14 +16,14 @@ function LeftNavigation() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const user = useSelector(state => state.session.user)
-    const notebooks = useSelector(state => state.notebooks)
+    // const notebooks = useSelector(state => state.notebooks)
     const [openMain, setOpenMain] = useState('')
-    const [openMid, setOpenMid] = useState('')
-    const [openSml, setOpenSml] = useState('')
+    // const [openMid, setOpenMid] = useState('')
+    // const [openSml, setOpenSml] = useState('')
     // State the small screen based on the current window width
     const [mediaQuery, setMediaQuery] = useState(window.innerWidth < 950);
     const [navVisible, setNavVisible] = useState(!mediaQuery)
-    const { theme, setTheme } = useAppTheme();
+    // const { theme, setTheme } = useAppTheme();
     const { activeNav, setActiveNav } = useNav();
 
 
@@ -117,29 +117,29 @@ function LeftNavigation() {
 
 
     //Open and close of mid and size tabs / navigates
-    const midNavElementClick = (string) => {
-        if (openMid === string) {
-            setOpenMid('')
-        } else {
-            setOpenMid(string)
-            setOpenSml('')
+    // const midNavElementClick = (string) => {
+    //     if (openMid === string) {
+    //         setOpenMid('')
+    //     } else {
+    //         setOpenMid(string)
+    //         setOpenSml('')
 
-            if (string === 'notebooks') {
-                navigate('/')
-            } else if (string === 'all-posts') {
-                navigate('/public')
-            } else if (string === 'user-posts') {
-                navigate('/public/user')
-            }
-        }
-    };
+    //         if (string === 'notebooks') {
+    //             navigate('/')
+    //         } else if (string === 'all-posts') {
+    //             navigate('/public')
+    //         } else if (string === 'user-posts') {
+    //             navigate('/public/user')
+    //         }
+    //     }
+    // };
 
 
     // Navigating to a specific notebook by id
-    const handleClickNotebook = (id) => {
-        setOpenSml(id)
-        navigate(`/notebook/${id}`)
-    }
+    // const handleClickNotebook = (id) => {
+    //     setOpenSml(id)
+    //     navigate(`/notebook/${id}`)
+    // }
 
     // Loging out of the site
     const logout = async (e) => {
