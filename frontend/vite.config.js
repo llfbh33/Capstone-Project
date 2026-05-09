@@ -15,7 +15,7 @@ export default defineConfig((mode) => ({
   server: mode === "development" ? {
     open: true,
     proxy: {
-      "/api": "http://127.0.0.1:8000",  // needs to be 5000 on laptop
+      "/api": "https://127.0.0.1:8000",  // needs to be 5000 on laptop
     },
   } : undefined
 }));
