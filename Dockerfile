@@ -22,7 +22,7 @@ RUN npm run build
 
 WORKDIR /var/www
 
-CMD gunicorn app:app
+CMD gunicorn app:app --forwarded-allow-ips="*"
 
 # flask db upgrade && flask seed all && 
 
