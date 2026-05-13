@@ -62,7 +62,7 @@ function HomePage () {
     return (
         <div className="main-container">
             <h1 className='title page-title'>{`${user?.name}'s Home`}</h1>
-            <p className="title page-subtitle">Recently Created Notebooks</p>
+            {/* <p className="title page-subtitle">Recently Created Notebooks</p> */}
             <div id='homepage-card-container'>
 
                 {Object.values(notebooks).reverse().slice(0,3).map(notebook => (

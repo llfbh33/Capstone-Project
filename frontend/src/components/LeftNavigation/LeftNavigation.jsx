@@ -7,6 +7,11 @@ import { CiLinkedin } from "react-icons/ci";
 import { useNav } from "../../context/Navigation/NavigationContext";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
 import ProfileModal from "../Modals/ProfileModal/ProfileModal";
+import { FaRegFolderOpen } from "react-icons/fa6";
+import { FaFilePdf } from "react-icons/fa6";
+
+
+
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
@@ -64,7 +69,7 @@ function LeftNavigation() {
             return;
         } else if (level === 'mid') {
             const newState = {
-                main: {...activeNav.main},
+                main: { ...activeNav.main },
                 mid: change,
                 small: { title: null, route: null, open: false },
             };
@@ -155,7 +160,7 @@ function LeftNavigation() {
                 <div id='left-nav-user-info'>
                     <div id='left-nav-user-info-inner'>
                         <div>
-                            <OpenModalMenuItem 
+                            <OpenModalMenuItem
                                 itemText={<img src={user?.profile_image} className="profile-image nav-profile-image" />}
                                 modalComponent={<ProfileModal />}
                             />
@@ -168,12 +173,12 @@ function LeftNavigation() {
                     </div>
                 </div>
                 <div id="navigation-container" style={{ display: navVisible ? 'block' : 'none' }}>
-                    
+
                     <div>
                         <div
                             className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
                             onClick={() => sidePanelClick(
-                                'main', 
+                                'main',
                                 { title: 'home', route: '/', open: false }
                             )}
                         >
@@ -186,22 +191,22 @@ function LeftNavigation() {
                         <div
                             className={activeNav.main.title === 'notebooks' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
                             onClick={() => sidePanelClick(
-                                'main', 
-                                {title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true}
+                                'main',
+                                { title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true }
                             )}
                         >
                             Notebooks
                         </div>
                         <div className={activeNav.main.title === 'notebooks' ? "left-nav-mid-line" : ""}></div>
                     </div>
-                        
+
                     <div>
-                        <div 
-                            className={activeNav.main.title === 'publicFeed' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} 
+                        <div
+                            className={activeNav.main.title === 'publicFeed' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
                             onClick={() => sidePanelClick(
-                                'main', 
-                                {title: 'publicFeed', route: '/public', open: activeNav.main.title === 'publicFeed' ? !activeNav.main.open : true}
-                                )}
+                                'main',
+                                { title: 'publicFeed', route: '/public', open: activeNav.main.title === 'publicFeed' ? !activeNav.main.open : true }
+                            )}
                         >
                             Public Feed
                         </div>
@@ -209,12 +214,12 @@ function LeftNavigation() {
                     </div>
 
                     <div>
-                        <div 
-                            className={activeNav.main.title === 'comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} 
+                        <div
+                            className={activeNav.main.title === 'comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
                             onClick={() => sidePanelClick(
-                                'main', 
-                                {title: 'comments', route: '/comments', open: activeNav.main.title === 'comments' ? !activeNav.main.open : true}
-                                )}
+                                'main',
+                                { title: 'comments', route: '/comments', open: activeNav.main.title === 'comments' ? !activeNav.main.open : true }
+                            )}
                         >
                             Comments
                         </div>
@@ -229,8 +234,8 @@ function LeftNavigation() {
                         <div className={openMain === '/dev-links' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/dev-links')}>Dev Links</div>
                         <div className="left-nav-mid-line" hidden={openMain !== '/dev-links'} ></div>
                         <div hidden={openMain === '/dev-links' ? false : true} className="developer-link-container">
-                            <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
-                            <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
+                            <Link to='https://github.com/llfbh33' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><FaGithub /></Link>
+                            <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><CiLinkedin /></Link>
                         </div>
                     </div>
                     <div className="signout-on-media-query">
@@ -240,6 +245,12 @@ function LeftNavigation() {
                 </div>
             </div>
             <div id="left-nav-signout-container">
+                <div className="developer-link-container">
+                    <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
+                    <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
+                    <Link to='/Aubrie-Resume.pdf' className='developer-links' target='_blank'><FaFilePdf /></Link>
+                    <Link to='https://aubries-portfolio.vercel.app/' className='developer-links' target='_blank'><FaRegFolderOpen /></Link>
+                </div>
                 <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
             </div>
 

@@ -117,8 +117,9 @@
 }
 
 #left-nav-signout-container {
-    height: 60px;
+    height: 100px;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
@@ -145,23 +146,23 @@
 }
 
 .developer-link-container {
-    margin: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 4px;
 }
 
 .developer-links {
     color:#7e7b7b;
-    font-size: 30px;
-    text-decoration: none;
-    border-radius: 50%;
-    width: 80px;
-    margin: 22px;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
 }
 
 .developer-links:hover {
     color: white; 
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8),
-                 0 0 20px rgba(255, 255, 255, 0.6),
-                 0 0 30px rgba(255, 255, 255, 0.4);
+    transform: translateY(-3px);
 }
 
 
