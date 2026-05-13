@@ -1,20 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaGithub } from "react-icons/fa6";
-import { CiLinkedin } from "react-icons/ci";
 // import { useAppTheme } from "../../context/Theme/ThemeContext";
 import { useNav } from "../../context/Navigation/NavigationContext";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
 import ProfileModal from "../Modals/ProfileModal/ProfileModal";
-import { FaRegFolderOpen } from "react-icons/fa6";
-import { FaFilePdf } from "react-icons/fa6";
+
 
 
 
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
+import DevLinks from "./DevLinks";
 
 
 function LeftNavigation() {
@@ -22,7 +20,7 @@ function LeftNavigation() {
     const navigate = useNavigate()
     const user = useSelector(state => state.session.user)
     // const notebooks = useSelector(state => state.notebooks)
-    const [openMain, setOpenMain] = useState('')
+    // const [openMain, setOpenMain] = useState('')
     // const [openMid, setOpenMid] = useState('')
     // const [openSml, setOpenSml] = useState('')
     // State the small screen based on the current window width
@@ -104,22 +102,22 @@ function LeftNavigation() {
     }
 
     // Open and close of main navigation tabs
-    const mainNavElementClick = (string) => {
-        console.log(string)
-        if (openMain !== string) {
-            setOpenMain(string)
-        } else if (openMain === string) {
-            setOpenMain('')
-        } else {
-            setOpenMain(string)
-        }
-        if (string === '/comments') {
-            navigate('/comments')
-        }
-        if (string === '/public') {
-            navigate('/public')
-        }
-    };
+    // const mainNavElementClick = (string) => {
+    //     console.log(string)
+    //     if (openMain !== string) {
+    //         setOpenMain(string)
+    //     } else if (openMain === string) {
+    //         setOpenMain('')
+    //     } else {
+    //         setOpenMain(string)
+    //     }
+    //     if (string === '/comments') {
+    //         navigate('/comments')
+    //     }
+    //     if (string === '/public') {
+    //         navigate('/public')
+    //     }
+    // };
 
 
     //Open and close of mid and size tabs / navigates
@@ -227,29 +225,13 @@ function LeftNavigation() {
                         <div className={activeNav.main.title === 'comments' ? "left-nav-mid-line" : ""}></div>
                     </div>
 
-                    {/* {/* <div>
-                        <div className='left-nav-main-ele' onClick={() => alert('Following coming soon')}>Following</div>
-                    </div> */}
-
-                    {/* <div>
-                        <div className={openMain === '/dev-links' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/dev-links')}>Dev Links</div>
-                        <div className="left-nav-mid-line" hidden={openMain !== '/dev-links'} ></div>
-                        <div hidden={openMain === '/dev-links' ? false : true} className="developer-link-container">
-                            <Link to='https://github.com/llfbh33' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><FaGithub /></Link>
-                            <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><CiLinkedin /></Link>
-                        </div>
-                    </div> */}
+                    {/* Dev links and signout on screens smaller than 950px */}
                     <div className={devLinks ? "dev-link-container-media-query" : "dev-link-title-container"}>
                         <div className={`dev-links-on-media-query ${devLinks ? "selected-color" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
                             Dev Links
                         </div>
-                        {devLinks &&
-                            <div className="developer-link-container dev-link-display">
-                                <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
-                                <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
-                                <Link to='/Aubrie-Resume.pdf' className='developer-links' target='_blank'><FaFilePdf /></Link>
-                                <Link to='https://aubries-portfolio.vercel.app/' className='developer-links' target='_blank'><FaRegFolderOpen /></Link>
-                            </div>
+                        {devLinks && mediaQuery &&
+                            <DevLinks />
                         }
                     </div>
                     <div className="signout-on-media-query">
@@ -258,13 +240,9 @@ function LeftNavigation() {
 
                 </div>
             </div>
-            <div id="left-nav-signout-container">
-                <div className="developer-link-container">
-                    <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
-                    <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
-                    <Link to='/Aubrie-Resume.pdf' className='developer-links' target='_blank'><FaFilePdf /></Link>
-                    <Link to='https://aubries-portfolio.vercel.app/' className='developer-links' target='_blank'><FaRegFolderOpen /></Link>
-                </div>
+            {/* Dev links and signout on screens larger than 950px */}
+            <div className="left-nav-signout-container">
+                <DevLinks />
                 <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
             </div>
 
