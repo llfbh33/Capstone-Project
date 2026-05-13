@@ -30,6 +30,7 @@ function LeftNavigation() {
     const [navVisible, setNavVisible] = useState(!mediaQuery)
     // const { theme, setTheme } = useAppTheme();
     const { activeNav, setActiveNav } = useNav();
+    const [devLinks, setDevLinks] = useState(false);
 
 
     useEffect(() => {
@@ -230,13 +231,26 @@ function LeftNavigation() {
                         <div className='left-nav-main-ele' onClick={() => alert('Following coming soon')}>Following</div>
                     </div> */}
 
-                    <div>
+                    {/* <div>
                         <div className={openMain === '/dev-links' ? "left-nav-main-ele-selected" : "left-nav-main-ele"} onClick={() => mainNavElementClick('/dev-links')}>Dev Links</div>
                         <div className="left-nav-mid-line" hidden={openMain !== '/dev-links'} ></div>
                         <div hidden={openMain === '/dev-links' ? false : true} className="developer-link-container">
                             <Link to='https://github.com/llfbh33' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><FaGithub /></Link>
                             <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank' hidden={openMain === '/dev-links' ? false : true}><CiLinkedin /></Link>
                         </div>
+                    </div> */}
+                    <div className={devLinks ? "dev-link-container-media-query" : "dev-link-title-container"}>
+                        <div className={`dev-links-on-media-query ${devLinks ? "selected-color" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
+                            Dev Links
+                        </div>
+                        {devLinks &&
+                            <div className="developer-link-container dev-link-display">
+                                <Link to='https://github.com/llfbh33' className='developer-links' target='_blank'><FaGithub /></Link>
+                                <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-links' target='_blank'><CiLinkedin /></Link>
+                                <Link to='/Aubrie-Resume.pdf' className='developer-links' target='_blank'><FaFilePdf /></Link>
+                                <Link to='https://aubries-portfolio.vercel.app/' className='developer-links' target='_blank'><FaRegFolderOpen /></Link>
+                            </div>
+                        }
                     </div>
                     <div className="signout-on-media-query">
                         <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
