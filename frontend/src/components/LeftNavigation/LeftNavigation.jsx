@@ -146,7 +146,6 @@ function LeftNavigation() {
                     <div id='nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
                 </div>
             }
-
         </div>
     )
 }
