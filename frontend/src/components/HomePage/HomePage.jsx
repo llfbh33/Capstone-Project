@@ -13,6 +13,11 @@ import { useNav } from "../../context/Navigation/NavigationContext";
 import './HomePage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import ActivityFeed from "./DashComponents/ActivityFeed";
+import InspiringQuotes from "./DashComponents/InspiringQuotes";
+import RecentNotebooks from "./DashComponents/RecentNotebooks";
+import RecentEntries from "./DashComponents/RecentEntries";
+import RecentPosts from "./DashComponents/RecentPosts";
 
 
 
@@ -68,8 +73,14 @@ function HomePage() {
                         <p className="page-sub-title">A snapshot of your writing journey.</p>
                     </div>
                     <div className="items-container">
-                        <div className="item-container">
-                            
+                        <div className="horizontal-container">
+                            <ActivityFeed />
+                            <InspiringQuotes />
+                        </div>
+                        <div className="horizontal-container">
+                            <RecentNotebooks />
+                            <RecentEntries />
+                            <RecentPosts />
                         </div>
                     </div>
                 </div>
