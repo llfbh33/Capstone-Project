@@ -8,16 +8,18 @@ import { useEffect, useState } from "react";
 
 
 const RecentEntries = () => {
+    const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
-    const entries = useSelector(state => state.entries);
-    const [entryArray, setEntryArray] = useState();
+    const allEntries = useSelector(state => state.entries);
+    const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id))
+    const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
         if (!notebooks || !entries) return;
 
-        const sortedEntries = Object.values(entries)
+        const sortedEntries = entries
             .sort((a, b) =>
                 new Date(b.updated_at) - new Date(a.updated_at)
             )
@@ -57,7 +59,7 @@ const RecentEntries = () => {
                                     {page.name}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {notebooks[page.notebook_id].name}
+                                    {notebooks[page.notebook_id]?.name}
                                 </div>
                             </div>
                         </div>

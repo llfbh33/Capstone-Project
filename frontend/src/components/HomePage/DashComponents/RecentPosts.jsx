@@ -1,8 +1,32 @@
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+
 import { SlNotebook } from "react-icons/sl";
 import './DashComponents.css';
 
 
 const RecentPosts = () => {
+    const user = useSelector(state => state.session.user)
+    const allEntries = useSelector(state => state.entries)
+    const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
+    const [entryArray, setEntryArray] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+        if (!entries) return;
+
+        const sortedEntries = entries
+            .sort((a, b) =>
+                new Date(b.post.created_at) - new Date(a.post.created_at)
+            )
+            .slice(0, 2);
+
+        setEntryArray(sortedEntries);
+        setLoading(false);
+
+    }, [entries]);
+
 
     return (
         <div className='dash-comp-container'>
@@ -12,32 +36,21 @@ const RecentPosts = () => {
                     <div>View all</div>
                 </div>
                 <div className='pannel-contents'>
-                    <div className='pannel-item'>
-                        <div className='pannel-item-icon'>
-                            <SlNotebook />
-                        </div>
-                        <div className='pannel-item-data-container'>
-                            <div className="pannel-item-title">
-                                This is my title
+                    {entryArray.map((page, index) => (
+                        <div className='pannel-item' key={`entry-${index}`}>
+                            <div className='pannel-item-icon'>
+                                <SlNotebook />
                             </div>
-                            <div className="pannel-item-description">
-                                This is my description
-                            </div>
-                        </div>
-                    </div>
-                    <div className='pannel-item'>
-                        <div className='pannel-item-icon'>
-                            <SlNotebook />
-                        </div>
-                        <div className='pannel-item-data-container'>
-                            <div className="pannel-item-title">
-                                This is my title
-                            </div>
-                            <div className="pannel-item-description">
-                                This is my description
+                            <div className='pannel-item-data-container'>
+                                <div className="pannel-item-title">
+                                    {page.name}
+                                </div>
+                                <div className="pannel-item-description">
+                                    {page.post.created_at}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    ))}
                 </div>
             </div>
         </div>
