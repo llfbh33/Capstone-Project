@@ -2,6 +2,8 @@
 import { createContext, useContext, useEffect } from "react";
 import useTheme from "./useTheme";
 
+// IS THIS IN USE ANY MORE?
+
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {

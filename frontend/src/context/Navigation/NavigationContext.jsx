@@ -1,6 +1,6 @@
 // ThemeContext.js
 import { createContext, useContext, useState } from "react";
-
+// NO LONGER IN USE
 const NavContext = createContext();
 
 export function NavProvider({ children }) {

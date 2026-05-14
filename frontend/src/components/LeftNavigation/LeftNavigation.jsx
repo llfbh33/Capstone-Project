@@ -1,33 +1,47 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import { useAppTheme } from "../../context/Theme/ThemeContext";
-import { useNav } from "../../context/Navigation/NavigationContext";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
 import ProfileModal from "../Modals/ProfileModal/ProfileModal";
-
-
-
-
 
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
 import DevLinks from "./DevLinks";
+import NavLinks from "./NavLinks";
+
+
+const navigationLinks = [
+    {
+        name: "home",
+        title: "Home",
+        route: "/"
+    },
+    {
+        name: "notebooks",
+        title: "Notebooks",
+        route: "/notebooks",
+    },
+    {
+        name: "public",
+        title: "Public Feed",
+        route: "/public"
+    },
+    {
+        name: "comments",
+        title: "Comments",
+        route: "/comments",
+    },
+]
+
 
 
 function LeftNavigation() {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const user = useSelector(state => state.session.user)
-    // const notebooks = useSelector(state => state.notebooks)
-    // const [openMain, setOpenMain] = useState('')
-    // const [openMid, setOpenMid] = useState('')
-    // const [openSml, setOpenSml] = useState('')
-    // State the small screen based on the current window width
     const [mediaQuery, setMediaQuery] = useState(window.innerWidth < 950);
     const [navVisible, setNavVisible] = useState(!mediaQuery)
-    // const { theme, setTheme } = useAppTheme();
-    const { activeNav, setActiveNav } = useNav();
+    const [activeNav, setActiveNav] = useState(navigationLinks[0].name);
     const [devLinks, setDevLinks] = useState(false);
 
 
@@ -55,97 +69,15 @@ function LeftNavigation() {
     }, [])
 
 
-
-    const sidePanelClick = (level, change) => {
-        if (level === 'main') {
-            const newState = {
-                main: change,
-                mid: { title: null, route: null, open: false },
-                small: { title: null, route: null, open: false },
-            };
-            setActiveNav(newState);
-            navigate(change.route);
-            return;
-        } else if (level === 'mid') {
-            const newState = {
-                main: { ...activeNav.main },
-                mid: change,
-                small: { title: null, route: null, open: false },
-            };
-            setActiveNav(newState);
-            navigate(change.route);
-        }
-        // if (change === 'home') {
-        //     const newState = {
-        //         main: { title: 'home', route: '/', open: !activeNav.main.open },
-        //         mid: { title: 'notebooks', route: '/', open: false },
-        //         small: { title: null, id: null, route: null, open: false },
-        //     }
-        //     setActiveNav(newState);
-        // } else
-        if (change === 'notebooks') {
-            const newState = {
-                main: { title: 'home', route: '/', open: true },
-                mid: { title: 'notebooks', route: '/', open: !activeNav.mid.open },
-                small: { title: null, id: null, route: null, open: false },
-            }
-            setActiveNav(newState);
-        }
-
-        if (level === 'small') {
-            setActiveNav((prev) => ({
-                ...prev,
-                small: change,
-            }))
-            navigate(change.route)
-        }
-    }
-
-    // Open and close of main navigation tabs
-    // const mainNavElementClick = (string) => {
-    //     console.log(string)
-    //     if (openMain !== string) {
-    //         setOpenMain(string)
-    //     } else if (openMain === string) {
-    //         setOpenMain('')
-    //     } else {
-    //         setOpenMain(string)
-    //     }
-    //     if (string === '/comments') {
-    //         navigate('/comments')
-    //     }
-    //     if (string === '/public') {
-    //         navigate('/public')
-    //     }
-    // };
+    // Updates for navigation click
+    const handleClick = (navObj) => {
+        setActiveNav(navObj.name);
+        navigate(navObj.route);
+    };
 
 
-    //Open and close of mid and size tabs / navigates
-    // const midNavElementClick = (string) => {
-    //     if (openMid === string) {
-    //         setOpenMid('')
-    //     } else {
-    //         setOpenMid(string)
-    //         setOpenSml('')
 
-    //         if (string === 'notebooks') {
-    //             navigate('/')
-    //         } else if (string === 'all-posts') {
-    //             navigate('/public')
-    //         } else if (string === 'user-posts') {
-    //             navigate('/public/user')
-    //         }
-    //     }
-    // };
-
-
-    // Navigating to a specific notebook by id
-    // const handleClickNotebook = (id) => {
-    //     setOpenSml(id)
-    //     navigate(`/notebook/${id}`)
-    // }
-
-    // Loging out of the site
+    // Logs out of app
     const logout = async (e) => {
         e.preventDefault();
         await dispatch(thunkLogout());
@@ -154,8 +86,10 @@ function LeftNavigation() {
 
 
     return (
-        <div id='main-left-nav-container'>
-            <div className="adjust-for-media-query">
+        <div id='main-nav-container'>
+            <div>
+
+                {/* Navigation Header */}
                 <div id='left-nav-user-info'>
                     <div id='left-nav-user-info-inner'>
                         <div>
@@ -168,79 +102,45 @@ function LeftNavigation() {
                             <div>{`Hello ${user?.name}`}</div>
                             <div>{user?.username}</div>
                         </div>
-                        <div className='media-query-menu' onClick={() => setNavVisible(!navVisible)}>Menu</div>
-                    </div>
-                </div>
-                <div id="navigation-container" style={{ display: navVisible ? 'block' : 'none' }}>
-
-                    <div>
-                        <div
-                            className={activeNav.main.title === 'home' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                            onClick={() => sidePanelClick(
-                                'main',
-                                { title: 'home', route: '/', open: false }
-                            )}
-                        >
-                            Home
-                        </div>
-                        <div className={activeNav.main.title === 'home' ? "left-nav-mid-line" : ""}></div>
-                    </div>
-
-                    <div>
-                        <div
-                            className={activeNav.main.title === 'notebooks' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                            onClick={() => sidePanelClick(
-                                'main',
-                                { title: 'notebooks', route: '/notebooks', open: activeNav.main.title === 'notebooks' ? !activeNav.main.open : true }
-                            )}
-                        >
-                            Notebooks
-                        </div>
-                        <div className={activeNav.main.title === 'notebooks' ? "left-nav-mid-line" : ""}></div>
-                    </div>
-
-                    <div>
-                        <div
-                            className={activeNav.main.title === 'publicFeed' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                            onClick={() => sidePanelClick(
-                                'main',
-                                { title: 'publicFeed', route: '/public', open: activeNav.main.title === 'publicFeed' ? !activeNav.main.open : true }
-                            )}
-                        >
-                            Public Feed
-                        </div>
-                        <div className={activeNav.main.title === 'publicFeed' ? "left-nav-mid-line" : ""}></div>
-                    </div>
-
-                    <div>
-                        <div
-                            className={activeNav.main.title === 'comments' ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
-                            onClick={() => sidePanelClick(
-                                'main',
-                                { title: 'comments', route: '/comments', open: activeNav.main.title === 'comments' ? !activeNav.main.open : true }
-                            )}
-                        >
-                            Comments
-                        </div>
-                        <div className={activeNav.main.title === 'comments' ? "left-nav-mid-line" : ""}></div>
-                    </div>
-
-                    {/* Dev links and signout on screens smaller than 950px */}
-                    <div className={devLinks ? "dev-link-container-media-query" : "dev-link-title-container"}>
-                        <div className={`dev-links-on-media-query ${devLinks ? "selected-color" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
-                            Dev Links
-                        </div>
-                        {devLinks && mediaQuery &&
-                            <DevLinks />
+                        {mediaQuery && 
+                            <div 
+                                className='media-query-menu' 
+                                onClick={() => setNavVisible(!navVisible)}
+                            >
+                                Menu
+                            </div>
                         }
                     </div>
-                    <div className="signout-on-media-query">
-                        <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
-                    </div>
+                </div>
+
+                {/* When the nav dropdown is visible set the display to flex, populate nav links */}
+                <div id="navigation-container" style={{ display: navVisible ? 'flex' : 'none' }}>
+                    {navigationLinks.map(link => (
+                        <NavLinks navObj={link} activeNav={activeNav} handleClick={handleClick} />
+                    ))}
+
+
+                    {/* Dev links and signout only visible on screens smaller than 950px */}
+                    {mediaQuery &&
+                        <div>
+                            <div className={devLinks ? "dev-link-container-media-query" : "dev-link-title-container"}>
+                                <div className={`dev-links-on-media-query ${devLinks ? "selected-color" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
+                                    Dev Links
+                                </div>
+                                {devLinks && mediaQuery &&
+                                    <DevLinks />
+                                }
+                            </div>
+                            <div className="signout-on-media-query">
+                                <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
+                            </div>
+                        </div>
+                    }
 
                 </div>
             </div>
-            {/* Dev links and signout on screens larger than 950px */}
+
+            {/* Dev links and signout only visible on screens larger than 950px */}
             <div className="left-nav-signout-container">
                 <DevLinks />
                 <div id='left-nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>

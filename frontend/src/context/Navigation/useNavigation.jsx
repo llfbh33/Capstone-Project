@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-// is this page in use any more?
+// NO LONGER IN USE
 function useNavigation() {
   const [navigation, setNavigation] = useState({
     main: 'home',
