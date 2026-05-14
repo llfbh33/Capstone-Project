@@ -10,7 +10,7 @@ import './LeftNavigation.css';
 const DevLinks = () => {
 
     return (
-        <div className="developer-link-container">
+        <div className="dev-link-container">
             <Link to='https://github.com/llfbh33' className='developer-link' target='_blank'><FaGithub /></Link>
             <Link to='https://www.linkedin.com/in/aubriewoodbine/' className='developer-link' target='_blank'><CiLinkedin /></Link>
             <Link to='/Aubrie-Resume.pdf' className='developer-link' target='_blank'><FaFilePdf /></Link>

@@ -7,12 +7,12 @@ const NavLinks = ({ navObj, activeNav, handleClick }) => {
     return (
         <div>
             <div
-                className={ navObj.name === activeNav ? "left-nav-main-ele-selected" : "left-nav-main-ele"}
+                className={ `nav-tab ${navObj.name === activeNav ? "nav-tab-selected" : ""}`}
                 onClick={() => handleClick(navObj)}
             >
                 { navObj.title }
             </div>
-            <div className={ navObj.name === activeNav ? "left-nav-mid-line" : "" }></div>
+            <div className={ navObj.name === activeNav ? "divider-line" : "" }></div>
         </div>
     )
 }
