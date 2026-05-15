@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useNav } from "../../../context/Navigation/NavigationContext";
 import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
 import './DashComponents.css';
@@ -11,6 +12,7 @@ import './DashComponents.css';
 const RecentNotebooks = () => {
     const notebooks = useSelector(state => state.notebooks);
     const navigate = useNavigate();
+    const { setActiveNav } = useNav();
     const [notebookArray, setNotebookArray] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -32,6 +34,7 @@ const RecentNotebooks = () => {
 
 
     const handleAllNotebooks = () => {
+        setActiveNav('notebooks')
         navigate("/notebooks");
     };
 

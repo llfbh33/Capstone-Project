@@ -3,6 +3,7 @@
 import { useSelector } from "react-redux";
 import { FaRegFileAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+// import { useNav } from "../../../context/Navigation/NavigationContext";
 import './DashComponents.css';
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useEffect, useState } from "react";
@@ -13,6 +14,7 @@ const RecentEntries = () => {
     const notebooks = useSelector(state => state.notebooks);
     const allEntries = useSelector(state => state.entries);
     const navigate = useNavigate();
+    // const { setActiveNav } = useNav();
     const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);

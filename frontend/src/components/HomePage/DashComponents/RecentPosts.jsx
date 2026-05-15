@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
+// import { useNav } from "../../../context/Navigation/NavigationContext";
 import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,7 @@ const RecentPosts = () => {
     const user = useSelector(state => state.session.user)
     const allEntries = useSelector(state => state.entries)
     const navigate = useNavigate();
+     // const { setActiveNav } = useNav();
     const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);

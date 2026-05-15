@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem";
 import ProfileModal from "../Modals/ProfileModal/ProfileModal";
-
+import { useNav } from "../../context/Navigation/NavigationContext";
 import { thunkLogout } from "../../redux/session";
 import './LeftNavigation.css'
 import DevLinks from "./DevLinks";
@@ -41,7 +41,7 @@ function LeftNavigation() {
     const user = useSelector(state => state.session.user)
     const [mediaQuery, setMediaQuery] = useState(window.innerWidth < 950);
     const [navVisible, setNavVisible] = useState(!mediaQuery)
-    const [activeNav, setActiveNav] = useState(navigationLinks[0].name);
+    const { activeNav, setActiveNav } = useNav();
     const [devLinks, setDevLinks] = useState(false);
 
 
