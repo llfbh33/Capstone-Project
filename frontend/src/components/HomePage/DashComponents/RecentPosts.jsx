@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 
 import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
-
+import { useNavigate } from "react-router-dom";
 import './DashComponents.css';
+
 
 
 const RecentPosts = () => {
     const user = useSelector(state => state.session.user)
     const allEntries = useSelector(state => state.entries)
+    const navigate = useNavigate();
     const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -30,12 +32,17 @@ const RecentPosts = () => {
     }, [entries]);
 
 
+    const handleAllPosts = () => {
+        navigate('/public/user');
+    }
+
+
     return (
         <div className='dash-comp-container'>
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Posts</h2>
-                    <div className="view-all">
+                    <div className="view-all" onClick={handleAllPosts}>
                         <div>View all</div>
                         <FaArrowRightLong />
                     </div>

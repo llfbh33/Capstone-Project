@@ -53,7 +53,7 @@ const RecentEntries = () => {
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Entries</h2>
-                    <div className="view-all">
+                    <div className="view-all" onClick={() => alert('There is not currently a page for All Entries')}>
                         <div>View all</div>
                         <FaArrowRightLong />
                     </div>
