@@ -176,7 +176,7 @@ const ActivityFeed = () => {
                                             borderRight: "7px solid rgb(11, 13, 94)",
                                         }}
                                         className="vertical-timeline-element--work"
-                                        date="2024 - present"
+                                        date={activity.date}
                                         iconStyle={{
                                             background: "rgb(11, 13, 94)",
                                             color: "#fff",
@@ -184,9 +184,9 @@ const ActivityFeed = () => {
                                         }}
                                         icon={activityType[activity.type]}
                                     >
-                                        <h3 className="vertical-timeline-element-title">Creative Director</h3>
-                                        <h4 className="vertical-timeline-element-subtitle">Miami, FL</h4>
-                                        <p>Creative Direction, User Experience, Visual Design</p>
+                                        {/* <h3 className="vertical-timeline-element-title">Creative Director</h3> */}
+                                        <h4 className="vertical-timeline-element-subtitle" style={{paddingTop: "10px"}}>{activity.text}</h4>
+                                        {/* <p></p> */}
                                     </VerticalTimelineElement>
                                 </div>
                             ))}

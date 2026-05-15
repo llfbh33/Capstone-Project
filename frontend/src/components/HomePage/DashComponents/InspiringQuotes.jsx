@@ -1,7 +1,7 @@
 import { BiSolidQuoteAltLeft } from "react-icons/bi";
 import './DashComponents.css';
 import { useEffect, useState } from "react";
-import LoadingPage from "../../LoadingPage/LoadingPage";
+
 
 
 const writingQuotes = [
