@@ -1,13 +1,16 @@
 
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SlNotebook } from "react-icons/sl";
+import { FaArrowRightLong } from "react-icons/fa6";
 import './DashComponents.css';
 
 
 
 const RecentNotebooks = () => {
     const notebooks = useSelector(state => state.notebooks);
+    const navigate = useNavigate();
     const [notebookArray, setNotebookArray] = useState();
     const [loading, setLoading] = useState(true);
 
@@ -26,6 +29,24 @@ const RecentNotebooks = () => {
 
     }, [notebooks]);
 
+
+
+    const handleAllNotebooks = () => {
+        navigate("/notebooks");
+    };
+
+    const handleClickNotebook = (id) => {
+        // const newActiveState = {
+        //     main: { title: 'notebooks', route: '/notebooks', open: true },
+        //     mid: { title: id, route: `/notebook/${id}`, open: true },
+        //     small: { title: null, route: null, open: false }
+        // };
+        // setActiveNav(newActiveState);
+        navigate(`/notebook/${id}`);
+    };
+
+
+
     if (loading) {
         return (
             <div className='dash-comp-container'>
@@ -41,11 +62,14 @@ const RecentNotebooks = () => {
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Notebooks</h2>
-                    <div>View all</div>
+                    <div className="view-all" onClick={handleAllNotebooks}>
+                        <div>View all</div>
+                        <FaArrowRightLong />
+                    </div>
                 </div>
                 <div className='pannel-contents'>
                     {notebookArray.map((book, index) => (
-                        <div className='pannel-item' key={`notebook-${index}`}>
+                        <div className='pannel-item' onClick={() => handleClickNotebook(book.id)} key={`notebook-${index}`}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>

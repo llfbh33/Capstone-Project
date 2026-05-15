@@ -117,7 +117,7 @@ function LeftNavigation() {
                 {/* When the nav dropdown is visible set the display to flex, populate nav links */}
                 <div id="navigation-container" style={{ display: navVisible ? 'flex' : 'none' }}>
                     {navigationLinks.map(link => (
-                        <NavLinks navObj={link} activeNav={activeNav} handleClick={handleClick} />
+                        <NavLinks key={link.name} navObj={link} activeNav={activeNav} handleClick={handleClick} />
                     ))}
 
 

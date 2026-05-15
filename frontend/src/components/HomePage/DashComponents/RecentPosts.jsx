@@ -2,6 +2,8 @@ import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 import { SlNotebook } from "react-icons/sl";
+import { FaArrowRightLong } from "react-icons/fa6";
+
 import './DashComponents.css';
 
 
@@ -33,7 +35,10 @@ const RecentPosts = () => {
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Posts</h2>
-                    <div>View all</div>
+                    <div className="view-all">
+                        <div>View all</div>
+                        <FaArrowRightLong />
+                    </div>
                 </div>
                 <div className='pannel-contents'>
                     {entryArray.map((page, index) => (

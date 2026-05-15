@@ -39,20 +39,6 @@ function HomePage() {
         if (theseNotebooks) setLoading(false)
     }, [theseNotebooks])
 
-    const handleClickNotebook = (id) => {
-        const newActiveState = {
-            main: { title: 'notebooks', route: '/notebooks', open: true },
-            mid: { title: id, route: `/notebook/${id}`, open: true },
-            small: { title: null, route: null, open: false }
-        };
-        setActiveNav(newActiveState);
-        navigate(`/notebook/${id}`);
-    }
-
-    const handleClickEntry = (entry) => {
-        console.log('notebookId', entry.notebook_id)
-        navigate(`/notebook/${entry.notebook_id}/entries/${entry.id}`)
-    }
 
     // const handleNewNotebook = () => {
     //     let modalComponent =<NewNotebookFormModal />

@@ -41,6 +41,11 @@
     align-items: center;
     min-height: 70px;
     flex: 0 0 auto;
+    cursor: pointer;
+}
+
+.pannel-item:hover {
+    background-color: green;
 }
 
 .pannel-item-icon {
@@ -175,4 +180,15 @@
 .activity-timeline::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 999px;
+}
+
+.view-all {
+    display: flex;
+    gap: 8px;
+    cursor: pointer;
+    color: rgb(173, 159, 243);
+}
+
+.view-all:hover {
+    color: rgb(211, 212, 250);
 }

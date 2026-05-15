@@ -2,8 +2,9 @@
 
 import { useSelector } from "react-redux";
 import { FaRegFileAlt } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 import './DashComponents.css';
+import { FaArrowRightLong } from "react-icons/fa6";
 import { useEffect, useState } from "react";
 
 
@@ -11,6 +12,7 @@ const RecentEntries = () => {
     const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
     const allEntries = useSelector(state => state.entries);
+    const navigate = useNavigate();
     const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -31,6 +33,11 @@ const RecentEntries = () => {
     }, [notebooks, entries])
 
 
+    const handleClickEntry = (entry) => {
+        navigate(`/notebook/${entry.notebook_id}/entries/${entry.id}`)
+    }
+
+
     if (loading) {
         return (
             <div className='dash-comp-container'>
@@ -46,11 +53,14 @@ const RecentEntries = () => {
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Entries</h2>
-                    <div>View all</div>
+                    <div className="view-all">
+                        <div>View all</div>
+                        <FaArrowRightLong />
+                    </div>
                 </div>
                 <div className='pannel-contents'>
                     {entryArray.map((page, index) => (
-                        <div className='pannel-item' key={`entry-${index}`}>
+                        <div className='pannel-item' onClick={() => handleClickEntry(page)} key={`entry-${index}`}>
                             <div className='pannel-item-icon'>
                                 <FaRegFileAlt />
                             </div>
