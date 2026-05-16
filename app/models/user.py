@@ -22,6 +22,7 @@ class User(db.Model, UserMixin):
     notebooks = db.relationship('Notebook', cascade='all, delete', back_populates='users')
     entries = db.relationship('Entry', cascade='all, delete', back_populates='users')
     comments = db.relationship('Comment', cascade='all, delete', back_populates='users')
+    activities = db.relationship('Activity', cascade='all, delete', back_populates='users')
 
     @property
     def password(self):

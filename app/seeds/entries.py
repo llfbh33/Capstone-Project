@@ -6,7 +6,7 @@ def seed_entries():
     one  = Entry(
         user_id = 1,
         notebook_id = 1,
-        name = 'the Closet',
+        name = 'The Closet',
         content='''Every night, Lisa heard the same soft whispering coming from her closet. "I'm watching you," it would murmur. Terrified, she would hide under her blanket, too scared to move. One night, fed up with the sleepless nights, she bravely got out of bed and yanked the closet door open.
 
                 Inside, there was nothing but her clothes and shoes. Relieved, she laughed at her imagination and turned to go back to bed. As she did, she caught a glimpse of her mirror. In its reflection, her closet door was still open—and a pair of glowing eyes stared back at her from the darkness.''',

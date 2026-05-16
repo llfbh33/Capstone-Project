@@ -5,3 +5,4 @@ from .notebook import notebook_routes
 from .entry import entry_routes
 from .post import post_routes
 from .comment import comment_routes
+from .activity import activity_routes
