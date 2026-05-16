@@ -50,7 +50,7 @@ const RecentPosts = () => {
                 </div>
                 <div className='pannel-contents'>
                     {entryArray.map((page, index) => (
-                        <div className='pannel-item' key={`entry-${index}`}>
+                        <div className='pannel-item action-item' key={`entry-${index}`}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>

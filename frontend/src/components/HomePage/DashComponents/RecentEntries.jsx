@@ -62,7 +62,7 @@ const RecentEntries = () => {
                 </div>
                 <div className='pannel-contents'>
                     {entryArray.map((page, index) => (
-                        <div className='pannel-item' onClick={() => handleClickEntry(page)} key={`entry-${index}`}>
+                        <div className='pannel-item action-item' onClick={() => handleClickEntry(page)} key={`entry-${index}`}>
                             <div className='pannel-item-icon'>
                                 <FaRegFileAlt />
                             </div>

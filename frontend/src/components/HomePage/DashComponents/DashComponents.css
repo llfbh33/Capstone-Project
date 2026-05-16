@@ -41,11 +41,14 @@
     align-items: center;
     min-height: 70px;
     flex: 0 0 auto;
-    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-.pannel-item:hover {
-    background-color: green;
+.action-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+    background-color: rgba(58, 58, 58, 0.461);
+    cursor: pointer;
 }
 
 .pannel-item-icon {
@@ -191,4 +194,25 @@
 
 .view-all:hover {
     color: rgb(211, 212, 250);
+}
+
+.activity-post .vertical-timeline-element-content {
+    background: rgb(11, 13, 94);
+    transition: all 0.2s ease;
+}
+
+.activity-post .vertical-timeline-element-content:hover {
+    background: rgb(25, 28, 140);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+}
+
+.activity-post .vertical-timeline-element-content-arrow {
+    border-right: 7px solid rgb(11, 13, 94);
+    transition: border-right-color 0.2s ease;
+}
+
+.activity-post .vertical-timeline-element-content:hover
+.vertical-timeline-element-content-arrow {
+    border-right: 7px solid rgb(25, 28, 140);
 }

@@ -72,7 +72,7 @@ const RecentNotebooks = () => {
                 </div>
                 <div className='pannel-contents'>
                     {notebookArray.map((book, index) => (
-                        <div className='pannel-item' onClick={() => handleClickNotebook(book.id)} key={`notebook-${index}`}>
+                        <div className='pannel-item action-item' onClick={() => handleClickNotebook(book.id)} key={`notebook-${index}`}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>
