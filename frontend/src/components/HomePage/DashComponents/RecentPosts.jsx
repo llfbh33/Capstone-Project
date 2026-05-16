@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-// import { useNav } from "../../../context/Navigation/NavigationContext";
+import { useNav } from "../../../context/Navigation/NavigationContext";
 import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ const RecentPosts = () => {
     const user = useSelector(state => state.session.user)
     const allEntries = useSelector(state => state.entries)
     const navigate = useNavigate();
-     // const { setActiveNav } = useNav();
+     const { setActiveNav } = useNav();
     const [entries, setEntries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -37,6 +37,11 @@ const RecentPosts = () => {
         navigate('/public/user');
     }
 
+    const handleClickPost = (id) => {
+        setActiveNav('posts');
+        navigate(`/public/${id}`);
+    };
+
 
     return (
         <div className='dash-comp-container'>
@@ -50,7 +55,7 @@ const RecentPosts = () => {
                 </div>
                 <div className='pannel-contents'>
                     {entryArray.map((page, index) => (
-                        <div className='pannel-item action-item' key={`entry-${index}`}>
+                        <div className='pannel-item action-item' key={`entry-${index}`} onClick={() => handleClickPost(page.id)}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>

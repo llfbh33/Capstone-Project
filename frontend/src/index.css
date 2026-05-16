@@ -7,6 +7,7 @@ body.light {
     --nav-selected: #3616ec;
     --text: black;
     --button-hover: #94aee2;
+    --container-border: border: rgb(85, 85, 230);
 }
 
 body.dark {
@@ -17,6 +18,7 @@ body.dark {
     --nav-selected: lightblue;
     --text: white;
     --button-hover: #231764;
+    --container-border: border: rgb(85, 85, 230);
 }
 
 body {

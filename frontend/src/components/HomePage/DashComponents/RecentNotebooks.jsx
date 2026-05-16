@@ -34,17 +34,12 @@ const RecentNotebooks = () => {
 
 
     const handleAllNotebooks = () => {
-        setActiveNav('notebooks')
+        setActiveNav('notebooks');
         navigate("/notebooks");
     };
 
     const handleClickNotebook = (id) => {
-        // const newActiveState = {
-        //     main: { title: 'notebooks', route: '/notebooks', open: true },
-        //     mid: { title: id, route: `/notebook/${id}`, open: true },
-        //     small: { title: null, route: null, open: false }
-        // };
-        // setActiveNav(newActiveState);
+        setActiveNav('notebooks');
         navigate(`/notebook/${id}`);
     };
 

@@ -20,7 +20,6 @@ function EntryPage() {
     const [isPreview, setIsPreview] = useState('Edit Entry')
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
-    console.log('entry', entry);
 
     useEffect(() => {
         if (entry) setLoaded(true);

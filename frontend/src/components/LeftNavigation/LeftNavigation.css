@@ -47,12 +47,13 @@
 }
 
 .nav-tab {
-    margin: 6px 20px;
+    margin: 0px 10px;
     cursor: pointer;
     font-size: 26px;
     text-decoration: none;
     color: var(--nav-hover);
     min-width: 120px;
+    padding: 6px 10px;
 }
 
 .nav-tab:hover {
@@ -61,12 +62,16 @@
 
 .nav-tab-selected {
     color: var(--nav-selected);
+    background-color: #22146c;
+    /* border: 1px solid red; */
+    padding: 6px 10px;
+    border-radius: 10px;
 }
 
-.divider-line {
+/* .divider-line {
     border-bottom: 1px solid #3399FF;
     width: 100%;
-}
+} */
 
 
 /* Dev Links container and icons */
