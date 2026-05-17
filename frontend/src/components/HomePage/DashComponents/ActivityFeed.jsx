@@ -1,17 +1,15 @@
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 import { useNav } from "../../../context/Navigation/NavigationContext";
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { MdOutlineSignpost } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdLocalPostOffice } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
 import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
-import { thunkGetCurrentUserActivities } from '../../../redux/activity';
 
 import './DashComponents.css';
-import { useState } from 'react';
 
 
 const activityType = {
@@ -33,7 +31,6 @@ const activityNav = {
 
 const ActivityFeed = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const { setActiveNav } = useNav();
     const activities = useSelector(state => [...Object.values(state.activities)].sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
@@ -73,7 +70,7 @@ const ActivityFeed = () => {
                 <div className=' activities-contain'>
                     <div className="activity-timeline">
                         <VerticalTimeline layout="1-column-left" >
-                            {activities.map((activity, index) => (
+                            {activities.map((activity) => (
                                 <div key={`activity-${activity.id}`} style={{ marginBottom: "50px" }} onClick={() => handleclick(activity)}>
                                     <VerticalTimelineElement
                                         contentStyle={{
