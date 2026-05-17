@@ -18,10 +18,7 @@ def get_current_user_activities():
         Activity.user_id == current_user.id
     ).order_by(Activity.created_at.desc()).all()
 
-    print(activities)
-    return {
-        "activities": [activity.to_dict() for activity in activities]
-    }
+    return [activity.to_dict() for activity in activities]
 
 
 
