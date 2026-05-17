@@ -37,12 +37,12 @@ function CreateEntryNameFormModal() {
             isPublic: false
         }));
 
-        if (serverResponse.name) {
-            setErrors(serverResponse);
+        if (serverResponse.errors) {
+            setErrors(serverResponse.errors);
         } else {
             await dispatch(thunkLoadEntries())
             setName('')
-            navigate(`/notebook/${notebookId}/entries/${serverResponse.entry.id}`)
+            navigate(`/notebook/${notebookId}/entries/${serverResponse.id}`)
             closeModal();
         }
     };

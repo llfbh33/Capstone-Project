@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Entry, Comment
+from app.models import db, Entry, Comment, Activity
 from app.forms import CommentForm, EditCommentForm
 
 
@@ -28,6 +28,18 @@ def create_entry():
         db.session.add(new_comment)
         db.session.commit()
 
+        entry = Entry.query.get(new_comment.entry_id)
+
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=entry.id,
+            target_type="comment",
+            text=f'Commented on post: "{entry.name}"',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return new_comment.to_dict()
     else:
         return form.errors, 400
@@ -49,6 +61,19 @@ def edit_entry(comment_id):
 
         db.session.commit()
 
+
+        entry = Entry.query.get(currComment.entry_id)
+
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=entry.id,
+            target_type="comment",
+            text=f'Edited comment on post: "{entry.name}"',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return currComment.to_dict()
     else:
         return form.errors, 400
@@ -63,6 +88,16 @@ def delete_notebook(comment_id):
     comment_to_delete = Comment.query.get(comment_id)
 
     entry = Entry.query.get(comment_to_delete.entry_id)
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=entry.id,
+        target_type="delete",
+        text=f'Deleted comment on post: "{entry.name}"',
+    )
+
+    db.session.add(activity)
+    db.session.commit()
 
     if comment_to_delete.user_id == current_user.id:
         db.session.delete(comment_to_delete)

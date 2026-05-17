@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Entry, db
+from app.models import Entry, Activity, Notebook, db
 from app.forms import EntryForm
 from datetime import datetime
 
@@ -73,6 +73,19 @@ def create_entry():
 
         db.session.add(new_entry)
         db.session.commit()
+        
+        notebook = Notebook.query.get(new_entry.notebook_id)
+
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=new_entry.id,
+            notebook_id=new_entry.notebook_id,
+            target_type="entry",
+            text=f'Created a new entry for: "{notebook.name}" named "{new_entry.name}',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
 
         entry_retrun = new_entry.to_dict()
         entry_retrun['comments'] = []
@@ -100,6 +113,20 @@ def edit_entry(entry_id):
 
         db.session.commit()
 
+        notebook = Notebook.query.get(currEntry.notebook_id)
+
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=currEntry.id,
+            notebook_id=notebook.id,
+            target_type="entry",
+            text=f'Edited entry: "{currEntry.name}" in notebook: "{notebook.name}',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
+
         entry_retrun = currEntry.to_dict()
 
         comment_list = []
@@ -122,6 +149,19 @@ def delete_notebook(entry_id):
     Delete a notebook
     """
     entry_to_delete = Entry.query.get(entry_id)
+
+    notebook = Notebook.query.get(entry_to_delete.notebook_id)
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=entry_to_delete.id,
+        notebook_id=notebook.id,
+        target_type="delete",
+        text=f'Deleted entry: "{entry_to_delete.name}" from notebook: "{notebook.name}',
+    )
+
+    db.session.add(activity)
+    db.session.commit()
 
     db.session.delete(entry_to_delete)
     db.session.commit()

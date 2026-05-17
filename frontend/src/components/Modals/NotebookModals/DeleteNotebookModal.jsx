@@ -9,7 +9,7 @@ function DeleteNotebookFormModal({notebook}) {
 
     const deleteNotebook = async () => {
         await dispatch(thunkDeleteNotebook(notebook.id))
-        await closeModal()
+        closeModal()
         return
     }
 

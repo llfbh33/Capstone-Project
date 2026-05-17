@@ -28,8 +28,8 @@ function EditPostFormModal({post}) {
 
       const serverResponse = await dispatch(thunkEditPost(editPost));
 
-      if (serverResponse.message) {
-        setValidationErrors(serverResponse);
+      if (serverResponse.errors) {
+        setValidationErrors(serverResponse.errors);
       } else {
         setMessage('')
         await closeModal();

@@ -1,3 +1,5 @@
+import { thunkGetCurrentUserActivities } from "./activity";
+
 const LOAD_USER_ENTRIES = 'entries/LOAD_USER_ENTRIES';
 const CREATE_ENTRY = 'entry/CREATE_ENTRY';
 const EDIT_ENTRY = 'entry/EDIT_ENTRY';
@@ -95,7 +97,9 @@ export const thunkCreateEntry = (entry) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        return dispatch(createEntry(data));
+        await dispatch(createEntry(data));
+        await dispatch(thunkGetCurrentUserActivities());
+        return data;
     } else {
         const errors = await response.json();
         return errors;
@@ -117,7 +121,9 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        return dispatch(editEntry(data));
+        await dispatch(editEntry(data));
+        await dispatch(thunkGetCurrentUserActivities());
+        return data;
     } else {
         const errors = await response.json();
         return errors;
@@ -128,7 +134,9 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
 export const thunkDeleteEntry = (entryId) => async (dispatch) => {
     const response = await fetch(`/api/entries/${entryId}/delete`);
     if (response.ok) {
-        return dispatch(deleteEntry(entryId))
+        await dispatch(deleteEntry(entryId));
+        await dispatch(thunkGetCurrentUserActivities());
+        return;
     } else {
         const errors = await response.json();
         return errors;
@@ -148,7 +156,9 @@ export const thunkCreateComment = (comment) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        return dispatch(createComment(data));
+        await dispatch(createComment(data));
+        await dispatch(thunkGetCurrentUserActivities());
+        return data;
     } else {
         const errors = await response.json();
         return errors;
@@ -167,7 +177,9 @@ export const thunkEditComment = (comment) => async (dispatch) => {
     });
     if (response.ok) {
         const data = await response.json();
-        return dispatch(editComment(data));
+        await dispatch(editComment(data));
+        await dispatch(thunkGetCurrentUserActivities());
+        return data;
     } else {
         const errors = await response.json();
         return errors;
@@ -177,7 +189,9 @@ export const thunkEditComment = (comment) => async (dispatch) => {
 export const thunkDeleteComment = (comment) => async (dispatch) => {
     const response = await fetch(`/api/comments/${comment.id}/delete`);
     if (response.ok) {
-        return dispatch(deleteComment(comment))
+        await dispatch(deleteComment(comment));
+        await dispatch(thunkGetCurrentUserActivities());
+        return;
     } else {
         const errors = await response.json();
         return errors;
@@ -196,7 +210,9 @@ export const thunkCreatePost = (post) => async (dispatch) => {
   });
   if (response.ok) {
     const data = await response.json();
-    return dispatch(createPost(data));
+    await dispatch(createPost(data));
+    await dispatch(thunkGetCurrentUserActivities());
+    return data;
   } else {
     const errors = await response.json();
     return errors;
@@ -214,7 +230,9 @@ const response = await fetch(`/api/posts/${post.entryId}/edit`, {
 });
   if (response.ok) {
     const data = await response.json();
-    return dispatch(editPost(data));
+    await dispatch(editPost(data));
+    await dispatch(thunkGetCurrentUserActivities());
+    return data;
   } else {
     const errors = await response.json();
     return errors;
@@ -224,7 +242,9 @@ const response = await fetch(`/api/posts/${post.entryId}/edit`, {
 export const thunkDeletePost = (post) => async (dispatch) => {
 const response = await fetch(`/api/posts/${post.id}/delete`);
 if (response.ok) {
-    return dispatch(deletePost(post))
+    await dispatch(deletePost(post));
+    await dispatch(thunkGetCurrentUserActivities());
+    return;
 } else {
   const errors = await response.json();
   return errors;

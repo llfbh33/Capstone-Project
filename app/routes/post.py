@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Post, db, Entry
+from app.models import Post, db, Entry, Activity
 from app.forms import PostForm, EditPostForm
 from datetime import datetime
 
@@ -101,6 +101,16 @@ def create_entry():
         db.session.add(new_post)
         db.session.commit()
 
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=new_post.entry_id,
+            target_type="post",
+            text=f'Published entry: "{entry.name}"',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         post = Post.query.filter(Post.entry_id == form.data['entry_id']).first()
         post_return = entry.to_dict()
         post_return['post'] = post.to_dict()
@@ -133,6 +143,16 @@ def edit_entry(post_id):
 
         db.session.commit()
 
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=currPost.entry_id,
+            target_type="post",
+            text=f'Edited public entry: "{entry.name}"',
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return currPost.to_dict()
     else:
         return form.errors, 400
@@ -140,7 +160,7 @@ def edit_entry(post_id):
 
 @post_routes.route("/<int:post_id>/delete")
 @login_required
-def delete_notebook(post_id):
+def delete_post(post_id):
     """
     Remove an entry from being public and delete the post
     """
@@ -148,6 +168,16 @@ def delete_notebook(post_id):
 
     entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
     setattr(entry, 'is_public', False)
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=entry.id,
+        target_type="delete",
+        text=f'Changed a post: "{entry.name}" to private',
+    )
+
+    db.session.add(activity)
+    db.session.commit()
 
     db.session.delete(post_to_delete)
     db.session.commit()

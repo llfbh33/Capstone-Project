@@ -32,8 +32,8 @@ function EditEntryNameFormModal({entry}) {
             })
         );
 
-        if (serverResponse.name) {
-            setValidationErrors(serverResponse);
+        if (serverResponse.errors) {
+            setValidationErrors(serverResponse.errors);
         } else {
             setName('')
             closeModal();

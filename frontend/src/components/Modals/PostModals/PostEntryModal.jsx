@@ -32,8 +32,8 @@ function PostPostModal({entry}) {
             })
         );
 
-        if (serverResponse.name) {
-            setValidationErrors(serverResponse);
+        if (serverResponse.errors) {
+            setValidationErrors(serverResponse.errors);
         } else {
             await dispatch(thunkLoadEntries());
             navigate(`/public/${entry.id}`)

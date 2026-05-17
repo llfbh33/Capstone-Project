@@ -6,6 +6,7 @@ import { MdOutlineSignpost } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdLocalPostOffice } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
+import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { thunkGetCurrentUserActivities } from '../../../redux/activity';
 
@@ -17,8 +18,8 @@ const activityType = {
     post: <MdOutlineSignpost />,
     entry: <FaRegFileAlt />,
     comment: <MdLocalPostOffice />,
-    notebook: <SlNotebook />
-
+    notebook: <SlNotebook />,
+    delete: <MdDelete />,
 }
 
 const activityNav = {
