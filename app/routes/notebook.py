@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import Notebook, db
+from app.models import Notebook, Activity, db
 from app.forms import NotebookForm
 from datetime import datetime
 
@@ -50,6 +50,16 @@ def create_notebook():
         db.session.add(new_notebook)
         db.session.commit()
 
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=new_notebook.id,
+            target_type="notebook",
+            text=f'Created a new notebook: "{new_notebook.name}"'
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return new_notebook.to_dict()
     else:
         return form.errors, 400
@@ -72,6 +82,16 @@ def edit_notebook(notebook_id):
 
         db.session.commit()
 
+        activity = Activity(
+            user_id=current_user.id,
+            target_id=currNotebook.id,
+            target_type="notebook",
+            text=f'Edited notebook: "{currNotebook.name}"'
+        )
+
+        db.session.add(activity)
+        db.session.commit()
+
         return currNotebook.to_dict()
     else:
         return form.errors, 400
@@ -84,6 +104,17 @@ def delete_notebook(notebook_id):
     Delete a notebook
     """
     notebook_to_delete = Notebook.query.get(notebook_id)
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=notebook_to_delete.id,
+        target_type="delete",
+        text=f'Deleted notebook: "{notebook_to_delete.name}"'
+    )
+
+    db.session.add(activity)
+    db.session.commit()
+
 
     db.session.delete(notebook_to_delete)
     db.session.commit()

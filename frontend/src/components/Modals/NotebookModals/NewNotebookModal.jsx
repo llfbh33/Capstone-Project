@@ -40,13 +40,14 @@ function NewNotebookFormModal() {
         })
       );
 
-      if (serverResponse.name) {
-        setErrors(serverResponse);
+
+      if (serverResponse.errors) {
+        setErrors(serverResponse.errors);
       } else {
         setName('')
         setAbout('')
         closeModal();
-        navigate('/')
+        navigate(`/notebook/${serverResponse.id}`)
       }
     };
 

@@ -34,25 +34,22 @@ const ActivityFeed = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const { setActiveNav } = useNav();
-    const activities = useSelector(state => state.activities);
-    const [sortedActivities] = useState([...Object.values(activities)].sort(
+    const activities = useSelector(state => [...Object.values(state.activities)].sort(
         (a, b) => new Date(b.created_at) - new Date(a.created_at)
     ));
 
     const handleclick = (activity) => {
-        console.log(activity)
+
+        if (activity.target_type === "delete") {
+            alert("This item has been deleted and is no longer recoverable");
+            return;
+        }
 
         if (activity.target_type === "entry") {
             navigate(`${activityNav[activity.target_type][0]}${activity.notebook_id}${activityNav[activity.target_type][1]}${activity.target_id}`)
         } else {
             navigate(`${activityNav[activity.target_type]}${activity.target_id}`)
         }
-
-        // if (activity.target_type === 'entry') {
-        //     navigate(`${activityNav[activity.type][0]}${activity.notebook_id}${activityNav[activity.type][1]}${activity.type_id}`)
-        // } else {
-        //     navigate(`${activityNav[activity.type]}${activity.type_id}`)
-        // }
 
         if (activity.target_type === 'post' || activity.target_type === 'comment') {
             setActiveNav('public');
@@ -61,7 +58,9 @@ const ActivityFeed = () => {
         }
     }
 
-    if (!sortedActivities) return;
+    console.log(activities)
+
+    if (!activities) return;
 
 
     return (
@@ -73,7 +72,7 @@ const ActivityFeed = () => {
                 <div className=' activities-contain'>
                     <div className="activity-timeline">
                         <VerticalTimeline layout="1-column-left" >
-                            {sortedActivities.map((activity, index) => (
+                            {activities.map((activity, index) => (
                                 <div key={`activity-${activity.id}`} style={{ marginBottom: "50px" }} onClick={() => handleclick(activity)}>
                                     <VerticalTimelineElement
                                         contentStyle={{

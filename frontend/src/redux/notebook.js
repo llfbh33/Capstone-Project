@@ -1,3 +1,5 @@
+import { thunkGetCurrentUserActivities } from "./activity";
+
 const LOAD_USER_NOTEBOOKS = 'notebooks/LOAD_USER_NOTEBOOKS';
 const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
 const EDIT_NOTEBOOK = 'notebook/EDIT_NOTEBOOK';
@@ -52,7 +54,9 @@ export const thunkCreateNotebook = (notebook) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      return dispatch(createNotebook(data));
+      await dispatch(createNotebook(data));
+      await dispatch(thunkGetCurrentUserActivities());
+      return data;
     } else {
       const errors = await response.json();
       return errors;
@@ -72,7 +76,9 @@ export const thunkEditNotebook = (notebook) => async (dispatch) => {
     });
     if (response.ok) {
       const data = await response.json();
-      return dispatch(editNotebook(data));
+      await dispatch(editNotebook(data));
+      await dispatch(thunkGetCurrentUserActivities());
+      return data;
     } else {
       const errors = await response.json();
       return errors;
@@ -83,7 +89,9 @@ export const thunkEditNotebook = (notebook) => async (dispatch) => {
 export const thunkDeleteNotebook = (notebookId) => async (dispatch) => {
     const response = await fetch(`/api/notebooks/${notebookId}/delete`);
     if (response.ok) {
-        return dispatch(deleteNotebook(notebookId))
+        await dispatch(deleteNotebook(notebookId));
+        await dispatch(thunkGetCurrentUserActivities());
+        return;
     } else {
       const errors = await response.json();
       return errors;
