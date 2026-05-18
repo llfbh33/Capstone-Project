@@ -17,7 +17,6 @@ class Notebook(db.Model):
 
     users = db.relationship('User', back_populates='notebooks')
     entries = db.relationship('Entry', cascade='all, delete', back_populates='notebooks')
-    activities = db.relationship('Activity', cascade='all, delete', back_populates='notebooks')
 
     def to_dict(self):
         return {
