@@ -11,7 +11,7 @@ class Activity(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     target_id = db.Column(db.Integer, nullable=False)
     target_type = db.Column(db.String(50), nullable=False)  # "entry", "comment", "post", "notebook"
-    action_type = db.Column(db.String(50), nullable=False)  # "created", "updated", "published", "commented", "unpublished", "deleted"
+    action_type = db.Column(db.String(50), nullable=False)  # "created", "updated", "deleted"
     text = db.Column(db.String(600), nullable=False)
     route = db.Column(db.String(255), nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now)

@@ -1,8 +1,8 @@
 """create activities table
 
-Revision ID: 09216b4ede95
+Revision ID: 08b6206c3905
 Revises: d932c3ffe75c
-Create Date: 2026-05-16 15:07:09.468156
+Create Date: 2026-05-18 16:19:08.385849
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '09216b4ede95'
+revision = '08b6206c3905'
 down_revision = 'd932c3ffe75c'
 branch_labels = None
 depends_on = None
@@ -22,12 +22,12 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('target_id', sa.Integer(), nullable=False),
-    sa.Column('notebook_id', sa.Integer(), nullable=True),
     sa.Column('target_type', sa.String(length=50), nullable=False),
+    sa.Column('action_type', sa.String(length=50), nullable=False),
     sa.Column('text', sa.String(length=600), nullable=False),
+    sa.Column('route', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
-    sa.ForeignKeyConstraint(['notebook_id'], ['notebooks.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

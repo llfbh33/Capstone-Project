@@ -4,6 +4,31 @@ from app.models import Notebook, Activity, db
 from app.forms import NotebookForm
 from datetime import datetime
 
+
+def generate_activity(action, notebook):
+
+    if action == "create":
+        text = f'Created a new notebook: "{notebook.name}"'
+    elif action == "update":
+        text = f'Edited notebook: "{notebook.name}"'
+    elif action == "delete":
+        text = f'Deleted notebook: "{notebook.name}"'
+    else:
+        text = f'Updated notebook: "{notebook.name}"'
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=notebook.id,
+        target_type="notebook",
+        action_type=action,
+        text=text
+    )
+
+    db.session.add(activity)
+    db.session.commit()
+
+
+
 notebook_routes = Blueprint('notebooks', __name__)
 
 
@@ -50,15 +75,7 @@ def create_notebook():
         db.session.add(new_notebook)
         db.session.commit()
 
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=new_notebook.id,
-            target_type="notebook",
-            text=f'Created a new notebook: "{new_notebook.name}"'
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        generate_activity('create', new_notebook)
 
         return new_notebook.to_dict()
     else:
@@ -82,15 +99,7 @@ def edit_notebook(notebook_id):
 
         db.session.commit()
 
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=currNotebook.id,
-            target_type="notebook",
-            text=f'Edited notebook: "{currNotebook.name}"'
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        generate_activity('update', currNotebook)
 
         return currNotebook.to_dict()
     else:
@@ -105,15 +114,7 @@ def delete_notebook(notebook_id):
     """
     notebook_to_delete = Notebook.query.get(notebook_id)
 
-    activity = Activity(
-        user_id=current_user.id,
-        target_id=notebook_to_delete.id,
-        target_type="delete",
-        text=f'Deleted notebook: "{notebook_to_delete.name}"'
-    )
-
-    db.session.add(activity)
-    db.session.commit()
+    generate_activity('delete', notebook_to_delete)
 
 
     db.session.delete(notebook_to_delete)
