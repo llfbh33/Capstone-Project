@@ -10,9 +10,6 @@ const CREATE_COMMENT = 'comment/CREATE_COMMENT'
 const EDIT_COMMENT = 'comment/EDIT_COMMENT'
 const DELETE_COMMENT = 'comment/DELETE_COMMENT'
 
-const CREATE_POST = 'post/CREATE_POST';
-const EDIT_POST = 'post/EDIT_POST';
-const DELETE_POST = 'post/DELETE_POST';
 
 // middleware functions for updating entries state
 const loadEntries = (entries) => ({
@@ -55,21 +52,6 @@ const deleteComment = (comment) => ({
   comment
 });
 
-// action creator functions for updating posts state
-const createPost = (post) => ({
-  type: CREATE_POST,
-  post
-});
-
-const editPost = (post) => ({
-  type: EDIT_POST,
-  post
-})
-
-const deletePost = (post) => ({
-  type: DELETE_POST,
-  post
-});
 
 
 // thunks for changing entries in the database
@@ -198,58 +180,7 @@ export const thunkDeleteComment = (comment) => async (dispatch) => {
     }
 };
 
-// thunks for changing posts in the database
-export const thunkCreatePost = (post) => async (dispatch) => {
-  const response = await fetch("/api/posts/new", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      entry_id: post.entryId,
-      message: post.message,
-    }),
-  });
-  if (response.ok) {
-    const data = await response.json();
-    await dispatch(createPost(data));
-    await dispatch(thunkGetCurrentUserActivities());
-    return data;
-  } else {
-    const errors = await response.json();
-    return errors;
-  }
-};
 
-export const thunkEditPost = (post) => async (dispatch) => {
-const response = await fetch(`/api/posts/${post.entryId}/edit`, {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    entry_id: post.entryId,
-    message: post.message,
-  }),
-});
-  if (response.ok) {
-    const data = await response.json();
-    await dispatch(editPost(data));
-    await dispatch(thunkGetCurrentUserActivities());
-    return data;
-  } else {
-    const errors = await response.json();
-    return errors;
-  }
-};
-
-export const thunkDeletePost = (post) => async (dispatch) => {
-const response = await fetch(`/api/posts/${post.id}/delete`);
-if (response.ok) {
-    await dispatch(deletePost(post));
-    await dispatch(thunkGetCurrentUserActivities());
-    return;
-} else {
-  const errors = await response.json();
-  return errors;
-}
-};
 
 const initialState = {};
 
@@ -295,31 +226,6 @@ function entryReducer(state = initialState, action) {
         const comments = newState[action.comment.entry_id].comments;
         newState[action.comment.entry_id].comments.splice(comments.indexOf(action.comment), 1)
         return newState
-    }
-    case CREATE_POST: {
-      const newState = {...state};
-      newState[action.post.id] = action.post
-      return newState
-    }
-    case EDIT_POST: {
-      const newState = {...state};
-      newState[action.post.entry_id].post = action.post
-      return newState
-    }
-// This delete of a post is good, but it does not adjust for the fact that the is_public
-// boolean for the entry is now set to false
-    case DELETE_POST: {
-      const newState = {...state};
-      let adjust_entry = newState[action.post.entry_id]
-      adjust_entry = Object.keys(adjust_entry)
-          .filter(key => key !== 'post')
-          .reduce((newObj, key) => {
-            newObj[key] = adjust_entry[key];
-            return newObj;
-          }, {});
-      newState[adjust_entry.id] = adjust_entry;
-      newState[adjust_entry.id].is_public = false;
-      return newState
     }
     case CLEAR_ENTRIES: {
         return initialState;

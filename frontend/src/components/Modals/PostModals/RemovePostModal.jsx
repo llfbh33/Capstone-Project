@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux"
-import { thunkDeletePost, thunkLoadEntries } from "../../../redux/entry"
+// import { thunkDeletePost, thunkLoadEntries } from "../../../redux/entry"
 import { useModal } from "../../../context/Modal/Modal";
 
 
@@ -8,8 +8,8 @@ function RemovePostModal({post}) {
     const { closeModal } = useModal();
 
     const deletePost = async () => {
-        await dispatch(thunkDeletePost(post.post))
-        await dispatch(thunkLoadEntries())
+        // await dispatch(thunkDeletePost(post.post))
+        // await dispatch(thunkLoadEntries())
         await closeModal()
         return
     }

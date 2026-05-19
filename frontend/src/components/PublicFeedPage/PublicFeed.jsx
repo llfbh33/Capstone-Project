@@ -10,10 +10,14 @@ import { BsTrash3Fill } from "react-icons/bs";
 
 function PublicFeed() {
     const allEntries = useSelector(state => state.entries)
+    const allPosts = useSelector(state => state.posts)
     const allUsers = useSelector(state => state.users)
     const [posts, setPosts] = useState(Object.values(allEntries).filter(entry => entry.is_public === true))
     const currUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
+    console.log('THE POSTS: ', allPosts)
+    console.log('THE ENTRIES: ', allEntries)
+    console.log("state", useSelector(state => state));
 
     useEffect(() => {
         setPosts(Object.values(allEntries).filter(entry => entry.is_public === true))

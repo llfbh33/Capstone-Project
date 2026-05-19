@@ -23,7 +23,7 @@ function PublicPost() {
     const [commentList, setCommentList] = useState([])
     const [loaded, setLoaded] = useState(false);
 
-    console.log('POST: ', post)
+    console.log('POST: ', postId)
 
     useEffect(() => {
         if (post?.comments) {

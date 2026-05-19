@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../../context/Modal/Modal";
 
 import './PostModals.css'
-import { thunkEditPost } from "../../../redux/entry";
+// import { thunkEditPost } from "../../../redux/entry";
 
 function EditPostFormModal({post}) {
     const dispatch = useDispatch();
@@ -21,19 +21,19 @@ function EditPostFormModal({post}) {
     const handleSubmit = async (e) => {
       e.preventDefault();
 
-      const editPost = {
-        entryId: post.post.id,
-        message
-      }
+      // const editPost = {
+      //   entryId: post.post.id,
+      //   message
+      // }
 
-      const serverResponse = await dispatch(thunkEditPost(editPost));
+      // const serverResponse = await dispatch(thunkEditPost(editPost));
 
-      if (serverResponse.errors) {
-        setValidationErrors(serverResponse.errors);
-      } else {
-        setMessage('')
-        await closeModal();
-      }
+      // if (serverResponse.errors) {
+      //   setValidationErrors(serverResponse.errors);
+      // } else {
+      //   setMessage('')
+      //   await closeModal();
+      // }
     };
 
     return (

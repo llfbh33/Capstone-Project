@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
+// import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal/Modal";
 import { useNavigate } from "react-router-dom";
 import './PostModals.css'
@@ -24,21 +24,21 @@ function PostPostModal({entry}) {
     const postEntry = async (e) => {
         e.preventDefault();
 
-        if (Object.values(validationErrors).length) return;
+        // if (Object.values(validationErrors).length) return;
 
-        const serverResponse = await dispatch(thunkCreatePost ({
-            entryId: entry.id,
-            message,
-            })
-        );
+        // const serverResponse = await dispatch(thunkCreatePost ({
+        //     entryId: entry.id,
+        //     message,
+        //     })
+        // );
 
-        if (serverResponse.errors) {
-            setValidationErrors(serverResponse.errors);
-        } else {
-            await dispatch(thunkLoadEntries());
-            navigate(`/public/${entry.id}`)
-            await closeModal();
-        }
+        // if (serverResponse.errors) {
+        //     setValidationErrors(serverResponse.errors);
+        // } else {
+        //     await dispatch(thunkLoadEntries());
+        //     navigate(`/public/${entry.id}`)
+        //     await closeModal();
+        // }
     }
 
     const doNotPost = () => {
