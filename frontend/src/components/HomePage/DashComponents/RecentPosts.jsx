@@ -22,10 +22,10 @@ const RecentPosts = () => {
         if (!entries) return;
 
         const sortedEntries = entries
-            .sort((a, b) =>
-                new Date(b.post.created_at) - new Date(a.post.created_at)
-            )
-            .slice(0, 2);
+            // .sort((a, b) =>
+            //     new Date(b.post.created_at) - new Date(a.post.created_at)
+            // )
+            // .slice(0, 2);
 
         setEntryArray(sortedEntries);
         setLoading(false);
@@ -66,7 +66,7 @@ const RecentPosts = () => {
                                     {page.name}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {page.post.created_at}
+                                    {/* {page.post.created_at} */}
                                 </div>
                             </div>
                         </div>

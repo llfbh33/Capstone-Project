@@ -19,6 +19,8 @@ const RecentEntries = () => {
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
 
+    console.log('all entries: ', Object.values(allEntries))
+
 
     useEffect(() => {
         if (!notebooks || !entries) return;

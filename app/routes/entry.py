@@ -32,26 +32,60 @@ def generate_activity(action, entry):
     db.session.add(activity)
     db.session.commit()
 
+# @entry_routes.route('')
+# @login_required
+# def get_entries():
+#     """
+#     Query for all entries and list them as dictionaries
+#     """
+#     entries = Entry.query.all()
+#     entries_return = []
+
+#     for entry in entries:
+#         entry_comments = []
+#         for comment in entry.comments:
+#             entry_comments.append(comment.to_dict())
+#         entry_w_comments = entry.to_dict()
+#         entry_w_comments['comments'] = entry_comments
+#         if entry.posts:
+#             entry_w_comments['post'] = entry.posts[0].to_dict()
+#         entries_return.append(entry_w_comments)
+
+#     return entries_return
+
 @entry_routes.route('')
 @login_required
-def get_entries():
+def get_current_users_entries():
     """
-    Query for all entries and list them as dictionaries
+    Query for current user's entries and list them as dictionaries
     """
-    entries = Entry.query.all()
+    entries = Entry.query.filter(
+        Entry.user_id == current_user.id
+    ).all()
+
     entries_return = []
 
     for entry in entries:
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_comments = entry.to_dict()
-        entry_w_comments['comments'] = entry_comments
+        entry_dict = entry.to_dict()
+
         if entry.posts:
-            entry_w_comments['post'] = entry.posts[0].to_dict()
-        entries_return.append(entry_w_comments)
+            post_dict = entry.posts.to_dict()
+            print(post_dict)
+
+            post_dict["comments"] = [
+                comment.to_dict() for comment in entry.posts.comments
+            ]
+
+            entry_dict["posts"] = post_dict
+            entry_dict["comments"] = post_dict["comments"]
+        else:
+            entry_dict["posts"] = None
+            entry_dict["comments"] = []
+
+        entries_return.append(entry_dict)
 
     return entries_return
+
 
 
 
