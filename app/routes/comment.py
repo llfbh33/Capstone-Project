@@ -1,10 +1,34 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
-from app.models import db, Entry, Comment, Activity
+from app.models import db, Entry, Comment, Activity, Post
 from app.forms import CommentForm, EditCommentForm
 
 
 comment_routes = Blueprint('comments', __name__)
+
+
+def generate_activity(action, comment, entry_name, post_id):
+
+    if action == "create":
+        text = f'Commented on post: "{entry_name}"'
+    elif action == "update":
+        text = f'Edited comment on post: "{entry_name}"'
+    elif action == "delete":
+        text = f'Deleted comment on post: "{entry_name}"'
+    else:
+        text = f'Edited comment on post: "{entry_name}"'
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=comment.id,
+        target_type="comment",
+        action_type=action,
+        text=text,
+        route=f'/public/{post_id}'
+    )
+
+    db.session.add(activity)
+    db.session.commit()
 
 
 
@@ -29,6 +53,7 @@ def create_entry():
         db.session.commit()
 
         entry = Entry.query.get(new_comment.entry_id)
+        post = Post.query.get()
 
         activity = Activity(
             user_id=current_user.id,
@@ -39,6 +64,8 @@ def create_entry():
 
         db.session.add(activity)
         db.session.commit()
+
+        generate_activity('create', new_comment, entry_name, )
 
         return new_comment.to_dict()
     else:
