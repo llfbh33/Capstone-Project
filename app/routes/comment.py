@@ -7,16 +7,16 @@ from app.forms import CommentForm, EditCommentForm
 comment_routes = Blueprint('comments', __name__)
 
 
-def generate_activity(action, comment, entry_name, post_id):
+def generate_activity(action, comment, post_name):
 
     if action == "create":
-        text = f'Commented on post: "{entry_name}"'
+        text = f'Commented on post: "{post_name}"'
     elif action == "update":
-        text = f'Edited comment on post: "{entry_name}"'
+        text = f'Edited comment on post: "{post_name}"'
     elif action == "delete":
-        text = f'Deleted comment on post: "{entry_name}"'
+        text = f'Deleted comment on post: "{post_name}"'
     else:
-        text = f'Edited comment on post: "{entry_name}"'
+        text = f'Edited comment on post: "{post_name}"'
 
     activity = Activity(
         user_id=current_user.id,
@@ -24,7 +24,7 @@ def generate_activity(action, comment, entry_name, post_id):
         target_type="comment",
         action_type=action,
         text=text,
-        route=f'/public/{post_id}'
+        route=f'/public/{comment.post_id}'
     )
 
     db.session.add(activity)
@@ -44,28 +44,20 @@ def create_entry():
     if form.validate_on_submit():
 
         new_comment = Comment (
-            user_id = form.data['user_id'],
-            entry_id = form.data['entry_id'],
+            user_id = current_user.id,
+            post_id = form.data['post_id'],
             comment = form.data['comment'],
         )
 
         db.session.add(new_comment)
         db.session.commit()
 
-        entry = Entry.query.get(new_comment.entry_id)
-        post = Post.query.get()
+        post = Post.query.get(new_comment.post_id)
+        if not post.comments_enabled:
+            return {"error": "Comments are disabled for this post"}, 403
 
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=entry.id,
-            target_type="comment",
-            text=f'Commented on post: "{entry.name}"',
-        )
+        generate_activity("create", new_comment, post.title)
 
-        db.session.add(activity)
-        db.session.commit()
-
-        generate_activity('create', new_comment, entry_name, )
 
         return new_comment.to_dict()
     else:
@@ -74,7 +66,7 @@ def create_entry():
 
 @comment_routes.route('/<int:comment_id>/edit', methods=['post'])
 @login_required
-def edit_entry(comment_id):
+def edit_comment(comment_id):
     """
     Edit an existing comment created by the current user
     """
@@ -84,55 +76,47 @@ def edit_entry(comment_id):
     if form.validate_on_submit():
 
         currComment = Comment.query.get(comment_id)
+
+        if not currComment:
+            return {"error": "Comment couldn't be found"}, 404
+
+        if currComment.user_id != current_user.id:
+            return {"error": "Forbidden"}, 403
+
         setattr(currComment, 'comment', form.data['comment'])
 
         db.session.commit()
 
+        post = Post.query.get(currComment.post_id)
 
-        entry = Entry.query.get(currComment.entry_id)
-
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=entry.id,
-            target_type="comment",
-            text=f'Edited comment on post: "{entry.name}"',
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        generate_activity("update", currComment, post.title)
 
         return currComment.to_dict()
+
     else:
         return form.errors, 400
 
 
 @comment_routes.route("/<int:comment_id>/delete")
 @login_required
-def delete_notebook(comment_id):
+def delete_comment(comment_id):
     """
-    Delete a comment, only if the current user is the creator of the comment or the owner of the post
+    Delete a comment, only if the current user is the creator of the comment
     """
+
     comment_to_delete = Comment.query.get(comment_id)
 
-    entry = Entry.query.get(comment_to_delete.entry_id)
+    if not comment_to_delete:
+        return {"error": "Comment couldn't be found"}, 404
 
-    activity = Activity(
-        user_id=current_user.id,
-        target_id=entry.id,
-        target_type="delete",
-        text=f'Deleted comment on post: "{entry.name}"',
-    )
+    if comment_to_delete.user_id != current_user.id:
+        return {"error": "Forbidden"}, 403
 
-    db.session.add(activity)
+    post = Post.query.get(comment_to_delete.post_id)
+
+    generate_activity("delete", comment_to_delete, post.title)
+
+    db.session.delete(comment_to_delete)
     db.session.commit()
-
-    if comment_to_delete.user_id == current_user.id:
-        db.session.delete(comment_to_delete)
-        db.session.commit()
-    elif entry.user_id == current_user.id:
-        db.session.delete(comment_to_delete)
-        db.session.commit()
-    else:
-        return {'message': "You are not the owner of this comment, nor are you the creator of the post it is posted to"}
 
     return {"message": "Comment has successfully been deleted"}
