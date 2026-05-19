@@ -7,16 +7,16 @@ from datetime import datetime
 post_routes = Blueprint('posts', __name__)
 
 
-def generate_activity(action, post, entry_name):
+def generate_activity(action, post):
 
     if action == "create":
-        text = f'Published: "{entry_name}"'
+        text = f'Published: "{post.title}"'
     elif action == "update":
-        text = f'Edited post: "{entry_name}"'
+        text = f'Edited post: "{post.title}"'
     elif action == "delete":
-        text = f'Unpublished: "{entry_name}"'
+        text = f'Unpublished: "{post.title}"'
     else:
-        text = f'Edited post: "{entry_name}"'
+        text = f'Edited post: "{post.title}"'
 
     activity = Activity(
         user_id=current_user.id,
@@ -131,6 +131,7 @@ def create_entry():
 
         new_post = Post(
             entry_id=form.data['entry_id'],
+            title=form.data['title'],
             message=form.data['message'],
             is_active=True,
             comments_enabled=True,
@@ -139,7 +140,7 @@ def create_entry():
         db.session.add(new_post)
         db.session.commit()
 
-        generate_activity('create', new_post, entry.name)
+        generate_activity('create', new_post)
 
         post_return = new_post.to_dict()
 
@@ -167,13 +168,16 @@ def edit_entry(post_id):
     if form.validate_on_submit():
 
         currPost = Post.query.get(post_id)
+        if not currPost:
+            return {"error": "Post couldn't be found"}, 404
+        setattr(currPost, 'title', form.data['title'])
         setattr(currPost, 'message', form.data['message'])
+        setattr(currPost, 'comments_enabled', form.data['comments_enabled'])
         setattr(currPost, 'updated_at', datetime.now())
 
         db.session.commit()
 
-        entry = Entry.query.get(currPost.entry_id)
-        generate_activity('update', currPost, entry.name)
+        generate_activity('update', currPost)
 
         return currPost.to_dict()
     else:
@@ -182,6 +186,7 @@ def edit_entry(post_id):
 
 
 
+# SHOULD NOT BE USED ANY MORE
 @post_routes.route("/<int:post_id>/delete")
 @login_required
 def delete_post(post_id):
@@ -193,7 +198,7 @@ def delete_post(post_id):
     entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
     setattr(entry, 'is_public', False)
 
-    generate_activity('update', post_to_delete, entry.name)
+    generate_activity('update', post_to_delete)
 
     db.session.delete(post_to_delete)
     db.session.commit()

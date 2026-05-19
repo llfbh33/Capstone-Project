@@ -6,36 +6,42 @@ from sqlalchemy.sql import text
 def seed_posts():
     one = Post(
         entry_id=1,
+        title='The Closet',
         message='Just messing around a little with a new writing style',
         is_active=True,
         comments_enabled=True,
     )
     two = Post(
         entry_id=3,
+        title="The Mysterious Hole",
         message="I'm not really sure where to go with this story.  I want to expand on it but I'm having a bit of writers block",
         is_active=True,
         comments_enabled=True,
     )
     three = Post(
         entry_id=5,
+        title='The Dance of Seasons',
         message="I'm thinking this piece might be better as a poem.  It feels very poetic but just a bit to short for a good short story",
         is_active=True,
         comments_enabled=True,
     )
     four = Post(
         entry_id=7,
+        title="Chapter 1: The Rise of Captain Simian",
         message='Open to any optinions!  First draft of the first chapter of my book!',
         is_active=True,
         comments_enabled=True,
     )
     five = Post(
         entry_id=8,
+        title='May 31, 2024',
         message='Making sure that this post shows up when looking for all posts but not when looking up by the current user',
         is_active=True,
         comments_enabled=True,    
     )
     six = Post(
         entry_id=4,
+        title='Castaway',
         message='Just a little something I through together when out on the ocean the other day',
         is_active=False,
         comments_enabled=True,
@@ -46,6 +52,7 @@ def seed_posts():
     db.session.add(three)
     db.session.add(four)
     db.session.add(five)
+    db.session.add(six)
 
     db.session.commit()
 

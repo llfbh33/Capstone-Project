@@ -10,6 +10,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     entry_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('entries.id')), nullable=True)
+    title = db.Column(db.String(150), nullable=False)
     message = db.Column(db.String(250))
     is_active = db.Column(db.Boolean, default=True)
     comments_enabled = db.Column(db.Boolean, default=True)
@@ -23,6 +24,7 @@ class Post(db.Model):
         return {
             'id': self.id,
             'entry_id': self.entry_id,
+            'title': self.title,
             'message': self.message,
             'is_active': self.is_active,
             'comments_enabled': self.comments_enabled,
