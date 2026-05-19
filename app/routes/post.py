@@ -7,6 +7,31 @@ from datetime import datetime
 post_routes = Blueprint('posts', __name__)
 
 
+def generate_activity(action, post, entry_name):
+
+    if action == "create":
+        text = f'Published: "{entry_name}"'
+    elif action == "update":
+        text = f'Edited post: "{entry_name}"'
+    elif action == "delete":
+        text = f'Unpublished: "{entry_name}"'
+    else:
+        text = f'Edited post: "{entry_name}"'
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=post.id,
+        target_type="post",
+        action_type=action,
+        text=text,
+        route=f'/post/{post.id}'
+    )
+
+    db.session.add(activity)
+    db.session.commit()
+
+
+
 @post_routes.route('')
 @login_required
 def get_posts():
@@ -101,15 +126,7 @@ def create_entry():
         db.session.add(new_post)
         db.session.commit()
 
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=new_post.entry_id,
-            target_type="post",
-            text=f'Published entry: "{entry.name}"',
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        generate_activity('create', new_post, entry.name)
 
         post = Post.query.filter(Post.entry_id == form.data['entry_id']).first()
         post_return = entry.to_dict()
@@ -143,15 +160,8 @@ def edit_entry(post_id):
 
         db.session.commit()
 
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=currPost.entry_id,
-            target_type="post",
-            text=f'Edited public entry: "{entry.name}"',
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        entry = Entry.query.get(currPost.entry_id)
+        generate_activity('update', currPost, entry.name)
 
         return currPost.to_dict()
     else:
@@ -169,15 +179,7 @@ def delete_post(post_id):
     entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
     setattr(entry, 'is_public', False)
 
-    activity = Activity(
-        user_id=current_user.id,
-        target_id=entry.id,
-        target_type="delete",
-        text=f'Changed a post: "{entry.name}" to private',
-    )
-
-    db.session.add(activity)
-    db.session.commit()
+    generate_activity('update', post_to_delete, entry.name)
 
     db.session.delete(post_to_delete)
     db.session.commit()
