@@ -12,14 +12,13 @@ import { useEffect, useState } from "react";
 const RecentEntries = () => {
     const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
-    const allEntries = useSelector(state => state.entries);
+    const entriesObj = useSelector(state => state.entries);
+    const [entries] = useState(Object.values(entriesObj))
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const [entries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id))
     const [entryArray, setEntryArray] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    console.log('all entries: ', Object.values(allEntries))
 
 
     useEffect(() => {

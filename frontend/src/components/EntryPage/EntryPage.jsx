@@ -21,6 +21,8 @@ function EntryPage() {
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
 
+    console.log(entry)
+
     useEffect(() => {
         if (entry) setLoaded(true);
     }, [entry])

@@ -38,23 +38,25 @@ def get_posts():
     """
     Query for all posts within the site
     """
+    posts = Post.query.all()
 
-    entries = Entry.query.filter(Entry.is_public == True).all()
-    posts = []
+    posts_return = []
 
-    for entry in entries:
-        entry_post = []
-        for post in entry.posts:
-            entry_post.append(post.to_dict())
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_post = entry.to_dict()
-        entry_w_post['post'] = entry_post
-        entry_w_post['comments'] = entry_comments
-        posts.append(entry_w_post)
+    for post in posts:
+        post_dict = post.to_dict()
 
-    return posts
+        post_dict["comments"] = [
+            comment.to_dict() for comment in post.comments
+        ]
+
+        if post.entries:
+            post_dict["entry"] = post.entries.to_dict()
+        else:
+            post_dict["entry"] = None
+
+        posts_return.append(post_dict)
+
+    return posts_return
 
 
 
@@ -64,22 +66,25 @@ def get_user_posts():
     """
     Query for all posts posted by current user
     """
-    entries = Entry.query.filter(Entry.is_public == True, Entry.user_id == current_user.id).all()
-    posts = []
+    posts = Post.query.filter(Post.user_id == current_user.id).all()
 
-    for entry in entries:
-        entry_post = []
-        for post in entry.posts:
-            entry_post.append(post.to_dict())
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_post = entry.to_dict()
-        entry_w_post['post'] = entry_post
-        entry_w_post['comments'] = entry_comments
-        posts.append(entry_w_post)
+    posts_return = []
 
-    return posts
+    for post in posts:
+        post_dict = post.to_dict()
+
+        post_dict["comments"] = [
+            comment.to_dict() for comment in post.comments
+        ]
+
+        if post.entries:
+            post_dict["entry"] = post.entries.to_dict()
+        else:
+            post_dict["entry"] = None
+
+        posts_return.append(post_dict)
+
+    return posts_return
 
 
 
@@ -90,18 +95,24 @@ def entry(post_id):
     """
     Query for a post by id and returns it in a dictionary
     """
-    post = Post.query.filter(Post.id == post_id).first()
-    entry = Entry.query.filter(Entry.id == post.entry_id).first()
 
-    entry_comments = []
-    for comment in entry.comments:
-        entry_comments.append(comment.to_dict())
+    post = Post.query.get(post_id)
 
-    entry_return = entry.to_dict()
-    entry_return['post'] = post.to_dict()
-    entry_return['comments'] = entry_comments
+    if not post:
+        return {"error": "Post couldn't be found"}, 404
 
-    return entry_return
+    post_dict = post.to_dict()
+
+    post_dict["comments"] = [
+        comment.to_dict() for comment in post.comments
+    ]
+
+    if post.entries:
+        post_dict["entry"] = post.entries.to_dict()
+    else:
+        post_dict["entry"] = None
+
+    return post_dict
 
 
 @post_routes.route('/new', methods=['post'])
@@ -118,9 +129,11 @@ def create_entry():
         entry = Entry.query.get(form.data['entry_id'])
         setattr(entry, 'is_public', True)
 
-        new_post = Post (
-            entry_id = form.data['entry_id'],
-            message = form.data['message'],
+        new_post = Post(
+            entry_id=form.data['entry_id'],
+            message=form.data['message'],
+            is_active=True,
+            comments_enabled=True,
         )
 
         db.session.add(new_post)
@@ -128,17 +141,16 @@ def create_entry():
 
         generate_activity('create', new_post, entry.name)
 
-        post = Post.query.filter(Post.entry_id == form.data['entry_id']).first()
-        post_return = entry.to_dict()
-        post_return['post'] = post.to_dict()
+        post_return = new_post.to_dict()
 
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
+        post_return["comments"] = [
+            comment.to_dict() for comment in new_post.comments
+        ]
 
-        post_return['comments'] = entry_comments
+        post_return["entry"] = entry.to_dict()
 
         return post_return
+
     else:
         return form.errors, 400
 
@@ -166,6 +178,8 @@ def edit_entry(post_id):
         return currPost.to_dict()
     else:
         return form.errors, 400
+
+
 
 
 @post_routes.route("/<int:post_id>/delete")

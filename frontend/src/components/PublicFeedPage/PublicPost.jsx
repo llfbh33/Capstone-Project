@@ -23,6 +23,8 @@ function PublicPost() {
     const [commentList, setCommentList] = useState([])
     const [loaded, setLoaded] = useState(false);
 
+    console.log('POST: ', post)
+
     useEffect(() => {
         if (post?.comments) {
             const listComments = [...post.comments].reverse()
@@ -65,11 +67,11 @@ function PublicPost() {
             </div>
             <div className='public-post-message-container-singular'>
                 <div>
-                    <p>{`Posted on: ${post?.post.created_at.slice(0, 17)}`}</p>
+                    <p>{`Posted on: ${post.created_at.slice(0, 17)}`}</p>
                     <h3>{`Message from ${creator?.username}:`}</h3>
                 </div>
                 <div className="message-container-singular">
-                    <p className="message-element">{post?.post.message}</p>
+                    <p className="message-element">{post.message}</p>
                 </div>
             </div>
             <div className="space-maker-div"></div>
