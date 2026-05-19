@@ -28,7 +28,8 @@ def seed_entries():
 
                     Here's to more good days ahead.
 
-                    Demo User'''
+                    Demo User''',
+        is_public=False
         )
     three  = Entry(
         user_id = 1,
@@ -103,7 +104,8 @@ def seed_entries():
 
                  With renewed determination, Captain James set to work repairing the radio transmitter, hoping against hope that his distress signal would reach someone, anyone, who could rescue him from his lonely exile.
 
-                 And as he waited for a response, he vowed to never forget the kindness of the stranger who had saved his life—a beacon of hope in his darkest hour of need.'''
+                 And as he waited for a response, he vowed to never forget the kindness of the stranger who had saved his life—a beacon of hope in his darkest hour of need.''',
+        is_public=False
         )
     five  = Entry(
         user_id = 1,
@@ -140,7 +142,8 @@ def seed_entries():
 
                 Now, I'm in bed, journaling and reflecting on the day. Nothing extraordinary happened, but sometimes these quiet, routine days are the best. They make me appreciate the small things. Tomorrow, I’ll tackle whatever comes my way, but for now, I’m grateful for today’s calm.
 
-                Goodnight, journal. Here’s to more peaceful days.'''
+                Goodnight, journal. Here’s to more peaceful days.''',
+        is_public=False
         )
     seven  = Entry(
         user_id = 1,

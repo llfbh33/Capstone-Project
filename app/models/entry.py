@@ -19,8 +19,7 @@ class Entry(db.Model):
 
     users = db.relationship('User', back_populates='entries')
     notebooks = db.relationship('Notebook', back_populates='entries')
-    posts = db.relationship('Post', cascade='all, delete', back_populates='entries')
-    comments = db.relationship('Comment', cascade='all, delete', back_populates='entries')
+    posts = db.relationship('Post', back_populates='entries', uselist=False)
 
     def to_dict(self):
         return {

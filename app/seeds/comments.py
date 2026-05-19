@@ -6,42 +6,42 @@ from sqlalchemy.sql import text
 def seed_comments():
     one = Comment(
         user_id=2,
-        entry_id=1,
+        post_id=1,
         comment='Interesting story.  A little short for my tastes.  Could use a little beefing up'
     )
     two = Comment(
         user_id=3,
-        entry_id=1,
+        post_id=1,
         comment="This is a good base.  Maybe add more information about Lisa's personality.  Is she a scardy cat?  Is she a normally brave person? "
     )
     three = Comment(
         user_id=4,
-        entry_id=4,
+        post_id=6,
         comment='I like this one.  It reminds me of the movie Castaway with Tim Allen'
     )
     four = Comment(
         user_id=1,
-        entry_id=8,
+        post_id=5,
         comment='I am not sure what you are trying for here.  Is this supposed to be creative writing?  Can you please elaborate on your thought process?'
     )
     five = Comment(
         user_id=5,
-        entry_id=7,
+        post_id=4,
         comment="Oh wow!  I love it!  I can't wait to read chapter 2!  Will the captain make a lot of friends in the stars?  On the edge of my seat!"
     )
     six = Comment(
         user_id=2,
-        entry_id=7,
+        post_id=4,
         comment="Huh, I'm a fan of sci-fi, but really?  A mokey space captain?  It's a bit of a stretch even for this type of theme."
     )
     seven = Comment(
         user_id=3,
-        entry_id=5,
+        post_id=3,
         comment='I think your right.  Turning this into a poem would really give it the right feeling.'
     )
     eight = Comment(
         user_id=1,
-        entry_id=1,
+        post_id=1,
         comment='I am commenting on my own entry publicly!!! :D'
     )
 
