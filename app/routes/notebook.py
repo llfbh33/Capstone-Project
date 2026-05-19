@@ -21,7 +21,8 @@ def generate_activity(action, notebook):
         target_id=notebook.id,
         target_type="notebook",
         action_type=action,
-        text=text
+        text=text,
+        route=f'/notebook/{notebook.id}'
     )
 
     db.session.add(activity)

@@ -257,6 +257,10 @@ body {
 
 @media (max-width: 950px) {
 
+    /* .child-container-two {
+
+    } */
+
     .left-hand-nav-container {
         width: 100%;
         height: 80px;
@@ -267,8 +271,15 @@ body {
     .main-insite-container {
         display: flex;
         flex-direction: column;
-        padding: 0px;
         width: 100%
+    }
+
+    .main-container {
+        padding: 40px;
+    }
+
+    .padding-container-header h1 {
+        text-align: left;
     }
 
     .main-insite-content-container {
