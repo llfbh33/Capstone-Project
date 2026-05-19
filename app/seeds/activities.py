@@ -6,19 +6,19 @@ from sqlalchemy.sql import text
 # Adds a demo user, you can add other users here if you want
 def seed_activities():
     one = Activity(
-        user_id=1, target_id=1, notebook_id=None, target_type="notebook", text="Created a new notebook: 'Short Stories'", created_at=datetime(2026, 5, 8, 9, 12))
+        user_id=1, target_id=1, target_type="notebook", action_type="create", text="Created a new notebook: 'Short Stories'", route="/notebook/1", created_at=datetime(2026, 5, 8, 9, 12))
     two = Activity(
-        user_id=1, target_id=1, notebook_id=1, target_type="entry", text="Added a new entry to: 'Short Stories'", created_at=datetime(2026, 5, 9, 14, 47))
+        user_id=1, target_id=1, target_type="entry", action_type="create", text="Added a new entry to: 'Short Stories'", route="/notebook/1/entries/1", created_at=datetime(2026, 5, 9, 14, 47))
     three = Activity(
-        user_id=1, target_id=1, notebook_id=1, target_type="entry", text="Updated 'The Closet' in 'Short Stories'", created_at=datetime(2026, 5, 10, 18, 5))
+        user_id=1, target_id=1, target_type="entry", action_type="update", text="Updated 'The Closet' in 'Short Stories'", route="/notebook/1/entries/1", created_at=datetime(2026, 5, 10, 18, 5))
     four = Activity(
-        user_id=1, target_id=1, notebook_id=None, target_type="post", text="Published 'The Closet'", created_at=datetime(2026, 5, 11, 11, 26))
+        user_id=1, target_id=1, target_type="post", action_type="create", text="Published 'The Closet'", route="/public/1", created_at=datetime(2026, 5, 11, 11, 26))
     five = Activity(
-        user_id=1, target_id=2, notebook_id=None, target_type="notebook", text="Created a new notebook: 'Journal'", created_at=datetime(2026, 5, 12, 20, 14))
+        user_id=1, target_id=2, target_type="notebook", action_type="create", text="Created a new notebook: 'Journal'", route="/notebook/2", created_at=datetime(2026, 5, 12, 20, 14))
     six = Activity(
-        user_id=1, target_id=2, notebook_id=2, target_type="entry", text="Added a new entry to: 'Journal'", created_at=datetime(2026, 5, 14, 8, 53))
+        user_id=1, target_id=2, target_type="entry", action_type="create", text="Added a new entry to: 'Journal'", route="/notebook/2/entries/2", created_at=datetime(2026, 5, 14, 8, 53))
     seven = Activity(
-        user_id=1, target_id=8, notebook_id=None, target_type="comment", text="Commented on 'May 31, 2024'", created_at=datetime(2026, 5, 15, 16, 31))
+        user_id=1, target_id=4, target_type="comment", action_type="create", text="Commented on 'May 31, 2024'", route="/public/5", created_at=datetime(2026, 5, 15, 16, 31))
 
 
     activities = [one, two, three, four, five, six, seven]

@@ -7,6 +7,31 @@ from datetime import datetime
 entry_routes = Blueprint('entries', __name__)
 
 
+def generate_activity(action, entry):
+
+    notebook = Notebook.query.get(entry.notebook_id)
+
+    if action == "create":
+        text = f'Added a new entry to: "{notebook.name}"'
+    elif action == "update":
+        text = f'Updated: "{entry.name}" in "{notebook.name}'
+    elif action == "delete":
+        text = f'Deleted entry: "{entry.name}"'
+    else:
+        text = f'Updated: "{entry.name}" in "{notebook.name}'
+
+    activity = Activity(
+        user_id=current_user.id,
+        target_id=entry.id,
+        target_type="entry",
+        action_type=action,
+        text=text,
+        route=f'/notebook/{notebook.id}/entries/{entry.id}'
+    )
+
+    db.session.add(activity)
+    db.session.commit()
+
 @entry_routes.route('')
 @login_required
 def get_entries():
@@ -74,18 +99,7 @@ def create_entry():
         db.session.add(new_entry)
         db.session.commit()
         
-        notebook = Notebook.query.get(new_entry.notebook_id)
-
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=new_entry.id,
-            notebook_id=new_entry.notebook_id,
-            target_type="entry",
-            text=f'Created a new entry for: "{notebook.name}" named "{new_entry.name}',
-        )
-
-        db.session.add(activity)
-        db.session.commit()
+        generate_activity('create', new_entry)
 
         entry_retrun = new_entry.to_dict()
         entry_retrun['comments'] = []
@@ -113,19 +127,7 @@ def edit_entry(entry_id):
 
         db.session.commit()
 
-        notebook = Notebook.query.get(currEntry.notebook_id)
-
-        activity = Activity(
-            user_id=current_user.id,
-            target_id=currEntry.id,
-            notebook_id=notebook.id,
-            target_type="entry",
-            text=f'Edited entry: "{currEntry.name}" in notebook: "{notebook.name}',
-        )
-
-        db.session.add(activity)
-        db.session.commit()
-
+        generate_activity('update', currEntry)
 
         entry_retrun = currEntry.to_dict()
 
@@ -150,18 +152,7 @@ def delete_notebook(entry_id):
     """
     entry_to_delete = Entry.query.get(entry_id)
 
-    notebook = Notebook.query.get(entry_to_delete.notebook_id)
-
-    activity = Activity(
-        user_id=current_user.id,
-        target_id=entry_to_delete.id,
-        notebook_id=notebook.id,
-        target_type="delete",
-        text=f'Deleted entry: "{entry_to_delete.name}" from notebook: "{notebook.name}',
-    )
-
-    db.session.add(activity)
-    db.session.commit()
+    generate_activity('delete', entry_to_delete)
 
     db.session.delete(entry_to_delete)
     db.session.commit()

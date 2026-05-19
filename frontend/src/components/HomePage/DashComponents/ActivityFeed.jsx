@@ -13,19 +13,35 @@ import './DashComponents.css';
 
 
 const activityType = {
-    post: <MdOutlineSignpost />,
-    entry: <FaRegFileAlt />,
-    comment: <MdLocalPostOffice />,
-    notebook: <SlNotebook />,
+    post: {
+        create: <MdOutlineSignpost />,
+        update: <MdOutlineSignpost />,
+        delete: <MdDelete />,
+    },
+    entry: {
+        create: <FaRegFileAlt />,
+        update: <FaRegFileAlt />,
+        delete: <MdDelete />,
+    },
+    comment: {
+        create: <MdLocalPostOffice />,
+        update: <MdLocalPostOffice />,
+        delete: <MdDelete />,
+    },
+    notebook: {
+        create: <SlNotebook />,
+        update: <SlNotebook />,
+        delete: <MdDelete />,
+    },
     delete: <MdDelete />,
 }
 
-const activityNav = {
-    post: "/public/",
-    notebook: "/notebook/",
-    comment: "/public/",
-    entry: ["/notebook/", "/entries/"]
-}
+// const activityNav = {
+//     post: "/public/",
+//     notebook: "/notebook/",
+//     comment: "/public/",
+//     entry: ["/notebook/", "/entries/"]
+// }
 
 
 
@@ -38,16 +54,12 @@ const ActivityFeed = () => {
 
     const handleclick = (activity) => {
 
-        if (activity.target_type === "delete") {
+        if (activity.action_type === "delete") {
             alert("This item has been deleted and is no longer recoverable");
             return;
         }
-
-        if (activity.target_type === "entry") {
-            navigate(`${activityNav[activity.target_type][0]}${activity.notebook_id}${activityNav[activity.target_type][1]}${activity.target_id}`)
-        } else {
-            navigate(`${activityNav[activity.target_type]}${activity.target_id}`)
-        }
+        
+        navigate(`${activity.route}`)
 
         if (activity.target_type === 'post' || activity.target_type === 'comment') {
             setActiveNav('public');
@@ -55,8 +67,7 @@ const ActivityFeed = () => {
             setActiveNav('notebooks');
         }
     }
-
-    console.log(activities)
+    
 
     if (!activities) return;
 
@@ -90,7 +101,7 @@ const ActivityFeed = () => {
                                             color: "#fff",
                                             size: "22px",
                                         }}
-                                        icon={activityType[activity.target_type]}
+                                        icon={activityType[activity.target_type][activity.action_type]}
                                     >
                                         {/* <h3 className="vertical-timeline-element-title">Creative Director</h3> */}
                                         <h4 className="vertical-timeline-element-subtitle" style={{ paddingTop: "10px" }}>{activity.text}</h4>
