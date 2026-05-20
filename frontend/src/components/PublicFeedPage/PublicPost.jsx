@@ -15,15 +15,14 @@ import { FaEdit } from "react-icons/fa";
 function PublicPost() {
     const { postId } = useParams();
     const dispatch = useDispatch();
-    const post = useSelector(state => state.entries[postId]);
-    const creator = useSelector(state => state.users[post?.user_id]);
-    const allUsers = useSelector(state => state.users);
+    const allUsers = useSelector(state => state.users)
+    const post = useSelector(state => state.posts[postId]);
+    const creator = useSelector(state => state.users[post.entry.user_id]);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
     const [commentList, setCommentList] = useState([])
     const [loaded, setLoaded] = useState(false);
 
-    console.log('POST: ', postId)
 
     useEffect(() => {
         if (post?.comments) {
@@ -61,9 +60,9 @@ function PublicPost() {
     if (loaded) {
     return (
         <div className="public-post-singular">
-            <h1 className='title page-title'>{`${post?.name} by ${creator?.username}`}</h1>
+            <h1 className='title page-title'>{`${post?.title} by ${creator?.username}`}</h1>
             <div className="public-post-content-container-singular">
-                <p className="post-content">{parser(post.content)}</p>
+                <p className="post-content">{parser(post.entry.content)}</p>
             </div>
             <div className='public-post-message-container-singular'>
                 <div>

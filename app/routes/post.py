@@ -123,6 +123,7 @@ def create_entry():
     """
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print(f'FORM DATA', form.data)
 
     if form.validate_on_submit():
 

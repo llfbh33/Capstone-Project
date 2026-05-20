@@ -38,13 +38,13 @@ function EditNotebookFormModal({notebook}) {
             })
         );
 
-        if (serverResponse.name) {
-            setErrors(serverResponse);
+        if (serverResponse.errors) {
+            setErrors(serverResponse.errors);
         } else {
             await dispatch(thunkLoadNotebooks())
             setName('')
             setAbout('')
-            await closeModal();
+            closeModal();
         }
     };
 

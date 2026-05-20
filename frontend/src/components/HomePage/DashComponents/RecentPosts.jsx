@@ -11,26 +11,31 @@ import './DashComponents.css';
 const RecentPosts = () => {
     const user = useSelector(state => state.session.user)
     const allEntries = useSelector(state => state.entries)
+    const allPosts = useSelector(state => state.posts)
     const navigate = useNavigate();
-     const { setActiveNav } = useNav();
-    const [entries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
-    const [entryArray, setEntryArray] = useState([]);
+    const { setActiveNav } = useNav();
+    const [posts] = useState(Object.values(allPosts).filter(post => post.entry.user_id === user.id && post.is_active === true))
+    const [postsArray, setPostsArray] = useState([]);
     const [loading, setLoading] = useState(true);
 
 
+
     useEffect(() => {
-        if (!entries) return;
+        if (!posts) return;
 
-        const sortedEntries = entries
-            // .sort((a, b) =>
-            //     new Date(b.post.created_at) - new Date(a.post.created_at)
-            // )
-            // .slice(0, 2);
+        const sortedPosts = posts.slice(posts.length - 2, posts.length).reverse();
 
-        setEntryArray(sortedEntries);
+        // const sortedPosts = posts
+        //     .sort((a, b) =>
+        //         new Date(b.updated_at) - new Date(a.updated_at)
+        //     )
+        //     .slice(0, 2);
+
+        console.log(sortedPosts)
+        setPostsArray(sortedPosts);
         setLoading(false);
 
-    }, [entries]);
+    }, [posts]);
 
 
     const handleAllPosts = () => {
@@ -56,17 +61,17 @@ const RecentPosts = () => {
                     </div>
                 </div>
                 <div className='pannel-contents'>
-                    {entryArray.map((page, index) => (
-                        <div className='pannel-item action-item' key={`entry-${index}`} onClick={() => handleClickPost(page.id)}>
+                    {postsArray.map((page, index) => (
+                        <div className='pannel-item action-item' key={`post-${index}`} onClick={() => handleClickPost(page.id)}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>
                             <div className='pannel-item-data-container'>
                                 <div className="pannel-item-title">
-                                    {page.name}
+                                    {page.title}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {/* {page.post.created_at} */}
+                                    {page.updated_at}
                                 </div>
                             </div>
                         </div>

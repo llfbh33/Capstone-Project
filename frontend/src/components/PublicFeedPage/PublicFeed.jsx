@@ -38,7 +38,6 @@ function PublicFeed() {
             <div className="public-post-content-container">
                 {posts.map(post => (
                     <div key={post.id} className="postfeed-post-container">
-                        {console.log(post)}
                         <div className="post-name-and-user-container">
                             <h3 className="post-name">{post.title}</h3>
                             <div className="post-username-image-container">

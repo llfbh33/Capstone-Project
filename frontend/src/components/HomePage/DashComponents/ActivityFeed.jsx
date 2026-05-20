@@ -78,7 +78,7 @@ const ActivityFeed = () => {
                 <div className='pannel-heading'>
                     <h2>Your Recent Activities</h2>
                 </div>
-                <div className=' activities-contain'>
+                <div className='activities-contain'>
                     <div className="activity-timeline">
                         <VerticalTimeline layout="1-column-left" >
                             {activities.map((activity) => (
