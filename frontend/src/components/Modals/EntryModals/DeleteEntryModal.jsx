@@ -11,9 +11,9 @@ function DeleteEntryFormModal({entry}) {
     const { closeModal } = useModal();
 
     const deleteEntry = async () => {
+        navigate(`notebook/${entry.notebook_id}`);
         await dispatch(thunkDeleteEntry(entry.id))
         await closeModal();
-        navigate(`notebook/${entry.notebook_id}`);
     }
 
     const doNotDelete = () => {

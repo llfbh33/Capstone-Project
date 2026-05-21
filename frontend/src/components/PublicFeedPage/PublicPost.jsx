@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-import { thunkCreateComment, thunkLoadEntries } from "../../redux/entry";
+import { thunkCreateComment } from "../../redux/comments";
 import parser from 'html-react-parser'
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
@@ -15,13 +15,17 @@ import { FaEdit } from "react-icons/fa";
 function PublicPost() {
     const { postId } = useParams();
     const dispatch = useDispatch();
-    const post = useSelector(state => state.entries[postId]);
+    const allUsers = useSelector(state => state.users)
+    // const allPosts = useSelector(state => state.posts)
+    const post = useSelector(state => state.posts[postId]);
     const creator = useSelector(state => state.users[post?.user_id]);
-    const allUsers = useSelector(state => state.users);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
-    const [commentList, setCommentList] = useState([])
+    const [commentList, setCommentList] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const [active] = useState(post?.is_active);
+    const notActive = "Post content is currently unavailable"
+
 
     useEffect(() => {
         if (post?.comments) {
@@ -32,7 +36,7 @@ function PublicPost() {
     }, [post])
 
     useEffect(() => {
-        if (post) {
+        if (post?.entry) {
             setLoaded(true)
         }
     }, [post])
@@ -46,30 +50,31 @@ function PublicPost() {
 
         const newComment = {
             userId: currUser.id,
-            entryId: post.id,
+            postId: post.id,
             comment: comment
         }
+        console.log(newComment)
 
         setComment('');
         await dispatch(thunkCreateComment(newComment));
-        await dispatch(thunkLoadEntries());
         return
     }
+
 
     if (loaded) {
     return (
         <div className="public-post-singular">
-            <h1 className='title page-title'>{`${post?.name} by ${creator?.username}`}</h1>
+            <h1 className='title page-title'>{`${post?.title} by ${creator?.username}`}</h1>
             <div className="public-post-content-container-singular">
-                <p className="post-content">{parser(post.content)}</p>
+                <p className="post-content">{active ? parser(post.entry.content) : notActive}</p>
             </div>
             <div className='public-post-message-container-singular'>
                 <div>
-                    <p>{`Posted on: ${post?.post.created_at.slice(0, 17)}`}</p>
+                    <p>{`Posted on: ${post.created_at.slice(0, 17)}`}</p>
                     <h3>{`Message from ${creator?.username}:`}</h3>
                 </div>
                 <div className="message-container-singular">
-                    <p className="message-element">{post?.post.message}</p>
+                    <p className="message-element">{post.message}</p>
                 </div>
             </div>
             <div className="space-maker-div"></div>
@@ -116,7 +121,7 @@ function PublicPost() {
                                     ? <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
                                             itemText={<BsTrash3Fill />}
-                                            modalComponent={<DeleteCommentModal comment={comment} />}
+                                            modalComponent={<DeleteCommentModal commentId={comment.id} />}
                                         />
                                     </div>
                                     : ''}

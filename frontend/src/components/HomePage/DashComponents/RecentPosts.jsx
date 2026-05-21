@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useNav } from "../../../context/Navigation/NavigationContext";
 import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
@@ -9,28 +9,14 @@ import './DashComponents.css';
 
 
 const RecentPosts = () => {
-    const user = useSelector(state => state.session.user)
-    const allEntries = useSelector(state => state.entries)
     const navigate = useNavigate();
-     const { setActiveNav } = useNav();
-    const [entries] = useState(Object.values(allEntries).filter(entry => entry.user_id === user.id && entry.is_public === true))
-    const [entryArray, setEntryArray] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-
-    useEffect(() => {
-        if (!entries) return;
-
-        const sortedEntries = entries
-            .sort((a, b) =>
-                new Date(b.post.created_at) - new Date(a.post.created_at)
-            )
-            .slice(0, 2);
-
-        setEntryArray(sortedEntries);
-        setLoading(false);
-
-    }, [entries]);
+    const { setActiveNav } = useNav();
+    const postsObj = useSelector(state => state.posts)
+    const posts = useMemo(() => {
+        return Object.values(postsObj).sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        ).slice(0, 2);
+    }, [postsObj]);
 
 
     const handleAllPosts = () => {
@@ -42,7 +28,15 @@ const RecentPosts = () => {
         navigate(`/public/${id}`);
     };
 
-    if (loading) return;
+    if (!posts) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
+    }
 
 
     return (
@@ -56,17 +50,17 @@ const RecentPosts = () => {
                     </div>
                 </div>
                 <div className='pannel-contents'>
-                    {entryArray.map((page, index) => (
-                        <div className='pannel-item action-item' key={`entry-${index}`} onClick={() => handleClickPost(page.id)}>
+                    {posts.map((page, index) => (
+                        <div className='pannel-item action-item' key={`post-${index}`} onClick={() => handleClickPost(page.id)}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
                             </div>
                             <div className='pannel-item-data-container'>
                                 <div className="pannel-item-title">
-                                    {page.name}
+                                    {page.title}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {page.post.created_at}
+                                    {page.updated_at}
                                 </div>
                             </div>
                         </div>

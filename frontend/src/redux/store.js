@@ -9,13 +9,16 @@ import sessionReducer from "./session";
 import notebookReducer from "./notebook";
 import entryReducer from "./entry";
 import usersReducer from "./users";
+import postsReducer from "./posts";
 import activitiesReducer from "./activity";
+
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   users: usersReducer,
   notebooks: notebookReducer,
   entries: entryReducer,
+  posts: postsReducer,
   activities: activitiesReducer,
 });
 

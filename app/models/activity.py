@@ -28,5 +28,5 @@ class Activity(db.Model):
             'action_type': self.action_type,
             'text': self.text,
             'route': self.route,
-            'created_at': self.created_at
+            'created_at': self.created_at.isoformat(),
         }

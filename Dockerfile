@@ -24,9 +24,8 @@ WORKDIR /var/www
 
 
 # CMD gunicorn app:app --forwarded-allow-ips="*"
-# CMD flask db upgrade && (flask seed undo || true) && flask seed all && gunicorn app:app --forwarded-allow-ips="*"
-# CMD flask db upgrade && gunicorn app:app --forwarded-allow-ips="*"
-CMD flask db upgrade && flask seed all && gunicorn app:app --forwarded-allow-ips="*"
+CMD flask seed undo && flask db upgrade && flask seed all && gunicorn app:app --forwarded-allow-ips="*"
+# CMD flask db upgrade && flask seed all && gunicorn app:app --forwarded-allow-ips="*"
 
 
 # FROM python:3.9.18-alpine3.18

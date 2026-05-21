@@ -1,25 +1,32 @@
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { thunkCreatePost, thunkLoadEntries } from "../../../redux/entry";
+import { thunkLoadEntries } from "../../../redux/entry";
+import { thunkCreatePost } from "../../../redux/posts";
 import { useModal } from "../../../context/Modal/Modal";
 import { useNavigate } from "react-router-dom";
+import { useNav } from "../../../context/Navigation/NavigationContext";
 import './PostModals.css'
 
 
 function PostPostModal({entry}) {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { setActiveNav } = useNav();
     const [message, setMessage] = useState(' ');
+    const [title, setTitle] = useState(entry.name)
     const [validationErrors, setValidationErrors] = useState({});
     const { closeModal } = useModal();
+    
 
     useEffect(() => {
         const errors = {};
         if (message.length <= 0) setMessage(' ')
-        if (message.length > 250) errors.message = 'Message can not be more than 100 characters'
+        if (message.length > 250) errors.message = 'Message can not be more than 250 characters'
+
+        if (title.length > 150) errors.title = 'Title can not be more than 150 characters'
         setValidationErrors(errors)
-    }, [message])
+    }, [message, title])
 
     const postEntry = async (e) => {
         e.preventDefault();
@@ -28,6 +35,7 @@ function PostPostModal({entry}) {
 
         const serverResponse = await dispatch(thunkCreatePost ({
             entryId: entry.id,
+            title,
             message,
             })
         );
@@ -36,8 +44,9 @@ function PostPostModal({entry}) {
             setValidationErrors(serverResponse.errors);
         } else {
             await dispatch(thunkLoadEntries());
-            navigate(`/public/${entry.id}`)
-            await closeModal();
+            setActiveNav('public');
+            navigate(`/public/${serverResponse.id}`)
+            closeModal();
         }
     }
 
@@ -47,8 +56,15 @@ function PostPostModal({entry}) {
 
     return (
         <div className='post-modal-main-container'>
-            <h1 className="post-modal-titles">{`Post "${entry.name}" to the public feed?`}</h1>
+            <h1 className="post-modal-titles">{`Publish your Entry?`}</h1>
             <div className="post-modal-form-container">
+                <label>What would you like to label your post?</label>
+                <input
+                    value={title}
+                    onChange={(e) => setTitle(e.target.value)}
+                    required
+                />
+                <p className="post-modal-errors">{validationErrors.title ? validationErrors.title : ''}</p>
                 <div className="post-modal-label">Would you like to include a message with your post?</div>
                 <div className="post-modal-label-2">This is not necessary, but it can help others understand what you are trying to acheive with your writing.</div>
                 <textarea

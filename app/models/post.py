@@ -9,17 +9,28 @@ class Post(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    entry_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('entries.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
+    entry_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('entries.id')), nullable=True)
+    title = db.Column(db.String(150), nullable=False)
     message = db.Column(db.String(250))
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    is_active = db.Column(db.Boolean, default=True)
+    comments_enabled = db.Column(db.Boolean, default=True)
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
+    user = db.relationship("User", back_populates="posts")
     entries = db.relationship('Entry', back_populates='posts')
+    comments = db.relationship('Comment', back_populates='posts')
 
     def to_dict(self):
         return {
             'id': self.id,
+            'user_id': self.user_id,
             'entry_id': self.entry_id,
+            'title': self.title,
             'message': self.message,
-            'created_at': self.created_at,
+            'is_active': self.is_active,
+            'comments_enabled': self.comments_enabled,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
         }

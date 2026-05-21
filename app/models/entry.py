@@ -14,13 +14,12 @@ class Entry(db.Model):
     name = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text)
     is_public = db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     users = db.relationship('User', back_populates='entries')
     notebooks = db.relationship('Notebook', back_populates='entries')
-    posts = db.relationship('Post', cascade='all, delete', back_populates='entries')
-    comments = db.relationship('Comment', cascade='all, delete', back_populates='entries')
+    posts = db.relationship('Post', back_populates='entries', uselist=False)
 
     def to_dict(self):
         return {
@@ -30,6 +29,6 @@ class Entry(db.Model):
             'name': self.name,
             'content': self.content,
             'is_public': self.is_public,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
         }

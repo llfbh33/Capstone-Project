@@ -32,26 +32,59 @@ def generate_activity(action, entry):
     db.session.add(activity)
     db.session.commit()
 
+# @entry_routes.route('')
+# @login_required
+# def get_entries():
+#     """
+#     Query for all entries and list them as dictionaries
+#     """
+#     entries = Entry.query.all()
+#     entries_return = []
+
+#     for entry in entries:
+#         entry_comments = []
+#         for comment in entry.comments:
+#             entry_comments.append(comment.to_dict())
+#         entry_w_comments = entry.to_dict()
+#         entry_w_comments['comments'] = entry_comments
+#         if entry.posts:
+#             entry_w_comments['post'] = entry.posts[0].to_dict()
+#         entries_return.append(entry_w_comments)
+
+#     return entries_return
+
 @entry_routes.route('')
 @login_required
-def get_entries():
+def get_current_users_entries():
     """
-    Query for all entries and list them as dictionaries
+    Query for current user's entries and list them as dictionaries
     """
-    entries = Entry.query.all()
+    entries = Entry.query.filter(
+        Entry.user_id == current_user.id
+    ).all()
+
     entries_return = []
 
     for entry in entries:
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_comments = entry.to_dict()
-        entry_w_comments['comments'] = entry_comments
+        entry_dict = entry.to_dict()
+
         if entry.posts:
-            entry_w_comments['post'] = entry.posts[0].to_dict()
-        entries_return.append(entry_w_comments)
+            post_dict = entry.posts.to_dict()
+
+            post_dict["comments"] = [
+                comment.to_dict() for comment in entry.posts.comments
+            ]
+
+            entry_dict["posts"] = post_dict
+            entry_dict["comments"] = post_dict["comments"]
+        else:
+            entry_dict["posts"] = None
+            entry_dict["comments"] = []
+
+        entries_return.append(entry_dict)
 
     return entries_return
+
 
 
 
@@ -63,17 +96,26 @@ def entry(entry_id):
     """
     entry = Entry.query.get(entry_id)
 
-    comments = []
-    for comment in entry.comments:
-        comments.append(comment.to_dict())
+    if not entry:
+        return {"error": "Entry couldn't be found"}, 404
+    
+    entry_dict = entry.to_dict()
+
     if entry.posts:
-        entry['post'] = entry.posts[0].to_dict()
+        post_dict = entry.posts.to_dict()
 
-    entry_return = entry.to_dict()
-    entry_return['comments'] = comments
+        post_dict["comments"] = [
+            comment.to_dict() for comment in entry.posts.comments
+        ]
 
+        entry_dict["posts"] = post_dict
+        entry_dict["comments"] = post_dict["comments"]
+    else:
+        entry_dict["posts"] = None
+        entry_dict["comments"] = []
+    
+    return entry_dict
 
-    return entry_return
 
 
 @entry_routes.route('/new', methods=['post'])
@@ -101,12 +143,15 @@ def create_entry():
         
         generate_activity('create', new_entry)
 
-        entry_retrun = new_entry.to_dict()
-        entry_retrun['comments'] = []
+        entry_return = new_entry.to_dict()
+        entry_return["posts"] = None
+        entry_return['comments'] = []
 
-        return entry_retrun
+        return entry_return
     else:
         return form.errors, 400
+
+
 
 
 @entry_routes.route('/<int:entry_id>/edit', methods=['post'])
@@ -129,17 +174,22 @@ def edit_entry(entry_id):
 
         generate_activity('update', currEntry)
 
-        entry_retrun = currEntry.to_dict()
-
-        comment_list = []
-        for comment in currEntry.comments:
-            comment_list.append(comment.to_dict())
-        entry_retrun['comments'] = comment_list
+        entry_return = currEntry.to_dict()
 
         if currEntry.posts:
-            entry_retrun['post'] =currEntry.posts[0].to_dict()
+            post_dict = currEntry.posts.to_dict()
 
-        return entry_retrun
+            post_dict["comments"] = [
+                comment.to_dict() for comment in currEntry.posts.comments
+            ]
+
+            entry_return["posts"] = post_dict
+            entry_return["comments"] = post_dict["comments"]
+        else:
+            entry_return["posts"] = None
+            entry_return["comments"] = []
+
+        return entry_return
     else:
         return form.errors, 400
 

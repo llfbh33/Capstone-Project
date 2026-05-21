@@ -1,22 +1,22 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Post, db, Entry, Activity
-from app.forms import PostForm, EditPostForm
+from app.forms import PostForm, EditPostForm, PublicationPostForm
 from datetime import datetime
 
 post_routes = Blueprint('posts', __name__)
 
 
-def generate_activity(action, post, entry_name):
+def generate_activity(action, post):
 
     if action == "create":
-        text = f'Published: "{entry_name}"'
+        text = f'Published: "{post.title}"'
     elif action == "update":
-        text = f'Edited post: "{entry_name}"'
+        text = f'Edited post: "{post.title}"'
     elif action == "delete":
-        text = f'Unpublished: "{entry_name}"'
+        text = f'Unpublished: "{post.title}"'
     else:
-        text = f'Edited post: "{entry_name}"'
+        text = f'Edited post: "{post.title}"'
 
     activity = Activity(
         user_id=current_user.id,
@@ -38,23 +38,25 @@ def get_posts():
     """
     Query for all posts within the site
     """
+    posts = Post.query.all()
 
-    entries = Entry.query.filter(Entry.is_public == True).all()
-    posts = []
+    posts_return = []
 
-    for entry in entries:
-        entry_post = []
-        for post in entry.posts:
-            entry_post.append(post.to_dict())
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_post = entry.to_dict()
-        entry_w_post['post'] = entry_post
-        entry_w_post['comments'] = entry_comments
-        posts.append(entry_w_post)
+    for post in posts:
+        post_dict = post.to_dict()
 
-    return posts
+        post_dict["comments"] = [
+            comment.to_dict() for comment in post.comments
+        ]
+
+        if post.entries:
+            post_dict["entry"] = post.entries.to_dict()
+        else:
+            post_dict["entry"] = None
+
+        posts_return.append(post_dict)
+
+    return posts_return
 
 
 
@@ -64,22 +66,25 @@ def get_user_posts():
     """
     Query for all posts posted by current user
     """
-    entries = Entry.query.filter(Entry.is_public == True, Entry.user_id == current_user.id).all()
-    posts = []
+    posts = Post.query.filter(Post.user_id == current_user.id).all()
 
-    for entry in entries:
-        entry_post = []
-        for post in entry.posts:
-            entry_post.append(post.to_dict())
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
-        entry_w_post = entry.to_dict()
-        entry_w_post['post'] = entry_post
-        entry_w_post['comments'] = entry_comments
-        posts.append(entry_w_post)
+    posts_return = []
 
-    return posts
+    for post in posts:
+        post_dict = post.to_dict()
+
+        post_dict["comments"] = [
+            comment.to_dict() for comment in post.comments
+        ]
+
+        if post.entries:
+            post_dict["entry"] = post.entries.to_dict()
+        else:
+            post_dict["entry"] = None
+
+        posts_return.append(post_dict)
+
+    return posts_return
 
 
 
@@ -90,18 +95,24 @@ def entry(post_id):
     """
     Query for a post by id and returns it in a dictionary
     """
-    post = Post.query.filter(Post.id == post_id).first()
-    entry = Entry.query.filter(Entry.id == post.entry_id).first()
 
-    entry_comments = []
-    for comment in entry.comments:
-        entry_comments.append(comment.to_dict())
+    post = Post.query.get(post_id)
 
-    entry_return = entry.to_dict()
-    entry_return['post'] = post.to_dict()
-    entry_return['comments'] = entry_comments
+    if not post:
+        return {"error": "Post couldn't be found"}, 404
 
-    return entry_return
+    post_dict = post.to_dict()
+
+    post_dict["comments"] = [
+        comment.to_dict() for comment in post.comments
+    ]
+
+    if post.entries:
+        post_dict["entry"] = post.entries.to_dict()
+    else:
+        post_dict["entry"] = None
+
+    return post_dict
 
 
 @post_routes.route('/new', methods=['post'])
@@ -112,33 +123,37 @@ def create_entry():
     """
     form = PostForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
+    print(f'FORM DATA', form.data)
 
     if form.validate_on_submit():
 
         entry = Entry.query.get(form.data['entry_id'])
         setattr(entry, 'is_public', True)
 
-        new_post = Post (
-            entry_id = form.data['entry_id'],
-            message = form.data['message'],
+        new_post = Post(
+            user_id=current_user.id,
+            entry_id=form.data['entry_id'],
+            title=form.data['title'],
+            message=form.data['message'],
+            is_active=True,
+            comments_enabled=True,
         )
 
         db.session.add(new_post)
         db.session.commit()
 
-        generate_activity('create', new_post, entry.name)
+        generate_activity('create', new_post)
 
-        post = Post.query.filter(Post.entry_id == form.data['entry_id']).first()
-        post_return = entry.to_dict()
-        post_return['post'] = post.to_dict()
+        post_return = new_post.to_dict()
 
-        entry_comments = []
-        for comment in entry.comments:
-            entry_comments.append(comment.to_dict())
+        post_return["comments"] = [
+            comment.to_dict() for comment in new_post.comments
+        ]
 
-        post_return['comments'] = entry_comments
+        post_return["entry"] = entry.to_dict()
 
         return post_return
+
     else:
         return form.errors, 400
 
@@ -155,33 +170,67 @@ def edit_entry(post_id):
     if form.validate_on_submit():
 
         currPost = Post.query.get(post_id)
+        if not currPost:
+            return {"error": "Post couldn't be found"}, 404
+        
+        entry = Entry.query.get(currPost.entry_id)
+        if not entry:
+            return {"error": "Entry couldn't be found"}, 404
+        
+        setattr(entry, 'is_public', True)
+        
+        setattr(currPost, 'title', form.data['title'])
         setattr(currPost, 'message', form.data['message'])
+        setattr(currPost, 'comments_enabled', form.data['comments_enabled'])
+        setattr(currPost, 'is_active', True)
         setattr(currPost, 'updated_at', datetime.now())
 
         db.session.commit()
 
-        entry = Entry.query.get(currPost.entry_id)
-        generate_activity('update', currPost, entry.name)
+        generate_activity('update', currPost)
 
         return currPost.to_dict()
     else:
         return form.errors, 400
 
 
-@post_routes.route("/<int:post_id>/delete")
+
+
+# route for making public or private
+@post_routes.route("/<int:post_id>/publication", methods=["POST"])
 @login_required
-def delete_post(post_id):
+def update_post_publication(post_id):
     """
-    Remove an entry from being public and delete the post
+    Publish or unpublish a post and its entry
     """
-    post_to_delete = Post.query.get(post_id)
+    form = PublicationPostForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
 
-    entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
-    setattr(entry, 'is_public', False)
+    if form.validate_on_submit():
+        post = Post.query.get(post_id)
 
-    generate_activity('update', post_to_delete, entry.name)
+        if not post:
+            return {"error": "Post couldn't be found"}, 404
 
-    db.session.delete(post_to_delete)
-    db.session.commit()
+        entry = Entry.query.get(post.entry_id)
 
-    return {"message": "Post has been successfully deleted"}
+        if not entry:
+            return {"error": "Entry couldn't be found"}, 404
+
+        is_active = form.data["is_active"]
+
+        post.is_active = is_active
+        post.updated_at = datetime.now()
+
+        entry.is_public = is_active
+        entry.updated_at = datetime.now()
+
+        action = "create" if is_active else "delete"
+
+        generate_activity(action, post)
+
+        db.session.commit()
+
+        return post.to_dict()
+
+    return form.errors, 400

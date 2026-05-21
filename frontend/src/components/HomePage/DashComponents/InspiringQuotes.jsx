@@ -209,25 +209,13 @@ const writingQuotes = [
 
 const InspiringQuotes = () => {
     const [quote, setQuote] = useState({});
-    const [loading, setLoading] = useState(true);
+    
 
     useEffect(() => {
         const randomQuote = writingQuotes[Math.floor(Math.random() * writingQuotes.length)];
         setQuote(randomQuote);
-        setLoading(false);
     }, []);
 
-
-
-    if (loading) {
-        return (
-            <div className='dash-comp-container'>
-                <div className='pannel-formatting'>
-                    Loading...
-                </div>
-            </div>
-        )
-    }
 
 
     return (
