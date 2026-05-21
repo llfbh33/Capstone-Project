@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import Post, db, Entry, Activity
-from app.forms import PostForm, EditPostForm
+from app.forms import PostForm, EditPostForm, PublicationPostForm
 from datetime import datetime
 
 post_routes = Blueprint('posts', __name__)
@@ -187,21 +187,41 @@ def edit_entry(post_id):
 
 
 
-# SHOULD NOT BE USED ANY MORE
-@post_routes.route("/<int:post_id>/delete")
+# route for making public or private
+@post_routes.route("/<int:post_id>/publication", methods=["POST"])
 @login_required
-def delete_post(post_id):
+def update_post_publication(post_id):
     """
-    Remove an entry from being public and delete the post
+    Publish or unpublish a post and its entry
     """
-    post_to_delete = Post.query.get(post_id)
+    form = PublicationPostForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
 
-    entry = Entry.query.filter(Entry.id == post_to_delete.entry_id).first()
-    setattr(entry, 'is_public', False)
+    if form.validate_on_submit():
+        post = Post.query.get(post_id)
 
-    generate_activity('update', post_to_delete)
+        if not post:
+            return {"error": "Post couldn't be found"}, 404
 
-    db.session.delete(post_to_delete)
-    db.session.commit()
+        entry = Entry.query.get(post.entry_id)
 
-    return {"message": "Post has been successfully deleted"}
+        if not entry:
+            return {"error": "Entry couldn't be found"}, 404
+
+        is_active = form.data["is_active"]
+
+        post.is_active = is_active
+        post.updated_at = datetime.now()
+
+        entry.is_public = is_active
+        entry.updated_at = datetime.now()
+
+        action = "create" if is_active else "delete"
+
+        generate_activity(action, post)
+
+        db.session.commit()
+
+        return post.to_dict()
+
+    return form.errors, 400

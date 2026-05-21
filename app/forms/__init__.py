@@ -4,5 +4,5 @@ from .edit_user_form import EditUserForm
 from .image_form import ImageForm
 from .notebook_form import NotebookForm
 from .entry_form import EntryForm
-from .post_form import PostForm, EditPostForm
+from .post_form import PostForm, EditPostForm, PublicationPostForm
 from .comment_form import CommentForm, EditCommentForm

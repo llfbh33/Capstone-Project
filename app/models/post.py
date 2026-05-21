@@ -14,8 +14,8 @@ class Post(db.Model):
     message = db.Column(db.String(250))
     is_active = db.Column(db.Boolean, default=True)
     comments_enabled = db.Column(db.Boolean, default=True)
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now(), onupdate=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     entries = db.relationship('Entry', back_populates='posts')
     comments = db.relationship('Comment', back_populates='posts')
@@ -28,6 +28,6 @@ class Post(db.Model):
             'message': self.message,
             'is_active': self.is_active,
             'comments_enabled': self.comments_enabled,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at,
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
         }

@@ -16,12 +16,14 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 function EntryPage() {
     const {notebookId, entryId} = useParams();
     const entry = useSelector(state => state.entries[entryId]);
+    const post = useSelector(state =>
+        Object.values(state.posts).find(post => post.entry_id === Number(entryId))
+    );
     const [name, setName] = useState("");
     const [isPreview, setIsPreview] = useState('Edit Entry')
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
 
-    console.log(entry)
 
     useEffect(() => {
         if (entry) setLoaded(true);
@@ -69,7 +71,7 @@ function EntryPage() {
                                 <OpenModalMenuItem
                                 buttonText='Set Private'
                                 hidden={isPreview === 'Preview'}
-                                modalComponent={<RemovePostModal post={entry} />}
+                                modalComponent={<RemovePostModal post={post} />}
                                 />
                             </div>
 

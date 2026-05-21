@@ -4,7 +4,7 @@ import { thunkGetCurrentUserActivities } from "./activity";
 const LOAD_POSTS = 'posts/LOAD_POSTS'
 const CREATE_POST = 'post/CREATE_POST';
 const EDIT_POST = 'post/EDIT_POST';
-const DELETE_POST = 'post/DELETE_POST';
+const PUBLICATION_OF_POST = 'post/PUBLICATION_OF_POST';
 const CLEAR_POSTS = 'posts/CLEAR_POSTS';
 
 
@@ -23,8 +23,8 @@ const editPost = (post) => ({
     post
 })
 
-const deletePost = (post) => ({
-    type: DELETE_POST,
+const publicationOfPost = (post) => ({
+    type: PUBLICATION_OF_POST,
     post
 });
 
@@ -91,11 +91,16 @@ export const thunkEditPost = (post) => async (dispatch) => {
 };
 
 
-/*-----SHOULD NO LONGER USE--------*/
-export const thunkDeletePost = (post) => async (dispatch) => {
-    const response = await fetch(`/api/posts/${post.id}/delete`);
+export const thunkPublicationOfPost = (post) => async (dispatch) => {
+    const response = await fetch(`/api/posts/${post.id}/publication`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            is_active: post.is_active
+        }), 
+    });
     if (response.ok) {
-        await dispatch(deletePost(post));
+        await dispatch(publicationOfPost(post));
         await dispatch(thunkGetCurrentUserActivities());
         return;
     } else {
@@ -125,22 +130,11 @@ function postsReducer(state = initialState, action) {
             newState[action.post.id] = action.post
             return newState
         }
-        // This delete of a post is good, but it does not adjust for the fact that the is_public
-        // boolean for the entry is now set to false
-        // WE ARE NO LONGER ALLOWING THE DELETION OF A POST
-        // case DELETE_POST: {
-        //     const newState = { ...state };
-        //     let adjust_entry = newState[action.post.entry_id]
-        //     adjust_entry = Object.keys(adjust_entry)
-        //         .filter(key => key !== 'post')
-        //         .reduce((newObj, key) => {
-        //             newObj[key] = adjust_entry[key];
-        //             return newObj;
-        //         }, {});
-        //     newState[adjust_entry.id] = adjust_entry;
-        //     newState[adjust_entry.id].is_public = false;
-        //     return newState
-        // }
+        case PUBLICATION_OF_POST: {
+            const newState = { ...state };
+            newState[action.post.id] = action.post
+            return newState
+        }
         case CLEAR_POSTS: {
             return initialState;
         }

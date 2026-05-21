@@ -16,8 +16,8 @@ class User(db.Model, UserMixin):
     profile_image = db.Column(db.String(255))
     theme = db.Column(db.String(50), default='default')
     hashed_password = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     notebooks = db.relationship('Notebook', cascade='all, delete', back_populates='users')
     entries = db.relationship('Entry', cascade='all, delete', back_populates='users')
@@ -41,5 +41,6 @@ class User(db.Model, UserMixin):
             'name': self.name,
             'username': self.username,
             'profile_image': self.profile_image,
-            'theme': self.theme
+            'theme': self.theme,
+            'created_at': self.created_at.isoformat(),
         }

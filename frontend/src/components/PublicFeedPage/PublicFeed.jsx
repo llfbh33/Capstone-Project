@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
@@ -10,21 +10,25 @@ import { BsTrash3Fill } from "react-icons/bs";
 
 function PublicFeed() {
     const allEntries = useSelector(state => state.entries)
-    const allPosts = useSelector(state => state.posts)
+    const postsObj = useSelector(state => state.posts)
     const allUsers = useSelector(state => state.users)
-    const [posts, setPosts] = useState(Object.values(allPosts))
+    const posts = useMemo(() => {
+        return Object.values(postsObj).sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+    }, [postsObj]);
     const currUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
 
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const sortedPosts = Object.values(allPosts)
-            .sort((a, b) =>
-                new Date(b.updated_at) - new Date(a.updated_at)
-            );
-        setPosts(sortedPosts)
-    }, [allPosts])
+    //     const sortedPosts = Object.values(allPosts)
+    //         .sort((a, b) =>
+    //             new Date(b.updated_at) - new Date(a.updated_at)
+    //         );
+    //     setPosts(sortedPosts)
+    // }, [allPosts])
 
 
     return (

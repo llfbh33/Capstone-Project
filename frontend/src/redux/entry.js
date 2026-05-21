@@ -54,7 +54,7 @@ const deleteComment = (comment) => ({
 
 
 
-// thunks for changing entries in the database
+// thunks for loading entries from the database
 export const thunkLoadEntries = () => async (dispatch) => {
     const response = await fetch('/api/entries');
     if (response.ok) {

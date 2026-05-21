@@ -5,12 +5,14 @@ import { thunkLoadEntries } from "../../../redux/entry";
 import { thunkCreatePost } from "../../../redux/posts";
 import { useModal } from "../../../context/Modal/Modal";
 import { useNavigate } from "react-router-dom";
+import { useNav } from "../../../context/Navigation/NavigationContext";
 import './PostModals.css'
 
 
 function PostPostModal({entry}) {
     const dispatch = useDispatch();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const { setActiveNav } = useNav();
     const [message, setMessage] = useState(' ');
     const [title, setTitle] = useState(entry.name)
     const [validationErrors, setValidationErrors] = useState({});
@@ -42,6 +44,7 @@ function PostPostModal({entry}) {
         } else {
             console.log(serverResponse.id)
             await dispatch(thunkLoadEntries());
+            setActiveNav('public');
             navigate(`/public/${serverResponse.id}`)
             closeModal();
         }

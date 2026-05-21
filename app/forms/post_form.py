@@ -28,3 +28,6 @@ class EditPostForm(FlaskForm):
     title = StringField("title", validators=[DataRequired(), Length(max=100)])
     message = StringField("message", validators=[Length(max=250)])
     comments_enabled = BooleanField("comments_enabled")
+
+class PublicationPostForm(FlaskForm):
+    is_active = BooleanField("is_active")

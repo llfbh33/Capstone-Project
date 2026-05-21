@@ -20,8 +20,10 @@ function PublicPost() {
     const creator = useSelector(state => state.users[post.entry.user_id]);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
-    const [commentList, setCommentList] = useState([])
+    const [commentList, setCommentList] = useState([]);
     const [loaded, setLoaded] = useState(false);
+    const [active] = useState(post.is_active);
+    const notActive = "Post content is currently unavailable"
 
 
     useEffect(() => {
@@ -57,12 +59,14 @@ function PublicPost() {
         return
     }
 
+    console.log('POST', post)
+
     if (loaded) {
     return (
         <div className="public-post-singular">
             <h1 className='title page-title'>{`${post?.title} by ${creator?.username}`}</h1>
             <div className="public-post-content-container-singular">
-                <p className="post-content">{parser(post.entry.content)}</p>
+                <p className="post-content">{active ? parser(post.entry.content) : notActive}</p>
             </div>
             <div className='public-post-message-container-singular'>
                 <div>

@@ -12,8 +12,8 @@ class Notebook(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     about = db.Column(db.String(400))
-    created_at = db.Column(db.Date, default=datetime.now())
-    updated_at = db.Column(db.Date, default=datetime.now())
+    created_at = db.Column(db.DateTime, default=datetime.now)
+    updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     users = db.relationship('User', back_populates='notebooks')
     entries = db.relationship('Entry', cascade='all, delete', back_populates='notebooks')
@@ -24,6 +24,6 @@ class Notebook(db.Model):
             'user_id': self.user_id,
             'name': self.name,
             'about': self.about,
-            'created_at': self.created_at,
-            'updated_at': self.updated_at
+            'created_at': self.created_at.isoformat(),
+            'updated_at': self.updated_at.isoformat(),
         }
