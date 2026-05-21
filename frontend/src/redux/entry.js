@@ -1,5 +1,4 @@
 import { thunkGetCurrentUserActivities } from "./activity";
-import { thunkLoadPosts } from "./posts";
 
 const LOAD_USER_ENTRIES = 'entries/LOAD_USER_ENTRIES';
 const CREATE_ENTRY = 'entry/CREATE_ENTRY';

@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-import { thunkLoadEntries } from "../../redux/entry";
 import { thunkCreateComment } from "../../redux/comments";
 import parser from 'html-react-parser'
 import { BsTrash3Fill } from "react-icons/bs";
@@ -17,7 +16,7 @@ function PublicPost() {
     const { postId } = useParams();
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.users)
-    const allPosts = useSelector(state => state.posts)
+    // const allPosts = useSelector(state => state.posts)
     const post = useSelector(state => state.posts[postId]);
     const creator = useSelector(state => state.users[post?.user_id]);
     const currUser = useSelector(state => state.session.user);

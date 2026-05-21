@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux"
-import { useEffect, useState, useMemo } from "react"
+import { useMemo } from "react"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
 import { useNavigate } from "react-router-dom"
-import parser from 'html-react-parser'
+// import parser from 'html-react-parser'
 import { BsTrash3Fill } from "react-icons/bs";
 
 
 function PublicFeed() {
-    const allEntries = useSelector(state => state.entries)
+    // const allEntries = useSelector(state => state.entries)
     const postsObj = useSelector(state => state.posts)
     const allUsers = useSelector(state => state.users)
     const posts = useMemo(() => {

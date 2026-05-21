@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
 
-import { useModal } from "../../../context/Modal/Modal";
+// import { useModal } from "../../../context/Modal/Modal";
 
 import './PostModals.css'
 // import { thunkEditPost } from "../../../redux/entry";
 
 function EditPostFormModal({post}) {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [message, setMessage] = useState(post.post.message);
     const [validationErrors, setValidationErrors] = useState({});
-    const { closeModal } = useModal();
+    // const { closeModal } = useModal();
 
     useEffect(() => {
       const errors = {};
