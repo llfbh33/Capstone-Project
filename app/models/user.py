@@ -19,9 +19,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
-    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
+    
     notebooks = db.relationship('Notebook', cascade='all, delete', back_populates='users')
     entries = db.relationship('Entry', cascade='all, delete', back_populates='users')
+    posts = db.relationship("Post", back_populates="user", cascade="all, delete-orphan")
     comments = db.relationship('Comment', cascade='all, delete', back_populates='users')
     activities = db.relationship('Activity', cascade='all, delete', back_populates='users')
 
