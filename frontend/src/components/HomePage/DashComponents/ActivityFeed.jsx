@@ -2,6 +2,7 @@ import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeli
 import 'react-vertical-timeline-component/style.min.css';
 import { useNav } from "../../../context/Navigation/NavigationContext";
 import { useSelector } from 'react-redux';
+import { useMemo } from 'react';
 import { MdOutlineSignpost } from "react-icons/md";
 import { FaRegFileAlt } from "react-icons/fa";
 import { MdLocalPostOffice } from "react-icons/md";
@@ -48,9 +49,12 @@ const activityType = {
 const ActivityFeed = () => {
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const activities = useSelector(state => [...Object.values(state.activities)].sort(
-        (a, b) => new Date(b.created_at) - new Date(a.created_at)
-    ));
+    const activitiesObj = useSelector(state => state.activities)
+    const activities = useMemo(() => {
+        return Object.values(activitiesObj).sort(
+            (a, b) => new Date(b.created_at) - new Date(a.created_at)
+        );
+    }, [activitiesObj]);
 
     const handleclick = (activity) => {
 
@@ -58,7 +62,7 @@ const ActivityFeed = () => {
             alert("This item has been deleted and is no longer recoverable");
             return;
         }
-        
+
         navigate(`${activity.route}`)
 
         if (activity.target_type === 'post' || activity.target_type === 'comment') {
@@ -67,9 +71,17 @@ const ActivityFeed = () => {
             setActiveNav('notebooks');
         }
     }
-    
 
-    if (!activities) return;
+
+    if (!activities) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
+    }
 
 
     return (

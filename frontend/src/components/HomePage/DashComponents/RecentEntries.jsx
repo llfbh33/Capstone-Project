@@ -6,34 +6,20 @@ import { useNavigate } from "react-router-dom";
 import { useNav } from "../../../context/Navigation/NavigationContext";
 import './DashComponents.css';
 import { FaArrowRightLong } from "react-icons/fa6";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 
 
 const RecentEntries = () => {
-    const user = useSelector(state => state.session.user);
-    const notebooks = useSelector(state => state.notebooks);
-    const entriesObj = useSelector(state => state.entries);
-    const [entries] = useState(Object.values(entriesObj))
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const [entryArray, setEntryArray] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const notebooksObj = useSelector(state => state.notebooks);
+    const entriesObj = useSelector(state => state.entries);
+    const entries = useMemo(() => {
+        return Object.values(entriesObj).sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        ).slice(0, 2);
+    }, [entriesObj]);
 
-
-
-    useEffect(() => {
-        if (!notebooks || !entries) return;
-
-        const sortedEntries = entries
-            .sort((a, b) =>
-                new Date(b.updated_at) - new Date(a.updated_at)
-            )
-            .slice(0, 2);
-
-        setEntryArray(sortedEntries);
-        setLoading(false);
-
-    }, [notebooks, entries])
 
 
     const handleClickEntry = (entry) => {
@@ -42,7 +28,7 @@ const RecentEntries = () => {
     }
 
 
-    if (loading) {
+    if (!entries) {
         return (
             <div className='dash-comp-container'>
                 <div className='pannel-formatting'>
@@ -63,7 +49,7 @@ const RecentEntries = () => {
                     </div>
                 </div>
                 <div className='pannel-contents'>
-                    {entryArray.map((page, index) => (
+                    {entries.map((page, index) => (
                         <div className='pannel-item action-item' onClick={() => handleClickEntry(page)} key={`entry-${index}`}>
                             <div className='pannel-item-icon'>
                                 <FaRegFileAlt />
@@ -73,7 +59,7 @@ const RecentEntries = () => {
                                     {page.name}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {notebooks[page.notebook_id]?.name}
+                                    {notebooksObj[page.notebook_id]?.name}
                                 </div>
                             </div>
                         </div>

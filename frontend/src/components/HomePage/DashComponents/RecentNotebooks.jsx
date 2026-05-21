@@ -1,6 +1,6 @@
 
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useNav } from "../../../context/Navigation/NavigationContext";
 import { SlNotebook } from "react-icons/sl";
@@ -10,27 +10,14 @@ import './DashComponents.css';
 
 
 const RecentNotebooks = () => {
-    const notebooks = useSelector(state => state.notebooks);
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const [notebookArray, setNotebookArray] = useState();
-    const [loading, setLoading] = useState(true);
-
-
-    useEffect(() => {
-        if (!notebooks) return;
-
-        const sortedNotebooks = Object.values(notebooks)
-            .sort((a, b) =>
-                new Date(b.updated_at) - new Date(a.updated_at)
-            )
-            .slice(0, 2);
-
-        setNotebookArray(sortedNotebooks);
-        setLoading(false);
-
-    }, [notebooks]);
-
+    const notebooksObj = useSelector(state => state.notebooks);
+    const notebooks = useMemo(() => {
+        return Object.values(notebooksObj).sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        ).slice(0, 2);
+    }, [notebooksObj]);
 
 
     const handleAllNotebooks = () => {
@@ -44,8 +31,7 @@ const RecentNotebooks = () => {
     };
 
 
-
-    if (loading) {
+    if (!notebooks) {
         return (
             <div className='dash-comp-container'>
                 <div className='pannel-formatting'>
@@ -66,7 +52,7 @@ const RecentNotebooks = () => {
                     </div>
                 </div>
                 <div className='pannel-contents'>
-                    {notebookArray.map((book, index) => (
+                    {notebooks.map((book, index) => (
                         <div className='pannel-item action-item' onClick={() => handleClickNotebook(book.id)} key={`notebook-${index}`}>
                             <div className='pannel-item-icon'>
                                 <SlNotebook />
