@@ -5,7 +5,8 @@ import { useParams } from "react-router-dom"
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
 import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
-import { thunkCreateComment, thunkLoadEntries } from "../../redux/entry";
+import { thunkLoadEntries } from "../../redux/entry";
+import { thunkCreateComment } from "../../redux/comments";
 import parser from 'html-react-parser'
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
@@ -50,13 +51,13 @@ function PublicPost() {
 
         const newComment = {
             userId: currUser.id,
-            entryId: post.id,
+            postId: post.id,
             comment: comment
         }
+        console.log(newComment)
 
         setComment('');
         await dispatch(thunkCreateComment(newComment));
-        await dispatch(thunkLoadEntries());
         return
     }
 
@@ -121,7 +122,7 @@ function PublicPost() {
                                     ? <div className="homepage-edit-notebook" >
                                         <OpenModalMenuItem
                                             itemText={<BsTrash3Fill />}
-                                            modalComponent={<DeleteCommentModal comment={comment} />}
+                                            modalComponent={<DeleteCommentModal commentId={comment.id} />}
                                         />
                                     </div>
                                     : ''}

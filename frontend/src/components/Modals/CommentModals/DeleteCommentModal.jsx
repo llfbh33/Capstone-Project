@@ -1,19 +1,19 @@
 import { useDispatch } from 'react-redux';
-
-import { thunkDeleteComment, thunkLoadEntries } from '../../../redux/entry';
+import { thunkLoadEntries } from '../../../redux/entry';
+import { thunkDeleteComment } from '../../../redux/comments';
 import { useModal } from "../../../context/Modal/Modal";
 import './CommentModals.css';
 
 
-function DeleteCommentModal({comment}) {
+function DeleteCommentModal({commentId}) {
     const dispatch = useDispatch();
     const { closeModal } = useModal();
+
 
     const deleteComment = async (e) => {
         e.preventDefault();
 
-        await dispatch(thunkDeleteComment(comment));
-        await dispatch(thunkLoadEntries());
+        await dispatch(thunkDeleteComment(commentId));
         closeModal();
     };
 

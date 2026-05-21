@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { useState } from 'react';
-
-import { thunkEditComment, thunkLoadEntries } from '../../../redux/entry';
+import { thunkEditComment } from '../../../redux/comments';
+import { thunkLoadEntries } from '../../../redux/entry';
 import { useModal } from "../../../context/Modal/Modal";
 import './CommentModals.css'
 
@@ -21,12 +21,11 @@ function EditCommentModal({comment}) {
         const editedComment = {
             id: comment.id,
             userId: comment.user_id,
-            entryId: comment.entry_id,
+            postId: comment.post_id,
             comment: updateComment
         }
 
         await dispatch(thunkEditComment(editedComment));
-        await dispatch(thunkLoadEntries())  // needs to be included so that the comment auto sets
         closeModal();
     };
 
