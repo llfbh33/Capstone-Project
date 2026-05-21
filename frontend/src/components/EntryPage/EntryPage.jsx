@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+import { useModal } from '../../context/Modal/Modal';
 import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
 import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
@@ -14,7 +15,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 
 
 function EntryPage() {
-    const {notebookId, entryId} = useParams();
+    const { notebookId, entryId } = useParams();
     const entry = useSelector(state => state.entries[entryId]);
     const post = useSelector(state =>
         Object.values(state.posts).find(post => post.entry_id === Number(entryId))
@@ -23,83 +24,101 @@ function EntryPage() {
     const [isPreview, setIsPreview] = useState('Edit Entry')
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
+    const { setModalContent } = useModal();
 
 
     useEffect(() => {
         if (entry) setLoaded(true);
     }, [entry])
 
-    useEffect(() =>{
-        if(entry?.name) {
-          setName(entry.name)
+    useEffect(() => {
+        if (entry?.name) {
+            setName(entry.name)
         }
     }, [entry])
 
     const previewSwitch = () => {
         if (isPreview === 'Preview') {
-          setIsPreview('Edit Entry')
+            setIsPreview('Edit Entry')
         } else {
-          setIsPreview('Preview')
+            setIsPreview('Preview')
         }
     }
+
+    const publishEntry = () => {
+        if (!post) {
+            let modalComponent = <PostPostModal entry={entry} />
+            setModalContent(modalComponent);
+        } else {
+            let modalComponent = <RemovePostModal post={post} />
+            setModalContent(modalComponent)
+        }
+    }
+
+                                        //     <OpenModalMenuItem
+                                        //     buttonText='Set Public'
+                                        //     hidden={isPreview === 'Preview'}
+                                        //     modalComponent={<PostPostModal entry={entry} />}
+                                        // />
 
     return (
         <div className='set-entry-page-size'>
             {loaded ?
-            <div>
+                <div>
 
-                <div >
-                    <h1 className='title page-title'>{`Notebook: ${notebook?.name}`}</h1>
-                    <div id='entrypage-entrytitle-buttons'>
-                        <p className="title page-subtitle">{`Entry: ${name}`}</p>
+                    <div >
+                        <h1 className='title page-title'>{`Notebook: ${notebook?.name}`}</h1>
+                        <div id='entrypage-entrytitle-buttons'>
+                            <p className="title page-subtitle">{`Entry: ${name}`}</p>
 
-                        <div className="entrypage-button-container">
-                            <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                  <OpenModalMenuItem
-                                  buttonText='Edit Name'
-                                  modalComponent={<EditEntryNameFormModal entry={entry}/>}
-                                  />
-                            </div>
-                            <button
-                                className="modal-button entry-button"
-                                onClick={previewSwitch}
+                            <div className="entrypage-button-container">
+                                <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
+                                    <OpenModalMenuItem
+                                        buttonText='Edit Name'
+                                        modalComponent={<EditEntryNameFormModal entry={entry} />}
+                                    />
+                                </div>
+                                <button
+                                    className="modal-button entry-button"
+                                    onClick={previewSwitch}
                                 >{isPreview}
-                            </button>
-                            {entry?.is_public
+                                </button>
+                                {entry?.is_public
 
-                            ? <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                <OpenModalMenuItem
-                                buttonText='Set Private'
-                                hidden={isPreview === 'Preview'}
-                                modalComponent={<RemovePostModal post={post} />}
-                                />
+                                    ? <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
+                                        <OpenModalMenuItem
+                                            buttonText='Set Private'
+                                            hidden={isPreview === 'Preview'}
+                                            modalComponent={<RemovePostModal post={post} />}
+                                        />
+                                    </div>
+
+                                    : <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
+                                        <button
+                                            hidden={isPreview === 'Preview'}
+                                            onClick={publishEntry}
+                                        >
+                                            Set Public
+                                        </button>
+                                    </div>
+                                }
+                                <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
+                                    <OpenModalMenuItem
+                                        buttonText='Delete'
+                                        modalComponent={<DeleteEntryFormModal entry={entry} />}
+                                    />
+                                </div>
                             </div>
 
-                            : <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                <OpenModalMenuItem
-                                buttonText='Set Public'
-                                hidden={isPreview === 'Preview'}
-                                modalComponent={<PostPostModal entry={entry} />}
-                                />
-                            </div>
-                            }
-                            <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                <OpenModalMenuItem
-                                buttonText='Delete'
-                                modalComponent={<DeleteEntryFormModal entry={entry} />}
-                                />
-                            </div>
                         </div>
+                    </div>
 
+                    <h1 className='entrypage-underline'></h1>
+                    <div>
+                        {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreviewPage entry={entry} />}
                     </div>
                 </div>
-
-                <h1 className='entrypage-underline'></h1>
-                <div>
-                    {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview}/> : <EntryPreviewPage entry={entry} /> }
-                </div>
-            </div>
-            : <LoadingPage /> }
+                : <LoadingPage />}
         </div>
     )
 }

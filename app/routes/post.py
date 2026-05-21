@@ -171,9 +171,17 @@ def edit_entry(post_id):
         currPost = Post.query.get(post_id)
         if not currPost:
             return {"error": "Post couldn't be found"}, 404
+        
+        entry = Entry.query.get(currPost.entry_id)
+        if not entry:
+            return {"error": "Entry couldn't be found"}, 404
+        
+        setattr(entry, 'is_public', True)
+        
         setattr(currPost, 'title', form.data['title'])
         setattr(currPost, 'message', form.data['message'])
         setattr(currPost, 'comments_enabled', form.data['comments_enabled'])
+        setattr(currPost, 'is_active', True)
         setattr(currPost, 'updated_at', datetime.now())
 
         db.session.commit()

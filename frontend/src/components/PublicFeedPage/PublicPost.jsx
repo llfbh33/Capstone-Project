@@ -17,7 +17,7 @@ function PublicPost() {
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.users)
     const post = useSelector(state => state.posts[postId]);
-    const creator = useSelector(state => state.users[post.entry.user_id]);
+    const creator = useSelector(state => state.users[post?.entry?.user_id]);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
     const [commentList, setCommentList] = useState([]);

@@ -76,7 +76,8 @@ export const thunkEditPost = (post) => async (dispatch) => {
         body: JSON.stringify({
             title: post.title,
             message: post.message,
-            comments_enabled: post.comments_enabled
+            comments_enabled: post.comments_enabled,
+            is_active: post.is_active
         }),
     });
     if (response.ok) {

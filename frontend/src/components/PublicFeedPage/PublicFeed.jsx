@@ -29,6 +29,7 @@ function PublicFeed() {
     //         );
     //     setPosts(sortedPosts)
     // }, [allPosts])
+    console.log(posts)
 
 
     return (
@@ -47,8 +48,8 @@ function PublicFeed() {
                             <div className="post-username-image-container">
                                 <div className="image-and-username">
 
-                                    <img src={allUsers[post.entry.user_id]?.profile_image} className="post-profile-image" />
-                                    <h3>{allUsers[post.entry.user_id]?.username}</h3>
+                                    <img src={allUsers[post?.entry.user_id]?.profile_image} className="post-profile-image" />
+                                    <h3>{allUsers[post?.entry.user_id]?.username}</h3>
                                 </div>
                                 {post?.entry && post?.entry?.user_id === currUser.id
                                     ? <div className="homepage-edit-notebook">
