@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useMemo } from "react";
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
@@ -18,22 +19,34 @@ import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 
 
 
+const notebookImages = [
+    './greenNotebook.png',
+    './blueNotebook.png',
+    './brownNotebook.png',
+]
+
+
 function NotebooksPage() {
     const user = useSelector(state => state.session.user);
     // const { activeNav, setActiveNav } = useNav();
-    const notebooks = useSelector(state => state.notebooks);
-    const [theseNotebooks, setTheseNotebooks] = useState('');
+    const notebookObj = useSelector(state => state.notebooks);
+    const notebooks = useMemo(() => {
+        return Object.values(notebookObj).sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        );
+    }, [notebookObj]);
+    // const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
     const { setModalContent } = useModal();
     const navigate = useNavigate();
 
-    useEffect(() => {
-        if (notebooks) setTheseNotebooks(notebooks)
-    }, [notebooks])
+    // useEffect(() => {
+    //     if (notebooks) setTheseNotebooks(notebooks)
+    // }, [notebooks])
 
-    useEffect(() => {
-        if (theseNotebooks) setLoading(false)
-    }, [theseNotebooks])
+    // useEffect(() => {
+    //     if (theseNotebooks) setLoading(false)
+    // }, [theseNotebooks])
 
     const handleClickNotebook = (id) => {
         // const newActiveState = {
@@ -51,9 +64,16 @@ function NotebooksPage() {
         setModalContent(modalComponent);
     }
 
-    if (loading) {
-        return <LoadingPage />
+    if (!notebooks) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
     }
+    console.log(notebooks)
 
 
     return (
@@ -86,37 +106,31 @@ function NotebooksPage() {
                                 </div>
 
                                 <div className="notebooks-block-container">
-                                    <div className='dash-comp-container'>
-                                        <div className='pannel-formatting'>
-                                            <div className='notebook-pannel-heading'>
-                                                <img className="book-image-all" src='./greenNotebook.png'></img>
-                                                <div className="notebook-edit" >
-                                                    <div>View all</div>
-                                                </div>
-                                            </div>
-                                            <div className="notebook-panel-container">
-                                                <h3>Captain Simian&apos;s Odyssey</h3>
-                                                <p>
-                                                    Here I am going to start my book about Captain Simian&apos;s
-                                                    travels through...
-                                                </p>
 
-                                                <div className="notebook-last-edited">
-                                                    <span>Last edited - </span>
-                                                    <span>May 2, 2024</span>
+
+                                    {notebooks.map((notebook, index) => (
+                                        <div className='dash-comp-container individual-notebooks' key={notebook.id}>
+                                            <div className='pannel-formatting'>
+                                                <div className='notebook-pannel-heading'>
+                                                    <img className="book-image-all" src={notebookImages[index % 3]}></img>
+                                                    <div className="notebook-edit" >
+                                                        <div>actions</div>
+                                                    </div>
+                                                </div>
+                                                <div className="notebook-panel-container">
+                                                    <h3>{notebook.name}</h3>
+                                                    <p>
+                                                        {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
+                                                    </p>
+
+                                                    <div className="notebook-last-edited">
+                                                        <span>Last edited - </span>
+                                                        <span>{notebook.updated_at}</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div className="notebook-container">
-                                        I am another book
-                                    </div>
-                                    <div className="notebook-container">
-                                        I am a book
-                                    </div>
-                                    <div className="notebook-container">
-                                        I am another book
-                                    </div>
+                                    ))}
                                 </div>
                             </div>
                         </div>
