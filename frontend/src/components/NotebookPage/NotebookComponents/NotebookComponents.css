@@ -1,0 +1,97 @@
+.featured-notebook-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #3399FF;
+    border-radius: 10px;
+    /* max-height: 300px; */
+}
+
+.featured-label {
+  display: block;
+  padding: 18px 0px 10px 18px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.featured-notebook-data {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    padding: 18px 24px;
+    border-top: 1px solid rgba(79, 70, 229, 0.7);
+    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 45%);
+}
+
+.notebook-cover {
+  /* width: 82px;
+  height: 118px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #29235f, #111827);
+  border-left: 6px solid #191540;
+  box-shadow: 8px 8px 18px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e7eb;
+  font-size: 2rem; */
+}
+
+.book-image {
+    max-width: 140px;
+}
+
+.featured-info {
+  flex: 1;
+  position: relative;
+}
+
+.featured-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.featured-header h3 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.featured-info p {
+  /* max-width: 360px; */
+  margin: 10px 0 18px;
+  font-size: 1.1rem;
+  line-height: 2;
+  color: #d1d5db;
+}
+
+.featured-meta,
+.featured-bottom {
+  display: flex;
+  gap: 16px;
+  font-size: 0.9rem;
+  color: #a5b4fc;
+  margin-bottom: 10px;
+}
+
+.progress-area {
+  max-width: 260px;
+  font-size: 0.8rem;
+}
+
+.progress-track {
+  margin-top: 6px;
+  height: 7px;
+  border-radius: 999px;
+  background: #1f2937;
+  overflow: hidden;
+}
+
+.progress-fill {
+  width: 68%;
+  height: 100%;
+  border-radius: inherit;
+  background: #5b4bff;
+}

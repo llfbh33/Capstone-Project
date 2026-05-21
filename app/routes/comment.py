@@ -31,6 +31,7 @@ def generate_activity(action, comment, post_name):
     db.session.commit()
 
 
+#CREATE A LOAD COMMENTS ROUTE
 
 @comment_routes.route('/new', methods=['post'])
 @login_required

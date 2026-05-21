@@ -1,5 +1,129 @@
 /* Uses the majority of the Homepage css */
 
+.padding-container-header-notebooks {
+    /* flex: 1; */
+    display: flex;
+    flex-direction: row;
+    padding: 24px 0px;
+    box-shadow: 
+  0 8px 12px rgba(0, 0, 0, 0.15),
+  0 1px 2px rgba(0, 0, 0, 0.08);
+  /* padding-bottom: 10px; */
+}
+
+.padding-container-header-notebooks h1 {
+    margin: 0;
+    width: 100%;
+}
+
+.new-search-notebooks-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.new-notebook-button {
+    height: 36px;
+    width: 140px;
+    color: white;
+    background-color: rgb(9, 9, 140);
+    border: 1px solid rgb(209, 209, 245);
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.new-notebook-text {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.new-notebook-text p {
+    margin: 0;
+}
+
+.all-notebooks-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.all-notebooks-action {
+    display: flex;
+    justify-content: space-between;
+}
+
+.all-notebooks-container p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.notebook-pannel-heading {
+    /* border: 1px solid var(--nav-selected); */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.notebook-edit {
+    padding: 10px;
+      color: #a5b4fc;
+}
+
+.notebooks-block-container {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* border: 1px solid rgb(209, 209, 245); */
+    border-radius: 6px;
+}
+
+.notebook-container {
+    flex: 1;
+    border: 1px solid rgb(209, 209, 245);
+    border-radius: 10px;
+}
+
+.book-image-all {
+    max-width: 100px;
+}
+
+.notebook-panel-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}
+
+.notebook-panel-container h3 {
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.notebook-panel-container p {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+}
+
+.notebook-last-edited {
+    margin-top: auto;
+      font-size: 1rem;
+  color: #a5b4fc;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
 #notebookpage-about-section-container {
     width: 100%;
     word-break: break-all;

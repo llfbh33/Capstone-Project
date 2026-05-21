@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
+import { FaPlus } from "react-icons/fa6";
+
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
 import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
@@ -12,10 +14,11 @@ import { useModal } from '../../context/Modal/Modal';
 // import './NotebooksPage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
+import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 
 
 
-function NotebooksPage () {
+function NotebooksPage() {
     const user = useSelector(state => state.session.user);
     // const { activeNav, setActiveNav } = useNav();
     const notebooks = useSelector(state => state.notebooks);
@@ -44,7 +47,7 @@ function NotebooksPage () {
     }
 
     const handleNewNotebook = () => {
-        let modalComponent =<NewNotebookFormModal />
+        let modalComponent = <NewNotebookFormModal />
         setModalContent(modalComponent);
     }
 
@@ -55,45 +58,107 @@ function NotebooksPage () {
 
     return (
         <div className="main-container">
-            <h1 className='title page-title'>{`${user?.name}'s Notebooks`}</h1>
-            {/* <p className="title page-subtitle">Your Notebooks</p> */}
-            <div id='homepage-notebook-card-container'>
+            <div className="child-container">
+                <div className="child-container-two">
+                    <div className="padding-container-header-notebooks">
+                        <h1 className="page-title">{`${user?.name}'s Notebook's`}</h1>
+                        <div className="new-search-notebooks-container">
+                            <button
+                                className="new-notebook-button"
+                                onClick={handleNewNotebook}
+                            >
+                                <div className="new-notebook-text">
+                                    <FaPlus />
+                                    <p>New Notebook</p>
+                                </div>
+                            </button>
+                        </div>
+                    </div>
+                    {/* <h1 className='title page-title'>{`${user?.name}'s Notebooks`}</h1> */}
+                    {/* <p className="title page-subtitle">Your Notebooks</p> */}
+                    <div className="items-container">
+                        <div className="horizontal-container">
+                            <FeaturedNotebook />
+                            <div className="all-notebooks-container">
+                                <div className="all-notebooks-action">
+                                    <p>All Notebooks</p>
+                                    <p>Sorted by: Last Edited</p>
+                                </div>
 
-                {Object.values(notebooks).map(notebook => (
-                    <div key={notebook?.id} className="notebook-card-container-media-query">
-                        <div className="homepage-notebook-card"  >
-                            <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
-                                <div>
-                                    <div>{notebook?.name}</div>
-                                </div>
-                                <div className='notebook-about-section-container'>
-                                    <div>{`${notebook?.about.slice(0, 70)}...`}</div>
-                                </div>
-                             </div>
-                            <div className="notebook-edit-delete-container">
-                                <div className="homepage-edit-notebook">
-                                    <OpenModalMenuItem
-                                    itemText={<FaEdit />}
-                                    modalComponent={<EditNotebookFormModal notebook={notebook} />}
-                                    />
-                                </div>
-                                <div className="homepage-edit-notebook">
-                                    <OpenModalMenuItem
-                                    itemText={<BsTrash3Fill />}
-                                    modalComponent={<DeleteNotebookFormModal notebook={notebook} />}
-                                    />
+                                <div className="notebooks-block-container">
+                                    <div className='dash-comp-container'>
+                                        <div className='pannel-formatting'>
+                                            <div className='notebook-pannel-heading'>
+                                                <img className="book-image-all" src='./greenNotebook.png'></img>
+                                                <div className="notebook-edit" >
+                                                    <div>View all</div>
+                                                </div>
+                                            </div>
+                                            <div className="notebook-panel-container">
+                                                <h3>Captain Simian&apos;s Odyssey</h3>
+                                                <p>
+                                                    Here I am going to start my book about Captain Simian&apos;s
+                                                    travels through...
+                                                </p>
+
+                                                <div className="notebook-last-edited">
+                                                    <span>Last edited - </span>
+                                                    <span>May 2, 2024</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="notebook-container">
+                                        I am another book
+                                    </div>
+                                    <div className="notebook-container">
+                                        I am a book
+                                    </div>
+                                    <div className="notebook-container">
+                                        I am another book
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                ))}
+                    {/* <div id='homepage-notebook-card-container'>
 
-                <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
-                    <div id='create-notebook-title'>
-                        Ready to write? Create a notebook to get started!
-                    </div>
+                        {Object.values(notebooks).map(notebook => (
+                            <div key={notebook?.id} className="notebook-card-container-media-query">
+                                <div className="homepage-notebook-card"  >
+                                    <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
+                                        <div>
+                                            <div>{notebook?.name}</div>
+                                        </div>
+                                        <div className='notebook-about-section-container'>
+                                            <div>{`${notebook?.about.slice(0, 70)}...`}</div>
+                                        </div>
+                                    </div>
+                                    <div className="notebook-edit-delete-container">
+                                        <div className="homepage-edit-notebook">
+                                            <OpenModalMenuItem
+                                                itemText={<FaEdit />}
+                                                modalComponent={<EditNotebookFormModal notebook={notebook} />}
+                                            />
+                                        </div>
+                                        <div className="homepage-edit-notebook">
+                                            <OpenModalMenuItem
+                                                itemText={<BsTrash3Fill />}
+                                                modalComponent={<DeleteNotebookFormModal notebook={notebook} />}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+
+                        <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
+                            <div id='create-notebook-title'>
+                                Ready to write? Create a notebook to get started!
+                            </div>
+                        </div>
+                    </div> */}
                 </div>
-
             </div>
         </div>
     )
