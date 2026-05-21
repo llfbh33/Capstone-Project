@@ -23,6 +23,7 @@ const notebookImages = [
     './greenNotebook.png',
     './blueNotebook.png',
     './brownNotebook.png',
+    './magentaNotebook.png',
 ]
 
 
@@ -112,7 +113,7 @@ function NotebooksPage() {
                                         <div className='dash-comp-container individual-notebooks' key={notebook.id}>
                                             <div className='pannel-formatting'>
                                                 <div className='notebook-pannel-heading'>
-                                                    <img className="book-image-all" src={notebookImages[index % 3]}></img>
+                                                    <img className="book-image-all" src={notebookImages[index % 4]}></img>
                                                     <div className="notebook-edit" >
                                                         <div>actions</div>
                                                     </div>

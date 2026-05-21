@@ -2,7 +2,7 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import "./NotebookComponents.css";
 
-const FeaturedNotebook = () => {
+const FeaturedNotebook = ({notebook}) => {
   return (
     <div className="featured-notebook-container">
       <span className="featured-label">Featured Notebook</span>
