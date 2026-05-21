@@ -17,6 +17,7 @@ function PostPostModal({entry}) {
     const [title, setTitle] = useState(entry.name)
     const [validationErrors, setValidationErrors] = useState({});
     const { closeModal } = useModal();
+    
 
     useEffect(() => {
         const errors = {};
@@ -42,7 +43,6 @@ function PostPostModal({entry}) {
         if (serverResponse.errors) {
             setValidationErrors(serverResponse.errors);
         } else {
-            console.log(serverResponse.id)
             await dispatch(thunkLoadEntries());
             setActiveNav('public');
             navigate(`/public/${serverResponse.id}`)

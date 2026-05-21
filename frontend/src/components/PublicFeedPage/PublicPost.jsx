@@ -16,13 +16,14 @@ function PublicPost() {
     const { postId } = useParams();
     const dispatch = useDispatch();
     const allUsers = useSelector(state => state.users)
+    const allPosts = useSelector(state => state.posts)
     const post = useSelector(state => state.posts[postId]);
-    const creator = useSelector(state => state.users[post?.entry?.user_id]);
+    const creator = useSelector(state => state.users[post?.user_id]);
     const currUser = useSelector(state => state.session.user);
     const [comment, setComment] = useState('');
     const [commentList, setCommentList] = useState([]);
     const [loaded, setLoaded] = useState(false);
-    const [active] = useState(post.is_active);
+    const [active] = useState(post?.is_active);
     const notActive = "Post content is currently unavailable"
 
 
@@ -35,7 +36,7 @@ function PublicPost() {
     }, [post])
 
     useEffect(() => {
-        if (post) {
+        if (post?.entry) {
             setLoaded(true)
         }
     }, [post])
@@ -59,7 +60,6 @@ function PublicPost() {
         return
     }
 
-    console.log('POST', post)
 
     if (loaded) {
     return (

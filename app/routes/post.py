@@ -131,6 +131,7 @@ def create_entry():
         setattr(entry, 'is_public', True)
 
         new_post = Post(
+            user_id=current_user.id,
             entry_id=form.data['entry_id'],
             title=form.data['title'],
             message=form.data['message'],

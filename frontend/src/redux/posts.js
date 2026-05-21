@@ -57,10 +57,11 @@ export const thunkCreatePost = (post) => async (dispatch) => {
         }),
 
     });
-    console.log('RESPONSE: ', response)
+    
     if (response.ok) {
         const data = await response.json();
         await dispatch(createPost(data));
+        await dispatch(thunkLoadPosts());
         await dispatch(thunkGetCurrentUserActivities());
         return data;
     } else {
@@ -83,6 +84,7 @@ export const thunkEditPost = (post) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         await dispatch(editPost(data));
+        await dispatch(thunkLoadPosts());
         await dispatch(thunkGetCurrentUserActivities());
         return data;
     } else {
@@ -102,6 +104,7 @@ export const thunkPublicationOfPost = (post) => async (dispatch) => {
     });
     if (response.ok) {
         await dispatch(publicationOfPost(post));
+        await dispatch(thunkLoadPosts());
         await dispatch(thunkGetCurrentUserActivities());
         return;
     } else {
