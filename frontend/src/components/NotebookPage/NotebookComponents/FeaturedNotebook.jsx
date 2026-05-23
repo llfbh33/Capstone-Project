@@ -1,4 +1,5 @@
-import { FaRegFileAlt } from "react-icons/fa";
+// import { FaRegFileAlt } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import "./NotebookComponents.css";
 import { friendlyDate } from "../../../utils/utils";
@@ -7,8 +8,10 @@ const FeaturedNotebook = ({ notebook, handleClickNotebook }) => {
   console.log(notebook)
   return (
     <div className="featured-notebook-container">
-      <span className="featured-label">Featured Notebook</span>
-
+      <div className="featured-label-container">
+        <span>Featured Notebook</span>
+        <FaStar />
+      </div>
       <div className="featured-notebook-data">
         <div className="notebook-cover">
           {/* <FaRegFileAlt /> */}

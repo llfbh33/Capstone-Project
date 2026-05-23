@@ -1,9 +1,11 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useMemo } from "react";
 import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa";
+
 
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
@@ -17,6 +19,7 @@ import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 import { friendlyDate } from "../../utils/utils";
+import { thunkFeaturedNotebook } from "../../redux/notebook";
 
 
 
@@ -32,6 +35,7 @@ const notebookImages = [
 
 function NotebooksPage() {
     const user = useSelector(state => state.session.user);
+    const dispatch = useDispatch();
     // const { setActiveNav } = useNav();
     const notebookObj = useSelector(state => state.notebooks);
     const notebooks = useMemo(() => {
@@ -60,6 +64,11 @@ function NotebooksPage() {
     const handleNewNotebook = () => {
         let modalComponent = <NewNotebookFormModal />
         setModalContent(modalComponent);
+    }
+
+    const handleSetFeatured = async (id) => {
+        // console.log('create thunk and route for handling setting featured');
+        await dispatch(thunkFeaturedNotebook(id))
     }
 
     if (!notebooks) {
@@ -100,13 +109,20 @@ function NotebooksPage() {
                                     <p>Sorted by: Last Created</p>
                                 </div>
                                 <div className="notebooks-block-container">
-                                    {notebooks.map((notebook, index) => (
+                                    {notebooks.map((notebook, index) => {
+                                        if (notebook.id === featuredNotebook.id) return <></>
+                                        else return (
                                         <div className='dash-comp-container individual-notebooks' key={notebook.id}>
                                             <div className='pannel-formatting'>
                                                 <div className='notebook-pannel-heading'>
                                                     <img className="book-image-all" src={notebookImages[index % 6]}></img>
-                                                    <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
-                                                        <div>View</div>
+                                                    <div style={{display: "flex", alignItems: "center", minHeight: "50px"}}>
+                                                        <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
+                                                            View
+                                                        </div>
+                                                        <div className="notebook-edit" style={{minWidth: "24px"}} onClick={() => handleSetFeatured(notebook.id)}>
+                                                            <FaRegStar />
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div className="notebook-panel-container">
@@ -124,7 +140,7 @@ function NotebooksPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                    ))}
+                                    )})}
                                 </div>
                             </div>
                         </div>

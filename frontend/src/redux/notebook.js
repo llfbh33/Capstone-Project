@@ -86,6 +86,26 @@ export const thunkEditNotebook = (notebook) => async (dispatch) => {
 };
 
 
+export const thunkFeaturedNotebook = (notebookId) => async (dispatch) => {
+  const response = await fetch(`/api/notebooks/${notebookId}/featured`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      is_featured: true
+    })
+  });
+  if (response.ok) {
+    const data = await response.json();
+    await dispatch(thunkLoadNotebooks());
+    await dispatch(thunkGetCurrentUserActivities());
+    return data;
+  } else {
+    const errors = await response.json()
+    return errors;
+  }
+}
+
+
 export const thunkDeleteNotebook = (notebookId) => async (dispatch) => {
     const response = await fetch(`/api/notebooks/${notebookId}/delete`);
     if (response.ok) {
