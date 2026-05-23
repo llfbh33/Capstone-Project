@@ -18,7 +18,6 @@ def generate_activity(action, notebook):
     else:
         text = f'Updated notebook: "{notebook.name}"'
 
-    action = "update" if action == "featured" else action
 
     activity = Activity(
         user_id=current_user.id,

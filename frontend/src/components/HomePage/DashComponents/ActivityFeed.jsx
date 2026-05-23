@@ -8,6 +8,7 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { MdLocalPostOffice } from "react-icons/md";
 import { SlNotebook } from "react-icons/sl";
 import { MdDelete } from "react-icons/md";
+import { FaStar } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 
 import './DashComponents.css';
@@ -33,17 +34,11 @@ const activityType = {
     notebook: {
         create: <SlNotebook />,
         update: <SlNotebook />,
+        featured: <FaStar />,
         delete: <MdDelete />,
     },
     delete: <MdDelete />,
 }
-
-// const activityNav = {
-//     post: "/public/",
-//     notebook: "/notebook/",
-//     comment: "/public/",
-//     entry: ["/notebook/", "/entries/"]
-// }
 
 
 
