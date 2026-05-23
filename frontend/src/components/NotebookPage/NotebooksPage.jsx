@@ -72,6 +72,9 @@ function NotebooksPage() {
         <div className="main-container">
             <div className="child-container">
                 <div className="child-container-two">
+                    <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>
+                        Notebooks
+                    </div>
                     <div className="padding-container-header-notebooks">
                         <h1 className="page-title">{`${user?.name}'s Notebook's`}</h1>
                         <div className="new-search-notebooks-container">
@@ -125,43 +128,6 @@ function NotebooksPage() {
                             </div>
                         </div>
                     </div>
-                    {/* <div id='homepage-notebook-card-container'>
-
-                        {Object.values(notebooks).map(notebook => (
-                            <div key={notebook?.id} className="notebook-card-container-media-query">
-                                <div className="homepage-notebook-card"  >
-                                    <div className="homepage-notebook-card-details" onClick={() => handleClickNotebook(notebook.id)}>
-                                        <div>
-                                            <div>{notebook?.name}</div>
-                                        </div>
-                                        <div className='notebook-about-section-container'>
-                                            <div>{`${notebook?.about.slice(0, 70)}...`}</div>
-                                        </div>
-                                    </div>
-                                    <div className="notebook-edit-delete-container">
-                                        <div className="homepage-edit-notebook">
-                                            <OpenModalMenuItem
-                                                itemText={<FaEdit />}
-                                                modalComponent={<EditNotebookFormModal notebook={notebook} />}
-                                            />
-                                        </div>
-                                        <div className="homepage-edit-notebook">
-                                            <OpenModalMenuItem
-                                                itemText={<BsTrash3Fill />}
-                                                modalComponent={<DeleteNotebookFormModal notebook={notebook} />}
-                                            />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-
-                        <div id='homepage-new-notebook-card' onClick={handleNewNotebook}>
-                            <div id='create-notebook-title'>
-                                Ready to write? Create a notebook to get started!
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
         </div>

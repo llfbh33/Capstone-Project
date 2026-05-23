@@ -147,6 +147,37 @@
     margin-bottom: 10px;
 }
 
+.navigation-tabs {
+    margin-top: 20px;
+    color: #d1d5db;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.navigation-tabs:hover {
+    color: white;
+}
+
+.navigation-intermediary {
+    margin-top: 20px;
+    color: #d1d5db;
+}
+
+.navigation-tabs-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.notebook-description-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+
+
 
 
 
