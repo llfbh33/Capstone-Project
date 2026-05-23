@@ -1,27 +1,15 @@
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useMemo } from "react";
-import { BsTrash3Fill } from "react-icons/bs";
-import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
-import { FaRegStar } from "react-icons/fa";
-import { FaEllipsisV } from "react-icons/fa";
-
-
-
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
-import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
 // import { useNav } from "../../context/Navigation/NavigationContext";
 import { useModal } from '../../context/Modal/Modal';
 // import './NotebooksPage.css'
-import { useEffect, useState } from "react";
-import LoadingPage from "../LoadingPage/LoadingPage";
+// import LoadingPage from "../LoadingPage/LoadingPage";
 import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 import { friendlyDate } from "../../utils/utils";
-import { thunkFeaturedNotebook } from "../../redux/notebook";
 import NotebookActions from "./NotebookComponents/NotebookActions";
 
 
@@ -38,7 +26,6 @@ const notebookImages = [
 
 function NotebooksPage() {
     const user = useSelector(state => state.session.user);
-    const dispatch = useDispatch();
     // const { setActiveNav } = useNav();
     const notebookObj = useSelector(state => state.notebooks);
     const notebooks = useMemo(() => {
@@ -48,7 +35,6 @@ function NotebooksPage() {
     }, [notebookObj]);
     const featuredNotebook = notebooks.find(notebook => notebook.is_featured) || notebooks[0];
     // const [theseNotebooks, setTheseNotebooks] = useState('');
-    const [loading, setLoading] = useState(true);
     const { setModalContent } = useModal();
     const navigate = useNavigate();
 
@@ -69,9 +55,7 @@ function NotebooksPage() {
         setModalContent(modalComponent);
     }
 
-    const handleSetFeatured = async (id) => {
-        await dispatch(thunkFeaturedNotebook(id))
-    }
+
 
     if (!notebooks) {
         return (
