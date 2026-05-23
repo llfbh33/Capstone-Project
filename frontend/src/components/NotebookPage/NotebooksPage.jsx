@@ -5,6 +5,8 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 import { FaPlus } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa";
+import { FaEllipsisV } from "react-icons/fa";
+
 
 
 
@@ -20,6 +22,7 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 import { friendlyDate } from "../../utils/utils";
 import { thunkFeaturedNotebook } from "../../redux/notebook";
+import NotebookActions from "./NotebookComponents/NotebookActions";
 
 
 
@@ -102,7 +105,7 @@ function NotebooksPage() {
                     </div>
                     <div className="items-container">
                         <div className="horizontal-container">
-                            <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook}/>
+                            <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook} />
                             <div className="all-notebooks-container">
                                 <div className="all-notebooks-action">
                                     <p>All Notebooks</p>
@@ -112,35 +115,31 @@ function NotebooksPage() {
                                     {notebooks.map((notebook, index) => {
                                         if (notebook.id === featuredNotebook.id) return <></>
                                         else return (
-                                        <div className='dash-comp-container individual-notebooks' key={notebook.id}>
-                                            <div className='pannel-formatting'>
-                                                <div className='notebook-pannel-heading'>
-                                                    <img className="book-image-all" src={notebookImages[index % 6]}></img>
-                                                    <div style={{display: "flex", alignItems: "center", minHeight: "50px"}}>
-                                                        <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
-                                                            View
-                                                        </div>
-                                                        <div className="notebook-edit" style={{minWidth: "24px"}} onClick={() => handleSetFeatured(notebook.id)}>
-                                                            <FaRegStar />
+                                            <div className='dash-comp-container individual-notebooks' key={notebook.id}>
+                                                <div className='pannel-formatting'>
+                                                    <div className='notebook-pannel-heading'>
+                                                        <img className="book-image-all" src={notebookImages[index % 6]}></img>
+                                                        <div style={{ display: "flex", alignItems: "center", minHeight: "50px" }}>
+                                                            <NotebookActions notebook={notebook} />
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div className="notebook-panel-container">
-                                                    <h3
-                                                        onClick={() => handleClickNotebook(notebook.id)}
-                                                    >{notebook.name}</h3>
-                                                    <p>
-                                                        {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
-                                                    </p>
+                                                    <div className="notebook-panel-container">
+                                                        <h3
+                                                            onClick={() => handleClickNotebook(notebook.id)}
+                                                        >{notebook.name}</h3>
+                                                        <p>
+                                                            {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
+                                                        </p>
 
-                                                    <div className="notebook-last-edited">
-                                                        <span>Last edited - </span>
-                                                        <span>{friendlyDate(notebook.updated_at)}</span>
+                                                        <div className="notebook-last-edited">
+                                                            <span>Last edited - </span>
+                                                            <span>{friendlyDate(notebook.updated_at)}</span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    )})}
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>

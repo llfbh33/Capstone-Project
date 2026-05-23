@@ -81,7 +81,6 @@
 }
 
 .notebook-edit {
-    padding: 10px;
     color: #a5b4fc;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -89,7 +88,8 @@
 
 .notebook-edit:hover {
     /* transform: translateY(-2px); */
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+    color: white;
 }
 
 

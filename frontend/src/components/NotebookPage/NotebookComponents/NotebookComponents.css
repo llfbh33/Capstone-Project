@@ -99,3 +99,27 @@
   border-radius: inherit;
   background: #5b4bff;
 }
+
+
+.action-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid green; */
+}
+
+.action-container {
+    position: absolute;
+    top: -32px;
+    right: -20px;
+    background: rgba(26, 29, 36, 0);
+    height: 130px;
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 70px 20px 0px 0px;
+    gap: 10px;
+    /* border: 2px solid orange; */
+}

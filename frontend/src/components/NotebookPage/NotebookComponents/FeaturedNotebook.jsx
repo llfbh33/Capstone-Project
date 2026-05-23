@@ -1,6 +1,5 @@
 // import { FaRegFileAlt } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
-import { FiExternalLink } from "react-icons/fi";
 import "./NotebookComponents.css";
 import { friendlyDate } from "../../../utils/utils";
 
