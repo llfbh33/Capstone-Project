@@ -1106,6 +1106,7 @@ https://capstone-project-lm4v.onrender.com
 
 ## Future Implimentation Goals
 
+- <strong>Notebook Image</strong>Provide users with a choice of notebook image or ability to upload a specific image to represent their notebook like a book cover
 - <strong>Tags</strong>: Allow users to categorize and search for writing pieces using tags.
 - <strong>Likes on Posts</strong>: Enable users to like posts, helping to highlight popular content.
 - <strong>Followers</strong>: Introduce a follow system so users can keep up with their favorite writers.

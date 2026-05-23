@@ -70,7 +70,6 @@ function NotebooksPage() {
     }
 
     const handleSetFeatured = async (id) => {
-        // console.log('create thunk and route for handling setting featured');
         await dispatch(thunkFeaturedNotebook(id))
     }
 
@@ -115,18 +114,16 @@ function NotebooksPage() {
                                     {notebooks.map((notebook, index) => {
                                         if (notebook.id === featuredNotebook.id) return <></>
                                         else return (
-                                            <div className='dash-comp-container individual-notebooks' key={notebook.id}>
+                                            <div className='dash-comp-container individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
                                                 <div className='pannel-formatting'>
                                                     <div className='notebook-pannel-heading'>
                                                         <img className="book-image-all" src={notebookImages[index % 6]}></img>
                                                         <div style={{ display: "flex", alignItems: "center", minHeight: "50px" }}>
-                                                            <NotebookActions notebook={notebook} />
+                                                            <NotebookActions notebook={notebook} handleClickNotebook={handleClickNotebook}/>
                                                         </div>
                                                     </div>
                                                     <div className="notebook-panel-container">
-                                                        <h3
-                                                            onClick={() => handleClickNotebook(notebook.id)}
-                                                        >{notebook.name}</h3>
+                                                        <h3>{notebook.name}</h3>
                                                         <p>
                                                             {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
                                                         </p>

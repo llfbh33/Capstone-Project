@@ -6,20 +6,25 @@ import DeleteNotebookFormModal from "../../Modals/NotebookModals/DeleteNotebookM
 import OpenModalMenuItem from "../../Modals/OpenModalButton/OpenModalMenuItem";
 
 import { FaEllipsisV } from "react-icons/fa";
+import "./NotebookComponents.css"
 
 
-const NotebookActions = ({ notebook }) => {
+const NotebookActions = ({ notebook, handleClickNotebook }) => {
     const dispatch = useDispatch();
     const [actionItem, setActionItem] = useState(null);
 
-    const handleSetFeatured = async (id) => {
-        await dispatch(thunkFeaturedNotebook(id))
+    const handleSetFeatured = async (e) => {
+        e.stopPropagation();
+        await dispatch(thunkFeaturedNotebook(notebook.id))
     };
 
 
     return (
         <div className="action-wrapper">
-            <div className="notebook-edit" onClick={() => setActionItem(prev => prev === notebook.id ? null : notebook.id)}>
+            <div className="notebook-edit notebook-ellipsies" onClick={(e) => {
+                e.stopPropagation();
+                setActionItem(prev => prev === notebook.id ? null : notebook.id)
+                }}>
                 <FaEllipsisV />
             </div>
             {actionItem === notebook.id && (
@@ -27,16 +32,16 @@ const NotebookActions = ({ notebook }) => {
                     <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
                         View
                     </div>
-                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={() => handleSetFeatured(notebook.id)}>
+                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={(e) => handleSetFeatured(e)}>
                         Set Featured
                     </div>
-                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={() => handleEditNotebook(notebook.id)}>
+                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={(e) => e.stopPropagation()}>
                         <OpenModalMenuItem
                             itemText={`Edit`}
                             modalComponent={<EditNotebookFormModal notebook={notebook} />}
                         />
                     </div>
-                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={() => handleDeleteNotebook(notebook.id)}>
+                    <div className="notebook-edit" style={{ minWidth: "24px" }} onClick={(e) => e.stopPropagation()}>
                         <OpenModalMenuItem
                             itemText={`Delete`}
                             modalComponent={<DeleteNotebookFormModal notebook={notebook} />}
