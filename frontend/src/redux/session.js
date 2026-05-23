@@ -1,6 +1,9 @@
 import { clearEntries } from "./entry";
 import { clearNotebooks } from "./notebook";
+import { clearActivities } from "./activity";
 import loadState from "../utils/loadData";
+import { clearPosts } from "./posts";
+import { clearComments } from "./comments";
 
 
 const SET_USER = 'session/setUser';
@@ -86,6 +89,9 @@ export const thunkLogout = () => async (dispatch) => {
   await fetch("/api/auth/logout");
   await dispatch(clearNotebooks());
   await dispatch(clearEntries());
+  await dispatch(clearActivities());
+  await dispatch(clearPosts());
+  await dispatch(clearComments());
   dispatch(removeUser());
 };
 

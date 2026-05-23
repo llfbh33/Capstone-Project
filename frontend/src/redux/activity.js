@@ -1,5 +1,6 @@
 // ACTION
-const LOAD_ACTIVITIES = "activities/loadActivities";
+const LOAD_ACTIVITIES = "activities/LOAD_ACTIVITIES";
+const CLEAR_ACTIVITIES = "activities/CLEAR_ACTIVITIES"
 
 
 // ACTION CREATOR
@@ -7,6 +8,10 @@ const loadActivities = (activities) => ({
     type: LOAD_ACTIVITIES,
     activities
 });
+
+export const clearActivities = () => ({
+    type: CLEAR_ACTIVITIES,
+})
 
 
 
@@ -33,7 +38,7 @@ const initialState = {};
 export default function activitiesReducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_ACTIVITIES: {
-            const newState = {...state};
+            const newState = { ...state };
 
             action.activities.forEach((activity) => {
                 newState[activity.id] = activity;
@@ -41,7 +46,9 @@ export default function activitiesReducer(state = initialState, action) {
 
             return newState;
         }
-
+        case CLEAR_ACTIVITIES: {
+            return initialState;
+        }
         default:
             return state;
     }

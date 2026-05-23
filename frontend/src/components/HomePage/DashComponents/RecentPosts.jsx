@@ -12,13 +12,16 @@ import { friendlyDate } from "../../../utils/utils";
 const RecentPosts = () => {
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const postsObj = useSelector(state => state.posts)
+    const user = useSelector(state => state.session);
+    const postsObj = useSelector(state => state.posts);
     const posts = useMemo(() => {
-        return Object.values(postsObj).sort(
-            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
-        ).slice(0, 2);
-    }, [postsObj]);
+        return Object.values(postsObj)
+            .filter(post => post.user_id === user.id)
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+            .slice(0, 2);
+    }, [postsObj, user.id]);
 
+    console.log(postsObj)
 
     const handleAllPosts = () => {
         navigate('/public/user');

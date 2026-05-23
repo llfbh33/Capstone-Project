@@ -5,23 +5,28 @@ import { thunkLoadEntries } from "./entry";
 const CREATE_COMMENT = 'comment/CREATE_COMMENT'
 const EDIT_COMMENT = 'comment/EDIT_COMMENT'
 const DELETE_COMMENT = 'comment/DELETE_COMMENT'
+const CLEAR_COMMENTS = 'comment/CLEAR_COMMENTS'
 
 
 
 const createComment = (comment) => ({
-  type: CREATE_COMMENT,
-  comment
+    type: CREATE_COMMENT,
+    comment
 });
 
 const editComment = (comment) => ({
-  type: EDIT_COMMENT,
-  comment
+    type: EDIT_COMMENT,
+    comment
 });
 
 const deleteComment = (commentId) => ({
-  type: DELETE_COMMENT,
-  commentId
+    type: DELETE_COMMENT,
+    commentId
 });
+
+export const clearComments = () => ({
+    type: CLEAR_COMMENTS,
+})
 
 
 
@@ -91,33 +96,36 @@ export const thunkDeleteComment = (commentId) => async (dispatch) => {
 const initialState = {};
 
 function commentsReducer(state = initialState, action) {
-  switch (action.type) {
-    // case LOAD_USER_ENTRIES: {
-    //     const newState = {...state};
-    //     action.entries.forEach((entry) => {
-    //         newState[entry.id] = entry
-    //     });
-    //     return newState
-    // }
+    switch (action.type) {
+        // case LOAD_USER_ENTRIES: {
+        //     const newState = {...state};
+        //     action.entries.forEach((entry) => {
+        //         newState[entry.id] = entry
+        //     });
+        //     return newState
+        // }
 
-    case CREATE_COMMENT: {
-      const newState = {...state};
-      newState[action.comment.id] = action.comment
-      return newState;
+        case CREATE_COMMENT: {
+            const newState = { ...state };
+            newState[action.comment.id] = action.comment
+            return newState;
+        }
+        case EDIT_COMMENT: {
+            const newState = { ...state };
+            newState[action.comment.id] = action.comment;
+            return newState;
+        }
+        case DELETE_COMMENT: {
+            const newState = { ...state }
+            delete newState[action.commentId]
+            return newState
+        }
+        case CLEAR_COMMENTS: {
+            return initialState;
+        }
+        default:
+            return state;
     }
-    case EDIT_COMMENT: {
-        const newState = {...state};
-        newState[action.comment.id] = action.comment;
-        return newState;
-    }
-    case DELETE_COMMENT: {
-        const newState = {...state}
-        delete newState[action.commentId]
-        return newState
-    }
-    default:
-      return state;
-  }
 }
 
 export default commentsReducer;

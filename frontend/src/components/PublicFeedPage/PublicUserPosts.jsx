@@ -19,11 +19,11 @@ function PublicUserPosts() {
     const navigate = useNavigate();
     const postsObj = useSelector(state => state.posts);
     const posts = useMemo(() => {
-        return Object.values(postsObj).sort(
-            (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        );
-    }, [postsObj]);
-    console.log('posts', posts)
+        return Object.values(postsObj)
+            .filter(post => post.user_id === user.id)
+            .sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at))
+    }, [postsObj, user.id]);
+
 
     useEffect(() => {
         if (entries) setLoaded(true);
