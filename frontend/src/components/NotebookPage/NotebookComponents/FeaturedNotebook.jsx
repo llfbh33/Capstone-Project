@@ -1,8 +1,10 @@
 import { FaRegFileAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import "./NotebookComponents.css";
+import { friendlyDate } from "../../../utils/utils";
 
 const FeaturedNotebook = ({ notebook, handleClickNotebook }) => {
+  console.log(notebook)
   return (
     <div className="featured-notebook-container">
       <span className="featured-label">Featured Notebook</span>
@@ -15,20 +17,19 @@ const FeaturedNotebook = ({ notebook, handleClickNotebook }) => {
 
         <div className="featured-info">
           <div className="featured-header">
-            <h3>Captain Simian&apos;s Odyssey</h3>
+            <h3>{notebook.name}</h3>
             <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
-              <div>View</div>
+              <div>Continue writing?</div>
             </div>
           </div>
 
           <p>
-            Here I am going to start my book about Captain Simian&apos;s
-            travels through...
+             {notebook.about.length > 200 ? `${notebook.about.slice(0, 200)}...` : notebook.about}
           </p>
 
           <div className="featured-meta">
             <span>Last edited</span>
-            <span>May 2, 2024</span>
+            <span>{friendlyDate(notebook.updated_at)}</span>
           </div>
 
           <div className="featured-bottom">

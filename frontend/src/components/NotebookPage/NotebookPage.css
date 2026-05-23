@@ -123,12 +123,21 @@
 .notebook-panel-container h3 {
     font-size: 1.3rem;
     margin: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    color: #fbfdffb4;
+}
+
+.notebook-panel-container h3:hover {
+    color: white;
+    transform: translateY(-5px);
 }
 
 .notebook-panel-container p {
     font-size: 1rem;
     font-weight: 400;
     margin: 0;
+    color: #fbfdffb4;
 }
 
 .notebook-last-edited {

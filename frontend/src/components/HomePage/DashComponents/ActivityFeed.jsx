@@ -11,6 +11,7 @@ import { MdDelete } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
 import './DashComponents.css';
+import { friendlyDate } from '../../../utils/utils';
 
 
 const activityType = {
@@ -107,7 +108,7 @@ const ActivityFeed = () => {
                                             // borderRight: "7px solid rgb(11, 13, 94)",
                                         }}
                                         className="vertical-timeline-element--work activity-post"
-                                        date={activity.created_at}
+                                        date={friendlyDate(activity.created_at)}
                                         iconStyle={{
                                             background: "rgb(11, 13, 94)",
                                             color: "#fff",

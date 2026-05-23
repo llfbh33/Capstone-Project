@@ -16,6 +16,7 @@ import { useModal } from '../../context/Modal/Modal';
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
 import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
+import { friendlyDate } from "../../utils/utils";
 
 
 
@@ -38,6 +39,7 @@ function NotebooksPage() {
             (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
         );
     }, [notebookObj]);
+    const featuredNotebook = notebooks.find(notebook => notebook.is_featured) || notebooks[0];
     // const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
     const { setModalContent } = useModal();
@@ -91,11 +93,11 @@ function NotebooksPage() {
                     </div>
                     <div className="items-container">
                         <div className="horizontal-container">
-                            <FeaturedNotebook notebook={{id: 1}} handleClickNotebook={handleClickNotebook}/>
+                            <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook}/>
                             <div className="all-notebooks-container">
                                 <div className="all-notebooks-action">
                                     <p>All Notebooks</p>
-                                    <p>Sorted by: Last Edited</p>
+                                    <p>Sorted by: Last Created</p>
                                 </div>
                                 <div className="notebooks-block-container">
                                     {notebooks.map((notebook, index) => (
@@ -108,14 +110,16 @@ function NotebooksPage() {
                                                     </div>
                                                 </div>
                                                 <div className="notebook-panel-container">
-                                                    <h3>{notebook.name}</h3>
+                                                    <h3
+                                                        onClick={() => handleClickNotebook(notebook.id)}
+                                                    >{notebook.name}</h3>
                                                     <p>
                                                         {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
                                                     </p>
 
                                                     <div className="notebook-last-edited">
                                                         <span>Last edited - </span>
-                                                        <span>{notebook.updated_at}</span>
+                                                        <span>{friendlyDate(notebook.updated_at)}</span>
                                                     </div>
                                                 </div>
                                             </div>

@@ -5,6 +5,7 @@ import { SlNotebook } from "react-icons/sl";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import './DashComponents.css';
+import { friendlyDate } from "../../../utils/utils";
 
 
 
@@ -60,7 +61,7 @@ const RecentPosts = () => {
                                     {page.title}
                                 </div>
                                 <div className="pannel-item-description">
-                                    {page.updated_at}
+                                    {friendlyDate(page.updated_at)}
                                 </div>
                             </div>
                         </div>
