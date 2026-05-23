@@ -27,10 +27,15 @@
     height: 36px;
     width: 140px;
     color: white;
-    background-color: rgb(9, 9, 140);
-    border: 1px solid rgb(209, 209, 245);
+    background-color: var(--bg-nav);
+    border: 1px solid #3399FF;
     border-radius: 6px;
     cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.new-notebook-button:hover {
+    background-color: #22146c;
 }
 
 .new-notebook-text {
