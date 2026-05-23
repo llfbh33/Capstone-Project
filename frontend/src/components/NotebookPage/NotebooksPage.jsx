@@ -21,15 +21,17 @@ import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 
 const notebookImages = [
     './greenNotebook.png',
-    './blueNotebook.png',
     './brownNotebook.png',
+    './darkBlueNotebook.png',
     './magentaNotebook.png',
+    './orangeNotebook.png',
+    './blueNotebook.png',
 ]
 
 
 function NotebooksPage() {
     const user = useSelector(state => state.session.user);
-    // const { activeNav, setActiveNav } = useNav();
+    // const { setActiveNav } = useNav();
     const notebookObj = useSelector(state => state.notebooks);
     const notebooks = useMemo(() => {
         return Object.values(notebookObj).sort(
@@ -50,13 +52,6 @@ function NotebooksPage() {
     // }, [theseNotebooks])
 
     const handleClickNotebook = (id) => {
-        // const newActiveState = {
-        //     main: {title: 'notebooks', route: '/notebooks', open: true},
-        //     mid: { title: id, route: `/notebook/${id}`, open: true},
-        //     small: { title: null, route: null, open: false}
-        // };
-        // setActiveNav(newActiveState);
-        navigate(`/notebook/${id}`);
         navigate(`/notebook/${id}`)
     }
 
@@ -74,7 +69,6 @@ function NotebooksPage() {
             </div>
         )
     }
-    console.log(notebooks)
 
 
     return (
@@ -95,27 +89,22 @@ function NotebooksPage() {
                             </button>
                         </div>
                     </div>
-                    {/* <h1 className='title page-title'>{`${user?.name}'s Notebooks`}</h1> */}
-                    {/* <p className="title page-subtitle">Your Notebooks</p> */}
                     <div className="items-container">
                         <div className="horizontal-container">
-                            <FeaturedNotebook />
+                            <FeaturedNotebook notebook={{id: 1}} handleClickNotebook={handleClickNotebook}/>
                             <div className="all-notebooks-container">
                                 <div className="all-notebooks-action">
                                     <p>All Notebooks</p>
                                     <p>Sorted by: Last Edited</p>
                                 </div>
-
                                 <div className="notebooks-block-container">
-
-
                                     {notebooks.map((notebook, index) => (
                                         <div className='dash-comp-container individual-notebooks' key={notebook.id}>
                                             <div className='pannel-formatting'>
                                                 <div className='notebook-pannel-heading'>
-                                                    <img className="book-image-all" src={notebookImages[index % 4]}></img>
-                                                    <div className="notebook-edit" >
-                                                        <div>actions</div>
+                                                    <img className="book-image-all" src={notebookImages[index % 6]}></img>
+                                                    <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
+                                                        <div>View</div>
                                                     </div>
                                                 </div>
                                                 <div className="notebook-panel-container">

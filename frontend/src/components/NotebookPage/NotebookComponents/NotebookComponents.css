@@ -51,7 +51,8 @@
 .featured-header {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
+  min-height: 50px;
 }
 
 .featured-header h3 {

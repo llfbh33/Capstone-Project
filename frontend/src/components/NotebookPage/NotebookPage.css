@@ -65,6 +65,7 @@
 
 .individual-notebooks {
     min-width: 300px;
+    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
 }
 
 .notebook-pannel-heading {
@@ -77,6 +78,13 @@
 .notebook-edit {
     padding: 10px;
     color: #a5b4fc;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.notebook-edit:hover {
+    /* transform: translateY(-2px); */
+    font-size: 1.2rem;
 }
 
 

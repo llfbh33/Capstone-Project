@@ -2,7 +2,7 @@ import { FaRegFileAlt } from "react-icons/fa";
 import { FiExternalLink } from "react-icons/fi";
 import "./NotebookComponents.css";
 
-const FeaturedNotebook = ({notebook}) => {
+const FeaturedNotebook = ({ notebook, handleClickNotebook }) => {
   return (
     <div className="featured-notebook-container">
       <span className="featured-label">Featured Notebook</span>
@@ -16,7 +16,9 @@ const FeaturedNotebook = ({notebook}) => {
         <div className="featured-info">
           <div className="featured-header">
             <h3>Captain Simian&apos;s Odyssey</h3>
-            <FiExternalLink />
+            <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
+              <div>View</div>
+            </div>
           </div>
 
           <p>
