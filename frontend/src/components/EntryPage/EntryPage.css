@@ -259,3 +259,33 @@
     }
 
 }
+
+
+
+/* ALL ENTRIES PAGE */
+.all-entries-filter-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px 24px;
+    border-top: 1px solid rgba(79, 70, 229, 0.7);
+    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 45%);
+}
+
+.all-entries-filter-component {
+    height: 24px;
+    font-size: 0.9rem;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid rgba(79, 70, 229, 0.7);
+    padding: 6px;
+    border-radius: 10px;;
+}
+
+.all-entries-filter-component:focus {
+    outline: none;
+    border-color: var(--nav-selected);
+}

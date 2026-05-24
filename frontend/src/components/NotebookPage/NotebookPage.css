@@ -296,7 +296,7 @@
     /* position: relative; */
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 10px;
     /* padding: 40px 0; */
 }
 

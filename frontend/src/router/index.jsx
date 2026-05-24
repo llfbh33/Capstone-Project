@@ -10,6 +10,7 @@ import PublicPost from '../components/PublicFeedPage/PublicPost';
 import PublicUserPosts from '../components/PublicFeedPage/PublicUserPosts';
 import NotFound from '../components/NotFound'
 import CommentsPage from '../components/CommentsPage/CommentsPage';
+import AllEntries from '../components/EntryPage/AllEntries';
 
 
 export const router = createBrowserRouter([
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '/notebook/:notebookId',
         element: <NotebookPage />,
+      },
+      {
+        path: '/allEntries',
+        element: <AllEntries />,
       },
       {
         path: '/notebook/:notebookId/entries/:entryId',
