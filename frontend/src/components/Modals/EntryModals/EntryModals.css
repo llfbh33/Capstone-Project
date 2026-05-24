@@ -71,3 +71,14 @@
 .name-input {
     width: 100px;
 }
+
+
+/* Create with no Notebook id */
+.create-entry-search-input {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    width: 90%;
+    position: relative;
+    margin-bottom: 20px;
+}

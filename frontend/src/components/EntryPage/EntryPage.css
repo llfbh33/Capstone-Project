@@ -264,7 +264,6 @@
 
 /* ALL ENTRIES PAGE */
 .all-entries-filter-container {
-    /* flex: 1; */
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -1,13 +1,16 @@
 import { useDispatch } from "react-redux"
 import { thunkDeleteNotebook } from "../../../redux/notebook"
 import { useModal } from "../../../context/Modal/Modal";
+import { useNavigate } from "react-router-dom";
 import './NotebookModal.css'
 
 function DeleteNotebookFormModal({notebook}) {
     const dispatch = useDispatch()
     const { closeModal } = useModal();
+    const navigate = useNavigate();
 
     const deleteNotebook = async () => {
+        navigate('/notebooks');
         await dispatch(thunkDeleteNotebook(notebook.id))
         closeModal()
         return

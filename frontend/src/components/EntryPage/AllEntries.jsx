@@ -23,6 +23,7 @@ import { MdKeyboardArrowLeft } from "react-icons/md";
 import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
 import { FaRegFileAlt } from "react-icons/fa";
 import { RxReset } from "react-icons/rx";
+import CreateEntryNoNotebookModal from '../Modals/EntryModals/CreateEntryNoNotebookModal';
 
 
 
@@ -87,9 +88,8 @@ const AllEntries = () => {
     }
 
     const handleNewEntry = () => {
-        alert("Set up a modal where you can select the notebook")
-        // let modalComponent = <CreateEntryNameFormModal />
-        // setModalContent(modalComponent);
+        let modalComponent = <CreateEntryNoNotebookModal notebook={selectedNotebook} />
+        setModalContent(modalComponent);
     }
 
     const handleSetFeatured = async (e) => {
