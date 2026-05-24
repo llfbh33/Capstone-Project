@@ -154,6 +154,11 @@ const AllEntries = () => {
                                             setShowSearchDropdown(true);
                                         }}
                                         onFocus={() => setShowSearchDropdown(true)}
+                                        onBlur={() => {
+                                            setTimeout(() => {
+                                                setShowSearchDropdown(false);
+                                            }, 100);
+                                        }}
                                     />
                                     {showSearchDropdown && searchEntries.length > 0 && (
                                         <div className="search-dropdown">
@@ -176,6 +181,12 @@ const AllEntries = () => {
                                     <div
                                         className="all-entries-filter-component notebook-dropdown-trigger"
                                         onClick={() => setShowNotebookDropdown(prev => !prev)}
+                                        onBlur={() => {
+                                            setTimeout(() => {
+                                                setShowNotebookDropdown(false);
+                                            }, 100);
+                                        }}
+                                        tabIndex={0}
                                     >
                                         {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
                                     </div>
@@ -219,7 +230,7 @@ const AllEntries = () => {
                                 <div className="all-entries-container">
                                     <div className="all-entries-action">
                                         <p className='sub-title'>{`Entries (${searchEntries.length})`}</p>
-                                        <div className='icon-container' onClick={() => setSearch('')}><RxReset /></div>
+                                        <div className='icon-container' onClick={() => {setSearch(''); setSelectedNotebook(null)}}><RxReset /></div>
                                     </div>
                                 </div>
                                 <div className='entries-list-section'>
