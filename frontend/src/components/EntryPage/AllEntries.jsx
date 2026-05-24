@@ -22,20 +22,22 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
 import { FaRegFileAlt } from "react-icons/fa";
+import { RxReset } from "react-icons/rx";
+
+
+
 
 const AllEntries = () => {
-        const notebookId = 1;
-    const notebook = useSelector(state => state.notebooks[notebookId]);
+    const notebooks = useSelector(state => state.notebooks)
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const entriesObj = useSelector(state => state.entries);
     const entries = useMemo(() => {
         return Object.values(entriesObj)
-            .filter(entry => entry.notebook_id === parseInt(notebookId))
             .sort(
                 (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
             );
-    }, [entriesObj, notebookId]);
+    }, [entriesObj]);
     const [selectedEntry, setSelectedEntry] = useState(null);
     const selectedIndex = useMemo(() => {
         if (selectedEntry) {
@@ -43,11 +45,31 @@ const AllEntries = () => {
         } else return 0;
     }, [entries, selectedEntry])
     const { setModalContent } = useModal();
-
     const entryRefs = useRef({});
 
+    const [selectedNotebook, setSelectedNotebook] = useState(null);
+    const [showNotebookDropdown, setShowNotebookDropdown] = useState(false);
 
-        // Scroll the selected entry in the list into view
+    const [search, setSearch] = useState("");
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+    const searchEntries = useMemo(() => {
+        let filtered = entries;
+
+        if (selectedNotebook !== null) {
+            filtered = filtered.filter(
+                entry => entry.notebook_id === selectedNotebook.id
+            );
+        }
+
+        if (!search.trim()) return filtered;
+
+        return filtered.filter(entry =>
+            entry.name.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [entries, search, selectedNotebook]);
+
+
+    // Scroll the selected entry in the list into view
     useEffect(() => {
         if (!selectedEntry?.id) return;
 
@@ -60,13 +82,14 @@ const AllEntries = () => {
 
 
     const handleClickEntry = () => {
-        navigate(`/notebook/${notebookId}/entries/${selectedEntry.id}`);
+        navigate(`/notebook/${selectedEntry.notebook_id}/entries/${selectedEntry.id}`);
         setSelectedEntry(null);
     }
 
     const handleNewEntry = () => {
-        let modalComponent = <CreateEntryNameFormModal />
-        setModalContent(modalComponent);
+        alert("Set up a modal where you can select the notebook")
+        // let modalComponent = <CreateEntryNameFormModal />
+        // setModalContent(modalComponent);
     }
 
     const handleSetFeatured = async (e) => {
@@ -95,7 +118,7 @@ const AllEntries = () => {
 
 
     return (
-                <div className="main-container">
+        <div className="main-container">
             <div className="child-container">
                 <div className="child-container-two">
                     <div className="navigation-tabs-container" >
@@ -121,17 +144,73 @@ const AllEntries = () => {
                                 <span>Browse and search through all of your writing</span>
                             </div>
                             <div className="all-entries-filter-container">
+                                <div class="filter-search-input">
+                                    <input
+                                        className="all-entries-filter-component"
+                                        value={search}
+                                        placeholder="Search entries..."
+                                        onChange={(e) => {
+                                            setSearch(e.target.value);
+                                            setShowSearchDropdown(true);
+                                        }}
+                                        onFocus={() => setShowSearchDropdown(true)}
+                                    />
+                                    {showSearchDropdown && searchEntries.length > 0 && (
+                                        <div className="search-dropdown">
+                                            {searchEntries.map(entry => (
+                                                <div
+                                                    key={entry.id}
+                                                    className="search-dropdown-item"
+                                                    onClick={() => {
+                                                        setSelectedEntry(entry);
+                                                        setShowSearchDropdown(false);
+                                                    }}
+                                                >
+                                                    {entry.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                                <div class="filter-search-input">
+                                    <div
+                                        className="all-entries-filter-component notebook-dropdown-trigger"
+                                        onClick={() => setShowNotebookDropdown(prev => !prev)}
+                                    >
+                                        {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
+                                    </div>
+
+                                    {showNotebookDropdown && (
+                                        <div className="search-dropdown">
+                                            <div
+                                                className="search-dropdown-item"
+                                                onClick={() => {
+                                                    setSelectedNotebook(null);
+                                                    setShowNotebookDropdown(false);
+                                                }}
+                                            >
+                                                Notebooks: All
+                                            </div>
+
+                                            {Object.values(notebooks).map(notebook => (
+                                                <div
+                                                    key={notebook.id}
+                                                    className="search-dropdown-item"
+                                                    onClick={() => {
+                                                        setSelectedNotebook(notebook);
+                                                        setShowNotebookDropdown(false);
+                                                    }}
+                                                >
+                                                    {notebook.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                                 <input
                                     className='all-entries-filter-component'
-                                    value="search entries..."
-                                />
-                                <input
-                                    className='all-entries-filter-component'
-                                    value="notebooks: All"
-                                />
-                                <input
-                                    className='all-entries-filter-component'
-                                    value="Sort: Last Updated"
+                                    placeholder="Sort: Last Updated"
+                                    disabled={true}
                                 />
                             </div>
                         </div>
@@ -139,18 +218,18 @@ const AllEntries = () => {
                             <div className="horizontal-container">
                                 <div className="all-entries-container">
                                     <div className="all-entries-action">
-                                        <p className='sub-title'>{`Entries (${entries.length})`}</p>
-                                        <p>Sorted by: Last Updated</p>
+                                        <p className='sub-title'>{`Entries (${searchEntries.length})`}</p>
+                                        <div className='icon-container' onClick={() => setSearch('')}><RxReset /></div>
                                     </div>
                                 </div>
                                 <div className='entries-list-section'>
                                     <div className='entry-scroll-contain'>
                                         <div className="entry-list-scroll">
-                                            {entries.map((entry, index) => (
+                                            {searchEntries.map((entry, index) => (
                                                 <div ref={(el) => {
                                                     entryRefs.current[entry.id] = el;
-                                                }} 
-                                                className={`entry-item-container ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                                }}
+                                                    className={`entry-item-container ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
                                                     <div className='entry-card-title'>{entry.name}</div>
 
                                                     <div className='alignment'>
@@ -179,7 +258,7 @@ const AllEntries = () => {
                                                     >
                                                         <OpenModalMenuItem
                                                             itemText={<GoPencil className="icon-container" />}
-                                                            modalComponent={<EditEntryNameFormModal entry={selectedEntry} setSelectedEntry={setSelectedEntry}/>}
+                                                            modalComponent={<EditEntryNameFormModal entry={selectedEntry} setSelectedEntry={setSelectedEntry} />}
                                                         />
                                                     </span>
                                                 </span>
@@ -193,6 +272,7 @@ const AllEntries = () => {
                                                     </div>
                                                 </div>
                                             </div>
+                                            <div>{notebooks[selectedEntry.notebook_id].name}</div>
                                             <div className='create-space-between'>
                                                 <div className='alignment'>
                                                     <div>{friendlyDate(selectedEntry.updated_at)}</div>
