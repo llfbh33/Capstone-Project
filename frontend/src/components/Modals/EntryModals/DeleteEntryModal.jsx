@@ -5,15 +5,16 @@ import { thunkDeleteEntry } from "../../../redux/entry"
 import { useModal } from "../../../context/Modal/Modal";
 import './EntryModals.css'
 
-function DeleteEntryFormModal({entry}) {
+function DeleteEntryFormModal({entry, setSelectedEntry}) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { closeModal } = useModal();
 
     const deleteEntry = async () => {
         navigate(`notebook/${entry.notebook_id}`);
-        await dispatch(thunkDeleteEntry(entry.id))
-        await closeModal();
+        await dispatch(thunkDeleteEntry(entry.id));
+        setSelectedEntry(null);
+        closeModal();
     }
 
     const doNotDelete = () => {

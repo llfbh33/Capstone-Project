@@ -72,11 +72,24 @@ body {
 /* General Page Layouts */
 .main-container {
     flex: 1;
+    height: 100vh;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
+}
+
+.main-container-grow {
+    flex: 1;
     min-height: 100vh;
     width: 100%;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .child-container {
@@ -85,6 +98,7 @@ body {
     display: flex;
     flex: 1;
     min-height: 0;
+    overflow: hidden;
     flex-direction: column;
     /* border: 1px solid #fe790c; */
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.679);
@@ -94,6 +108,8 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
+        min-height: 0;
+    overflow: hidden;
     /* border: 1px solid rgba(255, 255, 255, 0.12); */
     /* background: rgba(255, 255, 255, 0.04); */
     /* box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35), inset 0 0 40px rgba(255, 255, 255, 0.03); */
@@ -126,6 +142,7 @@ body {
 
 .items-container {
     flex: 1;
+    min-height: 0;
     /* border: 1px solid var(--nav-selected); */
     border-radius: 10px;
     margin-bottom: 20px;
@@ -135,8 +152,9 @@ body {
 }
 
 .horizontal-container {
-    /* border: 1px solid var(--nav-selected); */
+    /* border: 1px solid var(--nav-selected);/ */
     flex: 1;
+    min-height: 0;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -144,7 +162,7 @@ body {
 }
 
 .item-container {
-    border: 1px solid var(--nav-selected);
+    /* border: 1px solid var(--nav-selected); */
     width: 400px;
     height: 600px;
     border-radius: 10px;

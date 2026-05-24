@@ -42,8 +42,8 @@ const FeaturedNotebook = ({ notebook, handleClickNotebook }) => {
             <div className="featured-info">
               <div className="featured-header">
                 <h3>{notebook.name}</h3>
-                <div className="notebook-edit" onClick={() => handleClickNotebook(notebook.id)}>
-                  <div>Continue writing?</div>
+                <div className="notebook-edit-writing" onClick={() => handleClickNotebook(notebook.id)}>
+                  <div className="continue-writing">Continue writing?</div>
                 </div>
               </div>
 

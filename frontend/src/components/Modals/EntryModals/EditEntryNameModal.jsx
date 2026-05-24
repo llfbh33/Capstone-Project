@@ -5,7 +5,7 @@ import { thunkEditEntry } from "../../../redux/entry";
 import { useModal } from "../../../context/Modal/Modal";
 import "./EntryModals.css";
 
-function EditEntryNameFormModal({entry}) {
+function EditEntryNameFormModal({entry, setSelectedEntry}) {
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
     const [name, setName] = useState(entry.name);
@@ -35,7 +35,8 @@ function EditEntryNameFormModal({entry}) {
         if (serverResponse.errors) {
             setValidationErrors(serverResponse.errors);
         } else {
-            setName('')
+            setSelectedEntry(serverResponse);
+            setName('');
             closeModal();
         }
     };

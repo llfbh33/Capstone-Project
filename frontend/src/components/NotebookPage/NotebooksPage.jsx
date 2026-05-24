@@ -69,7 +69,7 @@ function NotebooksPage() {
 
 
     return (
-        <div className="main-container">
+        <div className="main-container-grow">
             <div className="child-container">
                 <div className="child-container-two">
                     <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>
