@@ -22,6 +22,11 @@ const navigationLinks = [
         route: "/notebooks",
     },
     {
+        name: "allEntries",
+        title: "All Entries",
+        route: "/all_entries",
+    },
+    {
         name: "public",
         title: "Public Feed",
         route: "/public"
