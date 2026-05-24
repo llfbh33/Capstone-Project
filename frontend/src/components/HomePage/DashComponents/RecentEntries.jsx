@@ -27,6 +27,11 @@ const RecentEntries = () => {
         navigate(`/notebook/${entry.notebook_id}/entries/${entry.id}`)
     }
 
+    const handleClickAllEntries = () => {
+        setActiveNav('allEntries');
+        navigate(`/all_entries`);
+    }
+
 
     if (!entries) {
         return (
@@ -43,7 +48,7 @@ const RecentEntries = () => {
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Entries</h2>
-                    <div className="view-all" onClick={() => alert('All Entries Page Coming Soon')}>
+                    <div className="view-all" onClick={handleClickAllEntries}>
                         <div>View all</div>
                         <FaArrowRightLong />
                     </div>

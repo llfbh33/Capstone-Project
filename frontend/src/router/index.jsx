@@ -30,7 +30,7 @@ export const router = createBrowserRouter([
         element: <NotebookPage />,
       },
       {
-        path: '/allEntries',
+        path: '/all_entries',
         element: <AllEntries />,
       },
       {
