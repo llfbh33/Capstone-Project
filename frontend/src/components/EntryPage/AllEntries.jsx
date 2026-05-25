@@ -1,17 +1,12 @@
-import { useNavigate, useParams } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { BsTrash3Fill } from "react-icons/bs";
 import { MdOpenInNew } from "react-icons/md";
 import { FaPlus } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
-import { FaRegStar } from "react-icons/fa";
-import { FaStar } from "react-icons/fa";
-import DeleteNotebookFormModal from '../Modals/NotebookModals/DeleteNotebookModal';
-import EditNotebookFormModal from '../Modals/NotebookModals/EditNotebookModal';
-import { thunkFeaturedNotebook } from '../../redux/notebook';
-import { useDispatch } from "react-redux";
-import CreateEntryNameFormModal from '../Modals/EntryModals/CreateEntryNameModal';
+// import { FaRegStar } from "react-icons/fa";
+// import { FaStar } from "react-icons/fa";
 import DeleteEntryFormModal from '../Modals/EntryModals/DeleteEntryModal';
 import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
 import { useModal } from '../../context/Modal/Modal';
@@ -31,7 +26,6 @@ import CreateEntryNoNotebookModal from '../Modals/EntryModals/CreateEntryNoNoteb
 const AllEntries = () => {
     const notebooks = useSelector(state => state.notebooks)
     const navigate = useNavigate();
-    const dispatch = useDispatch();
     const entriesObj = useSelector(state => state.entries);
     const entries = useMemo(() => {
         return Object.values(entriesObj)
@@ -92,10 +86,6 @@ const AllEntries = () => {
         setModalContent(modalComponent);
     }
 
-    const handleSetFeatured = async (e) => {
-        e.stopPropagation();
-        await dispatch(thunkFeaturedNotebook(notebook.id))
-    };
 
     const handleSelectedEntry = (entry) => {
         if (selectedEntry?.id === entry.id) {
@@ -144,7 +134,7 @@ const AllEntries = () => {
                                 <span>Browse and search through all of your writing</span>
                             </div>
                             <div className="all-entries-filter-container">
-                                <div class="filter-search-input">
+                                <div className="filter-search-input">
                                     <input
                                         className="all-entries-filter-component"
                                         value={search}
@@ -177,7 +167,7 @@ const AllEntries = () => {
                                         </div>
                                     )}
                                 </div>
-                                <div class="filter-search-input">
+                                <div className="filter-search-input">
                                     <div
                                         className="all-entries-filter-component notebook-dropdown-trigger"
                                         onClick={() => setShowNotebookDropdown(prev => !prev)}

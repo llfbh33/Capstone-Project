@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNav } from "../../../context/Navigation/NavigationContext";
@@ -9,7 +9,6 @@ import "./EntryModals.css";
 
 
 function CreateEntryNoNotebookModal({ notebook }) {
-    const { notebookId } = useParams();
     const navigate = useNavigate()
     const dispatch = useDispatch();
     const user = useSelector(state => state.session.user)
@@ -69,7 +68,7 @@ function CreateEntryNoNotebookModal({ notebook }) {
 
                         <div className="entry-modal-form-container">
                             <label className="entry-modal-label">Which Notebook should this entry be added to?</label>
-                            <div class="create-entry-search-input">
+                            <div className="create-entry-search-input">
                                 <div
                                     className="all-entries-filter-component notebook-dropdown-trigger"
                                     onClick={() => setShowNotebookDropdown(prev => !prev)}
@@ -121,7 +120,7 @@ function CreateEntryNoNotebookModal({ notebook }) {
 
             ) : (
             <div className='entry-modal-main-container'>
-                <h1 className="entry-modal-titles">Looks like you don't have any notebooks yet. Go to your Notebooks page to create one.</h1>
+                <h1 className="entry-modal-titles">{`Looks like you don't have any notebooks yet. Go to your Notebooks page to create one.`}</h1>
                 <button className="modal-button" onClick={handleNotebooks}>Notebooks Page</button>
             </div>)
             }
