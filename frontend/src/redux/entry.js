@@ -117,7 +117,7 @@ const initialState = {};
 function entryReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_USER_ENTRIES: {
-        const newState = {...state};
+        const newState = {};
         action.entries.forEach((entry) => {
             newState[entry.id] = entry
         });

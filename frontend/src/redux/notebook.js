@@ -1,4 +1,5 @@
 import { thunkGetCurrentUserActivities } from "./activity";
+import { thunkLoadEntries } from "./entry";
 
 const LOAD_USER_NOTEBOOKS = 'notebooks/LOAD_USER_NOTEBOOKS';
 const CREATE_NOTEBOOK = 'notebooks/CREATE_NOTEBOOK';
@@ -110,6 +111,7 @@ export const thunkDeleteNotebook = (notebookId) => async (dispatch) => {
     const response = await fetch(`/api/notebooks/${notebookId}/delete`);
     if (response.ok) {
         await dispatch(deleteNotebook(notebookId));
+        await dispatch(thunkLoadEntries());
         await dispatch(thunkGetCurrentUserActivities());
         return;
     } else {
@@ -123,7 +125,7 @@ const initialState = {};
 function notebookReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_USER_NOTEBOOKS: {
-        const newState = {...state};
+        const newState = {};
         action.payload.forEach((notebook) => {
             newState[notebook.id] = notebook
         });
