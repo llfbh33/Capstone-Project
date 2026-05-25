@@ -160,7 +160,7 @@ function NotebookPage() {
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
                                         }}
-                                            className={`entry-item-container ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                            className={`content-panel panel-col ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
                                             <div className='entry-card-title'>{entry.name}</div>
 
                                             <div className='alignment'>

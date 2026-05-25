@@ -101,7 +101,7 @@ function NotebooksPage() {
                             {notebooks.map((notebook, index) => {
                                 if (notebook.id === featuredNotebook.id) return <></>
                                 else return (
-                                    <div className='dash-comp-container individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                    <div className='content-panel panel-flex individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
                                         <div className='pannel-formatting'>
                                             <div className='notebook-pannel-heading'>
                                                 <img className="book-image-all" src={notebookImages[index % 6]}></img>

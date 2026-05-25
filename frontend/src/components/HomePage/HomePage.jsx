@@ -49,7 +49,7 @@ function HomePage() {
         <div className="page-container page-static">
             <div className="header-flex-col">
                 <h1>{`Welcome Back, ${user?.name}! 👋`}</h1>
-                <p className="page-sub-title">A snapshot of your writing journey.</p>
+                <p>A snapshot of your writing journey.</p>
             </div>
 
             <div className="section-layout section-row">

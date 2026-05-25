@@ -114,26 +114,24 @@ const AllEntries = () => {
             </div>
             <div className='header-flex-col'>
                 <div className='header-flex-row'>
-                <h1><FaRegFileAlt /> All Entries</h1>
-                <div className="new-search-notebooks-container">
-                    <button
-                        className="new-notebook-button"
-                        onClick={handleNewEntry}
-                    >
-                        <div className="new-notebook-text">
-                            <FaPlus />
-                            <p>New Entry</p>
-                        </div>
-                    </button>
-                </div>
-                </div>
-            </div>
-            <div className='entry-items-container'>
-                <div className="notebook-description-container">
-                    <div className="featured-label-container">
-                        <span>Browse and search through all of your writing</span>
+                    <h1><FaRegFileAlt /> All Entries</h1>
+                    <div className="new-search-notebooks-container">
+                        <button
+                            className="new-notebook-button"
+                            onClick={handleNewEntry}
+                        >
+                            <div className="new-notebook-text">
+                                <FaPlus />
+                                <p>New Entry</p>
+                            </div>
+                        </button>
                     </div>
-                    <div className="all-entries-filter-container">
+                </div>
+                <p>Browse and search through all of your writing</p>
+            </div>
+            <div className='section-layout section-col'>
+                <div className="content-panel panel-row">
+                    {/* <div className=""> */}
                         <div className="filter-search-input">
                             <input
                                 className="all-entries-filter-component"
@@ -213,10 +211,10 @@ const AllEntries = () => {
                             placeholder="Sort: Last Updated"
                             disabled={true}
                         />
-                    </div>
+                    {/* </div> */}
                 </div>
-            <div className="section-layout section-row">
-                <div className="section-layout section-col">
+                <div className="section-layout section-row">
+                    <div className="section-layout section-col">
                         <div className="all-entries-container">
                             <div className="all-entries-action">
                                 <p className='sub-title'>{`Entries (${searchEntries.length})`}</p>
@@ -230,7 +228,7 @@ const AllEntries = () => {
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
                                         }}
-                                            className={`entry-item-container ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                            className={`content-panel panel-col ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
                                             <div className='entry-card-title'>{entry.name}</div>
 
                                             <div className='alignment'>

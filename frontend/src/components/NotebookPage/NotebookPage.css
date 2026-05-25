@@ -57,9 +57,7 @@
 .individual-notebooks {
     min-width: 300px;
     cursor: pointer;
-    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
-    transition: all 0.3s ease;
-        
+    transition: all 0.3s ease;    
 }
 
 .individual-notebooks:hover {
@@ -314,7 +312,8 @@
 }
 
 .entry-item {
-    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
+    cursor: pointer;
+    /* background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%); */
 }
 
 .entry-item-selected {

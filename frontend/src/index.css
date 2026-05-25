@@ -137,6 +137,39 @@ body {
 
 /*------------------------------------------------*/
 
+/* General styling for Static Content Shape */
+.content-panel {
+        display: flex;
+    /* flex-direction: column; */
+    gap: 10px;
+    /* flex-direction: column; */
+    
+    border: 2px solid rgb(85, 85, 230);
+    border-radius: 10px;
+
+    padding: 16px;
+    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
+}
+
+/* Inclued to Allow Panel to Flex */
+.panel-flex {
+    flex: 1;
+}
+
+.panel-col {
+    /* display: flex; */
+    flex-direction: column;
+    /* gap: 10px; */
+}
+
+.panel-row {
+    /* display: flex; */
+    flex-direction: row;
+    /* gap: 10px; */
+}
+
+
+/*------------------------------------------------*/
 
 
 /* Screens smaller than 950px */
