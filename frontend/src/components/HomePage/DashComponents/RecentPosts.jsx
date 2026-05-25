@@ -12,7 +12,7 @@ import { friendlyDate } from "../../../utils/utils";
 const RecentPosts = () => {
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
-    const user = useSelector(state => state.session);
+    const user = useSelector(state => state.session.user);   // comming back as user: {user info}  - Why is this?
     const postsObj = useSelector(state => state.posts);
     const posts = useMemo(() => {
         return Object.values(postsObj)
@@ -21,7 +21,6 @@ const RecentPosts = () => {
             .slice(0, 2);
     }, [postsObj, user.id]);
 
-    console.log(postsObj)
 
     const handleAllPosts = () => {
         navigate('/public/user');

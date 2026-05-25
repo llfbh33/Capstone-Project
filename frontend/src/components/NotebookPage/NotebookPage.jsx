@@ -213,7 +213,7 @@ function NotebookPage() {
                                             </div>
                                         </div>
                                         <div className="selected-entry-data">
-                                            <div className="notebook-about-section">{`${parser(selectedEntry.content).slice(0, 600)}...`}</div>
+                                            <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
                                         </div>
                                         <div className='selected-entry-footer'>
                                             <div className='selected-footer-format'>
