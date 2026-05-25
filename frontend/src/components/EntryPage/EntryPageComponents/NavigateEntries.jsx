@@ -14,7 +14,7 @@ const NavigateEntries = ({ entry }) => {
 
     return (
         // <div className='entry-items-container'>
-        <div className="entry-nav-container">
+        <div className="entry-content-panel">
             <div className='entry-nav-styling'>
                 <div className='selected-footer-format'>
                     <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>

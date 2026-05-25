@@ -23,21 +23,30 @@
 
 
 /* Styling for entry navigation */
+.entry-content-panel {
+    display: flex;
+    gap: 10px;
+    
+    border: 2px solid rgb(85, 85, 230);
+    border-radius: 10px;
+    background-color: var(--bg-nav);
+}
+
 .entry-nav-container {
     flex: 1;
     min-height: 0;
-    max-height: 60px;
+    max-height: 100px;
     border-radius: 10px;
     margin-bottom: 40px;
 }
 
 .entry-nav-styling {
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    width: 100%;
 
     padding: 10px 20px 10px 20px;
-    background-color: var(--bg-nav);
-    border: 2px solid rgb(85, 85, 230);
     border-radius: 10px;
 }

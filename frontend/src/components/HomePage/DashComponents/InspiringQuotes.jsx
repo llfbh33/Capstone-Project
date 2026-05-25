@@ -219,8 +219,8 @@ const InspiringQuotes = () => {
 
 
     return (
-        <div className='dash-comp-container quotes-comp'>
-            <div className="pannel-formatting quotes-formatting" >
+        <div className='content-panel quotes-comp'>
+            <div className="pannel-formatting" >
                 <div className='pannel-item quotes-item' >
                     <div className='pannel-item-icon quotes-icon'>
                         <BiSolidQuoteAltLeft />

@@ -44,7 +44,7 @@ const RecentEntries = () => {
     }
 
     return (
-        <div className='dash-comp-container'>
+        <div className='content-panel panel-flex'>
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Entries</h2>

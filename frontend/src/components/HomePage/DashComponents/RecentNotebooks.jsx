@@ -42,7 +42,7 @@ const RecentNotebooks = () => {
     }
 
     return (
-        <div className='dash-comp-container'>
+        <div className='content-panel panel-flex'>
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Notebooks</h2>

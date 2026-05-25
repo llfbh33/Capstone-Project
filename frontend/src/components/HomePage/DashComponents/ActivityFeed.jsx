@@ -81,7 +81,7 @@ const ActivityFeed = () => {
 
 
     return (
-        <div className='dash-comp-container'>
+        <div className='content-panel panel-col'>
             <div className='pannel-formatting'>
                 <div className='pannel-heading'>
                     <h2>Your Recent Activities</h2>

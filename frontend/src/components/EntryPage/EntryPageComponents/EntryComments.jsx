@@ -4,15 +4,16 @@ const EntryComments = () => {
     const [showComments, setShowComments] = useState(false);
 
     return (
-        <div className="entry-comments-container">
-            <div className="section-layout section-row">
-                <div className='entry-items-container'>
-                <div className="inner-comments-container">
-                Comments go here
+        <>
+            {showComments ? (
+                <></>
+            ) : (
+                <div className="content-panel panel-row" style={{ justifyContent: "space-between" }}>
+                    <div>Comments Currently Closed</div>
+                    <div>Open</div>
                 </div>
-            </div>
-            </div>
-        </div>
+            )}
+        </>
     )
 };
 

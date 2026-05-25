@@ -124,12 +124,12 @@ body {
     gap: 20px;
 
     border-radius: 10px;
+    /* border: 1px solid green; */
 }
 
 .section-row {
     flex-direction: row;
 }
-
 .section-col {
     flex-direction: column;
 }
@@ -139,10 +139,8 @@ body {
 
 /* General styling for Static Content Shape */
 .content-panel {
-        display: flex;
-    /* flex-direction: column; */
+    display: flex;
     gap: 10px;
-    /* flex-direction: column; */
     
     border: 2px solid rgb(85, 85, 230);
     border-radius: 10px;
@@ -155,17 +153,13 @@ body {
 .panel-flex {
     flex: 1;
 }
-
+/* Include to Structure in Columns */
 .panel-col {
-    /* display: flex; */
     flex-direction: column;
-    /* gap: 10px; */
 }
-
+/* Include to Structure in Rows */
 .panel-row {
-    /* display: flex; */
     flex-direction: row;
-    /* gap: 10px; */
 }
 
 
