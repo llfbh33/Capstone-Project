@@ -131,7 +131,7 @@ function EntryPage() {
                     <div> */}
                         {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
                     {/* </div> */}
-                    {/* <EntryComments /> */}
+                    <EntryComments />
                     <NavigateEntries entry={entry}/>
                     </div>
                 </div>
