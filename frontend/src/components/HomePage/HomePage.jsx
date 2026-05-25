@@ -52,12 +52,12 @@ function HomePage() {
                 <p className="page-sub-title">A snapshot of your writing journey.</p>
             </div>
 
-            <div className="component-container component-row">
-                <div className="component-container component-col">
+            <div className="section-layout section-row">
+                <div className="section-layout section-col">
                     <ActivityFeed />
                     <InspiringQuotes />
                 </div>
-                <div className="component-container component-col">
+                <div className="section-layout section-col">
                     <RecentNotebooks />
                     <RecentEntries />
                     <RecentPosts />

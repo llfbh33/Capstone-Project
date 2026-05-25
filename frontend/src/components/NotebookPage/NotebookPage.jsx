@@ -145,8 +145,8 @@ function NotebookPage() {
                         <div className="notebook-about-section">{notebook.about}</div>
                     </div>
                 </div>
-            <div className="component-container component-row">
-                <div className="component-container component-col">
+                <div className="section-layout section-row">
+                    <div className="section-layout section-col">
                         <div className="all-entries-container">
                             <div className="all-entries-action">
                                 <p className='sub-title'>{`Entries (${entries.length})`}</p>

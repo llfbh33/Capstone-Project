@@ -23,11 +23,11 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <div id='main-insite-container'>
+        <div id='app-layout'>
 
           <LeftNavigation />
 
-          <div className='main-insite-content-container'>
+          <div className='app-content'>
             {loading ? <LoadingPage /> : <Outlet />}
           </div>
           

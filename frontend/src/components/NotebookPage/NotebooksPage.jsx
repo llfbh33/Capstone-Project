@@ -89,8 +89,8 @@ function NotebooksPage() {
                     </div>
                 </div>
             </div>
-            {/* <div className="component-container component-row"> */}
-                <div className="component-container component-col">
+            {/* <div className="section-layout section-row"> */}
+                <div className="section-layout section-col">
                     <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook} />
                     <div className="all-notebooks-container">
                         <div className="all-notebooks-action">

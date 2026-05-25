@@ -5,7 +5,7 @@ const EntryComments = () => {
 
     return (
         <div className="entry-comments-container">
-            <div className="component-container component-row">
+            <div className="section-layout section-row">
                 <div className='entry-items-container'>
                 <div className="inner-comments-container">
                 Comments go here
