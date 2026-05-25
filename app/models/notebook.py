@@ -9,7 +9,7 @@ class Notebook(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"), nullable=False)
     name = db.Column(db.String(100), nullable=False)
     about = db.Column(db.String(400))
     is_featured = db.Column(db.Boolean, default=False, nullable=False)
@@ -17,7 +17,7 @@ class Notebook(db.Model):
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
     users = db.relationship('User', back_populates='notebooks')
-    entries = db.relationship('Entry', cascade='all, delete', back_populates='notebooks')
+    entries = db.relationship('Entry', cascade='all, delete-orphan', back_populates='notebooks')
 
     def to_dict(self):
         return {

@@ -8,7 +8,7 @@ class Activity(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete="CASCADE"), nullable=False)
     target_id = db.Column(db.Integer, nullable=False)
     target_type = db.Column(db.String(50), nullable=False)  # "entry", "comment", "post", "notebook"
     action_type = db.Column(db.String(50), nullable=False)  # "created", "updated", "deleted"
