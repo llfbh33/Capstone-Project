@@ -241,6 +241,7 @@
 
 .selected-entry-container {
     flex: 1;
+    min-height: 0;
     display: flex;
     flex-direction: column;
     border: 2px solid rgb(85, 85, 230);
@@ -378,13 +379,13 @@
 }
 
 .selected-entry-data {
-    flex: 1;
-    display: flex;
-    /* align-items: center; */
-    gap: 40px;
-    padding: 18px 24px;
+    padding-left: 16px;
     border-top: 1px solid rgba(79, 70, 229, 0.7);
     background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 45%);
+}
+
+.selected-entry-data-inner {
+    padding-right: 14px;
 }
 
 .selected-entry-footer {

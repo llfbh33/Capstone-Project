@@ -220,7 +220,7 @@ const AllEntries = () => {
                                 <div className="all-entries-container">
                                     <div className="all-entries-action">
                                         <p className='sub-title'>{`Entries (${searchEntries.length})`}</p>
-                                        <div className='icon-container' onClick={() => {setSearch(''); setSelectedNotebook(null)}}><RxReset /></div>
+                                        <div className='icon-container' onClick={() => { setSearch(''); setSelectedNotebook(null) }}><RxReset /></div>
                                     </div>
                                 </div>
                                 <div className='entries-list-section'>
@@ -283,8 +283,13 @@ const AllEntries = () => {
                                                 {selectedEntry.is_public && <p className='is-published'>Published •</p>}
                                             </div>
                                         </div>
-                                        <div className="selected-entry-data">
-                                            <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
+                                        {/* <div className="selected-entry-data"> */}
+                                        <div className='entries-list-section selected-entry-data'>
+                                            <div className='entry-scroll-contain'>
+                                                <div className="entry-list-scroll selected-entry-data-inner">
+                                                    <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className='selected-entry-footer'>
                                             <div className='selected-footer-format'>
