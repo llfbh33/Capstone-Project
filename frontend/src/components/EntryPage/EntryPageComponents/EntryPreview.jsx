@@ -6,20 +6,20 @@ import { FaEdit } from "react-icons/fa";
 import { GoPencil } from "react-icons/go";
 import parser from 'html-react-parser'
 
-import DeleteCommentModal from "../Modals/CommentModals/DeleteCommentModal";
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import EditCommentModal from "../Modals/CommentModals/EditCommentModal";
+import DeleteCommentModal from "../../Modals/CommentModals/DeleteCommentModal";
+import OpenModalMenuItem from "../../Modals/OpenModalButton/OpenModalMenuItem"
+import EditCommentModal from "../../Modals/CommentModals/EditCommentModal";
 
-import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
-import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
-import { useModal } from "../../context/Modal/Modal";
+import EditEntryNameFormModal from "../../Modals/EntryModals/EditEntryNameModal";
+import DeleteEntryFormModal from "../../Modals/EntryModals/DeleteEntryModal";
+import { useModal } from "../../../context/Modal/Modal";
 import { MdOpenInNew } from "react-icons/md";
-import { friendlyDate } from "../../utils/utils";
+import { friendlyDate } from "../../../utils/utils";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 
 
-function EntryPreviewPage() {
+function EntryPreview() {
 
     const { entryId } = useParams();
     const entry = useSelector(state => state.entries[entryId]);
@@ -91,7 +91,7 @@ function EntryPreviewPage() {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className='selected-entry-footer'>
+                                        {/* <div className='selected-entry-footer'>
                                             <div className='selected-footer-format'>
                                                 <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
                                                     <MdKeyboardArrowLeft /> Previous
@@ -100,15 +100,15 @@ function EntryPreviewPage() {
                                                     Next <MdKeyboardArrowRight />
                                                 </div>
                                             </div>
-                                            {/* <div className='selected-footer-format'>
+                                            <div className='selected-footer-format'>
                                                 <div className='no-movement'>
                                                     {selectedIndex - 1 >= 0 ? entries[selectedIndex - 1].name : entries[entries.length - 1].name}
                                                 </div>
                                                 <div style={{ textAlign: "right" }} className='no-movement'>
                                                     {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
                                                 </div>
-                                            </div> */}
-                                        </div>
+                                            </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -175,4 +175,4 @@ function EntryPreviewPage() {
 }
 
 
-export default EntryPreviewPage
+export default EntryPreview

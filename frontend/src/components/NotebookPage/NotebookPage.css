@@ -353,6 +353,7 @@
     flex-direction: column;
     gap: 20px;
     background-color: var(--bg-nav);
+    border-bottom: 1px solid rgba(79, 70, 229, 0.7);
     border-radius: 10px 10px 0px 0px;
     padding: 18px 18px 10px 18px;
 }
@@ -380,12 +381,13 @@
 
 .selected-entry-data {
     padding-left: 16px;
-    border-top: 1px solid rgba(79, 70, 229, 0.7);
+    
     background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 45%);
 }
 
 .selected-entry-data-inner {
-    padding-right: 14px;
+    padding-right: 16px;
+
 }
 
 .selected-entry-footer {
@@ -398,6 +400,8 @@
     padding: 10px 20px 10px 20px;
     border-top: 1px solid rgba(79, 70, 229, 0.7);
 }
+
+
 
 .selected-footer-format {
     display: flex;

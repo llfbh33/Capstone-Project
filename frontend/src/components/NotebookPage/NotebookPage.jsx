@@ -212,8 +212,12 @@ function NotebookPage() {
                                                 {selectedEntry.is_public && <p className='is-published'>Published •</p>}
                                             </div>
                                         </div>
-                                        <div className="selected-entry-data">
-                                            <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
+                                        <div className='entries-list-section selected-entry-data'>
+                                            <div className='entry-scroll-contain'>
+                                                <div className="entry-list-scroll selected-entry-data-inner">
+                                                    <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div className='selected-entry-footer'>
                                             <div className='selected-footer-format'>

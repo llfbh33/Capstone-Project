@@ -12,6 +12,10 @@ import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
 import LoadingPage from "../LoadingPage/LoadingPage";
+import { useNavigate } from "react-router-dom";
+import EntryPreview from "./EntryPageComponents/EntryPreview";
+import EntryComments from "./EntryPageComponents/EntryComments";
+import NavigateEntries from "./EntryPageComponents/NavigateEntries";
 
 
 function EntryPage() {
@@ -25,6 +29,7 @@ function EntryPage() {
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
     const { setModalContent } = useModal();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -62,7 +67,16 @@ function EntryPage() {
                                         // />
 
     return (
-        <div className='set-entry-page-size'>
+                    <div className="main-container">
+                <div className="child-container">
+                    <div className="child-container-two">
+                                            <div className="navigation-tabs-container" >
+                        <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
+                        <div className="navigation-intermediary">{`>`}</div>
+                        <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebook.id}`)}>{notebook.name}</div>
+                    </div>
+
+        {/* <div className='set-entry-page-size'>
             {loaded ?
                 <div>
 
@@ -114,11 +128,14 @@ function EntryPage() {
                     </div>
 
                     <h1 className='entrypage-underline'></h1>
-                    <div>
-                        {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreviewPage entry={entry} />}
+                    <div> */}
+                        {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
+                    {/* </div> */}
+                    {/* <EntryComments /> */}
+                    <NavigateEntries entry={entry}/>
                     </div>
                 </div>
-                : <LoadingPage />}
+                {/* : <LoadingPage />} */}
         </div>
     )
 }
