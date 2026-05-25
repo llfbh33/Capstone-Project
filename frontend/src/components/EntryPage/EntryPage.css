@@ -275,7 +275,7 @@
 
 .filter-search-input {
     display: flex;
-        flex: 1;
+    flex: 1;
     min-width: 0;
     position: relative;
 }
