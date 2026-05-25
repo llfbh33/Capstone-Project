@@ -92,65 +92,67 @@ function LeftNavigation() {
 
 
     return (
-        <div id='main-nav-container'>
-            <div style={{ flex: 1 }}>
+        <div className='left-hand-nav-container'>
+            <div id='main-nav-container'>
+                <div style={{ flex: 1 }}>
 
-                {/* Navigation Header */}
-                <div id='nav-user-info'>
-                    <div id='nav-user-info-inner'>
-                        <div>
-                            <OpenModalMenuItem
-                                itemText={<img src={user?.profile_image} className="profile-image" />}
-                                modalComponent={<ProfileModal />}
-                            />
+                    {/* Navigation Header */}
+                    <div id='nav-user-info'>
+                        <div id='nav-user-info-inner'>
+                            <div>
+                                <OpenModalMenuItem
+                                    itemText={<img src={user?.profile_image} className="profile-image" />}
+                                    modalComponent={<ProfileModal />}
+                                />
+                            </div>
+                            <div id='nav-user-name'>
+                                <div>{`Hello ${user?.name}`}</div>
+                                <div>{user?.username}</div>
+                            </div>
+                            {mediaQuery &&
+                                <div
+                                    className='media-query-menu'
+                                    onClick={() => setNavVisible(!navVisible)}
+                                >
+                                    Menu
+                                </div>
+                            }
                         </div>
-                        <div id='nav-user-name'>
-                            <div>{`Hello ${user?.name}`}</div>
-                            <div>{user?.username}</div>
-                        </div>
+                    </div>
+
+                    {/* When the nav dropdown is visible set the display to flex, populate nav links */}
+                    <div id="navigation-container" style={{ display: navVisible ? 'flex' : 'none' }}>
+                        {navigationLinks.map(link => (
+                            <NavLinks key={link.name} navObj={link} activeNav={activeNav} handleClick={handleClick} />
+                        ))}
+
+
+                        {/* Dev links and signout only visible on screens smaller than 950px */}
                         {mediaQuery &&
-                            <div
-                                className='media-query-menu'
-                                onClick={() => setNavVisible(!navVisible)}
-                            >
-                                Menu
+                            <div>
+                                <div className={devLinks ? "dev-container-sm" : "dev-title-container"}>
+                                    <div className={`nav-tab ${devLinks ? "nav-tab-selected" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
+                                        Dev Links
+                                    </div>
+                                    {devLinks && mediaQuery &&
+                                        <DevLinks />
+                                    }
+                                </div>
+                                <div className='nav-tab' onClick={logout}>{`Sign out ${user?.username}`}</div>
                             </div>
                         }
+
                     </div>
                 </div>
 
-                {/* When the nav dropdown is visible set the display to flex, populate nav links */}
-                <div id="navigation-container" style={{ display: navVisible ? 'flex' : 'none' }}>
-                    {navigationLinks.map(link => (
-                        <NavLinks key={link.name} navObj={link} activeNav={activeNav} handleClick={handleClick} />
-                    ))}
-
-
-                    {/* Dev links and signout only visible on screens smaller than 950px */}
-                    {mediaQuery &&
-                        <div>
-                            <div className={devLinks ? "dev-container-sm" : "dev-title-container"}>
-                                <div className={`nav-tab ${devLinks ? "nav-tab-selected" : ""}`} onClick={() => setDevLinks(prev => !prev)}>
-                                    Dev Links
-                                </div>
-                                {devLinks && mediaQuery &&
-                                    <DevLinks />
-                                }
-                            </div>
-                            <div className='nav-tab' onClick={logout}>{`Sign out ${user?.username}`}</div>
-                        </div>
-                    }
-
-                </div>
+                {/* Dev links and signout only visible on screens larger than 950px */}
+                {!mediaQuery &&
+                    <div className="nav-signout-container">
+                        <DevLinks />
+                        <div id='nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
+                    </div>
+                }
             </div>
-
-            {/* Dev links and signout only visible on screens larger than 950px */}
-            {!mediaQuery && 
-                <div className="nav-signout-container">
-                    <DevLinks />
-                    <div id='nav-signout' onClick={logout}>{`Sign out ${user?.username}`}</div>
-                </div>
-            }
         </div>
     )
 }

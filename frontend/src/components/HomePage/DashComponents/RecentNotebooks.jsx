@@ -59,7 +59,7 @@ const RecentNotebooks = () => {
                             </div>
                             <div className='pannel-item-data-container'>
                                 <div className="pannel-item-title">
-                                    {book.name}
+                                    {book.name.length > 30 ? book.name.slice(0, 30) : book.name}
                                 </div>
                                 <div className="pannel-item-description">
                                     {`${book.about.slice(0, 40)}${book.about.length > 40 ? "..." : ""}`}

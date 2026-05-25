@@ -1,5 +1,16 @@
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-form-title {
+    margin: 0px 0px 20px 0px
+}
+
 .login-form-container {
-    width: 300px;
+    /* width: 300px; */
     padding: 10px
 }
 

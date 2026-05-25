@@ -35,6 +35,30 @@
   min-width: 400px;
 }
 
+.modal-button {
+    background-color: var(--bg-nav);
+    color: var(--text);
+    border-radius: 10px;
+    border: 1px solid #3399FF;
+    font-family: "Comic Neue", cursive;
+    cursor: pointer;
+}
+
+
+.modal-button:hover {
+    background-color: var(--button-hover);
+    border: 1px solid #4da2f7;
+}
+
+.conformation-btn {
+    width: 170px;
+    height: 34px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
 
 @media(max-width: 650px) {
   #modal-content {

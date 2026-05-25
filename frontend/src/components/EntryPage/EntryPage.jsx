@@ -60,23 +60,21 @@ function EntryPage() {
         }
     }
 
-                                        //     <OpenModalMenuItem
-                                        //     buttonText='Set Public'
-                                        //     hidden={isPreview === 'Preview'}
-                                        //     modalComponent={<PostPostModal entry={entry} />}
-                                        // />
+    //     <OpenModalMenuItem
+    //     buttonText='Set Public'
+    //     hidden={isPreview === 'Preview'}
+    //     modalComponent={<PostPostModal entry={entry} />}
+    // />
 
     return (
-                    <div className="main-container">
-                <div className="child-container">
-                    <div className="child-container-two">
-                                            <div className="navigation-tabs-container" >
-                        <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
-                        <div className="navigation-intermediary">{`>`}</div>
-                        <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebook.id}`)}>{notebook.name}</div>
-                    </div>
+        <div className="page-container page-static">
+            <div className="navigation-tabs-container" >
+                <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
+                <div className="navigation-intermediary">{`>`}</div>
+                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebook.id}`)}>{notebook.name}</div>
+            </div>
 
-        {/* <div className='set-entry-page-size'>
+            {/* <div className='set-entry-page-size'>
             {loaded ?
                 <div>
 
@@ -129,13 +127,10 @@ function EntryPage() {
 
                     <h1 className='entrypage-underline'></h1>
                     <div> */}
-                        {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
-                    {/* </div> */}
-                    <EntryComments />
-                    <NavigateEntries entry={entry}/>
-                    </div>
-                </div>
-                {/* : <LoadingPage />} */}
+            {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
+            {/* </div> */}
+            <EntryComments />
+            <NavigateEntries entry={entry} />
         </div>
     )
 }

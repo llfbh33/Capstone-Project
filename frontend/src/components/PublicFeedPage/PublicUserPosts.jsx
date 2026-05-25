@@ -39,7 +39,7 @@ function PublicUserPosts() {
     }
 
     return (
-        <div className="main-container">
+        <div className="page-container page-grow">
             {loaded ?
                 <div className="users-posts-container">
                     <h1 className='title page-title'>{`${user?.name}'s Posts`}</h1>

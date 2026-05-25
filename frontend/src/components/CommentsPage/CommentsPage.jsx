@@ -36,7 +36,7 @@ function CommentsPage () {
 
 
     return (
-        <div className="main-container">
+        <div className="page-container page-grow">
             <h1 className="title page-title">{`${user?.name}'s Comments`}</h1>
             <p className="title page-subtitle">All of your posts others have commented on:</p>
             <div className="comments-on-your-posts">
@@ -75,7 +75,6 @@ function CommentsPage () {
                 : <div className="no-public-posts">No one has commented on any of your posts yet.</div>}
                 </div>
             </div>
-            <p className='mini-page-title' ></p>
             <p className="title page-subtitle">All public posts you have commented on:</p>
             <div className="comments-you-posted-on">
                 <div id='homepage-notebook-card-container'>

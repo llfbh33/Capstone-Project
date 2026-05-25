@@ -1,4 +1,4 @@
-import { useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal/Modal";
@@ -15,24 +15,25 @@ export default function Layout() {
   // authenticating user then loading the state of the site
   useEffect(() => {
     dispatch(thunkAuthenticate())
-    .then(() => loadState(dispatch))
-    .then(() => setLoading(false))
-    .catch((error) => console.log(error))
+      .then(() => loadState(dispatch))
+      .then(() => setLoading(false))
+      .catch((error) => console.log(error))
   }, [dispatch]);
 
   return (
-      <>
-          <ModalProvider>
-          <div className='main-insite-container'>
-              <div className='left-hand-nav-container'>
-                    <LeftNavigation />
-              </div>
-              <div className='main-insite-content-container'>
-                   {loading? <LoadingPage /> : <Outlet />}
-              </div>
+    <>
+      <ModalProvider>
+        <div id='main-insite-container'>
+
+          <LeftNavigation />
+
+          <div className='main-insite-content-container'>
+            {loading ? <LoadingPage /> : <Outlet />}
           </div>
-          <Modal />
-          </ModalProvider>
-      </>
+          
+        </div>
+        <Modal />
+      </ModalProvider>
+    </>
   );
 }

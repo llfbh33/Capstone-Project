@@ -1,3 +1,13 @@
+
+
+/* Outermost container for Navigation Panel */
+.left-hand-nav-container {
+    width: 300px;
+    height: 100vh;
+    position: fixed;
+}
+
+
 /* Navigation container */
 #main-nav-container {
     display: flex;
@@ -139,6 +149,7 @@
         border-right: none;
         border-bottom: 1px solid #3399FF;
     }
+
 
     /* Navigation user info */
     #nav-user-info-inner {

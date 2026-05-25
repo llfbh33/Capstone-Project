@@ -1,21 +1,6 @@
 /* Uses the majority of the Homepage css */
 
-.padding-container-header-notebooks {
-    /* flex: 1; */
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    padding: 24px 0px;
-    box-shadow:
-        0 8px 12px rgba(0, 0, 0, 0.15),
-        0 1px 2px rgba(0, 0, 0, 0.08);
-    /* padding-bottom: 10px; */
-}
 
-.padding-container-header-notebooks h1 {
-    margin: 0;
-    width: 100%;
-}
 
 .new-search-notebooks-container {
     display: flex;
@@ -482,14 +467,9 @@
     }
 
     #homepage-user-title,
-    .page-title-blocks,
     #notebookpage-about-section-container {
         width: 100%;
         align-items: center;
-        text-align: center;
-    }
-
-    .mini-page-title {
         text-align: center;
     }
 

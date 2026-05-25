@@ -69,67 +69,65 @@ function NotebooksPage() {
 
 
     return (
-        <div className="main-container-grow">
-            <div className="child-container">
-                <div className="child-container-two">
-                    <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>
-                        Notebooks
-                    </div>
-                    <div className="padding-container-header-notebooks">
-                        <h1 className="page-title">{`${user?.name}'s Notebook's`}</h1>
-                        <div className="new-search-notebooks-container">
-                            <button
-                                className="new-notebook-button"
-                                onClick={handleNewNotebook}
-                            >
-                                <div className="new-notebook-text">
-                                    <FaPlus />
-                                    <p>New Notebook</p>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                    <div className="items-container">
-                        <div className="horizontal-container">
-                            <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook} />
-                            <div className="all-notebooks-container">
-                                <div className="all-notebooks-action">
-                                    <p>All Notebooks</p>
-                                    <p>Sorted by: Last Created</p>
-                                </div>
-                                <div className="notebooks-block-container">
-                                    {notebooks.map((notebook, index) => {
-                                        if (notebook.id === featuredNotebook.id) return <></>
-                                        else return (
-                                            <div className='dash-comp-container individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
-                                                <div className='pannel-formatting'>
-                                                    <div className='notebook-pannel-heading'>
-                                                        <img className="book-image-all" src={notebookImages[index % 6]}></img>
-                                                        <div style={{ display: "flex", alignItems: "center", minHeight: "50px" }}>
-                                                            <NotebookActions notebook={notebook} handleClickNotebook={handleClickNotebook}/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="notebook-panel-container">
-                                                        <h3>{notebook.name}</h3>
-                                                        <p>
-                                                            {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
-                                                        </p>
-
-                                                        <div className="notebook-last-edited">
-                                                            <span>Last edited - </span>
-                                                            <span>{friendlyDate(notebook.updated_at)}</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        )
-                                    })}
-                                </div>
+        <div className="page-container page-grow">
+            <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>
+                Notebooks
+            </div>
+            <div className='header-flex-col'>
+                <div className='header-flex-row'>
+                    <h1>{`${user?.name}'s Notebook's`}</h1>
+                    <div className="new-search-notebooks-container">
+                        <button
+                            className="new-notebook-button"
+                            onClick={handleNewNotebook}
+                        >
+                            <div className="new-notebook-text">
+                                <FaPlus />
+                                <p>New Notebook</p>
                             </div>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>
+            {/* <div className="component-container component-row"> */}
+                <div className="component-container component-col">
+                    <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook} />
+                    <div className="all-notebooks-container">
+                        <div className="all-notebooks-action">
+                            <p>All Notebooks</p>
+                            <p>Sorted by: Last Created</p>
+                        </div>
+                        <div className="notebooks-block-container">
+                            {notebooks.map((notebook, index) => {
+                                if (notebook.id === featuredNotebook.id) return <></>
+                                else return (
+                                    <div className='dash-comp-container individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
+                                        <div className='pannel-formatting'>
+                                            <div className='notebook-pannel-heading'>
+                                                <img className="book-image-all" src={notebookImages[index % 6]}></img>
+                                                <div style={{ display: "flex", alignItems: "center", minHeight: "50px" }}>
+                                                    <NotebookActions notebook={notebook} handleClickNotebook={handleClickNotebook} />
+                                                </div>
+                                            </div>
+                                            <div className="notebook-panel-container">
+                                                <h3>{notebook.name}</h3>
+                                                <p>
+                                                    {notebook.about.length > 160 ? `${notebook.about.slice(0, 160)}...` : notebook.about}
+                                                </p>
+
+                                                <div className="notebook-last-edited">
+                                                    <span>Last edited - </span>
+                                                    <span>{friendlyDate(notebook.updated_at)}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
+            {/* </div> */}
         </div>
     )
 }

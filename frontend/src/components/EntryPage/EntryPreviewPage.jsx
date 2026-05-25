@@ -45,7 +45,7 @@ function EntryPreviewPage() {
         return (
 
                         <div className='entry-items-container'>
-                            <div className="items-container">
+                            <div className="component-container component-row">
                                 <div className='selected-entry-horizontal-container'>
                                     <div className='selected-entry-container'>
                                         <div className='label-and-icons'>

@@ -46,26 +46,24 @@ function HomePage() {
 
 
     return (
-        <div className="main-container">
-            <div className="child-container">
-                <div className="child-container-two">
-                    <div className="padding-container-header">
-                        <h1 className="page-title">{`Welcome Back, ${user?.name}! 👋`}</h1>
-                        <p className="page-sub-title">A snapshot of your writing journey.</p>
-                    </div>
-                    <div className="items-container">
-                        <div className="horizontal-container">
-                            <ActivityFeed />
-                            <InspiringQuotes />
-                        </div>
-                        <div className="horizontal-container">
-                            <RecentNotebooks />
-                            <RecentEntries />
-                            <RecentPosts />
-                        </div>
-                    </div>
+        <div className="page-container page-static">
+            <div className="header-flex-col">
+                <h1>{`Welcome Back, ${user?.name}! 👋`}</h1>
+                <p className="page-sub-title">A snapshot of your writing journey.</p>
+            </div>
+
+            <div className="component-container component-row">
+                <div className="component-container component-col">
+                    <ActivityFeed />
+                    <InspiringQuotes />
+                </div>
+                <div className="component-container component-col">
+                    <RecentNotebooks />
+                    <RecentEntries />
+                    <RecentPosts />
                 </div>
             </div>
+
         </div>
     )
 }

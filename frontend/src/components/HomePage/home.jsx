@@ -15,6 +15,8 @@ import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
 
+// IS PAGE IN USE ANY MORE???
+
 
 function Home () {
     const user = useSelector(state => state.session.user);
@@ -60,7 +62,7 @@ function Home () {
 
 
     return (
-        <div className="main-container">
+        <div className="page-container page-static">
             <h1 className='title page-title'>{`${user?.name}'s Home`}</h1>
             {/* <p className="title page-subtitle">Recently Created Notebooks</p> */}
             <div id='homepage-card-container'>

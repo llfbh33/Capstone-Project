@@ -1,4 +1,25 @@
 
+.modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-form-title {
+    margin: 0px 0px 20px 0px
+}
+
+.error-validation {
+    color: red;
+    font-size: medium;
+}
+
+.error-validation-hidden {
+    color: rgba(255, 0, 0, 0);
+    font-size: medium;
+}
+
 .signup-form-container {
     display: flex;
     flex-direction: column;
