@@ -166,8 +166,12 @@ function EntryPage() {
             <div className="section-layout section-col">
                 {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
                 {/* </div> */}
-                <EntryComments />
-                <NavigateEntries entry={entry} />
+                <EntryComments comments={entry.comments} />
+                {/* <div className="entry-content-panel">
+                    <div className='entry-nav-styling'>
+                        <NavigateEntries entry={entry} />
+                    </div>
+                </div> */}
             </div>
         </div>
     )

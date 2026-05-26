@@ -34,11 +34,6 @@ const AllEntries = () => {
             );
     }, [entriesObj]);
     const [selectedEntry, setSelectedEntry] = useState(null);
-    const selectedIndex = useMemo(() => {
-        if (selectedEntry) {
-            return entries.indexOf(selectedEntry)
-        } else return 0;
-    }, [entries, selectedEntry])
     const { setModalContent } = useModal();
     const entryRefs = useRef({});
 
@@ -62,6 +57,12 @@ const AllEntries = () => {
             entry.name.toLowerCase().includes(search.toLowerCase())
         );
     }, [entries, search, selectedNotebook]);
+    
+    const selectedIndex = useMemo(() => {
+        if (selectedEntry) {
+            return searchEntries.indexOf(selectedEntry)
+        } else return 0;
+    }, [searchEntries, selectedEntry])
 
 
     // Scroll the selected entry in the list into view
@@ -98,9 +99,9 @@ const AllEntries = () => {
     const handleNewSelected = (direction) => {
         let newSelected;
         if (direction === 'left') {
-            newSelected = selectedIndex - 1 >= 0 ? entries[selectedIndex - 1] : entries[entries.length - 1];
+            newSelected = selectedIndex - 1 >= 0 ? searchEntries[selectedIndex - 1] : searchEntries[searchEntries.length - 1];
         } else {
-            newSelected = selectedIndex + 1 < entries.length ? entries[selectedIndex + 1] : entries[0];
+            newSelected = selectedIndex + 1 < searchEntries.length ? searchEntries[selectedIndex + 1] : searchEntries[0];
         }
 
         setSelectedEntry(newSelected);
@@ -132,85 +133,88 @@ const AllEntries = () => {
             <div className='section-layout section-col'>
                 <div className="content-panel panel-row">
                     {/* <div className=""> */}
-                        <div className="filter-search-input">
-                            <input
-                                className="all-entries-filter-component"
-                                value={search}
-                                placeholder="Search entries..."
-                                onChange={(e) => {
-                                    setSearch(e.target.value);
-                                    setShowSearchDropdown(true);
-                                }}
-                                onFocus={() => setShowSearchDropdown(true)}
-                                onBlur={() => {
-                                    setTimeout(() => {
-                                        setShowSearchDropdown(false);
-                                    }, 100);
-                                }}
-                            />
-                            {showSearchDropdown && searchEntries.length > 0 && (
-                                <div className="search-dropdown">
-                                    {searchEntries.map(entry => (
-                                        <div
-                                            key={entry.id}
-                                            className="search-dropdown-item"
-                                            onClick={() => {
-                                                setSelectedEntry(entry);
-                                                setShowSearchDropdown(false);
-                                            }}
-                                        >
-                                            {entry.name}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                        <div className="filter-search-input">
-                            <div
-                                className="all-entries-filter-component notebook-dropdown-trigger"
-                                onClick={() => setShowNotebookDropdown(prev => !prev)}
-                                onBlur={() => {
-                                    setTimeout(() => {
-                                        setShowNotebookDropdown(false);
-                                    }, 100);
-                                }}
-                                tabIndex={0}
-                            >
-                                {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
-                            </div>
 
-                            {showNotebookDropdown && (
-                                <div className="search-dropdown">
+                    <div className="filter-search-input">
+                        <input
+                            className="all-entries-filter-component"
+                            value={search}
+                            placeholder="Search entries..."
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setShowSearchDropdown(true);
+                            }}
+                            onFocus={() => setShowSearchDropdown(true)}
+                            onBlur={() => {
+                                setTimeout(() => {
+                                    setShowSearchDropdown(false);
+                                }, 100);
+                            }}
+                        />
+                        {showSearchDropdown && searchEntries.length > 0 && (
+                            <div className="search-dropdown">
+                                {searchEntries.map(entry => (
                                     <div
+                                        key={entry.id}
                                         className="search-dropdown-item"
                                         onClick={() => {
-                                            setSelectedNotebook(null);
-                                            setShowNotebookDropdown(false);
+                                            setSelectedEntry(entry);
+                                            setShowSearchDropdown(false);
                                         }}
                                     >
-                                        Notebooks: All
+                                        {entry.name}
                                     </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
 
-                                    {Object.values(notebooks).map(notebook => (
-                                        <div
-                                            key={notebook.id}
-                                            className="search-dropdown-item"
-                                            onClick={() => {
-                                                setSelectedNotebook(notebook);
-                                                setShowNotebookDropdown(false);
-                                            }}
-                                        >
-                                            {notebook.name}
-                                        </div>
-                                    ))}
-                                </div>
-                            )}
+                    <div className="filter-search-input">
+                        <div
+                            className="all-entries-filter-component notebook-dropdown-trigger"
+                            onClick={() => setShowNotebookDropdown(prev => !prev)}
+                            onBlur={() => {
+                                setTimeout(() => {
+                                    setShowNotebookDropdown(false);
+                                }, 100);
+                            }}
+                            tabIndex={0}
+                        >
+                            {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
                         </div>
-                        <input
-                            className='all-entries-filter-component'
-                            placeholder="Sort: Last Updated"
-                            disabled={true}
-                        />
+
+                        {showNotebookDropdown && (
+                            <div className="search-dropdown">
+                                <div
+                                    className="search-dropdown-item"
+                                    onClick={() => {
+                                        setSelectedNotebook(null);
+                                        setShowNotebookDropdown(false);
+                                    }}
+                                >
+                                    Notebooks: All
+                                </div>
+
+                                {Object.values(notebooks).map(notebook => (
+                                    <div
+                                        key={notebook.id}
+                                        className="search-dropdown-item"
+                                        onClick={() => {
+                                            setSelectedNotebook(notebook);
+                                            setShowNotebookDropdown(false);
+                                            if (selectedEntry.notebook_id !== notebook.id) setSelectedEntry(null);
+                                        }}
+                                    >
+                                        {notebook.name}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                    <input
+                        className='all-entries-filter-component'
+                        placeholder="Sort: Last Updated"
+                        disabled={true}
+                    />
                     {/* </div> */}
                 </div>
                 <div className="section-layout section-row">
@@ -228,7 +232,7 @@ const AllEntries = () => {
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
                                         }}
-                                            className={`content-panel panel-col ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                            className={`content-panel panel-col clickable-item ${selectedEntry?.id === entry.id ? "selected" : ""}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
                                             <div className='entry-card-title'>{entry.name}</div>
 
                                             <div className='alignment'>
@@ -289,6 +293,7 @@ const AllEntries = () => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className='selected-entry-footer'>
                                     <div className='selected-footer-format'>
                                         <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
@@ -300,13 +305,14 @@ const AllEntries = () => {
                                     </div>
                                     <div className='selected-footer-format'>
                                         <div className='no-movement'>
-                                            {selectedIndex - 1 >= 0 ? entries[selectedIndex - 1].name : entries[entries.length - 1].name}
+                                            {selectedIndex - 1 >= 0 ? searchEntries[selectedIndex - 1]?.name : searchEntries[searchEntries.length - 1]?.name}
                                         </div>
                                         <div style={{ textAlign: "right" }} className='no-movement'>
-                                            {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
+                                            {selectedIndex + 1 < searchEntries.length ? searchEntries[selectedIndex + 1]?.name : searchEntries[0]?.name}
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     }

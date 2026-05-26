@@ -129,6 +129,7 @@ body {
 
 .section-row {
     flex-direction: row;
+    /* align-items: center; */
 }
 .section-col {
     flex-direction: column;
@@ -141,12 +142,17 @@ body {
 .content-panel {
     display: flex;
     gap: 10px;
-    
-    border: 2px solid rgb(85, 85, 230);
+
+    /* border: 2px solid rgb(85, 85, 230); */
+    border: 1px solid green;
     border-radius: 10px;
 
     padding: 16px;
     background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
+}
+
+.content-panel.selected {
+    background-color: var(--bg-nav);
 }
 
 /* Inclued to Allow Panel to Flex */
@@ -164,6 +170,29 @@ body {
 
 
 /*------------------------------------------------*/
+
+
+.clickable-item {
+    cursor: pointer;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.remove-margin {
+    margin: 0;
+}
 
 
 /* Screens smaller than 950px */

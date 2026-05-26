@@ -50,3 +50,17 @@
     padding: 10px 20px 10px 20px;
     border-radius: 10px;
 }
+
+
+/*  Styling for Entry Comments */
+.comment-panel {
+    display: flex;
+    gap: 10px;
+
+    /* border: 2px solid rgb(85, 85, 230); */
+    border: 1px solid green;
+    border-radius: 10px;
+
+    padding: 16px;
+    background: radial-gradient(circle at left, rgba(48, 45, 110, 0.35), transparent 85%);
+}

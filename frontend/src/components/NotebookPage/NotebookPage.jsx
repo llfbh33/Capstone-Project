@@ -39,16 +39,39 @@ function NotebookPage() {
             );
     }, [entriesObj, notebookId]);
     const [selectedEntry, setSelectedEntry] = useState(null);
-    const selectedIndex = useMemo(() => {
-        if (selectedEntry) {
-            return entries.indexOf(selectedEntry)
-        } else return 0;
-    }, [entries, selectedEntry])
+
     const { setModalContent } = useModal();
 
     const entryRefs = useRef({});
 
+    const [search, setSearch] = useState("");
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+    const searchEntries = useMemo(() => {
+        let filtered = entries;
 
+        if (notebook !== null) {
+            filtered = filtered.filter(
+                entry => entry.notebook_id === notebook.id
+            );
+        }
+
+        if (!search.trim()) return filtered;
+
+        return filtered.filter(entry =>
+            entry.name.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [entries, search, notebook]);
+
+    const selectedIndex = useMemo(() => {
+        if (selectedEntry) {
+            return searchEntries.indexOf(selectedEntry)
+        } else return 0;
+    }, [searchEntries, selectedEntry])
+
+
+    console.log('Search Entries: ', searchEntries);
+    console.log('Entry!: ', selectedEntry);
+    console.log("Entry Index: ", selectedIndex);
 
     // Scroll the selected entry in the list into view
     useEffect(() => {
@@ -88,9 +111,9 @@ function NotebookPage() {
     const handleNewSelected = (direction) => {
         let newSelected;
         if (direction === 'left') {
-            newSelected = selectedIndex - 1 >= 0 ? entries[selectedIndex - 1] : entries[entries.length - 1];
+            newSelected = selectedIndex - 1 >= 0 ? searchEntries[selectedIndex - 1] : searchEntries[searchEntries.length - 1];
         } else {
-            newSelected = selectedIndex + 1 < entries.length ? entries[selectedIndex + 1] : entries[0];
+            newSelected = selectedIndex + 1 < searchEntries.length ? searchEntries[selectedIndex + 1] : searchEntries[0];
         }
 
         setSelectedEntry(newSelected);
@@ -121,7 +144,7 @@ function NotebookPage() {
                     </div>
                 </div>
             </div>
-            <div className='entry-items-container'>
+            <div className='section-layout section-col'>
                 <div className="notebook-description-container">
                     <div className="featured-label-container">
                         <span>Description</span>
@@ -147,20 +170,55 @@ function NotebookPage() {
                 </div>
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
-                        <div className="all-entries-container">
-                            <div className="all-entries-action">
-                                <p className='sub-title'>{`Entries (${entries.length})`}</p>
-                                <p>Sorted by: Last Updated</p>
+                        {/* <div className="flex-col"> */}
+                        <div className="all-entries-action" >
+                            <p className='sub-title remove-margin'>{`Entries (${entries.length})`}</p>
+                            <div className='section-layout section-row' style={{ alignItems: "center" }}>
+                                <div className="filter-search-input">
+                                    <input
+                                        className="all-entries-filter-component"
+                                        value={search}
+                                        placeholder="Search entries..."
+                                        onChange={(e) => {
+                                            setSearch(e.target.value);
+                                            setShowSearchDropdown(true);
+                                        }}
+                                        onFocus={() => setShowSearchDropdown(true)}
+                                        onBlur={() => {
+                                            setTimeout(() => {
+                                                setShowSearchDropdown(false);
+                                            }, 100);
+                                        }}
+                                    />
+                                    {showSearchDropdown && searchEntries.length > 0 && (
+                                        <div className="search-dropdown">
+                                            {searchEntries.map(entry => (
+                                                <div
+                                                    key={entry.id}
+                                                    className="search-dropdown-item"
+                                                    onClick={() => {
+                                                        setSelectedEntry(entry);
+                                                        setShowSearchDropdown(false);
+                                                    }}
+                                                >
+                                                    {entry.name}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                                <p className='sub-title remove-margin'>Sorted by: Last Updated</p>
                             </div>
                         </div>
+                        {/* </div> */}
                         <div className='entries-list-section'>
                             <div className='entry-scroll-contain'>
                                 <div className="entry-list-scroll">
-                                    {entries.map((entry, index) => (
+                                    {searchEntries.map((entry, index) => (
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
                                         }}
-                                            className={`content-panel panel-col ${selectedEntry?.id === entry.id ? "entry-item-selected" : "entry-item"}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                            className={`content-panel panel-col clickable-item ${selectedEntry?.id === entry.id ? "selected" : ""}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
                                             <div className='entry-card-title'>{entry.name}</div>
 
                                             <div className='alignment'>
@@ -219,6 +277,7 @@ function NotebookPage() {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className='selected-entry-footer'>
                                     <div className='selected-footer-format'>
                                         <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
@@ -230,13 +289,14 @@ function NotebookPage() {
                                     </div>
                                     <div className='selected-footer-format'>
                                         <div className='no-movement'>
-                                            {selectedIndex - 1 >= 0 ? entries[selectedIndex - 1].name : entries[entries.length - 1].name}
+                                            {selectedIndex - 1 >= 0 ? searchEntries[selectedIndex - 1]?.name : searchEntries[searchEntries.length - 1]?.name}
                                         </div>
                                         <div style={{ textAlign: "right" }} className='no-movement'>
-                                            {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
+                                            {selectedIndex + 1 < searchEntries.length ? searchEntries[selectedIndex + 1]?.name : searchEntries[0]?.name}
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     }

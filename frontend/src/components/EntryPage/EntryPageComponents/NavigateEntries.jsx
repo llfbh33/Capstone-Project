@@ -14,8 +14,9 @@ const NavigateEntries = ({ entry }) => {
 
     return (
         // <div className='entry-items-container'>
-        <div className="entry-content-panel">
-            <div className='entry-nav-styling'>
+        // <div className="entry-content-panel">
+        //     <div className='entry-nav-styling'>
+        <>
                 <div className='selected-footer-format'>
                     <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
                         <MdKeyboardArrowLeft /> Previous
@@ -32,8 +33,9 @@ const NavigateEntries = ({ entry }) => {
                         {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
                     </div>
                 </div>
-            </div>
-        </div>
+                </>
+        //     </div>
+        // </div>
         // </div>
     )
 };
