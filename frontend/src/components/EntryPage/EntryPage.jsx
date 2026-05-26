@@ -1,10 +1,10 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import { useModal } from '../../context/Modal/Modal';
 import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalButton"
+import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
 import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
 import EntryPreviewPage from "./EntryPreviewPage";
 import EntryEditPage from "./EntryEditPage";
@@ -30,11 +30,17 @@ function EntryPage() {
         Object.values(state.posts).find(post => post.entry_id === Number(entryId))
     );
     const [name, setName] = useState("");
-    const [isPreview, setIsPreview] = useState('Edit Entry')
+    const [isPreview, setIsPreview] = useState(true);
     const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
     const { setModalContent } = useModal();
     const navigate = useNavigate();
+    const comments = useMemo(() => {
+        return entry.comments
+            .sort(
+                (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+            );
+    }, [entry])
 
 
     useEffect(() => {
@@ -48,11 +54,7 @@ function EntryPage() {
     }, [entry])
 
     const previewSwitch = () => {
-        if (isPreview === 'Preview') {
-            setIsPreview('Edit Entry')
-        } else {
-            setIsPreview('Preview')
-        }
+        setIsPreview(prev => !prev);
     }
 
     const publishEntry = () => {
@@ -76,25 +78,31 @@ function EntryPage() {
             <div className="navigation-tabs-container" >
                 <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
                 <div className="navigation-intermediary">{`>`}</div>
-                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebookId}`)}>{notebook.name}</div>
+                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebookId}`)}>{notebook.name.length > 30 ? `${notebook.name.slice(0, 30)}...` : notebook.name}</div>
+                <div className="navigation-intermediary">{`>`}</div>
+                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebookId}/entries/${entry.id}`)}>{entry.name.length > 30 ? `${entry.name.slice(0, 30)}...` : entry.name}</div>
             </div>
             <div className='header-flex-col'>
                 <div className='header-flex-row'>
-                    <h1><FaRegFileAlt />{` ${entry.name}`}</h1>
+                    <h1>
+                        <FaRegFileAlt />{` ${entry.name}`}
+                    {!isPreview && <span
+                        className="title-edit-trigger"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <OpenModalMenuItem
+                            itemText={<GoPencil className="icon-container" />}
+                            modalComponent={<EditEntryNameFormModal entry={entry} />}
+                        />
+                    </span>}</h1>
                     <div className="new-search-notebooks-container">
-                        <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                            <OpenModalMenuItem
-                                buttonText={<GoPencil />}
-                                modalComponent={<EditEntryNameFormModal entry={entry} />}
-                            />
-                        </div>
                         <button
                             className="new-notebook-button"
-                        // onClick={handleNewEntry}
+                            onClick={() => setIsPreview(prev => !prev)}
                         >
                             <div className="new-notebook-text">
-                                <FaPlus />
-                                <p>Add All Interaction Icons Here</p>
+                                {/* <GoPencil /> */}
+                                <p>{isPreview ? 'Edit Entry' : 'Preview'}</p>
                             </div>
                         </button>
                     </div>
@@ -164,9 +172,9 @@ function EntryPage() {
                     <h1 className='entrypage-underline'></h1>
                     <div> */}
             <div className="section-layout section-col">
-                {isPreview === 'Preview' ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
+                {!isPreview ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
                 {/* </div> */}
-                <EntryComments comments={entry.comments} />
+                <EntryComments comments={comments} />
                 {/* <div className="entry-content-panel">
                     <div className='entry-nav-styling'>
                         <NavigateEntries entry={entry} />

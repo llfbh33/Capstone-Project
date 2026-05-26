@@ -42,7 +42,6 @@ const EntryComments = ({ comments }) => {
                                                     </div>
                                                     <div className="section-layout section-row" style={{  justifyContent: "flex-end" }}>
                                                         <p>{friendlyDate(comment.created_at)}</p>
-                                                        <p>Delete</p>
                                                     </div>
                                                 </div>
                                                 <div>

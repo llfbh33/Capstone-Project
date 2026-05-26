@@ -23,12 +23,12 @@ function SaveEntryModal({entry, content, setIsPreview}) {
             isPublic: entry.is_public
         }));
 
-        setIsPreview('Edit Entry')
+        setIsPreview(false);
         await closeModal();
     }
 
     const deleteChanges = () => {
-        setIsPreview('Edit Entry')
+        setIsPreview(false);
         closeModal();
     }
 

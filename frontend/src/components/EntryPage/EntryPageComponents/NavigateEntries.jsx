@@ -13,30 +13,24 @@ const NavigateEntries = ({ entry }) => {
 
 
     return (
-        // <div className='entry-items-container'>
-        // <div className="entry-content-panel">
-        //     <div className='entry-nav-styling'>
         <>
-                <div className='selected-footer-format'>
-                    <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
-                        <MdKeyboardArrowLeft /> Previous
-                    </div>
-                    <div className='alignment movement-click' onClick={() => handleNewSelected('right')}>
-                        Next <MdKeyboardArrowRight />
-                    </div>
+            <div className='selected-footer-format'>
+                <div className='alignment movement-click' onClick={() => handleNewSelected('left')}>
+                    <MdKeyboardArrowLeft /> Previous
                 </div>
-                <div className='selected-footer-format'>
-                    <div className='no-movement'>
-                        {selectedIndex - 1 >= 0 ? entries[selectedIndex - 1].name : entries[entries.length - 1].name}
-                    </div>
-                    <div style={{ textAlign: "right" }} className='no-movement'>
-                        {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
-                    </div>
+                <div className='alignment movement-click' onClick={() => handleNewSelected('right')}>
+                    Next <MdKeyboardArrowRight />
                 </div>
-                </>
-        //     </div>
-        // </div>
-        // </div>
+            </div>
+            <div className='selected-footer-format'>
+                <div className='no-movement'>
+                    {selectedIndex - 1 >= 0 ? entries[selectedIndex - 1].name : entries[entries.length - 1].name}
+                </div>
+                <div style={{ textAlign: "right" }} className='no-movement'>
+                    {selectedIndex + 1 < entries.length ? entries[selectedIndex + 1].name : entries[0].name}
+                </div>
+            </div>
+        </>
     )
 };
 

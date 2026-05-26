@@ -69,9 +69,6 @@ function NotebookPage() {
     }, [searchEntries, selectedEntry])
 
 
-    console.log('Search Entries: ', searchEntries);
-    console.log('Entry!: ', selectedEntry);
-    console.log("Entry Index: ", selectedIndex);
 
     // Scroll the selected entry in the list into view
     useEffect(() => {
@@ -126,7 +123,7 @@ function NotebookPage() {
             <div className="navigation-tabs-container" >
                 <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
                 <div className="navigation-intermediary">{`>`}</div>
-                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebook.id}`)}>{notebook.name}</div>
+                <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebookId}`)}>{notebook.name.length > 30 ? `${notebook.name.slice(0, 30)}...` : notebook.name}</div>
             </div>
             <div className='header-flex-col'>
                 <div className='header-flex-row'>

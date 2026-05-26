@@ -18,7 +18,7 @@ import './EntryPage.css'
 
 
 
-function EntryEditPage({setIsPreview}) {
+function EntryEditPage({ setIsPreview }) {
     const { entryId } = useParams();
     const entry = useSelector(state => state.entries[parseInt(entryId)]);
     const dispatch = useDispatch();
@@ -31,24 +31,24 @@ function EntryEditPage({setIsPreview}) {
     }, [content, entry])
 
 
-// creates a reference which is added to the main div of the edit area
+    // creates a reference which is added to the main div of the edit area
     const refOne = useRef(null)
-// callback function which will be activated if content is changed
+    // callback function which will be activated if content is changed
     const outsideClick = useCallback((e) => {
-      document.removeEventListener('click', outsideClick, true)
-      if (entry.content !== content) {
-        if(!refOne.current.contains(e.target)) {
-            const modalComponent =<SaveEntryModal  entry={entry} content={content} setIsPreview={setIsPreview}/>
-            setModalContent(modalComponent);
+        document.removeEventListener('click', outsideClick, true)
+        if (entry.content !== content) {
+            if (!refOne.current.contains(e.target)) {
+                const modalComponent = <SaveEntryModal entry={entry} content={content} setIsPreview={setIsPreview} />
+                setModalContent(modalComponent);
+            }
         }
-      }
-      return
-    }, [content, entry, setModalContent, setIsPreview] )
-// adds an event listener to the page
+        return
+    }, [content, entry, setModalContent, setIsPreview])
+    // adds an event listener to the page
     document.addEventListener('click', outsideClick, true)
 
 
-// necessary extentions for use of the tool bar
+    // necessary extentions for use of the tool bar
     const extensions = [
         Underline,
         Color.configure({ types: [TextStyle.name, ListItem.name] }),
@@ -66,12 +66,12 @@ function EntryEditPage({setIsPreview}) {
         }),
     ]
 
-// editor necessary to make the toolbar interactive
+    // editor necessary to make the toolbar interactive
     const editor = useEditor({
         extensions,
         content: content,
         Underline,
-        onUpdate: ({editor}) => {
+        onUpdate: ({ editor }) => {
             const html = editor.getHTML()
             setContent(html);
         }
@@ -81,14 +81,14 @@ function EntryEditPage({setIsPreview}) {
     const handleSave = async (e) => {
         if (e) e.preventDefault();
 
-        await dispatch(thunkEditEntry ({
+        await dispatch(thunkEditEntry({
             id: entry.id,
             userId: entry.user_id,
             notebookId: entry.notebook_id,
             name: entry.name,
             content,
             isPublic: entry.is_public
-            }));
+        }));
 
         await dispatch(thunkLoadEntries());
         setSaved(true);
@@ -97,19 +97,36 @@ function EntryEditPage({setIsPreview}) {
 
 
     return (
-        <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
+        <div className='page-container page-static'>
             <div id='editentry-save-btn-container' >
                 <button className="modal-button entry-button" onClick={handleSave}>Save</button>
                 <p>{saved ? 'Saved' : ''}</p>
             </div>
-            <div className='editentry-container'>
-                <div id='entryedit-toolbar-container'>
-                        <div className='edit-entry-tool-bar'>
-                            <MenuBar editor={editor}/>
+            <div className='selected-entry-container'>
+                <div className='toolbar-container'>
+                    {/* <div id='entryedit-toolbar-container'> */}
+                    {/* <div className='edit-entry-tool-bar'> */}
+                    <MenuBar editor={editor} />
+                    {/* </div> */}
+                    {/* </div> */}
+                </div>
+                <div className='entries-list-section selected-entry-data'>
+                    <div className='entry-scroll-contain'>
+                        <div className="entry-list-scroll selected-entry-data-inner">
+                        <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
+
+                            {/* <div className='editentry-container'> */}
+                            {/* <div id='entryedit-toolbar-container'>
+                            <div className='edit-entry-tool-bar'>
+                                <MenuBar editor={editor} />
+                            </div>
+                        </div> */}
+                            <div className="entry-content-container">
+                                <EditorContent editor={editor} />
+                            </div>
                         </div>
                     </div>
-                <div className="entry-content-container">
-                    <EditorContent editor={editor} />
+                </div>
                 </div>
             </div>
         </div>
