@@ -92,7 +92,7 @@ function LeftNavigation() {
 
 
     return (
-        <div className='left-hand-nav-container'>
+        <div className='left-hand-nav-container' id="left_app_navigation">
             <div id='main-nav-container'>
                 <div style={{ flex: 1 }}>
 

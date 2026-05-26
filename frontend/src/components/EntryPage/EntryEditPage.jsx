@@ -17,6 +17,12 @@ import MenuBar from "../TipTap/TipTap";
 import './EntryPage.css'
 
 
+const triggerSaveIds = [
+    "preview_button",
+    "left_app_navigation",
+    "helper_page_navigation"
+];
+
 
 function EntryEditPage({ setIsPreview }) {
     const { entryId } = useParams();
@@ -34,18 +40,35 @@ function EntryEditPage({ setIsPreview }) {
     // creates a reference which is added to the main div of the edit area
     const refOne = useRef(null)
     // callback function which will be activated if content is changed
-    const outsideClick = useCallback((e) => {
-        document.removeEventListener('click', outsideClick, true)
-        if (entry.content !== content) {
-            if (!refOne.current.contains(e.target)) {
-                const modalComponent = <SaveEntryModal entry={entry} content={content} setIsPreview={setIsPreview} />
-                setModalContent(modalComponent);
-            }
-        }
-        return
-    }, [content, entry, setModalContent, setIsPreview])
-    // adds an event listener to the page
-    document.addEventListener('click', outsideClick, true)
+
+const outsideClick = useCallback((e) => {
+    const clickedTriggerElement = triggerSaveIds.some(id =>
+        e.target.closest(`#${id}`)
+    );
+
+    const clickedOutsideEditor =
+        refOne.current && !refOne.current.contains(e.target);
+
+    if (entry.content !== content && clickedTriggerElement) {
+        setModalContent(
+            <SaveEntryModal
+                entry={entry}
+                content={content}
+                setIsPreview={setIsPreview}
+            />
+        );
+    }
+}, [content, entry, setModalContent, setIsPreview]);
+
+    useEffect(() => {
+
+        console.log('hello')
+        document.addEventListener("click", outsideClick, true);
+
+        return () => {
+            document.removeEventListener("click", outsideClick, true);
+        };
+    }, [outsideClick]);
 
 
     // necessary extentions for use of the tool bar
@@ -113,20 +136,20 @@ function EntryEditPage({ setIsPreview }) {
                 <div className='entries-list-section selected-entry-data'>
                     <div className='entry-scroll-contain'>
                         <div className="entry-list-scroll selected-entry-data-inner">
-                        <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
+                            <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
 
-                            {/* <div className='editentry-container'> */}
-                            {/* <div id='entryedit-toolbar-container'>
+                                {/* <div className='editentry-container'> */}
+                                {/* <div id='entryedit-toolbar-container'>
                             <div className='edit-entry-tool-bar'>
                                 <MenuBar editor={editor} />
                             </div>
                         </div> */}
-                            <div className="entry-content-container">
-                                <EditorContent editor={editor} />
+                                <div className="entry-content-container">
+                                    <EditorContent editor={editor} />
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
             </div>
         </div>

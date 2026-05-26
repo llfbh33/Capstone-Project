@@ -67,15 +67,11 @@ function EntryPage() {
         }
     }
 
-    //     <OpenModalMenuItem
-    //     buttonText='Set Public'
-    //     hidden={isPreview === 'Preview'}
-    //     modalComponent={<PostPostModal entry={entry} />}
-    // />
+
 
     return (
         <div className="page-container page-static">
-            <div className="navigation-tabs-container" >
+            <div className="navigation-tabs-container" id="helper_page_navigation">
                 <div className="navigation-tabs" onClick={() => navigate('/notebooks')}>Notebooks</div>
                 <div className="navigation-intermediary">{`>`}</div>
                 <div className="navigation-tabs" onClick={() => navigate(`/notebook/${notebookId}`)}>{notebook.name.length > 30 ? `${notebook.name.slice(0, 30)}...` : notebook.name}</div>
@@ -97,6 +93,7 @@ function EntryPage() {
                     </span>}</h1>
                     <div className="new-search-notebooks-container">
                         <button
+                            id="preview_button"
                             className="new-notebook-button"
                             onClick={() => setIsPreview(prev => !prev)}
                         >
@@ -118,62 +115,8 @@ function EntryPage() {
                 </div>
             </div>
 
-            {/* <div className='set-entry-page-size'>
-            {loaded ?
-                <div>
-
-                    <div >
-                        <h1 className='title page-title'>{`Notebook: ${notebook?.name}`}</h1>
-                        <div id='entrypage-entrytitle-buttons'>
-                            <p className="title page-subtitle">{`Entry: ${name}`}</p>
-
-                            <div className="entrypage-button-container">
-                                <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                    <OpenModalMenuItem
-                                        buttonText='Edit Name'
-                                        modalComponent={<EditEntryNameFormModal entry={entry} />}
-                                    />
-                                </div>
-                                <button
-                                    className="modal-button entry-button"
-                                    onClick={previewSwitch}
-                                >{isPreview}
-                                </button>
-                                {entry?.is_public
-
-                                    ? <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                        <OpenModalMenuItem
-                                            buttonText='Set Private'
-                                            hidden={isPreview === 'Preview'}
-                                            modalComponent={<RemovePostModal post={post} />}
-                                        />
-                                    </div>
-
-                                    : <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                        <button
-                                            hidden={isPreview === 'Preview'}
-                                            onClick={publishEntry}
-                                        >
-                                            Set Public
-                                        </button>
-                                    </div>
-                                }
-                                <div className="editentry-name-button" hidden={isPreview === 'Preview'}>
-                                    <OpenModalMenuItem
-                                        buttonText='Delete'
-                                        modalComponent={<DeleteEntryFormModal entry={entry} />}
-                                    />
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <h1 className='entrypage-underline'></h1>
-                    <div> */}
             <div className="section-layout section-col">
                 {!isPreview ? <EntryEditPage entry={entry} setIsPreview={setIsPreview} /> : <EntryPreview entry={entry} />}
-                {/* </div> */}
                 <EntryComments comments={comments} />
                 {/* <div className="entry-content-panel">
                     <div className='entry-nav-styling'>
