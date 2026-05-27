@@ -12,6 +12,9 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod("users.id"), ondelete="CASCADE"), nullable=False)
     entry_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('entries.id')), nullable=True)
     title = db.Column(db.String(150), nullable=False)
+    post_type = db.Column(db.String(50), nullable=True)
+    show_read_length = db.Column(db.Boolean, default=False)
+    read_length = db.Column(db.String(150), nullable=True)
     message = db.Column(db.String(250))
     is_active = db.Column(db.Boolean, default=True)
     comments_enabled = db.Column(db.Boolean, default=True)
@@ -28,6 +31,9 @@ class Post(db.Model):
             'user_id': self.user_id,
             'entry_id': self.entry_id,
             'title': self.title,
+            'post_type': self.post_type,
+            'show_read_length': self.show_read_length,
+            'read_length': self.read_length,
             'message': self.message,
             'is_active': self.is_active,
             'comments_enabled': self.comments_enabled,
