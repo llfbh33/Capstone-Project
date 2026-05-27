@@ -14,9 +14,6 @@ const EntryComments = ({ comments }) => {
     const [showComments, setShowComments] = useState(false);
     const users = useSelector(state => state.users)
 
-    console.log('comments: ', comments)
-    console.log(users)
-
 
     return (
         <>
@@ -34,7 +31,7 @@ const EntryComments = ({ comments }) => {
                                         const user = users[comment.user_id];
 
                                         return (
-                                            <div className="content-panel panel-col">
+                                            <div className="content-panel panel-col" key={comment.id}>
                                                 <div className="section-layout section-row flex-space-between">
                                                     <div className="section-layout section-row" style={{  alignItems: "center" }}>
                                                         <img src={user.profile_image} className="comment-profile-image" />

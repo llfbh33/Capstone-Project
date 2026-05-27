@@ -99,7 +99,7 @@ function NotebooksPage() {
                         </div>
                         <div className="notebooks-block-container">
                             {notebooks.map((notebook, index) => {
-                                if (notebook.id === featuredNotebook.id) return <></>
+                                if (notebook.id === featuredNotebook.id) return null;
                                 else return (
                                     <div className='content-panel panel-flex individual-notebooks' key={notebook.id} onClick={() => handleClickNotebook(notebook.id)}>
                                         <div className='pannel-formatting'>

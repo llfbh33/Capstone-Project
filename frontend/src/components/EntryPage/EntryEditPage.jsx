@@ -41,28 +41,25 @@ function EntryEditPage({ setIsPreview }) {
     const refOne = useRef(null)
     // callback function which will be activated if content is changed
 
-const outsideClick = useCallback((e) => {
-    const clickedTriggerElement = triggerSaveIds.some(id =>
-        e.target.closest(`#${id}`)
-    );
-
-    const clickedOutsideEditor =
-        refOne.current && !refOne.current.contains(e.target);
-
-    if (entry.content !== content && clickedTriggerElement) {
-        setModalContent(
-            <SaveEntryModal
-                entry={entry}
-                content={content}
-                setIsPreview={setIsPreview}
-            />
+    const outsideClick = useCallback((e) => {
+        const clickedTriggerElement = triggerSaveIds.some(id =>
+            e.target.closest(`#${id}`)
         );
-    }
-}, [content, entry, setModalContent, setIsPreview]);
+
+
+        if (entry.content !== content && clickedTriggerElement) {
+            setModalContent(
+                <SaveEntryModal
+                    entry={entry}
+                    content={content}
+                    setIsPreview={setIsPreview}
+                />
+            );
+        }
+    }, [content, entry, setModalContent, setIsPreview]);
 
     useEffect(() => {
 
-        console.log('hello')
         document.addEventListener("click", outsideClick, true);
 
         return () => {
@@ -120,7 +117,7 @@ const outsideClick = useCallback((e) => {
 
 
     return (
-        <div className='page-container page-static'>
+        <div className='page-container page-static' style={{paddingBottom: "0px"}}>
             <div id='editentry-save-btn-container' >
                 <button className="modal-button entry-button" onClick={handleSave}>Save</button>
                 <p>{saved ? 'Saved' : ''}</p>

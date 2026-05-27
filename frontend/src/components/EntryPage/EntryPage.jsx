@@ -1,23 +1,18 @@
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { useModal } from '../../context/Modal/Modal';
-import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
 import OpenModalMenuItem from '../Modals/OpenModalButton/OpenModalMenuItem';
 import EditEntryNameFormModal from "../Modals/EntryModals/EditEntryNameModal";
-import EntryPreviewPage from "./EntryPreviewPage";
 import EntryEditPage from "./EntryEditPage";
 import PostPostModal from "../Modals/PostModals/PostEntryModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './EntryPage.css'
-import LoadingPage from "../LoadingPage/LoadingPage";
 import { useNavigate } from "react-router-dom";
 import EntryPreview from "./EntryPageComponents/EntryPreview";
 import EntryComments from "./EntryPageComponents/EntryComments";
-import NavigateEntries from "./EntryPageComponents/NavigateEntries";
 import { FaRegFileAlt } from "react-icons/fa";
-import { FaPlus } from "react-icons/fa6";
 import { GoPencil } from "react-icons/go";
 import { friendlyDate } from "../../utils/utils";
 
@@ -29,9 +24,7 @@ function EntryPage() {
     const post = useSelector(state =>
         Object.values(state.posts).find(post => post.entry_id === Number(entryId))
     );
-    const [name, setName] = useState("");
     const [isPreview, setIsPreview] = useState(true);
-    const [loaded, setLoaded] = useState(false);
     const notebook = useSelector(state => state.notebooks[notebookId])
     const { setModalContent } = useModal();
     const navigate = useNavigate();
@@ -43,15 +36,6 @@ function EntryPage() {
     }, [entry])
 
 
-    useEffect(() => {
-        if (entry) setLoaded(true);
-    }, [entry])
-
-    useEffect(() => {
-        if (entry?.name) {
-            setName(entry.name)
-        }
-    }, [entry])
 
     const previewSwitch = () => {
         setIsPreview(prev => !prev);
@@ -65,6 +49,17 @@ function EntryPage() {
             let modalComponent = <RemovePostModal post={post} />
             setModalContent(modalComponent)
         }
+    }
+
+
+    if (!entry) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
     }
 
 
@@ -82,20 +77,20 @@ function EntryPage() {
                 <div className='header-flex-row'>
                     <h1>
                         <FaRegFileAlt />{` ${entry.name}`}
-                    {!isPreview && <span
-                        className="title-edit-trigger"
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <OpenModalMenuItem
-                            itemText={<GoPencil className="icon-container" />}
-                            modalComponent={<EditEntryNameFormModal entry={entry} />}
-                        />
-                    </span>}</h1>
+                        {!isPreview && <span
+                            className="title-edit-trigger"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <OpenModalMenuItem
+                                itemText={<GoPencil className="icon-container" />}
+                                modalComponent={<EditEntryNameFormModal entry={entry} />}
+                            />
+                        </span>}</h1>
                     <div className="new-search-notebooks-container">
                         <button
                             id="preview_button"
                             className="new-notebook-button"
-                            onClick={() => setIsPreview(prev => !prev)}
+                            onClick={previewSwitch}
                         >
                             <div className="new-notebook-text">
                                 {/* <GoPencil /> */}
@@ -111,7 +106,20 @@ function EntryPage() {
                         <div>•</div>
                         <div>{`Comments: ${entry.comments.length}`}</div>
                     </div>
-                    {entry.is_public && <p className='is-published'>Published •</p>}
+
+                    <div className="new-search-notebooks-container" style={{ alignItems: "center", gap: "20px" }}>
+                        {entry.is_public && <p className='is-published'>Published •</p>}
+                        <button
+                            id="preview_button"
+                            className="new-notebook-button"
+                            onClick={() => publishEntry()}
+                        >
+                            <div className="new-notebook-text">
+                                {/* <GoPencil /> */}
+                                <p>{entry.is_public ? `Make Private` : `Publish`}</p>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
 

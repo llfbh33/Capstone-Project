@@ -1,7 +1,6 @@
 
 import { useSelector } from "react-redux";
 import './HomePage.css'
-import { useEffect, useState } from "react";
 import ActivityFeed from "./DashComponents/ActivityFeed";
 import InspiringQuotes from "./DashComponents/InspiringQuotes";
 import RecentNotebooks from "./DashComponents/RecentNotebooks";

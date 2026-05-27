@@ -1,15 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { BsTrash3Fill } from "react-icons/bs";
-import { FaEdit } from "react-icons/fa";
 
-// import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
-import EditNotebookFormModal from "../Modals/NotebookModals/EditNotebookModal"
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import DeleteNotebookFormModal from "../Modals/NotebookModals/DeleteNotebookModal";
-import DeleteEntryFormModal from "../Modals/EntryModals/DeleteEntryModal";
-import { useNav } from "../../context/Navigation/NavigationContext";
-// import { useModal } from '../../context/Modal/Modal';
+import { useSelector } from "react-redux";
 import './HomePage.css'
 import { useEffect, useState } from "react";
 import LoadingPage from "../LoadingPage/LoadingPage";
@@ -19,14 +9,9 @@ import LoadingPage from "../LoadingPage/LoadingPage";
 
 
 function Home () {
-    const user = useSelector(state => state.session.user);
     const notebooks = useSelector(state => state.notebooks);
-    const entries = useSelector(state => state.entries);
     const [theseNotebooks, setTheseNotebooks] = useState('');
     const [loading, setLoading] = useState(true);
-    // const { setModalContent } = useModal();
-    const navigate = useNavigate();
-    const { setActiveNav } = useNav();
 
     useEffect(() => {
         if (notebooks) setTheseNotebooks(notebooks)
@@ -36,20 +21,20 @@ function Home () {
         if (theseNotebooks) setLoading(false)
     }, [theseNotebooks])
 
-    const handleClickNotebook = (id) => {
-        const newActiveState = {
-            main: {title: 'notebooks', route: '/notebooks', open: true},
-            mid: { title: id, route: `/notebook/${id}`, open: true},
-            small: { title: null, route: null, open: false}
-        };
-        setActiveNav(newActiveState);
-        navigate(`/notebook/${id}`);
-    }
+    // const handleClickNotebook = (id) => {
+    //     const newActiveState = {
+    //         main: {title: 'notebooks', route: '/notebooks', open: true},
+    //         mid: { title: id, route: `/notebook/${id}`, open: true},
+    //         small: { title: null, route: null, open: false}
+    //     };
+    //     setActiveNav(newActiveState);
+    //     navigate(`/notebook/${id}`);
+    // }
 
-    const handleClickEntry = (entry) => {
-        console.log('notebookId', entry.notebook_id)
-        navigate(`/notebook/${entry.notebook_id}/entries/${entry.id}`)
-    }
+    // const handleClickEntry = (entry) => {
+    //     console.log('notebookId', entry.notebook_id)
+    //     navigate(`/notebook/${entry.notebook_id}/entries/${entry.id}`)
+    // }
 
     // const handleNewNotebook = () => {
     //     let modalComponent =<NewNotebookFormModal />

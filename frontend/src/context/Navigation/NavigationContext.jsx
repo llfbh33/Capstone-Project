@@ -1,10 +1,22 @@
 // ThemeContext.js
 import { createContext, useContext, useState } from "react";
-// NO LONGER IN USE
+// import { useLocation } from "react-router-dom";
+
 const NavContext = createContext();
 
 export function NavProvider({ children }) {
+    // const { pathname } = useLocation();    // CAN ONLY BE USED IN A ROUTER LOCATION > MOVE TO LEFT NAV?
     const [activeNav, setActiveNav] = useState("home");
+
+  // const activeNav = useMemo(() => {
+  //   if (pathname === "/") return "home";
+  //   if (pathname.startsWith("/all_entries")) return "all_entries";
+  //   if (pathname.startsWith("/notebooks")) return "notebooks";
+  //   if (pathname.startsWith("/entries")) return "entries";
+  //   if (pathname.startsWith("/profile")) return "profile";
+
+  //   return "home";
+  // }, [pathname]);
 
 
   return (

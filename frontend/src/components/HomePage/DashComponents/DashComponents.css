@@ -9,10 +9,8 @@
 }
 
 .pannel-formatting {
-    /* border: 1px solid var(--nav-selected); */
     flex: 1;
     border-radius: 10px;
-    /* margin: 18px; */
     display: flex;
     flex-direction: column;
     gap: 14px;
