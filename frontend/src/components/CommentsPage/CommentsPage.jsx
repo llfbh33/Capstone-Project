@@ -5,7 +5,7 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import EditPostFormModal from "../Modals/PostModals/EditPostModal";
+// import EditPostFormModal from "../Modals/PostModals/EditPostModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import './CommentsPage.css'
 
@@ -58,7 +58,7 @@ function CommentsPage () {
                                     <div className="homepage-edit-notebook">
                                         <OpenModalMenuItem
                                         itemText={<FaEdit />}
-                                        modalComponent={<EditPostFormModal post={entry} />}
+                                        // modalComponent={<EditPostFormModal post={entry} />}
                                         />
                                     </div>
                                     <div className="homepage-edit-notebook">

@@ -631,3 +631,26 @@
         justify-content: center;
     }
 }
+
+
+
+
+.post-username-image-container {
+    display: flex;
+    align-items: center;
+    gap: 16px
+}
+
+
+/*-------------------*/
+
+.post-profile-image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.username-image-container {
+    align-items: center;
+    gap: 10px;
+}

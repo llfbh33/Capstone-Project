@@ -5,7 +5,7 @@ import { BsTrash3Fill } from "react-icons/bs";
 import { FaEdit } from "react-icons/fa";
 
 import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import EditPostFormModal from "../Modals/PostModals/EditPostModal";
+// import EditPostFormModal from "../Modals/PostModals/EditPostModal";
 import RemovePostModal from "../Modals/PostModals/RemovePostModal";
 import LoadingPage from "../LoadingPage/LoadingPage";
 
@@ -62,7 +62,7 @@ function PublicUserPosts() {
                                         <div className="homepage-edit-notebook">
                                             <OpenModalMenuItem
                                                 itemText={<FaEdit />}
-                                                modalComponent={<EditPostFormModal post={post} />}
+                                                // modalComponent={<EditPostFormModal post={post} />}
                                             />
                                         </div>
                                         <div className="homepage-edit-notebook">
