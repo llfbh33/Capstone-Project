@@ -1,16 +1,27 @@
 
+import { useState } from "react";
 
 
-const SearchBar = () => {
+
+/* contains 3 types of search
+- search input by string
+- reduce search size by selecting a filter
+- filter by sort
+*/
+const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelectedItem, filterPlaceholder, selectedFilter, setSelectedFilter, filterArray, filterCondition }) => {
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
+
+    const [showFilterDropdown, setShowFilterDropdown] = useState(false);
+
 
     return (
         <div className="content-panel panel-row">
 
-            {/* <div className="filter-search-input">
+            <div className="filter-search-input">
                 <input
                     className="all-entries-filter-component"
                     value={search}
-                    placeholder="Search entries..."
+                    placeholder={searchPlaceholder}
                     onChange={(e) => {
                         setSearch(e.target.value);
                         setShowSearchDropdown(true);
@@ -22,18 +33,18 @@ const SearchBar = () => {
                         }, 100);
                     }}
                 />
-                {showSearchDropdown && searchEntries.length > 0 && (
+                {showSearchDropdown && searchArray.length > 0 && (
                     <div className="search-dropdown">
-                        {searchEntries.map(entry => (
+                        {searchArray.map(item => (
                             <div
-                                key={entry.id}
+                                key={item.id}
                                 className="search-dropdown-item"
                                 onClick={() => {
-                                    setSelectedEntry(entry);
+                                    setSelectedItem(item);
                                     setShowSearchDropdown(false);
                                 }}
                             >
-                                {entry.name}
+                                {item?.name ? item.name : item.title}
                             </div>
                         ))}
                     </div>
@@ -43,40 +54,41 @@ const SearchBar = () => {
             <div className="filter-search-input">
                 <div
                     className="all-entries-filter-component notebook-dropdown-trigger"
-                    onClick={() => setShowNotebookDropdown(prev => !prev)}
+                    onClick={() => setShowFilterDropdown(prev => !prev)}
                     onBlur={() => {
                         setTimeout(() => {
-                            setShowNotebookDropdown(false);
+                            setShowFilterDropdown(false);
                         }, 100);
                     }}
                     tabIndex={0}
                 >
-                    {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
+                    {`${selectedFilter ? (selectedFilter?.name || selectedFilter?.title) : filterPlaceholder}`}
                 </div>
 
-                {showNotebookDropdown && (
+                {showFilterDropdown && (
                     <div className="search-dropdown">
                         <div
                             className="search-dropdown-item"
                             onClick={() => {
-                                setSelectedNotebook(null);
-                                setShowNotebookDropdown(false);
+                                setSelectedFilter(null);
+                                setShowFilterDropdown(false);
                             }}
                         >
-                            Notebooks: All
+                            {filterPlaceholder}
                         </div>
 
-                        {Object.values(notebooks).map(notebook => (
+                        {filterArray.map(item => (
                             <div
-                                key={notebook.id}
+                                key={item.id}
                                 className="search-dropdown-item"
                                 onClick={() => {
-                                    setSelectedNotebook(notebook);
-                                    setShowNotebookDropdown(false);
-                                    if (selectedEntry.notebook_id !== notebook.id) setSelectedEntry(null);
+                                    setSelectedFilter(item);
+                                    setShowFilterDropdown(false);
+                                    if (filterCondition) filterCondition(item.id);
+                                    // if (selectedEntry.notebook_id !== notebook.id) setSelectedEntry(null);
                                 }}
                             >
-                                {notebook.name}
+                                {item?.name ? item.name : item.title}
                             </div>
                         ))}
                     </div>
@@ -86,7 +98,7 @@ const SearchBar = () => {
                 className='all-entries-filter-component'
                 placeholder="Sort: Last Updated"
                 disabled={true}
-            /> */}
+            />
         </div>
     )
 }

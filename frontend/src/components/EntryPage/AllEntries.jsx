@@ -19,6 +19,7 @@ import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
 import { FaRegFileAlt } from "react-icons/fa";
 import { RxReset } from "react-icons/rx";
 import CreateEntryNoNotebookModal from '../Modals/EntryModals/CreateEntryNoNotebookModal';
+import SearchBar from '../ReusableComponents/SearchBar';
 
 
 
@@ -107,6 +108,12 @@ const AllEntries = () => {
         setSelectedEntry(newSelected);
     };
 
+    const handleFilterCondition = (notebookId) => {
+        if (selectedEntry?.notebook_id !== notebookId) {
+            setSelectedEntry(null);
+        }
+    }
+
 
     return (
         <div className="page-container page-static">
@@ -131,9 +138,19 @@ const AllEntries = () => {
                 <p>Browse and search through all of your writing</p>
             </div>
             <div className='section-layout section-col'>
-                <div className="content-panel panel-row">
-                    {/* <div className=""> */}
-
+                <SearchBar 
+                    search={search}
+                    setSearch={setSearch}
+                    searchPlaceholder={"Search entries..."}
+                    searchArray={searchEntries}
+                    setSelectedItem={setSelectedEntry}
+                    filterPlaceholder={"Notebooks: All"}
+                    selectedFilter={selectedNotebook}
+                    setSelectedFilter={setSelectedNotebook}
+                    filterArray={Object.values(notebooks)}
+                    filterCondition={handleFilterCondition}
+                />
+                {/* <div className="content-panel panel-row">
                     <div className="filter-search-input">
                         <input
                             className="all-entries-filter-component"
@@ -215,8 +232,8 @@ const AllEntries = () => {
                         placeholder="Sort: Last Updated"
                         disabled={true}
                     />
-                    {/* </div> */}
-                </div>
+                </div> */}
+
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
                         <div className="all-entries-container">
