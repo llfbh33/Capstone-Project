@@ -1,12 +1,12 @@
 
 
 
-const SearchBar = ({}) => {
+const SearchBar = () => {
 
     return (
         <div className="content-panel panel-row">
 
-            <div className="filter-search-input">
+            {/* <div className="filter-search-input">
                 <input
                     className="all-entries-filter-component"
                     value={search}
@@ -86,7 +86,7 @@ const SearchBar = ({}) => {
                 className='all-entries-filter-component'
                 placeholder="Sort: Last Updated"
                 disabled={true}
-            />
+            /> */}
         </div>
     )
 }

@@ -113,7 +113,7 @@ function EntryEditPage({ setIsPreview }) {
             .filter(Boolean).length;
     };
 
-    console.log(entry)
+
 
     const handleSave = async (e) => {
         if (e) e.preventDefault();

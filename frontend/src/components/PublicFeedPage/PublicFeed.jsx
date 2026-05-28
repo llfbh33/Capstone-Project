@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux"
 import { useMemo } from "react"
-import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-import RemovePostModal from "../Modals/PostModals/RemovePostModal"
+// import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
+// import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
 import { useNavigate } from "react-router-dom"
 // import parser from 'html-react-parser'
-import { BsTrash3Fill } from "react-icons/bs";
+// import { BsTrash3Fill } from "react-icons/bs";
 import { friendlyDate } from "../../utils/utils"
 import { MdLocalPostOffice } from "react-icons/md";
 
@@ -21,7 +21,7 @@ function PublicFeed() {
                 (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
             );
     }, [postsObj]);
-    const currUser = useSelector(state => state.session.user)
+    // const currUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
 
 
@@ -39,8 +39,6 @@ function PublicFeed() {
                 <div className="read-length long-read">Long Read</div>
             )
         }
-
-        return;
     }
 
     const handleOpenPost = (id) => {
