@@ -58,7 +58,7 @@ const AllEntries = () => {
             entry.name.toLowerCase().includes(search.toLowerCase())
         );
     }, [entries, search, selectedNotebook]);
-    
+
     const selectedIndex = useMemo(() => {
         if (selectedEntry) {
             return searchEntries.indexOf(selectedEntry)
@@ -138,8 +138,7 @@ const AllEntries = () => {
                 <p>Browse and search through all of your writing</p>
             </div>
             <div className='section-layout section-col'>
-                <SearchBar 
-                    css={"content-panel panel-row"}
+                <SearchBar
                     search={search}
                     setSearch={setSearch}
                     searchPlaceholder={"Search entries..."}
@@ -151,98 +150,14 @@ const AllEntries = () => {
                     filterArray={Object.values(notebooks)}
                     filterCondition={handleFilterCondition}
                 />
-                {/* <div className="content-panel panel-row">
-                    <div className="filter-search-input">
-                        <input
-                            className="all-entries-filter-component"
-                            value={search}
-                            placeholder="Search entries..."
-                            onChange={(e) => {
-                                setSearch(e.target.value);
-                                setShowSearchDropdown(true);
-                            }}
-                            onFocus={() => setShowSearchDropdown(true)}
-                            onBlur={() => {
-                                setTimeout(() => {
-                                    setShowSearchDropdown(false);
-                                }, 100);
-                            }}
-                        />
-                        {showSearchDropdown && searchEntries.length > 0 && (
-                            <div className="search-dropdown">
-                                {searchEntries.map(entry => (
-                                    <div
-                                        key={entry.id}
-                                        className="search-dropdown-item"
-                                        onClick={() => {
-                                            setSelectedEntry(entry);
-                                            setShowSearchDropdown(false);
-                                        }}
-                                    >
-                                        {entry.name}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
 
-                    <div className="filter-search-input">
-                        <div
-                            className="all-entries-filter-component notebook-dropdown-trigger"
-                            onClick={() => setShowNotebookDropdown(prev => !prev)}
-                            onBlur={() => {
-                                setTimeout(() => {
-                                    setShowNotebookDropdown(false);
-                                }, 100);
-                            }}
-                            tabIndex={0}
-                        >
-                            {`${selectedNotebook ? selectedNotebook.name : "Notebooks: All"}`}
-                        </div>
-
-                        {showNotebookDropdown && (
-                            <div className="search-dropdown">
-                                <div
-                                    className="search-dropdown-item"
-                                    onClick={() => {
-                                        setSelectedNotebook(null);
-                                        setShowNotebookDropdown(false);
-                                    }}
-                                >
-                                    Notebooks: All
-                                </div>
-
-                                {Object.values(notebooks).map(notebook => (
-                                    <div
-                                        key={notebook.id}
-                                        className="search-dropdown-item"
-                                        onClick={() => {
-                                            setSelectedNotebook(notebook);
-                                            setShowNotebookDropdown(false);
-                                            if (selectedEntry.notebook_id !== notebook.id) setSelectedEntry(null);
-                                        }}
-                                    >
-                                        {notebook.name}
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-                    </div>
-                    <input
-                        className='all-entries-filter-component'
-                        placeholder="Sort: Last Updated"
-                        disabled={true}
-                    />
-                </div> */}
+                <div className="all-entries-action">
+                    <p className='sub-title remove-margin'>{`Entries (${searchEntries.length})`}</p>
+                    <div className='icon-container' onClick={() => { setSearch(''); setSelectedNotebook(null) }}><RxReset /></div>
+                </div>
 
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
-                        <div className="all-entries-container">
-                            <div className="all-entries-action">
-                                <p className='sub-title'>{`Entries (${searchEntries.length})`}</p>
-                                <div className='icon-container' onClick={() => { setSearch(''); setSelectedNotebook(null) }}><RxReset /></div>
-                            </div>
-                        </div>
                         <div className='entries-list-section'>
                             <div className='entry-scroll-contain'>
                                 <div className="entry-list-scroll">

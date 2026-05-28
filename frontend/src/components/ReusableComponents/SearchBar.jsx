@@ -51,7 +51,7 @@ const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelec
                 )}
             </div>
 
-            <div className="filter-search-input">
+            {filterPlaceholder && <div className="filter-search-input">
                 <div
                     className="all-entries-filter-component notebook-dropdown-trigger"
                     onClick={() => setShowFilterDropdown(prev => !prev)}
@@ -93,7 +93,7 @@ const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelec
                         ))}
                     </div>
                 )}
-            </div>
+            </div>}
             <input
                 className='all-entries-filter-component'
                 placeholder="Sort: Last Updated"

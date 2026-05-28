@@ -21,6 +21,8 @@ import parser from 'html-react-parser'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
+import SearchBar from '../ReusableComponents/SearchBar';
+import { RxReset } from "react-icons/rx";
 
 
 
@@ -167,47 +169,18 @@ function NotebookPage() {
                 </div>
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
-                        {/* <div className="flex-col"> */}
-                        <div className="all-entries-action" >
-                            <p className='sub-title remove-margin'>{`Entries (${entries.length})`}</p>
-                            <div className='section-layout section-row' style={{ alignItems: "center" }}>
-                                <div className="filter-search-input">
-                                    <input
-                                        className="all-entries-filter-component"
-                                        value={search}
-                                        placeholder="Search entries..."
-                                        onChange={(e) => {
-                                            setSearch(e.target.value);
-                                            setShowSearchDropdown(true);
-                                        }}
-                                        onFocus={() => setShowSearchDropdown(true)}
-                                        onBlur={() => {
-                                            setTimeout(() => {
-                                                setShowSearchDropdown(false);
-                                            }, 100);
-                                        }}
-                                    />
-                                    {showSearchDropdown && searchEntries.length > 0 && (
-                                        <div className="search-dropdown">
-                                            {searchEntries.map(entry => (
-                                                <div
-                                                    key={entry.id}
-                                                    className="search-dropdown-item"
-                                                    onClick={() => {
-                                                        setSelectedEntry(entry);
-                                                        setShowSearchDropdown(false);
-                                                    }}
-                                                >
-                                                    {entry.name}
-                                                </div>
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                                <p className='sub-title remove-margin'>Sorted by: Last Updated</p>
-                            </div>
+                        <SearchBar
+                            search={search}
+                            setSearch={setSearch}
+                            searchPlaceholder={"Search entries..."}
+                            searchArray={searchEntries}
+                            setSelectedItem={setSelectedEntry}
+                        />
+                        <div className="all-entries-action">
+                            <p className='sub-title remove-margin'>{`Entries (${searchEntries.length})`}</p>
+                            <div className='icon-container' onClick={() => { setSearch('') }}><RxReset /></div>
                         </div>
-                        {/* </div> */}
+
                         <div className='entries-list-section'>
                             <div className='entry-scroll-contain'>
                                 <div className="entry-list-scroll">
