@@ -25,3 +25,4 @@ class EntryForm(FlaskForm):
     name = StringField('name', validators=[DataRequired(), Length(max=100)])
     content = TextAreaField('content')
     is_public = BooleanField('is_public')
+    read_length = IntegerField("read_length")

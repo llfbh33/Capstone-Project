@@ -14,6 +14,7 @@ class Entry(db.Model):
     name = db.Column(db.String(100), nullable=False)
     content = db.Column(db.Text)
     is_public = db.Column(db.Boolean, default=False)
+    read_length = db.Column(db.Integer, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
 
@@ -29,6 +30,7 @@ class Entry(db.Model):
             'name': self.name,
             'content': self.content,
             'is_public': self.is_public,
+            'read_length': self.read_length,
             'created_at': self.created_at.isoformat(),
             'updated_at': self.updated_at.isoformat(),
         }

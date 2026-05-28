@@ -168,6 +168,7 @@ def edit_entry(entry_id):
         setattr(currEntry, 'name', form.data['name'])
         setattr(currEntry, 'content', form.data['content'])
         setattr(currEntry, 'is_public', form.data['is_public'])
+        setattr(currEntry, 'read_length', form.data['read_length'])
         setattr(currEntry, 'updated_at', datetime.now())
 
         db.session.commit()

@@ -97,9 +97,28 @@ function EntryEditPage({ setIsPreview }) {
         }
     })
 
+    const getWordCount = () => {
+        if (!content) return 0;
+
+        const spacedHtml = content.replace(/></g, "> <");
+
+        const text =
+            new DOMParser()
+                .parseFromString(spacedHtml, "text/html")
+                .body.textContent || "";
+
+        return text
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean).length;
+    };
+
+    console.log(entry)
 
     const handleSave = async (e) => {
         if (e) e.preventDefault();
+
+        const wordCount = getWordCount();
 
         await dispatch(thunkEditEntry({
             id: entry.id,
@@ -107,7 +126,8 @@ function EntryEditPage({ setIsPreview }) {
             notebookId: entry.notebook_id,
             name: entry.name,
             content,
-            isPublic: entry.is_public
+            isPublic: entry.is_public,
+            read_length: wordCount
         }));
 
         await dispatch(thunkLoadEntries());
@@ -117,7 +137,7 @@ function EntryEditPage({ setIsPreview }) {
 
 
     return (
-        <div className='page-container page-static' style={{paddingBottom: "0px"}}>
+        <div className='page-container page-static' style={{ paddingBottom: "0px" }}>
             <div id='editentry-save-btn-container' >
                 <button className="modal-button entry-button" onClick={handleSave}>Save</button>
                 <p>{saved ? 'Saved' : ''}</p>

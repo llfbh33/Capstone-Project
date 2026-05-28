@@ -81,7 +81,8 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
             notebook_id: entry.notebookId,
             name: entry.name,
             content: entry.content,
-            is_public: entry.isPublic
+            is_public: entry.isPublic,
+            read_length: entry.read_length,
         }),
     });
     if (response.ok) {

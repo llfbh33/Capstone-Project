@@ -24,7 +24,6 @@ class PostForm(FlaskForm):
     message = StringField("message", validators=[Length(max=250)])
     post_type = StringField("post_type", validators=[Length(max=50)])
     show_read_length = BooleanField("show_read_length")
-    read_length = IntegerField("read_length")
 
 
 class EditPostForm(FlaskForm):
@@ -33,7 +32,6 @@ class EditPostForm(FlaskForm):
     comments_enabled = BooleanField("comments_enabled")
     post_type = StringField("post_type", validators=[Length(max=50)])
     show_read_length = BooleanField("show_read_length")
-    read_length = IntegerField("read_length")
 
 class PublicationPostForm(FlaskForm):
     is_active = BooleanField("is_active")
