@@ -43,6 +43,10 @@ function PublicFeed() {
         return;
     }
 
+    const handleOpenPost = (id) => {
+        navigate(`/public/${id}`);
+    };
+
 
 
     return (
@@ -72,7 +76,7 @@ function PublicFeed() {
                         <div className='entry-scroll-contain'>
                             <div className="entry-list-scroll">
                                 {posts.map(post => (
-                                    <div className="content-panel panel-col clickable-item" key={post.id}>
+                                    <div className="content-panel panel-col clickable-item" key={post.id} onClick={() => handleOpenPost(post.id)}>
                                         <div className="flex-row flex-space-between">
                                             <div className="flex-row username-image-container">
                                                 <img src={allUsers[post.user_id].profile_image}
