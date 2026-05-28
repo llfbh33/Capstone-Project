@@ -15,25 +15,34 @@ function PublicFeed() {
     const postsObj = useSelector(state => state.posts)
     const allUsers = useSelector(state => state.users)
     const posts = useMemo(() => {
-        return Object.values(postsObj).sort(
-            (a, b) => new Date(b.created_at) - new Date(a.created_at)
-        );
+        return Object.values(postsObj)
+            .filter(post => post.is_active === true)
+            .sort(
+                (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+            );
     }, [postsObj]);
     const currUser = useSelector(state => state.session.user)
     const navigate = useNavigate()
 
 
     const handleReadLength = (count) => {
-        let difficulty;
+     if (count < 500) {
+            return (
+                <div className="read-length short-read">Short Read</div>
+            )
+        } else if (count >= 500 && count < 1500) {
+            return (
+                <div className="read-length med-read">Medium Read</div>
+            )
+        } else {
+            return (
+                <div className="read-length long-read">Long Read</div>
+            )
+        }
 
-        if (count < 500) difficulty = 'short';
-        else if (count >= 500 && count < 1500) difficulty = 'medium';
-        else difficulty = 'long';
-
-        return difficulty;
+        return;
     }
 
-    console.log(posts)
 
 
     return (
@@ -77,10 +86,10 @@ function PublicFeed() {
                                         <p>{post.message}</p>
                                         <div className="flex-row flex-space-between">
                                             <div className="flex-row" style={{gap: "30px"}}>
-                                                {post.show_read_length && <div>{handleReadLength(post.entry.read_length)}</div>}
+                                                {post.show_read_length && handleReadLength(post.entry.read_length)}
                                                 <div><MdLocalPostOffice />{` ${post.comments.length} Comments`}</div>
                                             </div>
-                                            
+                                            <p className='is-published'>Published •</p>
                                         </div>
                                     </div>
                                 ))}
