@@ -31,10 +31,8 @@ const lengths = [
 ]
 
 function PublicFeed() {
-    // const allEntries = useSelector(state => state.entries)
     const postsObj = useSelector(state => state.posts);
     const allUsers = useSelector(state => state.users);
-    const entryObj = useSelector(state => state.entries);
     const posts = useMemo(() => {
         return Object.values(postsObj)
             .filter(post => post.is_active === true)
@@ -95,11 +93,6 @@ function PublicFeed() {
         navigate(`/public/${id}`);
     };
 
-    const handleFilterCondition = (id) => {
-        // if (readLength(post.entry.read_length) !== id) {
-        //     setSelectedPost(null);
-        // }
-    }
 
     // Scroll the selected post in the list into view
     useEffect(() => {
@@ -131,7 +124,6 @@ function PublicFeed() {
                     selectedFilter={selectedLength}
                     setSelectedFilter={setSelectedLength}
                     filterArray={lengths}
-                    filterCondition={handleFilterCondition}
                 />
 
                 <div className="section-layout section-col">

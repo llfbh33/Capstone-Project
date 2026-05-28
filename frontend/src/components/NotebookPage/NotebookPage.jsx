@@ -47,7 +47,6 @@ function NotebookPage() {
     const entryRefs = useRef({});
 
     const [search, setSearch] = useState("");
-    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const searchEntries = useMemo(() => {
         let filtered = entries;
 

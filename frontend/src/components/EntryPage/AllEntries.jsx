@@ -39,10 +39,8 @@ const AllEntries = () => {
     const entryRefs = useRef({});
 
     const [selectedNotebook, setSelectedNotebook] = useState(null);
-    const [showNotebookDropdown, setShowNotebookDropdown] = useState(false);
 
     const [search, setSearch] = useState("");
-    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const searchEntries = useMemo(() => {
         let filtered = entries;
 
