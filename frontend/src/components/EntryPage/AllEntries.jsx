@@ -108,8 +108,8 @@ const AllEntries = () => {
         setSelectedEntry(newSelected);
     };
 
-    const handleFilterCondition = (notebookId) => {
-        if (selectedEntry?.notebook_id !== notebookId) {
+    const handleFilterCondition = (id) => {
+        if (selectedEntry?.notebook_id !== id) {
             setSelectedEntry(null);
         }
     }
@@ -139,6 +139,7 @@ const AllEntries = () => {
             </div>
             <div className='section-layout section-col'>
                 <SearchBar 
+                    css={"content-panel panel-row"}
                     search={search}
                     setSearch={setSearch}
                     searchPlaceholder={"Search entries..."}

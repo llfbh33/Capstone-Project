@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import { useMemo } from "react"
+import { useMemo, useState, useEffect, useRef } from "react"
 // import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 // import RemovePostModal from "../Modals/PostModals/RemovePostModal"
 import './PublicFeed.css'
@@ -8,12 +8,33 @@ import { useNavigate } from "react-router-dom"
 // import { BsTrash3Fill } from "react-icons/bs";
 import { friendlyDate } from "../../utils/utils"
 import { MdLocalPostOffice } from "react-icons/md";
+import SearchBar from "../ReusableComponents/SearchBar"
 
+
+const lengths = [
+    {
+        id: "Short",
+        name: "Short",
+    },
+    {
+        id: "Medium",
+        name: "Medium"
+    },
+    {
+        id: "Long",
+        name: "Long",
+    },
+    {
+        id: "My Posts",
+        name: "My Posts",
+    }
+]
 
 function PublicFeed() {
     // const allEntries = useSelector(state => state.entries)
-    const postsObj = useSelector(state => state.posts)
-    const allUsers = useSelector(state => state.users)
+    const postsObj = useSelector(state => state.posts);
+    const allUsers = useSelector(state => state.users);
+    const entryObj = useSelector(state => state.entries);
     const posts = useMemo(() => {
         return Object.values(postsObj)
             .filter(post => post.is_active === true)
@@ -21,12 +42,41 @@ function PublicFeed() {
                 (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
             );
     }, [postsObj]);
-    // const currUser = useSelector(state => state.session.user)
+    const currUser = useSelector(state => state.session.user);
     const navigate = useNavigate()
+    const postRefs = useRef({});
+    const [search, setSearch] = useState("");
+    const [selectedLength, setSelectedLength] = useState(null);
+    const [selectedPost, setSelectedPost] = useState(null);
+    const readLength = (count) => {
+        if (count < 500) {
+            return "Short";
+        } else if (count >= 500 && count < 1500) {
+            return "Medium";
+        } else {
+            return "Long";
+        }
+    };
+    const searchPosts = useMemo(() => {
+        let filtered = posts;
+
+        if (selectedLength !== null) {
+            filtered = filtered.filter(
+                post => selectedLength.name === "My Posts" ? post.user_id === currUser.id : readLength(post.entry.read_length) === selectedLength.name
+            );
+        }
+
+        if (!search.trim()) return filtered;
+
+        return filtered.filter(post =>
+            post.title.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [posts, search, selectedLength]);
+
 
 
     const handleReadLength = (count) => {
-     if (count < 500) {
+        if (count < 500) {
             return (
                 <div className="read-length short-read">Short Read</div>
             )
@@ -45,6 +95,22 @@ function PublicFeed() {
         navigate(`/public/${id}`);
     };
 
+    const handleFilterCondition = (id) => {
+        // if (readLength(post.entry.read_length) !== id) {
+        //     setSelectedPost(null);
+        // }
+    }
+
+    // Scroll the selected post in the list into view
+    useEffect(() => {
+        if (!selectedPost?.id) return;
+
+        postRefs.current[selectedPost.id]?.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+        });
+    }, [selectedPost?.id]);
+
 
 
     return (
@@ -55,26 +121,28 @@ function PublicFeed() {
             </div>
             <div className="section-layout section-col">
 
-                <div className="content-panel panel-col">
-                    <div className="section-layout section-row">
-                        <div>search</div>
-                        <div>lengths</div>
-                        <div>sort</div>
-                    </div>
-                    <div className="section-layout section-row">
-                        <div>all filter buttons</div>
-                        <div>short read</div>
-                        <div>med read</div>
-                        <div>long read</div>
-                    </div>
-                </div>
+                <SearchBar
+                    search={search}
+                    setSearch={setSearch}
+                    searchPlaceholder={"Search posts..."}
+                    searchArray={searchPosts}
+                    setSelectedItem={setSelectedPost}
+                    filterPlaceholder={"All Lengths"}
+                    selectedFilter={selectedLength}
+                    setSelectedFilter={setSelectedLength}
+                    filterArray={lengths}
+                    filterCondition={handleFilterCondition}
+                />
 
                 <div className="section-layout section-col">
                     <div className='entries-list-section'>
                         <div className='entry-scroll-contain'>
                             <div className="entry-list-scroll">
-                                {posts.map(post => (
-                                    <div className="content-panel panel-col clickable-item" key={post.id} onClick={() => handleOpenPost(post.id)}>
+                                {searchPosts.map(post => (
+                                    <div ref={(el) => {
+                                        postRefs.current[post.id] = el;
+                                    }}
+                                        className={`content-panel panel-col clickable-item ${selectedPost?.id === post.id ? "selected" : ""}`} key={post.id} onClick={() => handleOpenPost(post.id)}>
                                         <div className="flex-row flex-space-between">
                                             <div className="flex-row username-image-container">
                                                 <img src={allUsers[post.user_id].profile_image}
@@ -87,7 +155,7 @@ function PublicFeed() {
                                         <h3 className="remove-margin">{post.title}</h3>
                                         <p>{post.message}</p>
                                         <div className="flex-row flex-space-between">
-                                            <div className="flex-row" style={{gap: "30px"}}>
+                                            <div className="flex-row" style={{ gap: "30px" }}>
                                                 {post.show_read_length && handleReadLength(post.entry.read_length)}
                                                 <div><MdLocalPostOffice />{` ${post.comments.length} Comments`}</div>
                                             </div>

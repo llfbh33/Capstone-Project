@@ -654,3 +654,10 @@
     align-items: center;
     gap: 10px;
 }
+
+.tag-buttons {
+    border: 1px solid blue;
+    display: flex;
+    align-items: center;
+}
+
