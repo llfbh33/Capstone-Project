@@ -54,6 +54,8 @@ export const thunkCreatePost = (post) => async (dispatch) => {
             entry_id: post.entryId,
             title: post.title,
             message: post.message,
+            post_type: post.post_type,
+            show_read_length: post.show_read_length,
         }),
 
     });
@@ -78,7 +80,9 @@ export const thunkEditPost = (post) => async (dispatch) => {
             title: post.title,
             message: post.message,
             comments_enabled: post.comments_enabled,
-            is_active: post.is_active
+            is_active: post.is_active,
+            post_type: post.post_type,
+            show_read_length: post.show_read_length,
         }),
     });
     if (response.ok) {

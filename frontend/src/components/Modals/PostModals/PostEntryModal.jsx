@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { thunkLoadEntries } from "../../../redux/entry";
@@ -9,15 +9,40 @@ import { useNav } from "../../../context/Navigation/NavigationContext";
 import './PostModals.css'
 
 
-function PostPostModal({entry}) {
+
+
+const categories = [
+    "Fiction",
+    "Nonfiction",
+    "Poetry",
+    "Essay",
+    "Journal",
+    "Reflection",
+    "Random Thoughts"
+]
+
+function PostPostModal({ entry }) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
+    const [title, setTitle] = useState(entry.name);
     const [message, setMessage] = useState(' ');
-    const [title, setTitle] = useState(entry.name)
+    const [category, setCategory] = useState(null);
+    const [search, setSearch] = useState('');
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
     const { closeModal } = useModal();
-    
+    const [includeLength, setIncludeLength] = useState(false);
+    const searchCategories = useMemo(() => {
+        let filtered = categories;
+
+        if (!search.trim()) return filtered;
+
+        return filtered.filter(category =>
+            category.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [categories, search])
+
 
     useEffect(() => {
         const errors = {};
@@ -33,11 +58,13 @@ function PostPostModal({entry}) {
 
         if (Object.values(validationErrors).length) return;
 
-        const serverResponse = await dispatch(thunkCreatePost ({
+        const serverResponse = await dispatch(thunkCreatePost({
             entryId: entry.id,
             title,
             message,
-            })
+            post_type: category,
+            show_read_length: includeLength,
+        })
         );
 
         if (serverResponse.errors) {
@@ -54,6 +81,7 @@ function PostPostModal({entry}) {
         closeModal();
     }
 
+
     return (
         <div className='post-modal-main-container'>
             <h1 className="post-modal-titles">{`Publish your Entry?`}</h1>
@@ -65,6 +93,48 @@ function PostPostModal({entry}) {
                     required
                 />
                 <p className="post-modal-errors">{validationErrors.title ? validationErrors.title : ''}</p>
+                <div>
+                    <label>Categorize your post?</label>
+                    <div className="filter-search-input">
+                        <input
+                            className="all-entries-filter-component"
+                            value={search}
+                            placeholder="Search categories..."
+                            onChange={(e) => {
+                                setSearch(e.target.value);
+                                setShowSearchDropdown(true);
+                            }}
+                            onFocus={() => setShowSearchDropdown(true)}
+                            onBlur={() => {
+                                setTimeout(() => {
+                                    setShowSearchDropdown(false);
+                                }, 100);
+                            }}
+                        />
+                        {showSearchDropdown && searchCategories.length > 0 && (
+                            <div className="search-dropdown">
+                                {searchCategories.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="search-dropdown-item"
+                                        onClick={() => {
+                                            setCategory(item);
+                                            setSearch(item);
+                                            setShowSearchDropdown(false);
+                                        }}
+                                    >
+                                        {item}
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                </div>
+                <div>
+                    <label>Display the length of the post?</label>
+                    <button onClick={() => setIncludeLength(true)}>Yes</button>
+                    <button onClick={() => setIncludeLength(false)}>No</button>
+                </div>
                 <div className="post-modal-label">Would you like to include a message with your post?</div>
                 <div className="post-modal-label-2">This is not necessary, but it can help others understand what you are trying to acheive with your writing.</div>
                 <textarea

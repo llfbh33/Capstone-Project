@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useDispatch } from "react-redux"
 import { thunkLoadEntries } from "../../../redux/entry"
 import { thunkPublicationOfPost, thunkEditPost } from "../../../redux/posts";
@@ -7,6 +7,15 @@ import { useNavigate } from "react-router-dom";
 import { useNav } from "../../../context/Navigation/NavigationContext";
 import './PostModals.css'
 
+const categories = [
+    "Fiction",
+    "Nonfiction",
+    "Poetry",
+    "Essay",
+    "Journal",
+    "Reflection",
+    "Random Thoughts"
+]
 
 
 function RemovePostModal({ post }) {
@@ -14,10 +23,24 @@ function RemovePostModal({ post }) {
     const navigate = useNavigate();
     const { setActiveNav } = useNav();
     const { closeModal } = useModal();
-    const [message, setMessage] = useState(post.message);
     const [title, setTitle] = useState(post.title);
+    const [message, setMessage] = useState(post.message);
+    const [category, setCategory] = useState(post.post_type);
+    const [search, setSearch] = useState(post?.post_type || "");
+    const [showSearchDropdown, setShowSearchDropdown] = useState(false);
     const [validationErrors, setValidationErrors] = useState({});
     const active = post.is_active
+    const [includeLength, setIncludeLength] = useState(false);
+    const searchCategories = useMemo(() => {
+        let filtered = categories;
+
+        if (!search.trim()) return filtered;
+
+        return filtered.filter(category =>
+            category.toLowerCase().includes(search.toLowerCase())
+        );
+    }, [categories, search])
+
 
     useEffect(() => {
         const errors = {};
@@ -38,6 +61,8 @@ function RemovePostModal({ post }) {
             title,
             message,
             is_active: true,
+            post_type: category,
+            show_read_length: includeLength,
         }));
 
         if (serverResponse.errors) {
@@ -88,6 +113,48 @@ function RemovePostModal({ post }) {
                             required
                         />
                         <p className="post-modal-errors">{validationErrors.title ? validationErrors.title : ''}</p>
+                        <div>
+                            <label>Categorize your post?</label>
+                            <div className="filter-search-input">
+                                <input
+                                    className="all-entries-filter-component"
+                                    value={search}
+                                    placeholder="Search categories..."
+                                    onChange={(e) => {
+                                        setSearch(e.target.value);
+                                        setShowSearchDropdown(true);
+                                    }}
+                                    onFocus={() => setShowSearchDropdown(true)}
+                                    onBlur={() => {
+                                        setTimeout(() => {
+                                            setShowSearchDropdown(false);
+                                        }, 100);
+                                    }}
+                                />
+                                {showSearchDropdown && searchCategories.length > 0 && (
+                                    <div className="search-dropdown">
+                                        {searchCategories.map((item, index) => (
+                                            <div
+                                                key={index}
+                                                className="search-dropdown-item"
+                                                onClick={() => {
+                                                    setCategory(item);
+                                                    setSearch(item);
+                                                    setShowSearchDropdown(false);
+                                                }}
+                                            >
+                                                {item}
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                        <div>
+                            <label>Display the length of the post?</label>
+                            <button onClick={() => setIncludeLength(true)}>Yes</button>
+                            <button onClick={() => setIncludeLength(false)}>No</button>
+                        </div>
                         <div className="post-modal-label">Would you like to include a message with your post?</div>
                         <div className="post-modal-label-2">This is not necessary, but it can help others understand what you are trying to acheive with your writing.</div>
                         <textarea

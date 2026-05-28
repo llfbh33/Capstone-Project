@@ -135,6 +135,8 @@ def create_entry():
             entry_id=form.data['entry_id'],
             title=form.data['title'],
             message=form.data['message'],
+            post_type=form.data['post_type'],
+            show_read_length=form.data['show_read_length'],
             is_active=True,
             comments_enabled=True,
         )
@@ -181,7 +183,9 @@ def edit_entry(post_id):
         
         setattr(currPost, 'title', form.data['title'])
         setattr(currPost, 'message', form.data['message'])
-        setattr(currPost, 'comments_enabled', form.data['comments_enabled'])
+        setattr(currPost, 'comments_enabled', True)
+        setattr(currPost, 'post_type', form.data['post_type'])
+        setattr(currPost, 'show_read_length', form.data['show_read_length'])
         setattr(currPost, 'is_active', True)
         setattr(currPost, 'updated_at', datetime.now())
 
