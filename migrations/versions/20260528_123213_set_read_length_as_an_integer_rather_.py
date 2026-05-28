@@ -22,7 +22,8 @@ def upgrade():
         batch_op.alter_column('read_length',
                existing_type=sa.VARCHAR(length=50),
                type_=sa.Integer(),
-               existing_nullable=True)
+               existing_nullable=True,
+               postgresql_using='read_length::integer')
 
     # ### end Alembic commands ###
 
@@ -33,6 +34,7 @@ def downgrade():
         batch_op.alter_column('read_length',
                existing_type=sa.Integer(),
                type_=sa.VARCHAR(length=50),
-               existing_nullable=True)
+               existing_nullable=True,
+               postgresql_using='read_length::integer')
 
     # ### end Alembic commands ###
