@@ -35,6 +35,7 @@ const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, publish
         setSelected(null);
     };
 
+    // Sets the Selected Item with Lower Preview Navigation
     const handleNewSelected = (direction) => {
         let newSelected;
         if (direction === 'left') {
