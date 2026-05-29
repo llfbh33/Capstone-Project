@@ -1,5 +1,4 @@
 import { useNavigate } from 'react-router-dom'
-import { useSelector } from "react-redux";
 import { useMemo } from "react";
 import parser from 'html-react-parser'
 
@@ -17,7 +16,6 @@ import { friendlyDate } from '../../../utils/utils';
 // subtitle is either the notebook name or the post message
 const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, published }) => {
     const navigate = useNavigate();
-    const notebooks = useSelector(state => state.notebooks);
     const selectedIndex = useMemo(() => {
         if (selected) {
             return searchArray.indexOf(selected)
@@ -33,7 +31,7 @@ const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, publish
             navigate(`/notebook/${selected.notebook_id}/entries/${selected.id}`);
         }
         
-        setSelectedEntry(null);
+        setSelected(null);
     };
 
     const handleNewSelected = (direction) => {

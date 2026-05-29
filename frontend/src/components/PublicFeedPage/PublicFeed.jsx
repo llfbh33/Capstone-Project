@@ -3,14 +3,13 @@ import { useSelector } from "react-redux"
 import { useMemo, useState, useEffect, useRef } from "react"
 
 import { MdLocalPostOffice } from "react-icons/md";
-import { RxReset } from "react-icons/rx";
 
-import SearchBar from "../ReusableComponents/SearchComponents/SearchBar"
+
 import { friendlyDate, readLength } from "../../utils/utils"
-import './PublicFeed.css'
+import SearchBar from "../ReusableComponents/SearchComponents/SearchBar"
 import SearchClearWithTitle from "../ReusableComponents/SearchComponents/SearchClearWithTitle";
 import SelectedPreview from "../ReusableComponents/SelectedPreview/SelectedPreview";
-
+import './PublicFeed.css'
 
 
 const lengths = [
@@ -88,11 +87,6 @@ function PublicFeed() {
     }, [selectedPost?.id]);
 
     //-----------------------------------------------------------------
-
-    // Opens the Clicked Post
-    const handleOpenPost = (id) => {
-        navigate(`/public/${id}`);
-    };
 
     // Clear Search and Filters
     const handleClearPosts = () => {
