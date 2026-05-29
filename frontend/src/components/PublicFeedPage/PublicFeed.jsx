@@ -9,6 +9,7 @@ import SearchBar from "../ReusableComponents/SearchComponents/SearchBar"
 import { friendlyDate, readLength } from "../../utils/utils"
 import './PublicFeed.css'
 import SearchClearWithTitle from "../ReusableComponents/SearchComponents/SearchClearWithTitle";
+import SelectedPreview from "../ReusableComponents/SelectedPreview/SelectedPreview";
 
 
 
@@ -95,8 +96,17 @@ function PublicFeed() {
 
     // Clear Search and Filters
     const handleClearPosts = () => {
-        setSearch(''); 
+        setSearch('');
         setSelectedLength(null);
+    };
+
+    // Sets the Post Selection
+    const handleSelectedPost = (post) => {
+        if (selectedPost?.id === post.id) {
+            setSelectedPost(null);
+        } else {
+            setSelectedPost(post)
+        }
     };
 
 
@@ -152,41 +162,53 @@ function PublicFeed() {
                 />
 
                 <SearchClearWithTitle item={searchPosts} handleClear={handleClearPosts} />
-
-                <div className="section-layout section-col">
-                    <div className='list-section'>
-                        <div className='scroll-contain'>
-                            <div className="list-scroll">
-                                {searchPosts.map(post => (
-                                    <div ref={(el) => {
-                                        postRefs.current[post.id] = el;
-                                    }}
-                                        className={`content-panel panel-col clickable-item ${selectedPost?.id === post.id ? "selected" : ""}`} key={post.id} onClick={() => handleOpenPost(post.id)}>
-                                        <div className="flex-row flex-space-between">
-                                            <div className="flex-row username-image-container">
-                                                <img src={usersObj[post.user_id].profile_image}
-                                                    className="post-profile-image"
-                                                />
-                                                <p>{usersObj[post.user_id].username}</p>
+                <div className="section-layout section-row">
+                    <div className="section-layout section-col">
+                        <div className='list-section'>
+                            <div className='scroll-contain'>
+                                <div className="list-scroll">
+                                    {searchPosts.map(post => (
+                                        <div ref={(el) => {
+                                            postRefs.current[post.id] = el;
+                                        }}
+                                            className={`content-panel panel-col clickable-item ${selectedPost?.id === post.id ? "selected" : ""}`}
+                                            key={post.id}
+                                            onClick={() => handleSelectedPost(post)}
+                                        >
+                                            <div className="flex-row flex-space-between">
+                                                <div className="flex-row username-image-container">
+                                                    <img src={usersObj[post.user_id].profile_image}
+                                                        className="post-profile-image"
+                                                    />
+                                                    <p>{usersObj[post.user_id].username}</p>
+                                                </div>
+                                                <p>{friendlyDate(post.updated_at)}</p>
                                             </div>
-                                            <p>{friendlyDate(post.updated_at)}</p>
-                                        </div>
-                                        <h3 className="remove-margin">{post.title}</h3>
-                                        <p>{post.message}</p>
-                                        <div className="flex-row flex-space-between">
-                                            <div className="flex-row post-tag-spacing">
-                                                {post.show_read_length && handleReadLength(post.entry.read_length)}
-                                                <div><MdLocalPostOffice />{` ${post.comments.length} Comments`}</div>
+                                            <h3 className="remove-margin">{post.title}</h3>
+                                            <p>{post.message}</p>
+                                            <div className="flex-row flex-space-between">
+                                                <div className="flex-row post-tag-spacing">
+                                                    {post.show_read_length && handleReadLength(post.entry.read_length)}
+                                                    <div><MdLocalPostOffice />{` ${post.comments.length} Comments`}</div>
+                                                </div>
+                                                <p className='is-published'>Published •</p>
                                             </div>
-                                            <p className='is-published'>Published •</p>
                                         </div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {selectedPost &&
+                        <SelectedPreview
+                            selected={selectedPost}
+                            setSelected={setSelectedPost}
+                            searchArray={searchPosts}
+                            subtitle={selectedPost.message}
+                            published={true}
+                        />
+                    }
                 </div>
-
             </div>
         </div>
     )

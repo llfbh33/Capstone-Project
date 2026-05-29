@@ -138,7 +138,10 @@ const AllEntries = () => {
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
                                         }}
-                                            className={`content-panel panel-col clickable-item ${selectedEntry?.id === entry.id ? "selected" : ""}`} key={`entry-${index}`} onClick={() => handleSelectedEntry(entry)}>
+                                            className={`content-panel panel-col clickable-item ${selectedEntry?.id === entry.id ? "selected" : ""}`} 
+                                            key={`entry-${index}`} 
+                                            onClick={() => handleSelectedEntry(entry)}
+                                        >
                                             <div className='entry-card-title'>{entry.name}</div>
 
                                             <div className='alignment'>
@@ -157,8 +160,9 @@ const AllEntries = () => {
                         <SelectedPreview 
                             selected={selectedEntry} 
                             setSelected={setSelectedEntry} 
-                            searchArray={searchEntries} 
-                            showNotebook={true}
+                            searchArray={searchEntries}
+                            subtitle={selectedEntry.name}
+                            published={false}
                         />
                     }
                 </div>

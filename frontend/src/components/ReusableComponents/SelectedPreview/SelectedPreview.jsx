@@ -14,10 +14,8 @@ import EditEntryNameFormModal from '../../Modals/EntryModals/EditEntryNameModal'
 import DeleteEntryFormModal from '../../Modals/EntryModals/DeleteEntryModal';
 import { friendlyDate } from '../../../utils/utils';
 
-
-const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) => {
-    console.log(searchArray)
-    console.log(selected)
+// subtitle is either the notebook name or the post message
+const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, published }) => {
     const navigate = useNavigate();
     const notebooks = useSelector(state => state.notebooks);
     const selectedIndex = useMemo(() => {
@@ -27,8 +25,14 @@ const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) =
     }, [searchArray, selected]);
 
 
+    // Navigates to Selected Items Page - In posts or entries
     const handleClickEntry = () => {
-        navigate(`/notebook/${selected.notebook_id}/entries/${selected.id}`);
+        if (published) {
+            navigate(`/public/${selected.id}`);
+        } else {
+            navigate(`/notebook/${selected.notebook_id}/entries/${selected.id}`);
+        }
+        
         setSelectedEntry(null);
     };
 
@@ -50,9 +54,9 @@ const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) =
                 <div className='label-and-icons'>
                     <div className='label-and-icons-header'>
                         <span className="entry-preview-title">
-                            {selected.name}
+                            {selected.name || selected.title}
 
-                            <span
+                            {!published && <span
                                 className="title-edit-trigger"
                                 onClick={(e) => e.stopPropagation()}
                             >
@@ -60,19 +64,19 @@ const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) =
                                     itemText={<GoPencil className="icon-container" />}
                                     modalComponent={<EditEntryNameFormModal entry={selected} setSelectedEntry={setSelected} />}
                                 />
-                            </span>
+                            </span>}
                         </span>
                         <div className='notebook-icon-container'>
                             <div className='icon-container' onClick={handleClickEntry}><MdOpenInNew /></div>
-                            <div className='icon-container'>
+                            {!published && <div className='icon-container'>
                                 <OpenModalMenuItem
                                     itemText={<BsTrash3Fill />}
                                     modalComponent={<DeleteEntryFormModal entry={selected} setSelectedEntry={setSelected} />}
                                 />
-                            </div>
+                            </div>}
                         </div>
                     </div>
-                    {showNotebook && <div>{notebooks[selected.notebook_id].name}</div>}
+                    <div>{subtitle}</div>
                     <div className='create-space-between'>
                         <div className='alignment'>
                             <div>{friendlyDate(selected.updated_at)}</div>
@@ -86,7 +90,7 @@ const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) =
                 <div className='list-section selected-entry-data'>
                     <div className='scroll-contain'>
                         <div className="list-scroll selected-entry-data-inner">
-                            <div className="notebook-about-section" type="HTML">{parser(selected.content)}</div>
+                            <div className="notebook-about-section" type="HTML">{published ? parser(selected.entry.content) : parser(selected.content)}</div>
                         </div>
                     </div>
                 </div>
@@ -102,10 +106,10 @@ const SelectedPreview = ({ selected, setSelected, searchArray, showNotebook }) =
                     </div>
                     <div className='selected-footer-format'>
                         <div className='no-movement'>
-                            {selectedIndex - 1 >= 0 ? searchArray[selectedIndex - 1]?.name : searchArray[searchArray.length - 1]?.name}
+                            {selectedIndex - 1 >= 0 ? (searchArray[selectedIndex - 1]?.name || searchArray[selectedIndex - 1]?.title) : (searchArray[searchArray.length - 1]?.name || searchArray[searchArray.length - 1]?.title)}
                         </div>
                         <div style={{ textAlign: "right" }} className='no-movement'>
-                            {selectedIndex + 1 < searchArray.length ? searchArray[selectedIndex + 1]?.name : searchArray[0]?.name}
+                            {selectedIndex + 1 < searchArray.length ? (searchArray[selectedIndex + 1]?.name || searchArray[selectedIndex + 1]?.title) : (searchArray[0]?.name || searchArray[0]?.title)}
                         </div>
                     </div>
                 </div>
