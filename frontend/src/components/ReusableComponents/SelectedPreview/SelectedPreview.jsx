@@ -12,6 +12,7 @@ import OpenModalMenuItem from '../../Modals/OpenModalButton/OpenModalMenuItem';
 import EditEntryNameFormModal from '../../Modals/EntryModals/EditEntryNameModal';
 import DeleteEntryFormModal from '../../Modals/EntryModals/DeleteEntryModal';
 import { friendlyDate } from '../../../utils/utils';
+import './SelectedPreview.css';
 
 // subtitle is either the notebook name or the post message
 const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, published }) => {
@@ -47,15 +48,15 @@ const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, publish
 
 
     return (
-        <div className='selected-entry-horizontal-container'>
-            <div className='selected-entry-container'>
+        <div className='selected-horizontal-container'>
+            <div className='selected-container'>
                 <div className='label-and-icons'>
                     <div className='label-and-icons-header'>
                         <span className="entry-preview-title">
                             {selected.name || selected.title}
 
                             {!published && <span
-                                className="title-edit-trigger"
+                                className="title-edit-pencil"
                                 onClick={(e) => e.stopPropagation()}
                             >
                                 <OpenModalMenuItem
@@ -64,7 +65,7 @@ const SelectedPreview = ({ selected, setSelected, searchArray, subtitle, publish
                                 />
                             </span>}
                         </span>
-                        <div className='notebook-icon-container'>
+                        <div className='flex-row icon-gap'>
                             <div className='icon-container' onClick={handleClickEntry}><MdOpenInNew /></div>
                             {!published && <div className='icon-container'>
                                 <OpenModalMenuItem

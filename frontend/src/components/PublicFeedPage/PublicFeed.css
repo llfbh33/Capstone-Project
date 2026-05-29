@@ -655,12 +655,6 @@
     gap: 10px;
 }
 
-.post-tag-buttons {
-    border: 1px solid blue;
-    display: flex;
-    align-items: center;
-}
-
 .post-tag-spacing {
     gap: 30px;
 }
