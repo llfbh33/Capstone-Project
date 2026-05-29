@@ -143,6 +143,9 @@ function PublicFeed() {
 
     return (
         <div className="page-container page-static">
+            <div className="navigation-tabs-container" >
+                <div className="navigation-tabs" onClick={() => navigate('/public')}>Public Feed</div>
+            </div>
             <div className="header-flex-col">
                 <h1>Public Feed</h1>
                 <p>Discover what others are wrighting. A community of stories, thoughts, and ideas.</p>
@@ -216,43 +219,4 @@ function PublicFeed() {
 
 export default PublicFeed
 
-
-
-
-
-{/* <p className='mini-page-explination'>Read what others have written and give them advice.  Remember to be respectful.</p> */ }
-{/* <div className="publicfeed-post-title"> */ }
-// <h1 className='title page-title'>Public Feed</h1>
-// <h2 className="title page-subtitle">All Entries</h2>
-{/* </div> */ }
-
-// <div className="public-post-content-container">
-// {posts.map(post => (
-// <div key={post.id} className="postfeed-post-container">
-// <div className="post-name-and-user-container">
-// <h3 className="post-name">{post.title}</h3>
-// <div className="post-username-image-container">
-// <div className="image-and-username">
-
-// <img src={usersObj[post?.user_id]?.profile_image} className="post-profile-image" />
-// <h3>{usersObj[post?.user_id]?.username}</h3>
-// </div>
-// {post?.entry && post?.user_id === currUser.id
-// ? <div className="homepage-edit-notebook">
-// <OpenModalMenuItem
-// itemText={<BsTrash3Fill />}
-// modalComponent={<RemovePostModal post={post} />}
-// />
-// </div>
-// : ''}
-
-// </div>
-// </div>
-// <div className="small-post-container" onClick={() => navigate(`/public/${post.id}`)}>
-// <div className="small-post-content">{post.message}</div>
-// </div>
-// <div className="post-seporating-bottom-border"></div>
-// </div>
-// ))}
-// </div>
 

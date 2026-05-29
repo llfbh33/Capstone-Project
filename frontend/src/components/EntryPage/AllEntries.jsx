@@ -94,7 +94,7 @@ const AllEntries = () => {
     return (
         <div className="page-container page-static">
             <div className="navigation-tabs-container" >
-                <div className="navigation-tabs" onClick={() => navigate('/allEntries')}>All Entries</div>
+                <div className="navigation-tabs" onClick={() => navigate('/all_entries')}>All Entries</div>
             </div>
             <div className='header-flex-col'>
                 <div className='header-flex-row'>
