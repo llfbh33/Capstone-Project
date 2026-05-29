@@ -57,13 +57,23 @@ function PublicFeed() {
             return "Long";
         }
     };
+
+    console.log(posts)
     const searchPosts = useMemo(() => {
         let filtered = posts;
 
         if (selectedLength !== null) {
-            filtered = filtered.filter(
-                post => selectedLength.name === "My Posts" ? post.user_id === currUser.id : readLength(post?.entry?.read_length) === selectedLength.name
-            );
+            filtered = filtered.filter(post => {
+                if (selectedLength.name === "My Posts") {
+                    return post.user_id === currUser.id;
+                }
+
+                if (!post.entry || post.entry.read_length === null) {
+                    return false;
+                }
+
+                return readLength(post.entry.read_length) === selectedLength.name;
+            });
         }
 
         if (!search.trim()) return filtered;
@@ -71,7 +81,7 @@ function PublicFeed() {
         return filtered.filter(post =>
             post.title.toLowerCase().includes(search.toLowerCase())
         );
-    }, [posts, search, selectedLength]);
+    }, [posts, search, selectedLength, currUser.id]);
 
 
 
@@ -109,13 +119,13 @@ function PublicFeed() {
 
     const handleUpdatePostsEntries = async (e) => {
         e.preventDefault();
-       const response = await dispatch(thunkEntriesUpdateReadLength());
+        const response = await dispatch(thunkEntriesUpdateReadLength());
 
-       if (response.errors) {
-        console.log(response.errors);
-       } else {
-        console.log("SUCCESS!!")
-       }
+        if (response.errors) {
+            console.log(response.errors);
+        } else {
+            console.log("SUCCESS!!")
+        }
     };
 
 
@@ -140,11 +150,11 @@ function PublicFeed() {
                     filterArray={lengths}
                 />
 
-                <button 
-                    className="modal-button" 
-                    style={{height: "40px", fontSize:"24px"}}
+                <button
+                    className="modal-button"
+                    style={{ height: "40px", fontSize: "24px" }}
                     onClick={handleUpdatePostsEntries}
-                    >Update Posts and Entries Read Lengths
+                >Update Posts and Entries Read Lengths
                 </button>
 
                 <div className="section-layout section-col">
