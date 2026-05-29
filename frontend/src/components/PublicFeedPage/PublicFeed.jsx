@@ -1,14 +1,12 @@
+import { useNavigate } from "react-router-dom"
 import { useSelector } from "react-redux"
 import { useMemo, useState, useEffect, useRef } from "react"
-// import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
-// import RemovePostModal from "../Modals/PostModals/RemovePostModal"
-import './PublicFeed.css'
-import { useNavigate } from "react-router-dom"
-// import parser from 'html-react-parser'
-// import { BsTrash3Fill } from "react-icons/bs";
-import { friendlyDate } from "../../utils/utils"
+
 import { MdLocalPostOffice } from "react-icons/md";
+
 import SearchBar from "../ReusableComponents/SearchBar"
+import { friendlyDate, readLength, handleReadLength } from "../../utils/utils"
+import './PublicFeed.css'
 
 
 
@@ -32,8 +30,12 @@ const lengths = [
 ]
 
 function PublicFeed() {
+    const navigate = useNavigate();
+    const postRefs = useRef({});
+    const currUser = useSelector(state => state.session.user);
     const postsObj = useSelector(state => state.posts);
-    const allUsers = useSelector(state => state.users);
+    const usersObj = useSelector(state => state.users);
+    // Filters and sorts posts, saved as memo for auto update on postsObj update
     const posts = useMemo(() => {
         return Object.values(postsObj)
             .filter(post => post.is_active === true)
@@ -41,23 +43,11 @@ function PublicFeed() {
                 (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
             );
     }, [postsObj]);
-    const currUser = useSelector(state => state.session.user);
-    const navigate = useNavigate()
-    const postRefs = useRef({});
+
     const [search, setSearch] = useState("");
     const [selectedLength, setSelectedLength] = useState(null);
     const [selectedPost, setSelectedPost] = useState(null);
-    const readLength = (count) => {
-        if (count < 500) {
-            return "Short";
-        } else if (count >= 500 && count < 1500) {
-            return "Medium";
-        } else {
-            return "Long";
-        }
-    };
-
-
+    // Filters the posts depending on user search
     const searchPosts = useMemo(() => {
         let filtered = posts;
 
@@ -82,28 +72,7 @@ function PublicFeed() {
         );
     }, [posts, search, selectedLength, currUser.id]);
 
-
-
-    const handleReadLength = (count) => {
-        if (count < 500) {
-            return (
-                <div className="read-length short-read">Short Read</div>
-            )
-        } else if (count >= 500 && count < 1500) {
-            return (
-                <div className="read-length med-read">Medium Read</div>
-            )
-        } else {
-            return (
-                <div className="read-length long-read">Long Read</div>
-            )
-        }
-    }
-
-    const handleOpenPost = (id) => {
-        navigate(`/public/${id}`);
-    };
-
+    //-----------------------------------------------------------------
 
     // Scroll the selected post in the list into view
     useEffect(() => {
@@ -115,8 +84,25 @@ function PublicFeed() {
         });
     }, [selectedPost?.id]);
 
+    //-----------------------------------------------------------------
+
+    // Opens the Clicked Post
+    const handleOpenPost = (id) => {
+        navigate(`/public/${id}`);
+    };
+
+    //-----------------------------------------------------------------
 
 
+    if (!posts) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
+    }
 
 
     return (
@@ -150,10 +136,10 @@ function PublicFeed() {
                                         className={`content-panel panel-col clickable-item ${selectedPost?.id === post.id ? "selected" : ""}`} key={post.id} onClick={() => handleOpenPost(post.id)}>
                                         <div className="flex-row flex-space-between">
                                             <div className="flex-row username-image-container">
-                                                <img src={allUsers[post.user_id].profile_image}
+                                                <img src={usersObj[post.user_id].profile_image}
                                                     className="post-profile-image"
                                                 />
-                                                <p>{allUsers[post.user_id].username}</p>
+                                                <p>{usersObj[post.user_id].username}</p>
                                             </div>
                                             <p>{friendlyDate(post.updated_at)}</p>
                                         </div>
@@ -198,8 +184,8 @@ export default PublicFeed
 // <div className="post-username-image-container">
 // <div className="image-and-username">
 
-// <img src={allUsers[post?.user_id]?.profile_image} className="post-profile-image" />
-// <h3>{allUsers[post?.user_id]?.username}</h3>
+// <img src={usersObj[post?.user_id]?.profile_image} className="post-profile-image" />
+// <h3>{usersObj[post?.user_id]?.username}</h3>
 // </div>
 // {post?.entry && post?.user_id === currUser.id
 // ? <div className="homepage-edit-notebook">
