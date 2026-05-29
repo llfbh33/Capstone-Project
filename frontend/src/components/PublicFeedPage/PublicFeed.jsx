@@ -62,7 +62,7 @@ function PublicFeed() {
 
         if (selectedLength !== null) {
             filtered = filtered.filter(
-                post => selectedLength.name === "My Posts" ? post.user_id === currUser.id : readLength(post.entry.read_length) === selectedLength.name
+                post => selectedLength.name === "My Posts" ? post.user_id === currUser.id : readLength(post?.entry?.read_length) === selectedLength.name
             );
         }
 
