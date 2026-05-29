@@ -96,7 +96,7 @@ export const thunkEditEntry = (entry) => async (dispatch) => {
     }
 };
 
-export const thunkEntriesUpdateReadLength = () => async (dispatch) => {
+export const thunkEntriesUpdateReadLength = () => async () => {
     const response = await fetch(`/api/entries/read_length`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
