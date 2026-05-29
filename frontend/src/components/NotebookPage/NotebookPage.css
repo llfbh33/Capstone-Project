@@ -175,17 +175,6 @@
     gap: 20px;
 }
 
-.icon-container {
-    cursor: pointer;
-    color: #d1d5dbbb;
-    transition: all 0.3s ease;
-}
-
-.icon-container:hover {
-    color: white;
-    transform: translateY(-3px);
-}
-
 .notebook-about-section {
     margin: 0;
     line-height: 1.6;
