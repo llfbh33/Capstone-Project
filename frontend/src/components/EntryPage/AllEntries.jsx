@@ -17,9 +17,9 @@ import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
 import { FaRegFileAlt } from "react-icons/fa";
-import { RxReset } from "react-icons/rx";
 import CreateEntryNoNotebookModal from '../Modals/EntryModals/CreateEntryNoNotebookModal';
-import SearchBar from '../ReusableComponents/SearchBar';
+import SearchBar from '../ReusableComponents/SearchComponents/SearchBar';
+import SearchClearWithTitle from '../ReusableComponents/SearchComponents/SearchClearWithTitle';
 
 
 
@@ -110,7 +110,12 @@ const AllEntries = () => {
         if (selectedEntry?.notebook_id !== id) {
             setSelectedEntry(null);
         }
-    }
+    };
+
+    const handleClearEntries = () => {
+        setSearch('');
+        setSelectedNotebook(null);
+    };
 
 
     return (
@@ -149,10 +154,7 @@ const AllEntries = () => {
                     filterCondition={handleFilterCondition}
                 />
 
-                <div className="all-entries-action">
-                    <p className='sub-title remove-margin'>{`Entries (${searchEntries.length})`}</p>
-                    <div className='icon-container' onClick={() => { setSearch(''); setSelectedNotebook(null) }}><RxReset /></div>
-                </div>
+                <SearchClearWithTitle item={searchEntries} handleClear={handleClearEntries} />
 
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">

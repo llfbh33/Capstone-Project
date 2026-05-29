@@ -3,10 +3,12 @@ import { useSelector } from "react-redux"
 import { useMemo, useState, useEffect, useRef } from "react"
 
 import { MdLocalPostOffice } from "react-icons/md";
+import { RxReset } from "react-icons/rx";
 
-import SearchBar from "../ReusableComponents/SearchBar"
-import { friendlyDate, readLength, handleReadLength } from "../../utils/utils"
+import SearchBar from "../ReusableComponents/SearchComponents/SearchBar"
+import { friendlyDate, readLength } from "../../utils/utils"
 import './PublicFeed.css'
+import SearchClearWithTitle from "../ReusableComponents/SearchComponents/SearchClearWithTitle";
 
 
 
@@ -91,18 +93,42 @@ function PublicFeed() {
         navigate(`/public/${id}`);
     };
 
+    // Clear Search and Filters
+    const handleClearPosts = () => {
+        setSearch(''); 
+        setSelectedLength(null);
+    };
+
+
+    // Returns a tag for the read length of the post
+    const handleReadLength = (count) => {
+        if (count < 500) {
+            return (
+                <div className="read-length short-read">Short Read</div>
+            )
+        } else if (count >= 500 && count < 1500) {
+            return (
+                <div className="read-length med-read">Medium Read</div>
+            )
+        } else {
+            return (
+                <div className="read-length long-read">Long Read</div>
+            )
+        }
+    };
+
     //-----------------------------------------------------------------
 
 
-    if (!posts) {
-        return (
-            <div className='dash-comp-container'>
-                <div className='pannel-formatting'>
-                    Loading...
-                </div>
-            </div>
-        )
-    }
+    // if (!posts) {
+    //     return (
+    //         <div className='dash-comp-container'>
+    //             <div className='pannel-formatting'>
+    //                 Loading...
+    //             </div>
+    //         </div>
+    //     )
+    // }
 
 
     return (
@@ -124,6 +150,8 @@ function PublicFeed() {
                     setSelectedFilter={setSelectedLength}
                     filterArray={lengths}
                 />
+
+                <SearchClearWithTitle item={searchPosts} handleClear={handleClearPosts} />
 
                 <div className="section-layout section-col">
                     <div className='entries-list-section'>

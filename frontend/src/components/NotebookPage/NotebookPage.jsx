@@ -21,8 +21,8 @@ import parser from 'html-react-parser'
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { MdKeyboardArrowLeft } from "react-icons/md";
 import EditEntryNameFormModal from '../Modals/EntryModals/EditEntryNameModal';
-import SearchBar from '../ReusableComponents/SearchBar';
-import { RxReset } from "react-icons/rx";
+import SearchBar from '../ReusableComponents/SearchComponents/SearchBar';
+import SearchClearWithTitle from '../ReusableComponents/SearchComponents/SearchClearWithTitle';
 
 
 
@@ -117,6 +117,11 @@ function NotebookPage() {
         setSelectedEntry(newSelected);
     };
 
+    // Clears the Search of Entries
+    const handleClearEntries = () => {
+        setSearch('');
+    };
+
 
 
     return (
@@ -175,10 +180,8 @@ function NotebookPage() {
                             searchArray={searchEntries}
                             setSelectedItem={setSelectedEntry}
                         />
-                        <div className="all-entries-action">
-                            <p className='sub-title remove-margin'>{`Entries (${searchEntries.length})`}</p>
-                            <div className='icon-container' onClick={() => { setSearch('') }}><RxReset /></div>
-                        </div>
+
+                        <SearchClearWithTitle item={searchEntries} handleClear={handleClearEntries} />
 
                         <div className='entries-list-section'>
                             <div className='entry-scroll-contain'>
