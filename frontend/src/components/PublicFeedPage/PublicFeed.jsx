@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
 import { useMemo, useState, useEffect, useRef } from "react"
 // import OpenModalMenuItem from "../Modals/OpenModalButton/OpenModalMenuItem"
 // import RemovePostModal from "../Modals/PostModals/RemovePostModal"
@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom"
 import { friendlyDate } from "../../utils/utils"
 import { MdLocalPostOffice } from "react-icons/md";
 import SearchBar from "../ReusableComponents/SearchBar"
-import { thunkEntriesUpdateReadLength } from "../../redux/entry"
+
 
 
 const lengths = [
@@ -32,7 +32,6 @@ const lengths = [
 ]
 
 function PublicFeed() {
-    const dispatch = useDispatch();
     const postsObj = useSelector(state => state.posts);
     const allUsers = useSelector(state => state.users);
     const posts = useMemo(() => {
@@ -58,7 +57,7 @@ function PublicFeed() {
         }
     };
 
-    console.log(posts)
+
     const searchPosts = useMemo(() => {
         let filtered = posts;
 
@@ -117,16 +116,6 @@ function PublicFeed() {
     }, [selectedPost?.id]);
 
 
-    const handleUpdatePostsEntries = async (e) => {
-        e.preventDefault();
-        const response = await dispatch(thunkEntriesUpdateReadLength());
-
-        if (response.errors) {
-            console.log(response.errors);
-        } else {
-            console.log("SUCCESS!!")
-        }
-    };
 
 
 
@@ -149,13 +138,6 @@ function PublicFeed() {
                     setSelectedFilter={setSelectedLength}
                     filterArray={lengths}
                 />
-
-                <button
-                    className="modal-button"
-                    style={{ height: "40px", fontSize: "24px" }}
-                    onClick={handleUpdatePostsEntries}
-                >Update Posts and Entries Read Lengths
-                </button>
 
                 <div className="section-layout section-col">
                     <div className='entries-list-section'>

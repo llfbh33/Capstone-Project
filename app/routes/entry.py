@@ -213,26 +213,6 @@ def edit_entry(entry_id):
     
 
 
-@entry_routes.route('/read_length', methods=['post'])
-@login_required
-def update_entry_read_length():
-    """
-    Edit an existing entry for the current user
-    """
-    entries = Entry.query.all()
-
-    for entry in entries:
-        entry.read_length = get_word_count(entry.content)
-
-    db.session.commit()
-
-    return {"message": f"Updated {len(entries)} entries"}
-    
-
-
-
-
-
 @entry_routes.route("/<int:entry_id>/delete")
 @login_required
 def delete_notebook(entry_id):
