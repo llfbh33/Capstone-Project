@@ -3,8 +3,25 @@ from flask_login import login_required, current_user
 from app.models import Entry, Activity, Notebook, db
 from app.forms import EntryForm
 from datetime import datetime
+from bs4 import BeautifulSoup
+import re
 
 entry_routes = Blueprint('entries', __name__)
+
+
+def get_word_count(content):
+    if not content:
+        return 0
+
+    spaced_html = content.replace("><", "> <")
+
+    text = BeautifulSoup(spaced_html, "html.parser").get_text() or ""
+
+    return len([
+        word
+        for word in re.split(r"\s+", text.strip())
+        if word
+    ])
 
 
 def generate_activity(action, entry):
@@ -193,6 +210,27 @@ def edit_entry(entry_id):
         return entry_return
     else:
         return form.errors, 400
+    
+
+
+@entry_routes.route('/read_length', methods=['post'])
+@login_required
+def update_entry_read_length():
+    """
+    Edit an existing entry for the current user
+    """
+    entries = Entry.query.all()
+
+    for entry in entries:
+        entry.read_length = get_word_count(entry.content)
+
+    db.session.commit()
+
+    return {"message": f"Updated {len(entries)} entries"}
+    
+
+
+
 
 
 @entry_routes.route("/<int:entry_id>/delete")
