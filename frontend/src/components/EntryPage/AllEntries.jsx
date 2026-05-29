@@ -158,9 +158,9 @@ const AllEntries = () => {
 
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
-                        <div className='entries-list-section'>
-                            <div className='entry-scroll-contain'>
-                                <div className="entry-list-scroll">
+                        <div className='list-section'>
+                            <div className='scroll-contain'>
+                                <div className="list-scroll">
                                     {searchEntries.map((entry, index) => (
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
@@ -219,9 +219,9 @@ const AllEntries = () => {
                                     </div>
                                 </div>
                                 {/* <div className="selected-entry-data"> */}
-                                <div className='entries-list-section selected-entry-data'>
-                                    <div className='entry-scroll-contain'>
-                                        <div className="entry-list-scroll selected-entry-data-inner">
+                                <div className='list-section selected-entry-data'>
+                                    <div className='scroll-contain'>
+                                        <div className="list-scroll selected-entry-data-inner">
                                             <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
                                         </div>
                                     </div>

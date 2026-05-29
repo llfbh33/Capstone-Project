@@ -120,15 +120,15 @@ function PublicFeed() {
     //-----------------------------------------------------------------
 
 
-    // if (!posts) {
-    //     return (
-    //         <div className='dash-comp-container'>
-    //             <div className='pannel-formatting'>
-    //                 Loading...
-    //             </div>
-    //         </div>
-    //     )
-    // }
+    if (!posts) {
+        return (
+            <div className='dash-comp-container'>
+                <div className='pannel-formatting'>
+                    Loading...
+                </div>
+            </div>
+        )
+    }
 
 
     return (
@@ -154,9 +154,9 @@ function PublicFeed() {
                 <SearchClearWithTitle item={searchPosts} handleClear={handleClearPosts} />
 
                 <div className="section-layout section-col">
-                    <div className='entries-list-section'>
-                        <div className='entry-scroll-contain'>
-                            <div className="entry-list-scroll">
+                    <div className='list-section'>
+                        <div className='scroll-contain'>
+                            <div className="list-scroll">
                                 {searchPosts.map(post => (
                                     <div ref={(el) => {
                                         postRefs.current[post.id] = el;
@@ -174,7 +174,7 @@ function PublicFeed() {
                                         <h3 className="remove-margin">{post.title}</h3>
                                         <p>{post.message}</p>
                                         <div className="flex-row flex-space-between">
-                                            <div className="flex-row" style={{ gap: "30px" }}>
+                                            <div className="flex-row post-tag-spacing">
                                                 {post.show_read_length && handleReadLength(post.entry.read_length)}
                                                 <div><MdLocalPostOffice />{` ${post.comments.length} Comments`}</div>
                                             </div>

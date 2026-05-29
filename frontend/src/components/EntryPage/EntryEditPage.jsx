@@ -150,9 +150,9 @@ function EntryEditPage({ setIsPreview }) {
                     {/* </div> */}
                     {/* </div> */}
                 </div>
-                <div className='entries-list-section selected-entry-data'>
-                    <div className='entry-scroll-contain'>
-                        <div className="entry-list-scroll selected-entry-data-inner">
+                <div className='list-section selected-entry-data'>
+                    <div className='scroll-contain'>
+                        <div className="list-scroll selected-entry-data-inner">
                             <div ref={refOne} className='editentry-main-container' id='edit-entry-ref'>
 
                                 {/* <div className='editentry-container'> */}

@@ -168,9 +168,7 @@ body {
 }
 
 
-/*------------------------------------------------*/
-
-/* Icon Buttons Styling */
+/*------------------------Icon Buttons Styling------------------------*/
 .icon-container {
     cursor: pointer;
     color: #d1d5dbbb;
@@ -183,33 +181,7 @@ body {
 }
 
 
-/*------------------------------------------------*/
-
-
-.clickable-item {
-    cursor: pointer;
-}
-
-.flex-col {
-    display: flex;
-    flex-direction: column;
-}
-
-.flex-row {
-    display: flex;
-    flex-direction: row;
-}
-
-.flex-space-between {
-    justify-content: space-between;
-}
-
-.remove-margin {
-    margin: 0;
-}
-
-/*-------------------------------*/
-/* Tag Styles */
+/*---------------Tag Styles----------------*/
 .is-published {
     color: green;
     font-size: 0.7rem;
@@ -247,6 +219,65 @@ body {
     color: rgb(237, 196, 63);
     border: 1px solid rgb(237, 196, 63);
 }
+
+
+/*---------------SCROLLING----------------*/
+.list-section {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow: hidden;
+    /* border: 1px solid green; */
+}
+
+.scroll-contain {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.list-scroll {
+    height: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.list-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.list-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 999px;
+}
+
+
+/*------------------------Random Common------------------------*/
+.clickable-item {
+    cursor: pointer;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.remove-margin {
+    margin: 0;
+}
+
 
 
 /* Screens smaller than 950px */

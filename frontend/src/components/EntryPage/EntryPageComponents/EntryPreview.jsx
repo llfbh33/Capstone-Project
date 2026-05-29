@@ -20,9 +20,9 @@ function EntryPreview() {
 
     return (
         <div className='selected-entry-container'>
-            <div className='entries-list-section selected-entry-data'>
-                <div className='entry-scroll-contain'>
-                    <div className="entry-list-scroll selected-entry-data-inner">
+            <div className='list-section selected-entry-data'>
+                <div className='scroll-contain'>
+                    <div className="list-scroll selected-entry-data-inner">
                         <div className="notebook-about-section" type="HTML">{parser(entry.content)}</div>
                     </div>
                 </div>

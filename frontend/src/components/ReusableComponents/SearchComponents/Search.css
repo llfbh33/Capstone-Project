@@ -1,5 +1,91 @@
 
 
+/* Search Styles */
+
+.search-input-section {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    position: relative;
+}
+
+.search-input-component {
+    height: 24px;
+    font-size: 0.9rem;
+    flex: 1;
+    background-color: rgba(0, 0, 0, 0);
+    color: white;
+    border: 1px solid rgba(79, 70, 229, 0.7);
+    padding: 6px;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    text-wrap: none;
+}
+
+.search-input-component:focus {
+    outline: none;
+    border-color: var(--nav-selected);
+    box-shadow: 0 0 10px rgba(123, 92, 255, 0.25);
+}
+
+/* DROPDOWN */
+.search-dropdown {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    width: 100%;
+    max-height: 320px;
+    overflow-y: auto;
+
+    background: rgba(10, 8, 28, 0.98);
+    border: 1px solid var(--nav-selected);
+    border-radius: 12px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    z-index: 100;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+}
+
+.search-dropdown-item {
+    padding: 12px 14px;
+    border-radius: 8px;
+
+    cursor: pointer;
+
+    color: white;
+    transition: background 0.15s ease;
+}
+
+.search-dropdown-item:hover {
+    background: rgba(68, 43, 190, 0.5);
+}
+
+.search-dropdown::-webkit-scrollbar {
+    width: 6px;
+}
+
+.search-dropdown::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 999px;
+}
+
+.filter-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+
+/* Search Clear With Title Styles */
 .search-clear-container {
     display: flex;
     justify-content: space-between;

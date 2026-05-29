@@ -24,9 +24,9 @@ const EntryComments = ({ comments }) => {
                         <div onClick={() => setShowComments(false)} className="clickable-item">Close <MdOutlineKeyboardDoubleArrowUp /></div>
                     </div>
                     <div className="section-layout section-col">
-                        <div className='entries-list-section selected-entry-data'>
-                            <div className='entry-scroll-contain'>
-                                <div className="entry-list-scroll selected-entry-data-inner">
+                        <div className='list-section selected-entry-data'>
+                            <div className='scroll-contain'>
+                                <div className="list-scroll selected-entry-data-inner">
                                     {comments.map((comment) => {
                                         const user = users[comment.user_id];
 

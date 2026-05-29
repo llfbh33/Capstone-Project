@@ -183,9 +183,9 @@ function NotebookPage() {
 
                         <SearchClearWithTitle item={searchEntries} handleClear={handleClearEntries} />
 
-                        <div className='entries-list-section'>
-                            <div className='entry-scroll-contain'>
-                                <div className="entry-list-scroll">
+                        <div className='list-section'>
+                            <div className='scroll-contain'>
+                                <div className="list-scroll">
                                     {searchEntries.map((entry, index) => (
                                         <div ref={(el) => {
                                             entryRefs.current[entry.id] = el;
@@ -242,9 +242,9 @@ function NotebookPage() {
                                         {selectedEntry.is_public && <p className='is-published'>Published •</p>}
                                     </div>
                                 </div>
-                                <div className='entries-list-section selected-entry-data'>
-                                    <div className='entry-scroll-contain'>
-                                        <div className="entry-list-scroll selected-entry-data-inner">
+                                <div className='list-section selected-entry-data'>
+                                    <div className='scroll-contain'>
+                                        <div className="list-scroll selected-entry-data-inner">
                                             <div className="notebook-about-section" type="HTML">{parser(selectedEntry.content)}</div>
                                         </div>
                                     </div>

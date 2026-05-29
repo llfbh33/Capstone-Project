@@ -1,25 +1,24 @@
 
 import { useState } from "react";
+import './Search.css';
 
 
 
 /* contains 3 types of search
 - search input by string
-- reduce search size by selecting a filter
+- optional: reduce search size by selecting a filter
 - filter by sort
 */
 const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelectedItem, filterPlaceholder, selectedFilter, setSelectedFilter, filterArray, filterCondition }) => {
     const [showSearchDropdown, setShowSearchDropdown] = useState(false);
-
     const [showFilterDropdown, setShowFilterDropdown] = useState(false);
 
 
     return (
         <div className="content-panel panel-row">
-
-            <div className="filter-search-input">
+            <div className="search-input-section">
                 <input
-                    className="all-entries-filter-component"
+                    className="search-input-component"
                     value={search}
                     placeholder={searchPlaceholder}
                     onChange={(e) => {
@@ -51,9 +50,9 @@ const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelec
                 )}
             </div>
 
-            {filterPlaceholder && <div className="filter-search-input">
+            {filterPlaceholder && <div className="search-input-section">
                 <div
-                    className="all-entries-filter-component notebook-dropdown-trigger"
+                    className="search-input-component filter-dropdown-trigger"
                     onClick={() => setShowFilterDropdown(prev => !prev)}
                     onBlur={() => {
                         setTimeout(() => {
@@ -85,7 +84,6 @@ const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelec
                                     setSelectedFilter(item);
                                     setShowFilterDropdown(false);
                                     if (filterCondition) filterCondition(item.id);
-                                    // if (selectedEntry.notebook_id !== notebook.id) setSelectedEntry(null);
                                 }}
                             >
                                 {item?.name ? item.name : item.title}
@@ -95,7 +93,7 @@ const SearchBar = ({ search, setSearch, searchPlaceholder, searchArray, setSelec
                 )}
             </div>}
             <input
-                className='all-entries-filter-component'
+                className='search-input-component'
                 placeholder="Sort: Last Updated"
                 disabled={true}
             />

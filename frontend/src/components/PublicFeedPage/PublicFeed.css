@@ -642,7 +642,7 @@
 }
 
 
-/*-------------------*/
+/*---------Public Feed----------*/
 
 .post-profile-image {
     width: 30px;
@@ -655,9 +655,13 @@
     gap: 10px;
 }
 
-.tag-buttons {
+.post-tag-buttons {
     border: 1px solid blue;
     display: flex;
     align-items: center;
+}
+
+.post-tag-spacing {
+    gap: 30px;
 }
 
