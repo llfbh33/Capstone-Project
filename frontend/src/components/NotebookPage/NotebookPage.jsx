@@ -175,7 +175,7 @@ function NotebookPage() {
                             setSelectedItem={setSelectedEntry}
                         />
 
-                        <SearchClearWithTitle item={searchEntries} handleClear={handleClearEntries} />
+                        <SearchClearWithTitle label='Entries' item={searchEntries} handleClear={handleClearEntries} />
 
                         <div className='list-section'>
                             <div className='scroll-contain'>

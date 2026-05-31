@@ -127,7 +127,7 @@ const AllEntries = () => {
                     filterCondition={handleFilterCondition}
                 />
 
-                <SearchClearWithTitle item={searchEntries} handleClear={handleClearEntries} />
+                <SearchClearWithTitle label="Entries" item={searchEntries} handleClear={handleClearEntries} />
 
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">

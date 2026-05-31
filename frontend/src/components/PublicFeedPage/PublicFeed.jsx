@@ -158,7 +158,7 @@ function PublicFeed() {
                     filterArray={lengths}
                 />
 
-                <SearchClearWithTitle item={searchPosts} handleClear={handleClearPosts} />
+                <SearchClearWithTitle label="Posts" item={searchPosts} handleClear={handleClearPosts} />
                 <div className="section-layout section-row">
                     <div className="section-layout section-col">
                         <div className='list-section'>
