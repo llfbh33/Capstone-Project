@@ -31,11 +31,11 @@ const navigationLinks = [
         title: "Public Feed",
         route: "/public"
     },
-    {
-        name: "comments",
-        title: "Comments",
-        route: "/comments",
-    },
+    // {
+    //     name: "comments",
+    //     title: "Comments",
+    //     route: "/comments",
+    // },
 ]
 
 
