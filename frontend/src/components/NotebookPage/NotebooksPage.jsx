@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import { FaPlus } from "react-icons/fa6";
 
 import NewNotebookFormModal from "../Modals/NotebookModals/NewNotebookModal";
@@ -11,8 +11,8 @@ import { useModal } from '../../context/Modal/Modal';
 import FeaturedNotebook from "./NotebookComponents/FeaturedNotebook";
 import { friendlyDate } from "../../utils/utils";
 import NotebookActions from "./NotebookComponents/NotebookActions";
-import SearchBar from "../ReusableComponents/SearchComponents/SearchBar";
-import SearchClearWithTitle from "../ReusableComponents/SearchComponents/SearchClearWithTitle";
+// import SearchBar from "../ReusableComponents/SearchComponents/SearchBar";
+// import SearchClearWithTitle from "../ReusableComponents/SearchComponents/SearchClearWithTitle";
 
 
 
@@ -38,25 +38,18 @@ function NotebooksPage() {
     const featuredNotebook = notebooks.find(notebook => notebook.is_featured) || notebooks[0];
     // const [theseNotebooks, setTheseNotebooks] = useState('');
     const { setModalContent } = useModal();
-    const [search, setSearch] = useState("")
+    // const [search, setSearch] = useState("")
     const navigate = useNavigate();
-    const searchNotebooks = useMemo(() => {
-        let filtered = notebooks;
+    // const searchNotebooks = useMemo(() => {
+    //     let filtered = notebooks;
 
-        if (!search.trim()) return filtered;
+    //     if (!search.trim()) return filtered;
 
-        return filtered.filter(notebook =>
-            notebook.name.toLowerCase().includes(search.toLowerCase())
-        );
-    }, [notebooks, search]);
+    //     return filtered.filter(notebook =>
+    //         notebook.name.toLowerCase().includes(search.toLowerCase())
+    //     );
+    // }, [notebooks, search]);
 
-    // useEffect(() => {
-    //     if (notebooks) setTheseNotebooks(notebooks)
-    // }, [notebooks])
-
-    // useEffect(() => {
-    //     if (theseNotebooks) setLoading(false)
-    // }, [theseNotebooks])
 
     const handleClickNotebook = (id) => {
         navigate(`/notebook/${id}`)
@@ -105,12 +98,12 @@ function NotebooksPage() {
                 <div className="section-layout section-col">
                     <FeaturedNotebook notebook={featuredNotebook} handleClickNotebook={handleClickNotebook} />
                     <div className="all-notebooks-container">
-                        {/* <div className="all-notebooks-action">
+                        <div className="all-notebooks-action">
                             <p>All Notebooks</p>
                             <p>Sorted by: Last Created</p>
-                        </div> */}
-                        <SearchBar />
-                        <SearchClearWithTitle label="Notebooks" item={searchNotebooks} />
+                        </div>
+                        {/* <SearchBar />
+                        <SearchClearWithTitle label="Notebooks" item={searchNotebooks} /> */}
                         <div className="notebooks-block-container">
                             {notebooks.map((notebook, index) => {
                                 if (notebook.id === featuredNotebook.id) return null;
