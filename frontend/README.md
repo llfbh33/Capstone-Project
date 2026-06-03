@@ -19,3 +19,5 @@ branch!
 
 
 npm i react-vertical-timeline-component
+
+working on formatting ideas
